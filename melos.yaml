@@ -1,0 +1,27 @@
+# name: cars_market
+
+# packages:
+#   - packages/core/**        # detect all core packages
+#   - packages/features/** 
+# command:
+#   bootstrap:
+#     environment:
+#       sdk: ^3.9.2
+#     dependencies:
+#       go_router: ^16.2.4
+#       smooth_page_indicator: ^1.2.1
+#       flutter:
+#         sdk: flutter
+#       cupertino_icons: ^1.0.8
+#     dev_dependencies:
+#       flutter_lints: ^6.0.0
+
+# scripts:
+#   clean: melos clean
+#   runner: flutter pub run build_runner build --delete-conflicting-outputs
+#   clean and bootstrap: melos clean && melos bootstrap
+#   test:
+#     run: melos exec --concurrency=1 -- flutter test
+
+#   update: flutter pub outdated
+#   upgrade: flutter pub upgrade --major-versions

@@ -1,0 +1,48 @@
+class StringsManager {
+
+  static const String findYouCar = 'Find You Dream Car';
+  static const String welcome = 'Welcome Back';
+  static const String error = 'Error';
+  static const String sucsses = 'Sucsses';
+  static const String worning = 'Worning';
+  static const String inbox = 'Please check your inbox to verify your email';
+  static const String inboxF = 'Please check your inbox to reset your password';
+  static const String forgotPassword= 'Forgot Password?';
+  static const String forgotPasswordAppBarTitle= 'Forgot Password';
+  static const String resetPassword= 'Reset Password';
+  static const String forgotPasswordTitle= "Enter you email address and we'll send you a \n link to rest your password.";
+  static const String email = 'Email';
+  static const String cYourAccount = 'Create your account';
+  static const String cAccount = 'Create Account';
+  static const String haveAccount = 'Already have an account? ';
+  static const String dontHaveAccount = "Don't have an account? ";
+  static const String password = 'Password';
+  static const String cYourpassword = 'Confirm your password';
+  static const String cpassword = 'Confirm password';
+  static const String enterEmail = 'Enter your email';
+  static const String enterPassword = 'Enter your Password';
+  static const String guestMode = 'Continue as Guest';
+  static const String loginTO = 'Login to access your account';
+  static const String createOne = 'Create one here';
+  static const String login = 'Login';
+  static const String homeL = 'Home';
+  static const String searchL = 'Search';
+  static const String addL = 'Sell';
+  static const String favoritesL = 'Favorites';
+  static const String profileL = 'Profile';
+
+  static const String browse =
+      'Browse our extensive inventory of new and used vehicles from top brands.';
+  static const String getStarted = 'Get Started';
+  static const String pick = 'Pick Your Car';
+  static const String browseTopb =
+      'Browse top brands with detailed specs and offers.';
+  static const String makeIt = 'Make It Yours';
+  static const String compare =
+      'Compare prices, check details, and complete your purchase with ease.';
+  static const List<Map<String, String>> titles = [
+    {'t': findYouCar, 's': browse},
+    {'t': pick, 's': browseTopb},
+    {'t': makeIt, 's': compare},
+  ];
+}
