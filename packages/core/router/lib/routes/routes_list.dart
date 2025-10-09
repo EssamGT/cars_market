@@ -1,3 +1,4 @@
+import 'package:add/presentation/add_screen.dart';
 import 'package:create_account/presentation/create_account_screen.dart';
 import 'package:forgot_password/presentation/forgot_password_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -26,5 +27,9 @@ final routes = <RouteBase>[
   GoRoute(
     path: RoutesManager.home,
     builder: (context, state) => const HomeScreen(),
+  ),
+  GoRoute(
+    path: RoutesManager.add,
+    builder: (context, state) => const AddScreen(),
   ),
 ];

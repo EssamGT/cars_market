@@ -1,3 +1,4 @@
+import 'package:constants/color_manager.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +34,13 @@ class BottomWidget extends StatelessWidget {
                     children: [
                       Text(
                         StringsManager.titles[cubit.index]['t']!,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(height: AppSize.s10),
                       Text(
                         StringsManager.titles[cubit.index]['s']!,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   );
@@ -65,7 +66,9 @@ class BottomWidget extends StatelessWidget {
             height: 50,
             child: Text(
               'Get Started',
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                color: ColorManager.background,
+              ),
             ),
           ),
         ],

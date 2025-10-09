@@ -13,7 +13,7 @@ class CTextField extends StatefulWidget {
   final VoidCallback? supmit;
 
   final TextFieldValidationType validationType;
-  CTextField({
+  const CTextField({
     super.key,
     required this.controller,
     required this.hint,
@@ -62,7 +62,7 @@ class _CTextFieldState extends State<CTextField> {
               child: Text(
                 widget.label,
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           TextFormField(
@@ -99,7 +99,7 @@ class _CTextFieldState extends State<CTextField> {
                     )
                   : SizedBox(),
             ),
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.bodyLarge,
             validator: (value) => TextFieldValidator.validateNormal(
               widget.validationType,
               value!,

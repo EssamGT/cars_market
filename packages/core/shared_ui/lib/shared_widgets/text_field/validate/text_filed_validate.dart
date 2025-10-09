@@ -5,6 +5,11 @@ enum TextFieldValidationType {
   confirmPassword,
   none,
   loginPassword,
+  year,
+  version,
+  description,
+  brand,
+  model,
 }
 
 class TextFieldValidator {
@@ -40,6 +45,20 @@ class TextFieldValidator {
         return null;
 
       case TextFieldValidationType.none:
+        return null;
+      case TextFieldValidationType.year:
+        if (input.isEmpty) return "Year can't be empty";
+        if (input.length != 4) return "Year must be 4 digts";
+        if (int.parse(input) > DateTime.now().year + 2) {
+          return "Year can't be biger than ${DateTime.now().year + 2}";
+        }
+        return null;
+
+      case TextFieldValidationType.brand:
+        if (input.isEmpty) return "Brand ca't be empty";
+        return null;
+      case TextFieldValidationType.model:
+        if (input.isEmpty) return "Model ca't be empty";
         return null;
       default:
         return null;

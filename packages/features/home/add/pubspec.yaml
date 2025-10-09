@@ -12,9 +12,36 @@ dependencies:
   flutter:
     sdk: flutter
 
+  constants:
+    path: ../../../core/constants
+  router:
+    path: ../../../core/router
+  shared_ui:
+    path: ../../../core/shared_ui
+  remote:
+    path: ../../../core/remote
+  data:
+    path: ../../../core/data
+  domain:
+    path: ../../../core/domain
+  error_handler:
+    path: ../../../core/error_handler
+  supabase_flutter: ^2.10.1
+  go_router: ^16.2.4
+  get_it: ^8.2.0
+  injectable: ^2.5.1
+  connectivity_plus: ^7.0.0
+  dartz: ^0.10.1
+  flutter_bloc: ^9.1.1
+  get: ^4.7.2
+  iconsax_flutter: ^1.0.1
+  dotted_border: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator: ^2.8.1
+  build_runner: ^2.7.1
   flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the

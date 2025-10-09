@@ -11,9 +11,9 @@ class LoginPageText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       spacing: AppSize.s10,
       children: [
-        Text(StringsManager.welcome,style: Theme.of(context).textTheme.titleLarge,),
+        Text(StringsManager.welcome,style: Theme.of(context).textTheme.displayMedium,),
         Text(StringsManager.loginTO,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: AppSize.s10,)
       ],

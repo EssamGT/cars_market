@@ -1,4 +1,3 @@
-import 'package:add/presentation/add_screen.dart';
 import 'package:favorites/presentation/favorites_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -10,14 +9,14 @@ import 'package:search/presentation/search_screen.dart';
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
-  Widget getScreen(int index) {
+  Widget getScreen(int index,) {
     switch (index) {
       case 0:
         return MainScreen();
       case 1:
         return SearchScreen();
-      case 2:
-        return AddScreen();
+      // case 2:
+      //   return AddScreen();
       case 3:
         return FavoritesScreen();
       case 4:

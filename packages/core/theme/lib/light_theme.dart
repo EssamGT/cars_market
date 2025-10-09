@@ -5,6 +5,8 @@ import 'package:theme/themes/button_theme.dart';
 import 'package:theme/themes/color_theme.dart';
 import 'package:theme/themes/imput_decoration.dart';
 import 'package:theme/themes/light_navigation_bar_theme.dart';
+import 'package:theme/themes/outlined_button_theme.dart';
+import 'package:theme/themes/search_bar_theme.dart';
 import 'package:theme/themes/text_slection_theme.dart';
 import 'package:theme/themes/text_theme.dart';
 
@@ -17,10 +19,10 @@ ThemeData lightTheme() {
     primaryTextTheme: TextTheme(),
     inputDecorationTheme: lightInputDecoration(),
     buttonTheme: lightButtonTheme(),
+    outlinedButtonTheme: lightOutlinedButtonTheme(),
     useMaterial3: true,
-    useSystemColors: true,
     textSelectionTheme: lightTextSlectionTheme(),
-    navigationBarTheme: lightNavigationBarTheme()
-  
+    navigationBarTheme: lightNavigationBarTheme(),
+    searchBarTheme: lightSearchBarTheme(),
   );
 }

@@ -68,7 +68,7 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
               child: Text(
                 widget.label1,
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           TextFormField(
@@ -106,7 +106,7 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
                     )
                   : SizedBox(),
             ),
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.bodyLarge,
             validator: (value) => TextFieldValidator.validateNormal(
               TextFieldValidationType.password,
               value!,
@@ -130,7 +130,7 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
               child: Text(
                 widget.label2,
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           TextFormField(
@@ -161,7 +161,7 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
                 ),
               ),
             ),
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.bodyLarge,
             validator: (value) => TextFieldValidator.twoPasswordValidator(
               value!,
               widget.controller1.text,

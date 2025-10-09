@@ -11,7 +11,7 @@ class ForgotPasswordText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
       child: Text(
         StringsManager.forgotPasswordTitle,
-        style: Theme.of(context).textTheme.bodySmall,
+        style: Theme.of(context).textTheme.bodyMedium,
         textAlign: TextAlign.center,
       ),
     );

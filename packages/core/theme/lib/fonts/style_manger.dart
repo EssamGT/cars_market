@@ -4,23 +4,37 @@ import 'package:theme/fonts/font_manager.dart';
 TextStyle _getTextStyle(
   double fontSize,
   FontWeight fontWeight,
-  Color color, [
-  String fontFamily = FontConstants.inter,
-]) {
+  Color color,
+  String fontFamily,
+  double spacing,
+  double height,
+) {
   return TextStyle(
     fontFamily: fontFamily,
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
+    wordSpacing: spacing,
+    height: height,
   );
 }
 
 TextStyle getRegularStyle({
   double fontSize = FontSize.s12,
   String fontFamily = FontConstants.inter,
+  double spacing = 0,
+  double height = 0,
+
   required Color color,
 }) {
-  return _getTextStyle(fontSize, FontWeightManager.regular, color, fontFamily);
+  return _getTextStyle(
+    fontSize,
+    FontWeightManager.regular,
+    color,
+    fontFamily,
+    spacing,
+    height,
+  );
 }
 
 // medium style
@@ -28,10 +42,19 @@ TextStyle getRegularStyle({
 TextStyle getMediumStyle({
   double fontSize = FontSize.s12,
   String fontFamily = FontConstants.inter,
+  double spacing = 0,
+  double height = 0,
 
   required Color color,
 }) {
-  return _getTextStyle(fontSize, FontWeightManager.medium, color, fontFamily);
+  return _getTextStyle(
+    fontSize,
+    FontWeightManager.medium,
+    color,
+    fontFamily,
+    spacing,
+    height,
+  );
 }
 
 // medium style
@@ -39,10 +62,19 @@ TextStyle getMediumStyle({
 TextStyle getLightStyle({
   double fontSize = FontSize.s12,
   String fontFamily = FontConstants.inter,
+  double spacing = 0,
+  double height = 0,
 
   required Color color,
 }) {
-  return _getTextStyle(fontSize, FontWeightManager.light, color, fontFamily);
+  return _getTextStyle(
+    fontSize,
+    FontWeightManager.light,
+    color,
+    fontFamily,
+    spacing,
+    height,
+  );
 }
 
 // bold style
@@ -50,15 +82,27 @@ TextStyle getLightStyle({
 TextStyle getBoldStyle({
   double fontSize = FontSize.s12,
   String fontFamily = FontConstants.inter,
+  double spacing = 0,
+  double height = 0,
 
   required Color color,
 }) {
-  return _getTextStyle(fontSize, FontWeightManager.bold, color, fontFamily);
+  return _getTextStyle(
+    fontSize,
+    FontWeightManager.bold,
+    color,
+    fontFamily,
+    spacing,
+    height,
+  );
 }
 
 TextStyle getExtraBoldStyle({
   double fontSize = FontSize.s12,
   String fontFamily = FontConstants.inter,
+  double spacing = 0,
+  double height = 0,
+
   required Color color,
 }) {
   return _getTextStyle(
@@ -66,6 +110,8 @@ TextStyle getExtraBoldStyle({
     FontWeightManager.extraBold,
     color,
     fontFamily,
+    spacing,
+    height,
   );
 }
 
@@ -74,8 +120,17 @@ TextStyle getExtraBoldStyle({
 TextStyle getSemiBoldStyle({
   double fontSize = FontSize.s12,
   String fontFamily = FontConstants.inter,
+  double spacing = 0,
+  double height = 0,
 
   required Color color,
 }) {
-  return _getTextStyle(fontSize, FontWeightManager.semiBold, color, fontFamily);
+  return _getTextStyle(
+    fontSize,
+    FontWeightManager.semiBold,
+    color,
+    fontFamily,
+    spacing,
+    height,
+  );
 }

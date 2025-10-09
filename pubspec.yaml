@@ -105,6 +105,7 @@ melos:
       dev_dependencies:
         injectable_generator: ^2.8.1
         build_runner: ^2.7.1
+        dotted_border: ^2.0.0
 
   flutter_test:
     sdk: flutter

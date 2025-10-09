@@ -1,8 +1,10 @@
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:home/presentation/widgets/animated_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home/presentation/widgets/navigation_controller.dart';
+import 'package:router/routes_manager.dart';
+import 'package:shared_ui/shared_widgets/animated/animated_container.dart';
 
 class BottomCNavBar extends StatelessWidget {
   final NavigationController controller;
@@ -19,7 +21,7 @@ class BottomCNavBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p12),
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m12),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary.withAlpha(150),
+          color: Theme.of(context).colorScheme.onSecondary.withAlpha(200),
           boxShadow: [
             BoxShadow(
               color: Theme.of(context).colorScheme.shadow.withAlpha(30),
@@ -41,7 +43,11 @@ class BottomCNavBar extends StatelessWidget {
               behavior: HitTestBehavior.translucent,
 
               onTap: () {
-                controller.selectedIndex.value = index;
+                if (index == 2) {
+                  context.push(RoutesManager.add);
+                } else {
+                  controller.selectedIndex.value = index;
+                }
               },
               child: Obx(() {
                 final isActive = controller.selectedIndex.value == index;

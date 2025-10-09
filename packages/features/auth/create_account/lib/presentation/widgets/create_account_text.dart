@@ -15,7 +15,7 @@ class CreateAccountText extends StatelessWidget {
         ),
       child: Row(
         children: [
-          Text(StringsManager.cYourAccount,style: Theme.of(context).textTheme.titleLarge,)
+          Text(StringsManager.cYourAccount,style: Theme.of(context).textTheme.displayMedium,)
         ],
       ),
     );

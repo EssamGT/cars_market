@@ -25,7 +25,7 @@ ColorScheme lightThemeColors() {
     onError: ColorManager.textPrimary,
     surface: ColorManager.background,
     surfaceContainerHighest : ColorManager.surfaceVariant,
-    onSurface: ColorManager.surface,
+    onSurface: ColorManager.secondary,
     outline: ColorManager.outline,
     shadow: ColorManager.shadow,
     scrim: ColorManager.textPrimary.withAlpha(50),

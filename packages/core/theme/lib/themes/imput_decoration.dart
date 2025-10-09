@@ -1,8 +1,8 @@
 import 'package:constants/color_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:theme/fonts/font_manager.dart';
-import 'package:theme/fonts/style_manger.dart';
+import 'package:theme/themes/color_theme.dart';
+import 'package:theme/themes/text_theme.dart';
 
 // InputDecorationThemeData lightInputDecoration() {
 //   return InputDecorationThemeData(
@@ -51,7 +51,6 @@ import 'package:theme/fonts/style_manger.dart';
 //   );
 // }
 
-
 InputDecorationThemeData lightInputDecoration() {
   return InputDecorationThemeData(
     border: OutlineInputBorder(
@@ -60,9 +59,7 @@ InputDecorationThemeData lightInputDecoration() {
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppSize.s10),
-      borderSide: BorderSide(color: ColorManager.textPrimary.withAlpha(50),
-      width: 2,
-      ),
+      borderSide: BorderSide(color: Colors.transparent, width: 2),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppSize.s10),
@@ -74,27 +71,22 @@ InputDecorationThemeData lightInputDecoration() {
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppSize.s10),
       borderSide: BorderSide(
-        color: ColorManager.primary.withAlpha(100),
+        color: lightThemeColors().primary.withAlpha(100),
         // width: 2,
       ),
     ),
-    hintStyle: getRegularStyle(
-      color: ColorManager.textPrimary,
-      fontFamily: FontConstants.lato,
-      fontSize: FontSize.s16,
-    ),
+    hintStyle: lightTextTheme().bodyMedium,
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppSize.s10),
-      borderSide: BorderSide(color: ColorManager.error),
+      borderSide: BorderSide(color: lightThemeColors().error),
     ),
-    errorStyle: getMediumStyle(
-      color: ColorManager.error,
-      fontSize: FontSize.s12,
-      fontFamily: FontConstants.lato,
+    errorStyle: lightTextTheme().bodySmall!.copyWith(
+      color: lightThemeColors().error,
     ),
+
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppSize.s10),
-      borderSide: BorderSide(color: ColorManager.error),
+      borderSide: BorderSide(color: lightThemeColors().error),
     ),
   );
 }

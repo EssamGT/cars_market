@@ -29,7 +29,12 @@ class TwoTextButton extends StatelessWidget {
           Text(t1, style: Theme.of(context).textTheme.bodySmall),
           GestureDetector(
             onTap: loading ? () {} : onTap,
-            child: Text(t2, style: Theme.of(context).textTheme.bodyMedium),
+            child: Text(
+              t2,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ),
         ],
       ),
