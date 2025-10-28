@@ -29,6 +29,9 @@ flutter:
     - assets/images/b1.png
     - assets/images/b2.png
     - assets/images/b3.png
+    - assets/lottie/loading.json
+    - assets/lottie/success.json
+    - assets/lottie/error.json
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/to/asset-from-package

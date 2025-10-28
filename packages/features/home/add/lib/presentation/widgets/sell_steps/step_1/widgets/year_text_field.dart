@@ -18,23 +18,26 @@ class _YearTextFieldState extends State<YearTextField> {
     var cubit = AddCubit.get(context);
     return Column(
       children: [
-        NormalTextField(
-          gvalue: cubit.car.description,
+        NormalTextFieldUploadCar(
+          car: cubit.car,
           hint: StringsManager.version,
-          onChanged: (valu) {},
+          type: TextFieldUploadCarType.version,
           title: StringsManager.version,
+          validationType: TextFieldValidationType.version,
+          // keybordType: TextInputType.number,
+          // maxLength: 4,
+          format: false,
         ),
         SizedBox(height: AppSize.s15),
-        NormalTextField(
-          gvalue: cubit.car.year.toString(),
+        NormalTextFieldUploadCar(
+          car: cubit.car,
           hint: StringsManager.year,
-          onChanged: (valu) {
-            cubit.car.setYear = valu;
-          },
+          type: TextFieldUploadCarType.year,
           title: StringsManager.year,
           validationType: TextFieldValidationType.year,
           keybordType: TextInputType.number,
           maxLength: 4,
+          format: false,
         ),
       ],
     );

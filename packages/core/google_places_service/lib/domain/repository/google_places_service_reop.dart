@@ -1,0 +1,7 @@
+import 'package:dartz/dartz.dart';
+import 'package:data/models/failure/failure.dart';
+import 'package:google_places_service/domain/entity/google_maps_entity.dart';
+
+abstract class GooglePlacesServiceRepo {
+  Future<Either<Failure, GoogleMapsEntity>> getAutoComplete(String input);
+}

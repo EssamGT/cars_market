@@ -1,0 +1,36 @@
+import 'package:add/data/data_source/add_data_source.dart';
+import 'package:dartz/dartz.dart';
+import 'package:data/models/car/car_image.dart';
+import 'package:data/models/car/car_model.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:injectable/injectable.dart';
+import 'package:remote/remote/remote_manager.dart';
+
+@Injectable(as: AddDataSource)
+class AddDataSourceImpl implements AddDataSource {
+  RemoteManager remoteManager;
+  AddDataSourceImpl({required this.remoteManager});
+
+  @override
+  Future<Either<String, void>> uploadCar(CarModel car) async {
+    try {
+      await remoteManager.uploadCar(car);
+      return Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<CarImage>>> uploadImage(
+    List<XFile> images,
+    String uuid,
+  ) async {
+    try {
+      final response = await remoteManager.uploadImages(images, uuid);
+      return Right(response);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+}

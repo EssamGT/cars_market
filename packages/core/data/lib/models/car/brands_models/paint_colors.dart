@@ -1,0 +1,27 @@
+final List<String> basePaintColors = [
+  'White',
+  'Black',
+  'Silver',
+  'Gray',
+  'Blue',
+  'Red',
+  'Green',
+  'Brown',
+  'Beige',
+  'Yellow',
+  'Orange',
+  'Gold',
+  'Bronze',
+  'Purple',
+  'Other / Custom',
+];
+final List<String> paintConditions = [
+  'Brand New',
+  'Excellent',
+  'Good',
+  'Fair',
+  'Needs Repainting',
+  'Custom / Wrapped',
+  'Repainted (Original Color)',
+  'Repainted (Different Color)',
+];

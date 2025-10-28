@@ -1,4 +1,4 @@
-import 'package:data/models/failure.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_codes.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_extensions.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_type.dart';

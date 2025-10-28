@@ -2,14 +2,17 @@ import 'package:cars_market/di/di.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import 'package:router/router%20.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme/light_theme.dart';
 
 void main() async {
-  await Supabase.initialize(url: AppConstants.url, anonKey: AppConstants.key);
+  await Supabase.initialize(url: AppConstants.url, anonKey: AppConstants.key,);
   await configureDependencies(Environment.dev);
+  await dotenv.load(fileName: AppConstants.env);
+
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

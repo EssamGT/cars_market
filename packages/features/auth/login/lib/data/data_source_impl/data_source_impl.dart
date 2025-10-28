@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:data/models/auth_model.dart';
-import 'package:data/models/failure.dart';
+import 'package:data/models/auth/auth_model.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_handler.dart';
 import 'package:injectable/injectable.dart';
 import 'package:login/data/data_source.dart';

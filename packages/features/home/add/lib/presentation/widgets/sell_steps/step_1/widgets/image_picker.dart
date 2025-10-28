@@ -1,18 +1,18 @@
-import 'dart:math' as math;
-
+import 'package:add/presentation/cubit/add_cubit.dart';
+import 'package:add/presentation/widgets/sell_steps/step_1/widgets/image_preview.dart';
+import 'package:add/presentation/widgets/sell_steps/step_1/widgets/no_images.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ImagePicker extends StatelessWidget {
   const ImagePicker({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-
+    // Size screenSize = MediaQuery.of(context).size;
+    // var cubit = AddCubit.get(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,62 +23,29 @@ class ImagePicker extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: DottedBorder(
-            color: Theme.of(context).colorScheme.outline,
-            strokeWidth: 1.5,
-            dashPattern: [8, 6],
-            borderType: BorderType.RRect,
-            radius: const Radius.circular(AppSize.s15),
-            child: Container(
-              height: AppSize.s280,
-              width: screenSize.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.s15),
-                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-
-                // strokeAlign: AppMargin.m12
-              ),
-              child: Column(
-                spacing: AppSize.s5,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Transform(
-                    transform: Matrix4.rotationY(math.pi),
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.add_a_photo_outlined,
-                      size: AppSize.s50,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  SizedBox(height: AppSize.s5),
-                  Column(
-                    spacing: AppSize.s5,
-                    children: [
-                      Text(
-                        StringsManager.addPhotos,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      Text(
-                        StringsManager.addPhotosSubTitle,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    ],
-                  ),
-                  CTextButton(
-                    onTap: () {},
-                    text: StringsManager.uploadPhotos,
-                    radius: BorderRadius.circular(AppSize.s30),
-                    width: screenSize.width / 1.8,
-                    loading: false,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        BlocBuilder<AddCubit, AddState>(
+          buildWhen: (previous, current) {
+            if (current is ImagesSelected ||
+                current is EmptyImages ||
+                current is EmptyErrorImages ||
+                current is LessThan3ErrorImages) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          builder: (context, state) {
+            if (state is ImagesSelected) {
+              return ImagePreview(images: state.images);
+            }
+            if (state is LessThan3ErrorImages) {
+              return ImagePreview(images: state.images,error: true);
+            }
+            if (state is EmptyErrorImages) {
+              return NoImages(error: true);
+            }
+            return NoImages();
+          },
         ),
       ],
     );

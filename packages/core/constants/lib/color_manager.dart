@@ -14,9 +14,6 @@ import 'package:flutter/material.dart';
 
 //   static const Color error = Colors.red;
 
-
-
-
 // }
 abstract class ColorManager {
   // Brand
@@ -32,7 +29,7 @@ abstract class ColorManager {
   static const Color background = Color(0xffF9FAFB);
   static const Color surface = Color(0xffFFFFFF);
   static const Color surfaceVariant = Color(0xffECEFF4);
-
+  static const Color disabled = Color(0xffBDBDBD);
   // Text
   static const Color textPrimary = Color(0xff1A1A1A);
   static const Color textSecondary = Color(0xff4A4A4A);

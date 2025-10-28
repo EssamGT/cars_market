@@ -12,6 +12,7 @@ import 'package:theme/themes/text_theme.dart';
 
 ThemeData lightTheme() {
   return ThemeData(
+    disabledColor: ColorManager.disabled,
     scaffoldBackgroundColor: ColorManager.background,
     appBarTheme: lightAppBarTheme(),
     colorScheme: lightThemeColors(),

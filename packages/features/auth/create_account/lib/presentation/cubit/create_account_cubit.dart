@@ -1,6 +1,6 @@
 import 'package:create_account/domain/use_case/create_account_use_case.dart';
-import 'package:data/models/auth_model.dart';
-import 'package:data/models/failure.dart';
+import 'package:data/models/auth/auth_model.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

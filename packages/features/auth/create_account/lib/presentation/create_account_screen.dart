@@ -3,7 +3,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:create_account/presentation/cubit/create_account_cubit.dart';
 import 'package:create_account/presentation/widgets/create_account_text.dart';
-import 'package:data/models/auth_model.dart';
+import 'package:data/models/auth/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

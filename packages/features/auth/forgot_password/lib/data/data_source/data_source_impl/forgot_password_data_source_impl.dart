@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:data/models/failure.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_handler.dart';
 import 'package:forgot_password/data/data_source/forgot_password_data_soure.dart';
 import 'package:injectable/injectable.dart';

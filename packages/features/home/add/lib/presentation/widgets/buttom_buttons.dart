@@ -1,5 +1,6 @@
 import 'package:add/presentation/cubit/add_cubit.dart';
 import 'package:add/presentation/widgets/controller/sell_steps_controller.dart';
+import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,106 +9,326 @@ import 'package:shared_ui/shared_widgets/animated/animated_container.dart';
 class ButtomButtons extends StatelessWidget {
   final SellStepsController controller;
   const ButtomButtons({super.key, required this.controller});
-
+  final Duration animationDuration = const Duration(milliseconds: 1000);
+  final Duration textDurationIn = const Duration(milliseconds: 500);
+  final Duration textDurationOut = const Duration(milliseconds: 700);
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    // var cubit = AddCubit.get(context);
-    return Obx(() {
-      return SizedBox(
-        height: AppSize.s80,
-        width: screenSize.width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppPadding.p10,
-            horizontal: AppPadding.p20,
-          ),
-          child: Row(
-            mainAxisAlignment: controller.alinment.value
-                ? MainAxisAlignment.spaceBetween
-                : MainAxisAlignment.center,
+    var cubit = AddCubit.get(context);
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: AppSize.s80,
+        minHeight: AppSize.s80,
+        maxWidth: screenSize.width,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppPadding.p10,
+          horizontal: AppPadding.p20,
+        ),
+        child: Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AnimatedOpacity(
-                opacity: controller.showPrev.value ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 400),
-                curve: Curves.easeInOut,
-                child: IgnorePointer(
-                  ignoring: !controller.showPrev.value,
-                  child: controller.showPrev.value
-                      ? OutlinedButton(
-                          onPressed: () {
-                            controller.changeIndex(
-                              controller.selectedIndex.value - 1,
-                            );
-                          },
-                          style: OutlinedButton.styleFrom(
-                            minimumSize: Size(
-                              MediaQuery.of(context).size.width / 2.5,
-                              AppSize.s50,
+              AnimatedSwitcher(
+                duration: textDurationIn,
+                switchInCurve: Curves.easeIn,
+                switchOutCurve: Curves.easeOut,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+                child: controller.showPrev.value
+                    ? AnimatedContainer(
+                        key: const ValueKey('backButton'),
+                        duration: textDurationOut,
+                        curve: Curves.easeInOut,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(context).colorScheme.shadow,
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                              offset: const Offset(0, 6),
                             ),
+                          ],
+                          borderRadius: BorderRadius.circular(AppSize.s8),
+                        ),
+                        width: controller.showPrevMin.value
+                            ? screenSize.width / 3.5
+                            : screenSize.width / 2.5,
+                        height: AppSize.s50,
+                        child: FilledButton(
+                          onPressed: controller.animating.value
+                              ? () {}
+                              : () {
+                                  controller.changeIndex(
+                                    controller.selectedIndex.value - 1,
+                                  );
+                                },
+                          style: FilledButton.styleFrom(
+                            alignment: Alignment.center,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(AppSize.s8),
                             ),
                             elevation: AppSize.s10,
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.surface,
                             shadowColor: Theme.of(context).colorScheme.shadow,
+                            foregroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
                           ),
-                          child: const Text('Prev'),
+                          child: Text(
+                            StringsManager.back,
+                            style: Theme.of(context).textTheme.titleMedium!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.onError,
+                                ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(key: ValueKey('empty')),
+              ),
+              AnimatedOpacity(
+                opacity: controller.showPrev.value ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                child: IgnorePointer(
+                  ignoring: !controller.showPrev.value,
+
+                  child: controller.showPrev.value
+                      ? AnimatedBar(
+                          isActive: controller.showPrev.value,
+                          inline: true,
                         )
-                      : const SizedBox(),
+                      : SizedBox(),
                 ),
               ),
-              AnimatedBar(
-                isActive: controller.showPrev.value,
-                inline: true,
-              ),
+
               AnimatedContainer(
-                duration: const Duration(milliseconds: 400),
+                duration: animationDuration,
+
                 curve: Curves.easeInOut,
                 width: controller.minimize.value
-                    ? screenSize.width / 2.5
+                    ? controller.nextMax.value
+                          ? screenSize.width / 1.8
+                          : screenSize.width / 2.5
                     : screenSize.width - 40,
-                height: AppSize.s50,
+                height: controller.nextMax.value ? AppSize.s55 : AppSize.s50,
                 child: FilledButton(
                   onPressed: controller.animating.value
                       ? () {}
                       : () {
-                          print('dadsadadad');
-                          // if (cubit.step1Validation()) {
-                          if (controller.key.currentState!.validate()) {
+                          if (controller.key.currentState!.validate() &&
+                              cubit.validateImage()) {
                             controller.changeIndex(
                               controller.selectedIndex.value + 1,
                             );
                           }
-                          // }
                         },
                   style: FilledButton.styleFrom(
-                    minimumSize: Size(
-                      MediaQuery.of(context).size.width - 50,
-                      AppSize.s50,
-                    ),
-
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppSize.s8),
                     ),
                     elevation: AppSize.s10,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
 
                     shadowColor: Theme.of(context).colorScheme.shadow,
                   ),
 
-                  child: Text(
-                    'Next',
-                    style: Theme.of(context).textTheme.titleMedium,
+                  child: AnimatedSwitcher(
+                    duration: textDurationIn,
+                    reverseDuration: textDurationOut,
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SlideTransition(
+                          position: Tween<Offset>(
+                            begin: controller.nextMaxWord.value
+                                ? const Offset(0.1, 0.0)
+                                : const Offset(-0.5, 0.0),
+                            end: Offset.zero,
+                          ).animate(animation),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: controller.nextMaxWord.value
+                        ? Text(
+                            key: ValueKey('list-my-car'),
+                            StringsManager.listMyCar,
+
+                            style: Theme.of(context).textTheme.titleMedium,
+                          )
+                        : Text(
+                            key: ValueKey('next'),
+                            StringsManager.next,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 } 
+
+
+
+
+
+
+// 
+//
+// AnimatedOpacity(
+//                 opacity: controller.showPrev.value ? 1.0 : 0.0,
+//                 duration: const Duration(milliseconds: 400),
+//                 curve: Curves.easeInOut,
+//                 child: IgnorePointer(
+//                   ignoring: !controller.showPrev.value,
+//                   child: controller.showPrev.value
+//                       ? Container(
+//                           decoration: BoxDecoration(
+//                             boxShadow: [
+//                               BoxShadow(
+//                                 color: Theme.of(context).colorScheme.shadow,
+//                                 blurRadius: 10,
+//                                 spreadRadius: 2,
+//                                 offset: const Offset(
+//                                   0,
+//                                   6,
+//                                 ), // position of shadow
+//                               ),
+//                             ],
+//                             borderRadius: BorderRadius.circular(AppSize.s8),
+//                           ),
+//                           child: AnimatedContainer(
+//                             duration: const Duration(milliseconds: 200),
+//                             curve: Curves.easeInOut,
+//                             width: controller.nextMax.value
+//                                 ? screenSize.width / 3.5
+//                                 : screenSize.width / 2.5,
+//                             height: AppSize.s50,
+//                             child: FilledButton(
+//                               onPressed: () {
+//                                 controller.changeIndex(
+//                                   controller.selectedIndex.value - 1,
+//                                 );
+//                               },
+//                               style: FilledButton.styleFrom(
+//                                 alignment: Alignment.center,
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadius.circular(
+//                                     AppSize.s8,
+//                                   ),
+//                                 ),
+//                                 elevation: AppSize.s10,
+//                                 backgroundColor: Theme.of(
+//                                   context,
+//                                 ).colorScheme.surface,
+//                                 shadowColor: Theme.of(
+//                                   context,
+//                                 ).colorScheme.shadow,
+//                               ),
+//                               child: Text(
+//                                 StringsManager.prev,
+//                                 style: Theme.of(context).textTheme.titleMedium!
+//                                     .copyWith(
+//                                       color: Theme.of(
+//                                         context,
+//                                       ).colorScheme.onError,
+//                                       fontSize: controller.showPrevMin.value? AppSize.s14:AppSize.s15,
+//                                     ),
+//                               ),
+//                             ),
+//                           ),
+//                         )
+//                       : const SizedBox(),
+//                 ),
+//               ),
+//               AnimatedOpacity(
+//                 opacity: controller.showPrev.value ? 1.0 : 0.0,
+//                 duration: const Duration(milliseconds: 400),
+//                 curve: Curves.easeInOut,
+//                 child: IgnorePointer(
+//                   ignoring: !controller.showPrev.value,
+          
+//                   child: controller.showPrev.value
+//                       ? AnimatedBar(
+//                           isActive: controller.showPrev.value,
+//                           inline: true,
+//                         )
+//                       : SizedBox(),
+//                 ),
+//               ),
+//               AnimatedContainer(
+                
+//                 duration: const Duration(milliseconds: 150),
+//                 curve: Curves.easeInOut,
+//                 width: controller.minimize.value
+//                     ? controller.nextMax.value
+//                           ? screenSize.width / 1.8
+//                           : screenSize.width / 2.5
+//                     : screenSize.width - 40,
+//                 height: controller.nextMax.value ? AppSize.s55 : AppSize.s50,
+//                 child: FilledButton(
+//                   onPressed: controller.animating.value
+//                       ? () {}
+//                       : () {
+//                           print('dadsadadad');
+                      
+//                           // if (controller.key.currentState!.validate()&&
+//                           //       cubit.validateImage()) {
+//                           controller.changeIndex(
+//                             controller.selectedIndex.value + 1,
+//                           );
+//                           // }
+                          
+//                         },
+//                   style: FilledButton.styleFrom(
+//                     minimumSize: Size(
+//                       MediaQuery.of(context).size.width - 50,
+//                       AppSize.s50,
+//                     ),
+          
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(AppSize.s8),
+//                     ),
+//                     elevation: AppSize.s10,
+          
+//                     shadowColor: Theme.of(context).colorScheme.shadow,
+//                   ),
+          
+//                   child: Text(
+//                     controller.nextMaxWord.value
+//                         ? StringsManager.listMyCar
+//                         : StringsManager.next,
+//                     style: Theme.of(context).textTheme.titleMedium,
+//                   ),
+//                 ),
+//               ), */
+//*** 
+// */
+
+
+
+
+
+
+
+
+
+
+
 // AnimatedSwitcher(
 //             duration: const Duration(milliseconds: 500),
 //             switchInCurve: Curves.easeIn,

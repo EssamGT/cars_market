@@ -10,6 +10,14 @@ enum TextFieldValidationType {
   description,
   brand,
   model,
+  bodyType,
+  fuelType,
+  gearboxType,
+  mileage,
+  paintColor,
+  paintCondition,
+  price,
+  location,
 }
 
 class TextFieldValidator {
@@ -55,10 +63,44 @@ class TextFieldValidator {
         return null;
 
       case TextFieldValidationType.brand:
-        if (input.isEmpty) return "Brand ca't be empty";
+        if (input.isEmpty) return "Brand can't be empty";
         return null;
       case TextFieldValidationType.model:
-        if (input.isEmpty) return "Model ca't be empty";
+        if (input.isEmpty) return "Model can't be empty";
+        return null;
+      case TextFieldValidationType.bodyType:
+        if (input.isEmpty) return "Body Type can't be empty";
+        return null;
+      case TextFieldValidationType.fuelType:
+        if (input.isEmpty) return "Fuel Type can't be empty";
+        return null;
+      case TextFieldValidationType.gearboxType:
+        if (input.isEmpty) return "Gearbox Type can't be empty";
+        return null;
+      case TextFieldValidationType.mileage:
+        if (input.isEmpty) return "Mileage Type can't be empty";
+        if (input[0] == '0') return "Please enter a valid mileage";
+        if (input.length > 9) return "Please enter a valid mileage";
+        return null;
+      case TextFieldValidationType.paintColor:
+        if (input.isEmpty) return "Paint color can't be empty";
+        return null;
+      case TextFieldValidationType.paintCondition:
+        if (input.isEmpty) return "Paint Condition can't be empty";
+        return null;
+      case TextFieldValidationType.location:
+        if (input.isEmpty) return "Location can't be empty";
+        return null;
+      case TextFieldValidationType.price:
+        if (input.isEmpty) return "Price can't be empty";
+        if(input == '0') return "Price must be greater than 0";
+        if(input[0] == '0') return "Please enter a valid price";
+        if(input.length <5) return "Please enter a valid price";
+        return null;
+      case TextFieldValidationType.description:
+        if (input.isEmpty) return "Description can't be empty";
+        if(input.length < 100) return "Description must be at least 100 characters";
+      
         return null;
       default:
         return null;

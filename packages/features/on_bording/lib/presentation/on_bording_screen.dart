@@ -48,7 +48,7 @@ class OnBordingScreen extends StatelessWidget {
                         key: ValueKey(
                           cubit.index,
                         ), 
-                        package: AppConstants.asettsPakage,
+                        package: AppConstants.assetsPackage,
                         fit: BoxFit.cover,
                         height: screenSize.height / 1.5,
                         width: screenSize.width,

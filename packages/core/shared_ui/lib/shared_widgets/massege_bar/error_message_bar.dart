@@ -67,12 +67,12 @@ Icon getIcon(MessageBarType type) {
 String getTitle(MessageBarType type, BuildContext context) {
   switch (type) {
     case MessageBarType.sucsses:
-      return StringsManager.sucsses;
+      return StringsManager.success;
     case MessageBarType.error:
       return StringsManager.error;
 
     case MessageBarType.worning:
-      return StringsManager.worning;
+      return StringsManager.warning;
   }
 }
 

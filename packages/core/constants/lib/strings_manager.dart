@@ -2,9 +2,16 @@ class StringsManager {
   static const String findYouCar = 'Find you dream car';
   static const String welcome = 'Welcome Back';
   static const String error = 'Error';
-  static const String sucsses = 'Sucsses';
-  static const String worning = 'Worning';
-  static const String photos = 'Photos';
+  static const String success = 'Success';
+  // static const String uploading = 'Uploading...';
+  static const String loading = 'Loading...';
+  static const String location = 'Location *';
+  static const String listingYourCar = 'Listing your car...';
+  static const String warning = 'Warning';
+  static const String oops = 'Oops!';
+  static const String photos = 'Photos *';
+  static const String okay = 'Okay';
+  static const String carListedSuccessfully = 'Car listed successfully';
   static const String list = 'List your car';
   static const String brand = 'Brand *';
   static const String brands = 'Brands';
@@ -13,9 +20,44 @@ class StringsManager {
   static const String model = 'Model *';
   static const String models = 'Models';
   static const String chose = 'Chose';
+  static const String safetyOptionsSelected = 'Safety Options Selected';
+  static const String back = 'Back';
+  static const String stepIndicatorTitle1 = 'Identification';
+  static const String stepIndicatorTitle2 = 'Details';
+  static const String stepIndicatorTitle3 = 'Pricing & Publish';
+  static const String bodyType = 'Body Type *';
+  static const String bodyTypes = 'Body Types';
+  static const String bodyTypeError = 'No body type found';
+  static const String pleaseAddAtLeast3Images = 'please Add At Least 3 Images';
+  static const String fuelType = 'Fuel Type *';
+  static const String fuelTypes = 'Fuel Types';
+  static const String price = 'Price *';
+  static const String next = 'Next';
+  static const String listMyCar = 'List My Car Now ';
+  static const String negotiable = 'Negotiable';
+  static const String nonNegotiable = 'Non-Negotiable';
+  static const String gearboxType = 'Gearbox Type *';
+  static const String gearboxTypes = 'Gearbox Types';
+  static const String mileage = 'Mileage (km) *';
+  static const String mileageHint = 'e.g.., 55000';
+  static const String paintColor = 'Paint Color *';
+  static const String paintColors = 'Paint Colors';
+  static const String paintCondition = 'Paint Condition *';
+  static const String paintConditions = 'Paint Conditions';
+  static const String interiorFeatures = 'Interior Features';
+  static const String interiorFeaturesHint =
+      'e.g.., Leather seats, Sunroof, Premium Sound System';
+  static const String safetyOptions = 'Safety Options';
+  static const String serviceHistory = 'Service History';
+  static const String serviceHistoryHint =
+      'e.g.., Full service history available, Last serviced at 50,000 km';
+  static const String modifcations = 'Modifcations';
+  static const String modifcationsHint =
+      'e.g.., Upgraded exhaust system, Custom wheels, if none, leave blank';
   static const String modelError = "Model can't be empty";
   static const String brandError = "brand can't be empty";
   static const String description = 'Description';
+  static const String descriptionHint = 'Description';
   static const String descriptionError =
       "Description can't be empty or less than 100";
   static const String addPhotosSubTitle = 'Add at least 3 photos of you car';

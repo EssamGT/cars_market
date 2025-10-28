@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/di/di_remote_module.dart' as _i523;
 import 'package:remote/network_info/network_info.dart' as _i583;
 import 'package:remote/network_info/network_info_impl.dart' as _i339;
+import 'package:remote/remote/api_manager.dart' as _i120;
 import 'package:remote/remote/remote_manager.dart' as _i227;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
@@ -25,6 +26,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final remoteModule = _$RemoteModule();
+    gh.factory<_i120.ApiManager>(() => _i120.ApiManager());
     gh.singleton<_i454.Supabase>(() => remoteModule.supabase);
     gh.factory<_i583.NetworkInfo>(() => _i339.NetworkInfoImpl());
     gh.singleton<_i227.RemoteManager>(

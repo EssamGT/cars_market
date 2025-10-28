@@ -1,4 +1,3 @@
-import 'package:constants/color_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +7,7 @@ class CTextButton extends StatelessWidget {
   final double hight;
   final double width;
   final bool loading;
+  final bool enable;
   final BorderRadius? radius;
   const CTextButton({
     super.key,
@@ -17,6 +17,7 @@ class CTextButton extends StatelessWidget {
     this.width = AppSize.s40,
     this.loading = false,
     this.radius,
+    this.enable = true,
   });
 
   @override
@@ -25,12 +26,15 @@ class CTextButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppPadding.p20),
       child: Center(
         child: FilledButton(
-          onPressed: () => loading ? () {} : onTap(),
+          onPressed: () => loading || !enable ? null : onTap(),
           style: FilledButton.styleFrom(
             minimumSize: Size(MediaQuery.of(context).size.width - width, hight),
             shape: RoundedRectangleBorder(
               borderRadius: radius ?? BorderRadius.circular(AppSize.s10),
             ),
+            backgroundColor: enable
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).disabledColor,
             elevation: AppSize.s20,
 
             shadowColor: Theme.of(context).colorScheme.shadow,

@@ -1,4 +1,4 @@
-import 'package:data/models/failure.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forgot_password/domain/usecase/forgot_password_use_case.dart';

@@ -9,6 +9,7 @@ class Success extends LoginState {}
 
 class Loading extends LoginState {}
 
+
 // ignore: must_be_immutable
 class Error extends LoginState {
   Failure failure;

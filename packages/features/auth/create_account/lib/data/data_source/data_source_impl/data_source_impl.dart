@@ -1,7 +1,7 @@
 import 'package:create_account/data/data_source/data_source.dart';
 import 'package:dartz/dartz.dart';
-import 'package:data/models/auth_model.dart';
-import 'package:data/models/failure.dart';
+import 'package:data/models/auth/auth_model.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_handler.dart';
 import 'package:injectable/injectable.dart';
 import 'package:remote/remote/remote_manager.dart';

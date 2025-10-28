@@ -10,8 +10,8 @@ class AnimatedBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return inline
         ? AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
+            duration: Duration(milliseconds: 800),
+            // curve: Curves.easeInOut,
             // margin: EdgeInsets.only(bottom: AppMargin.m2),
             height: isActive ? AppSize.s30 : AppSize.s0,
             width: isActive ? AppSize.s2 : AppSize.s0,

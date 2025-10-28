@@ -105,6 +105,7 @@ class _CTextFieldState extends State<CTextField> {
               value!,
             ),
             autovalidateMode: AutovalidateMode.onUnfocus,
+            key: widget.key,
             textInputAction: widget.next != null
                 ? TextInputAction.next
                 : TextInputAction.done,

@@ -1,7 +1,7 @@
 import 'package:cars_market/di/di.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
-import 'package:data/models/auth_model.dart';
+import 'package:data/models/auth/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -64,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     MessageBar.show(context, state.failure.message);
                   }
                   if (state is Success) {
+                    context.go(RoutesManager.home);
                     MessageBar.show(context, 'ss', MessageBarType.sucsses);
                   }
                 },

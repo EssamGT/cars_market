@@ -8,7 +8,7 @@ Future<T?> popUpScreen<T>({
     context: context,
     barrierDismissible: true,
     barrierLabel: 'Dismiss',
-    barrierColor: Colors.black.withOpacity(0.5), // background dim
+    barrierColor: Colors.black.withAlpha(130), // background dim
     transitionDuration: const Duration(milliseconds: 350),
     pageBuilder: (_, animation, secondaryAnimation) {
       return child; // actual UI is in transitionBuilder

@@ -1,4 +1,4 @@
-import 'package:data/models/failure.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/network_errors/data_source.dart';
 import 'package:error_handler/error_handler/network_errors/response_code.dart';
 import 'package:error_handler/error_handler/network_errors/response_messages.dart';
