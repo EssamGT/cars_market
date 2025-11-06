@@ -25,5 +25,6 @@ ThemeData lightTheme() {
     textSelectionTheme: lightTextSlectionTheme(),
     navigationBarTheme: lightNavigationBarTheme(),
     searchBarTheme: lightSearchBarTheme(),
+    
   );
 }

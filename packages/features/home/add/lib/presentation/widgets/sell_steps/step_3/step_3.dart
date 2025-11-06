@@ -14,7 +14,7 @@ class Step3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppPadding.p12),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
       child: BlocListener<AddCubit, AddState>(
         listener: (context, state) {
           if (state is UploadingLoading) {
@@ -32,6 +32,7 @@ class Step3 extends StatelessWidget {
           }
         },
         child: Column(
+          key: ValueKey('step_3'),
           spacing: AppSize.s10,
           children: [
             PriceTextField(),

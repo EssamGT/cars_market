@@ -7,6 +7,7 @@ import 'package:data/models/auth/auth_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:router/routes_manager.dart';
 import 'package:shared_ui/shared_widgets/buttons/colored_text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/two_text_button.dart';
@@ -33,6 +34,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   @override
   void initState() {
+    getIt.resetLazySingleton<CreateAccountCubit>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     cpasswordController = TextEditingController();
@@ -51,7 +53,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     email.dispose();
     passwordFocus.dispose();
     cpasswordFoucs.dispose();
-
+    getIt<CreateAccountCubit>().close();
     super.dispose();
   }
 
@@ -60,8 +62,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: BlocProvider(
-        create: (context) => getIt.get<CreateAccountCubit>(),
+      body: BlocProvider.value(
+        value: getIt.get<CreateAccountCubit>(),
         child: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: screenSize.height),
@@ -79,11 +81,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     MessageBar.show(context, state.failure.message);
                   }
                   if (state is Success) {
-                    context.pop();
+                    // context.pop();
+                    context.go(RoutesManager.userDetails);
                     MessageBar.show(
                       context,
-                    StringsManager.inbox,
-                      MessageBarType.sucsses,
+                      StringsManager.inbox,
+                      MessageBarType.success,
                     );
                   }
                 },
@@ -111,7 +114,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   hint: StringsManager.enterEmail,
                                   next: passwordFocus,
                                   validationType: TextFieldValidationType.email,
-                                  loading: state is Loading,
+                                  enabled: state is! Loading,
                                 ),
                                 TwoPasswordTextFiled(
                                   controller1: passwordController,

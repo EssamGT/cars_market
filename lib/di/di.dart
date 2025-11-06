@@ -7,6 +7,7 @@ import 'package:google_places_service/data/di/remote_di.dart';
 import 'package:injectable/injectable.dart';
 import 'package:login/data/di/login_di.dart';
 import 'package:remote/di/remote_di.dart';
+import 'package:user_details/data/di/user_details_di.dart';
 
 final getIt = GetIt.instance;
 
@@ -23,4 +24,5 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureForgotPasswordDependencies(getIt, enviroment);
   await configureAddDependencies(getIt, enviroment);
   await configureGooglePlacesServiceDependencies(getIt, enviroment);
+  await configureUserDetailsDependencies(getIt, enviroment);
 }

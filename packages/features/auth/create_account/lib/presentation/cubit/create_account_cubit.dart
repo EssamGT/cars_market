@@ -15,26 +15,20 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
       BlocProvider.of(context);
 
   void login(AuthModel auth) async {
-  
-      emit(Loading());
-      final result = await useCase.createAccount(auth);
-      result.fold(
-        (failure) {
-          emit(Error(failure));
-          debugPrint('fail');
+    emit(Loading());
+    final result = await useCase.createAccount(auth);
+    result.fold(
+      (failure) {
+        emit(Error(failure));
+        // debugPrint('fail');
 
-          debugPrint(failure.code);
-          debugPrint(failure.message);
-        },
-        (suc) {
-          emit(Success());
-
-          debugPrint('suc');
-
-          debugPrint(suc.user.toString());
-          debugPrint(suc.session.toString());
-        },
-      );
-    
+        // debugPrint(failure.code);
+        // debugPrint(failure.message);
+      },
+      (suc) {
+        emit(Success());
+        // debugPrint(suc.credential.toString());
+      },
+    );
   }
 }

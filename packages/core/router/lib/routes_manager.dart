@@ -2,6 +2,7 @@ class RoutesManager {
 static const String home = '/home';
 static const String onBoarding = '/onBording';
   static const String login = '/login';
+  static const String userDetails = '/userDetails';
   static const String createAccount = '/createAccount';
   static const String forgotPasword = '/forgotPasword';
   static const String newUserDataScreen = '/newUserDataScreen';
@@ -11,6 +12,7 @@ static const String onBoarding = '/onBording';
   static const String favorites = '/favorites';
   static const String profile = '/profile';
   static const String menuScreen = '/menuScreen';
+  static const String otpScreen = '/otpScreen';
   // static const String home = '/home';
   // static const String home = '/home';
 }

@@ -12,10 +12,13 @@ class Step1 extends StatefulWidget {
 class _Step1State extends State<Step1> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Column(children: [ImagePicker(), CarDetails()]);
+    return Column(
+      key: ValueKey('step1'),
+      children: [ImagePicker(), CarDetails()],
+    );
   }
 }

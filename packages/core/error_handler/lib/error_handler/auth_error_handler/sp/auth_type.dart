@@ -82,5 +82,5 @@ enum AuthErrorType {
   userSsoManaged,
   validationFailed,
   weakPassword,
-  unknown,
+  unknown, userDisabled,
 }

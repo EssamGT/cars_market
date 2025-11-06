@@ -30,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late GlobalKey<FormState> formKey;
   @override
   void initState() {
+    getIt.resetLazySingleton<LoginCubit>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     emailNode = FocusNode();
@@ -44,14 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     emailNode.dispose();
     passwordNode.dispose();
+    getIt<LoginCubit>().close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return BlocProvider(
-      create: (context) => getIt.get<LoginCubit>(),
+    return BlocProvider.value(
+      value: getIt.get<LoginCubit>(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
@@ -64,8 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     MessageBar.show(context, state.failure.message);
                   }
                   if (state is Success) {
-                    context.go(RoutesManager.home);
-                    MessageBar.show(context, 'ss', MessageBarType.sucsses);
+                    context.go(RoutesManager.userDetails);
+                    // MessageBar.show(context, 'ss', MessageBarType.sucsses);
                   }
                 },
                 builder: (context, state) {
@@ -85,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               LoginPageText(),
                               CTextField(
-                                loading: state is Loading,
+                                enabled: state is! Loading,
                                 myNode: emailNode,
                                 next: passwordNode,
                                 validationType: TextFieldValidationType.email,
@@ -93,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hint: StringsManager.email,
                               ),
                               CTextField(
-                                loading: state is Loading,
+                                enabled: state is! Loading,
 
                                 myNode: passwordNode,
                                 validationType:

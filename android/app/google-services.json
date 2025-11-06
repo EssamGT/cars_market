@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "615647597249",
+    "project_id": "carsmarket-8b9a8",
+    "storage_bucket": "carsmarket-8b9a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615647597249:android:cb93143f85938ecfcd7a40",
+        "android_client_info": {
+          "package_name": "com.example.cars_market"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtCcSZ_0DSFPboP-H4jtVkoQT-8tbgtSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

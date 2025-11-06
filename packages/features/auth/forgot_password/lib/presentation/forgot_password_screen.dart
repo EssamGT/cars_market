@@ -23,6 +23,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   late GlobalKey<FormState> formKey;
   @override
   void initState() {
+    getIt.resetLazySingleton<ForgotPasswordCubit>();
     emailController = TextEditingController();
     formKey = GlobalKey<FormState>();
     super.initState();
@@ -30,6 +31,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   void dispose() {
+    getIt<ForgotPasswordCubit>().close();
     emailController.dispose();
 
     super.dispose();
@@ -38,8 +40,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return BlocProvider(
-      create: (context) => getIt.get<ForgotPasswordCubit>(),
+    return BlocProvider.value(
+      value: getIt.get<ForgotPasswordCubit>(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(StringsManager.forgotPasswordAppBarTitle),
@@ -63,7 +65,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     MessageBar.show(
                       context,
                       StringsManager.inboxF,
-                      MessageBarType.sucsses,
+                      MessageBarType.success,
                     );
                   }
                 },
@@ -85,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 controller: emailController,
                                 hint: StringsManager.enterEmail,
                                 validationType: TextFieldValidationType.email,
-                                loading: state is Loading,
+                                enabled: state is! Loading,
                                 supmit: () {
                                   if (formKey.currentState!.validate()) {
                                     cubit.forgotPassword(emailController.text);

@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class Step2 extends StatefulWidget {
-  Step2({super.key});
+  const Step2({super.key});
 
   @override
   State<Step2> createState() => _Step2State();
@@ -30,8 +30,9 @@ class _Step2State extends State<Step2> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppPadding.p12),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
       child: Column(
+        key: ValueKey('step_2'),
         spacing: AppSize.s10,
         children: [
           BodyType(),

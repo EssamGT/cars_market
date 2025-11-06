@@ -2,7 +2,6 @@ name: assets
 description: "A new Flutter package project."
 version: 0.0.1
 publish_to: none
-  
 
 environment:
   sdk: ^3.9.0
@@ -23,13 +22,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   assets:
     - assets/images/b1.png
     - assets/images/b2.png
     - assets/images/b3.png
     - assets/lottie/loading.json
+    - assets/lottie/loadingd.json
     - assets/lottie/success.json
     - assets/lottie/error.json
   #

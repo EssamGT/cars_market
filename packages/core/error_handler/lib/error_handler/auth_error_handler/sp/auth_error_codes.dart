@@ -94,5 +94,7 @@ class AuthErrorCodes {
   static const String userSsoManaged = 'user_sso_managed';
   static const String validationFailed = 'validation_failed';
   static const String weakPassword =
-      'weak_password'; // duplicate with weakPassword above
+      'weak_password';
+
+  static get userDisabled => null; // duplicate with weakPassword above
 }

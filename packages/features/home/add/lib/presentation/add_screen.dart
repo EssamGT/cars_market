@@ -45,6 +45,7 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    final double indicatorHeight = AppSize.s60;
     return BlocProvider.value(
       value: getIt.get<AddCubit>(),
       child: Scaffold(
@@ -52,61 +53,69 @@ class _AddScreenState extends State<AddScreen> {
         bottomNavigationBar: ButtomButtons(controller: controller),
         // pin the indicator to the top using a Stack and give the scrollable content
         // top padding equal to the indicator height + top safe area
-        body: Builder(
-          builder: (context) {
-            final double indicatorHeight = AppSize.s60;
-            final double topOffset =
-                indicatorHeight + MediaQuery.of(context).padding.top;
-            return Stack(
-              children: [
-                SingleChildScrollView(
-                  controller: controller.scrollController,
-                  padding: EdgeInsets.only(top: topOffset),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: screenSize.height - topOffset,
-                      minWidth: screenSize.width,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Obx(
-                        () => PopScope(
-                          canPop: false,
-                          child: Column(
-                            children: [
-                              // keep only the current step in the scrollable area
-                              Form(
-                                key: controller.key,
-                                child: controller
-                                    .steps[controller.selectedIndex.value],
-                              ),
-                            ],
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              controller: controller.scrollController,
+              padding: EdgeInsets.only(top: indicatorHeight + AppPadding.p8),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: AppSize.s100,
+                  minWidth: screenSize.width,
+                ),
+                child: IntrinsicHeight(
+                  child: PopScope(
+                    canPop: false,
+
+                    child: Obx(
+                      () => Column(
+                        children: [
+                          // keep only the current step in the scrollable area
+                          Form(
+                            key: controller.key,
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              switchInCurve: Curves.easeOut,
+                              switchOutCurve: Curves.easeIn,
+                              transitionBuilder: (child, animation) =>
+                                  FadeTransition(
+                                    opacity: animation,
+                                    child: ScaleTransition(
+                                      scale: Tween<double>(
+                                        begin: 0.50,
+                                        end: 1.0,
+                                      ).animate(animation),
+                                      child: child,
+                                    ),
+                                  ),
+                              child: controller
+                                  .steps[controller.selectedIndex.value],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: SafeArea(
-                    bottom: false,
-                    child: Container(
-                      height: indicatorHeight,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      alignment: Alignment.center,
-                      child: Obx(
-                        () => StepsIndicator(
-                          index: controller.selectedIndex.value,
-                        ),
-                      ),
-                    ),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: SafeArea(
+                bottom: false,
+                child: Container(
+                  height: indicatorHeight,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  alignment: Alignment.center,
+                  child: Obx(
+                    () => StepsIndicator(index: controller.selectedIndex.value),
                   ),
                 ),
-              ],
-            );
-          },
+              ),
+            ),
+          ],
         ),
       ),
     );

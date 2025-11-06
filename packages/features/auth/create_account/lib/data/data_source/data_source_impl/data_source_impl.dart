@@ -3,24 +3,24 @@ import 'package:dartz/dartz.dart';
 import 'package:data/models/auth/auth_model.dart';
 import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_handler.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:remote/remote/remote_manager.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 @LazySingleton(as: DataSource)
 class DataSourceImpl extends DataSource {
   RemoteManager remote;
   DataSourceImpl(this.remote);
   @override
-  Future<Either<Failure, AuthResponse>> cereateAccount(AuthModel auth) async {
+  Future<Either<Failure, UserCredential>> cereateAccount(AuthModel auth) async {
     try {
       final response = await remote.createAccount(
         email: auth.email,
         password: auth.password,
       );
       return Right(response);
-    } on AuthException catch (authError) {
-      return left(AuthErrorHandler.handelError(authError));
+    } on FirebaseAuthException catch (authError) {
+      return left(AuthErrorHandler.handleFirebaseAuthError(authError));
     } catch (e) {
       print('from dataSource error');
       print(e);

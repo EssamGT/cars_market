@@ -5,7 +5,6 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:router/routes_manager.dart';
 
 enum PopupType { loading, success, error }
 
@@ -35,81 +34,81 @@ class PopUpManager {
     _popupEntry = null;
   }
 
-  static successPopUp(context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width / 1.4;
-    Future.delayed(AppConstants.timeoutDuration, () {
-      context.go(RoutesManager.home);
-    });
-    return showDialog(
-      traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
-      barrierDismissible: false,
-      useRootNavigator: false,
-      fullscreenDialog: false,
-      animationStyle: AnimationStyle(
-        curve: Curves.easeInBack,
-        duration: Duration(milliseconds: 300),
-      ),
-      useSafeArea: true,
-      requestFocus: false,
-      context: context,
-      builder: (context) {
-        return Center(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(AppSize.s20),
-            ),
-            constraints: BoxConstraints(
-              maxWidth: width,
-              minHeight: screenSize.height / 3,
-            ),
-            child: Column(
-              spacing: AppSize.s15,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: width,
-                  height: screenSize.height / 6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppSize.s20),
-                      topRight: Radius.circular(AppSize.s20),
-                    ),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: Center(
-                    child: Lottie.asset(
-                      AssetsManager.success,
-                      package: AppConstants.assetsPackage,
-                    ),
-                  ),
-                ),
-                Text(
-                  StringsManager.success,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Text(
-                  StringsManager.carListedSuccessfully,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                FilledButton(
-                  style: ButtonStyle(),
-                  onPressed: () {
-                    context.go(RoutesManager.home);
-                  },
-                  child: Text(
-                    StringsManager.okay,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // static successPopUp(context) {
+  //   Size screenSize = MediaQuery.of(context).size;
+  //   double width = screenSize.width / 1.4;
+  //   Future.delayed(AppConstants.timeoutDuration, () {
+  //     context.go(RoutesManager.home);
+  //   });
+  //   return showDialog(
+  //     traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+  //     barrierDismissible: false,
+  //     useRootNavigator: false,
+  //     fullscreenDialog: false,
+  //     animationStyle: AnimationStyle(
+  //       curve: Curves.easeInBack,
+  //       duration: Duration(milliseconds: 300),
+  //     ),
+  //     useSafeArea: true,
+  //     requestFocus: false,
+  //     context: context,
+  //     builder: (context) {
+  //       return Center(
+  //         child: Container(
+  //           decoration: BoxDecoration(
+  //             color: Theme.of(context).scaffoldBackgroundColor,
+  //             borderRadius: BorderRadius.circular(AppSize.s20),
+  //           ),
+  //           constraints: BoxConstraints(
+  //             maxWidth: width,
+  //             minHeight: screenSize.height / 3,
+  //           ),
+  //           child: Column(
+  //             spacing: AppSize.s15,
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Container(
+  //                 width: width,
+  //                 height: screenSize.height / 6,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.only(
+  //                     topLeft: Radius.circular(AppSize.s20),
+  //                     topRight: Radius.circular(AppSize.s20),
+  //                   ),
+  //                   color: Theme.of(context).colorScheme.primary,
+  //                 ),
+  //                 child: Center(
+  //                   child: Lottie.asset(
+  //                     AssetsManager.success,
+  //                     package: AppConstants.assetsPackage,
+  //                   ),
+  //                 ),
+  //               ),
+  //               Text(
+  //                 StringsManager.success,
+  //                 style: Theme.of(context).textTheme.headlineSmall,
+  //               ),
+  //               Text(
+  //                 StringsManager.carListedSuccessfully,
+  //                 style: Theme.of(context).textTheme.bodyMedium,
+  //               ),
+  //               FilledButton(
+  //                 style: ButtonStyle(),
+  //                 onPressed: () {
+  //                   context.go(RoutesManager.home);
+  //                 },
+  //                 child: Text(
+  //                   StringsManager.okay,
+  //                   style: Theme.of(context).textTheme.titleSmall,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }
 
 class _PopupWidget extends StatelessWidget {

@@ -18,6 +18,7 @@ enum TextFieldValidationType {
   paintCondition,
   price,
   location,
+  name,
 }
 
 class TextFieldValidator {
@@ -35,6 +36,7 @@ class TextFieldValidator {
         if (input.isEmpty) return "Phone number can't be empty";
         final regex = RegExp(r'^[0-9]{8,15}$');
         if (!regex.hasMatch(input)) return "Enter a valid phone number";
+        if (input.length < 10) return "Enter a valid phone number";
         return null;
 
       case TextFieldValidationType.password:
@@ -93,14 +95,20 @@ class TextFieldValidator {
         return null;
       case TextFieldValidationType.price:
         if (input.isEmpty) return "Price can't be empty";
-        if(input == '0') return "Price must be greater than 0";
-        if(input[0] == '0') return "Please enter a valid price";
-        if(input.length <5) return "Please enter a valid price";
+        if (input == '0') return "Price must be greater than 0";
+        if (input[0] == '0') return "Please enter a valid price";
+        if (input.length < 5) return "Please enter a valid price";
         return null;
       case TextFieldValidationType.description:
         if (input.isEmpty) return "Description can't be empty";
-        if(input.length < 100) return "Description must be at least 100 characters";
-      
+        if (input.length < 100) {
+          return "Description must be at least 100 characters";
+        }
+
+        return null;
+      case TextFieldValidationType.name:
+        if (input.isEmpty) return "Name can't be empty";
+        if (input.length < 5) return "Name must be at least 5 characters";
         return null;
       default:
         return null;

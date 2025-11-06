@@ -65,7 +65,9 @@ InputDecorationThemeData lightInputDecoration() {
       borderRadius: BorderRadius.circular(AppSize.s10),
       borderSide: BorderSide(color: ColorManager.transparent),
     ),
+
     fillColor: ColorManager.surfaceVariant,
+     
     filled: true,
     activeIndicatorBorder: BorderSide(color: ColorManager.surfaceVariant),
     focusedBorder: OutlineInputBorder(

@@ -16,6 +16,8 @@ dependencies:
     path: ../constants
   data:
     path: ../data
+  assets:
+    path: ../assets
   google_places_service:
     path: ../google_places_service
   add:
@@ -24,14 +26,15 @@ dependencies:
   iconsax_flutter: ^1.0.1
   intl: ^0.20.2
   flutter_bloc: ^9.1.1
+  intl_phone_number_input: ^0.7.5
+  lottie: ^3.3.2 
+  redacted: ^1.0.13
 
-  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

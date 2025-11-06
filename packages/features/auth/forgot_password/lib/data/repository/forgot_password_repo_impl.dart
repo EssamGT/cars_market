@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
+import 'package:error_handler/error_handler/base_errors/base_error_type.dart';
 import 'package:forgot_password/data/data_source/forgot_password_data_soure.dart';
 import 'package:forgot_password/domain/repository/forgot_password_repo.dart';
 import 'package:injectable/injectable.dart';
@@ -15,7 +16,7 @@ class ForgotPasswordRepoImpl extends ForgotPasswordRepo {
     if (await networkInfo.isConnected) {
       return dataSoure.forgotPassword(email);
     } else {
-      return Left(Failure(code: 'no internet', message: 'nointer'));
+      return Left(BaseErrorType.noInternet.getFailure());
     }
   }
 }

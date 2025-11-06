@@ -16,7 +16,11 @@ dependencies:
   connectivity_plus: ^7.0.0
   dartz: ^0.10.1
   image_picker: ^1.2.0
+  firebase_core: ^4.2.0
+  firebase_auth: ^6.1.1  
 
+  cars_market:
+    path: ../../../../cars_market
   error_handler:
     path: ../error_handler
   domain:

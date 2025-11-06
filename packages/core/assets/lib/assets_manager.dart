@@ -9,7 +9,7 @@ class AssetsManager {
   static String b2 = '$imagesPath/b2.png';
   static String b3 = '$imagesPath/b3.png';
   static String loading = '$lottiePath/loading.json';
+  static String loadingDots = '$lottiePath/loadingd.json';
   static String error = '$lottiePath/error.json';
   static String success = '$lottiePath/success.json';
-
 }

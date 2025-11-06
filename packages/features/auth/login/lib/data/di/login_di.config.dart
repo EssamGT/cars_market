@@ -11,8 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:login/data/data_source.dart' as _i1048;
-import 'package:login/data/data_source_impl/data_source_impl.dart' as _i486;
+import 'package:login/data/data_source/data_source.dart' as _i1048;
+import 'package:login/data/data_source/data_source_impl/data_source_impl.dart' as _i486;
 import 'package:login/data/repository/login_repo_impl.dart' as _i527;
 import 'package:login/domain/repository/login_repo.dart' as _i636;
 import 'package:login/domain/usecase/login_use_case.dart' as _i936;
