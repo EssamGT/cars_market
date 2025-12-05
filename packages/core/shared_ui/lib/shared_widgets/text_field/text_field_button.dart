@@ -5,7 +5,6 @@ import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
-import 'package:google_places_service/presentation/location_page.dart';
 import 'package:shared_ui/shared_widgets/slection_page/options_selection_page.dart';
 import 'package:shared_ui/shared_widgets/slection_page/selection_page.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';

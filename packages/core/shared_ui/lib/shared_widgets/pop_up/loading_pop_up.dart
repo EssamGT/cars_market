@@ -38,9 +38,8 @@ class LoadingPopUp {
 
 class _PopupWidget extends StatelessWidget {
   final PopupType type;
-  final String errorMessage;
 
-  const _PopupWidget({required this.type, this.errorMessage = ""});
+  const _PopupWidget({required this.type, });
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +70,8 @@ class _PopupWidget extends StatelessWidget {
 
 class _LoadingDots extends StatelessWidget {
   final PopupType type;
-  final String errorMessage;
 
-  const _LoadingDots({required this.type, this.errorMessage = ""});
+  const _LoadingDots({required this.type, });
 
   @override
   Widget build(BuildContext context) {
@@ -89,23 +87,23 @@ class _LoadingDots extends StatelessWidget {
   }
 }
 
-class _FullScreenLoadingDots extends StatelessWidget {
-  final PopupType type;
+// class _FullScreenLoadingDots extends StatelessWidget {
+//   final PopupType type;
 
-  const _FullScreenLoadingDots({required this.type});
+//   const _FullScreenLoadingDots({required this.type});
 
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.black45,
-      child: Container(
-        child: Center(
-          child: Lottie.asset(
-            AssetsManager.loadingDots,
-            package: AppConstants.assetsPackage,
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       color: Colors.black45,
+//       child: Container(
+//         child: Center(
+//           child: Lottie.asset(
+//             AssetsManager.loadingDots,
+//             package: AppConstants.assetsPackage,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
