@@ -19,6 +19,7 @@ enum TextFieldValidationType {
   price,
   location,
   name,
+  otp,
 }
 
 class TextFieldValidator {
@@ -37,6 +38,15 @@ class TextFieldValidator {
         final regex = RegExp(r'^[0-9]{8,15}$');
         if (!regex.hasMatch(input)) return "Enter a valid phone number";
         if (input.length < 10) return "Enter a valid phone number";
+        if (input[0] == '0' && input.length == 10) {
+          return "Enter a valid phone number";
+        }
+        return null;
+      case TextFieldValidationType.otp:
+        if (input.isEmpty) return "OTP can't be empty";
+
+        if (input.length < 6) return "Enter a valid OTP";
+
         return null;
 
       case TextFieldValidationType.password:
@@ -124,6 +134,10 @@ class TextFieldValidator {
     if (input != input2) {
       return "Passwords do not match";
     }
+    return null;
+  }
+
+  static String? validatePhoneNumber(String value, String defaultCountryCode) {
     return null;
   }
 }

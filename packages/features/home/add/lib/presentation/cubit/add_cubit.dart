@@ -103,6 +103,7 @@ class AddCubit extends Cubit<AddState> {
     emit(UploadingLoading());
     String uuid = UuidV4().generate();
     car.id = uuid;
+    car.createdAt = DateTime.now().toString();
     final result = await uploadImages(uuid);
     result.fold(
       (error) {
@@ -126,6 +127,8 @@ class AddCubit extends Cubit<AddState> {
     //   emit(UploadingSuccess());
     // });
   }
+
+  
 
   // bool step1Validation() {
   //   if (car.brand.isEmpty) {

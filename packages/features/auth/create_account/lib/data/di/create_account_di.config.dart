@@ -23,7 +23,7 @@ import 'package:create_account/presentation/cubit/create_account_cubit.dart'
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;
-import 'package:remote/remote/remote_manager.dart' as _i227;
+import 'package:remote/remote/auth/auth_manager.dart' as _i227;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -33,7 +33,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i398.DataSource>(
-      () => _i120.DataSourceImpl(gh<_i227.RemoteManager>()),
+      () => _i120.DataSourceImpl(gh<_i227.AuthManager>()),
     );
     gh.lazySingleton<_i52.CreateAccountRepo>(
       () => _i842.CreateAccountRepoImpl(

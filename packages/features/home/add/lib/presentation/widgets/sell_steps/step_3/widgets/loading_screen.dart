@@ -33,82 +33,6 @@ class PopUpManager {
     _popupEntry?.remove();
     _popupEntry = null;
   }
-
-  // static successPopUp(context) {
-  //   Size screenSize = MediaQuery.of(context).size;
-  //   double width = screenSize.width / 1.4;
-  //   Future.delayed(AppConstants.timeoutDuration, () {
-  //     context.go(RoutesManager.home);
-  //   });
-  //   return showDialog(
-  //     traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
-  //     barrierDismissible: false,
-  //     useRootNavigator: false,
-  //     fullscreenDialog: false,
-  //     animationStyle: AnimationStyle(
-  //       curve: Curves.easeInBack,
-  //       duration: Duration(milliseconds: 300),
-  //     ),
-  //     useSafeArea: true,
-  //     requestFocus: false,
-  //     context: context,
-  //     builder: (context) {
-  //       return Center(
-  //         child: Container(
-  //           decoration: BoxDecoration(
-  //             color: Theme.of(context).scaffoldBackgroundColor,
-  //             borderRadius: BorderRadius.circular(AppSize.s20),
-  //           ),
-  //           constraints: BoxConstraints(
-  //             maxWidth: width,
-  //             minHeight: screenSize.height / 3,
-  //           ),
-  //           child: Column(
-  //             spacing: AppSize.s15,
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               Container(
-  //                 width: width,
-  //                 height: screenSize.height / 6,
-  //                 decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.only(
-  //                     topLeft: Radius.circular(AppSize.s20),
-  //                     topRight: Radius.circular(AppSize.s20),
-  //                   ),
-  //                   color: Theme.of(context).colorScheme.primary,
-  //                 ),
-  //                 child: Center(
-  //                   child: Lottie.asset(
-  //                     AssetsManager.success,
-  //                     package: AppConstants.assetsPackage,
-  //                   ),
-  //                 ),
-  //               ),
-  //               Text(
-  //                 StringsManager.success,
-  //                 style: Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //               Text(
-  //                 StringsManager.carListedSuccessfully,
-  //                 style: Theme.of(context).textTheme.bodyMedium,
-  //               ),
-  //               FilledButton(
-  //                 style: ButtonStyle(),
-  //                 onPressed: () {
-  //                   context.go(RoutesManager.home);
-  //                 },
-  //                 child: Text(
-  //                   StringsManager.okay,
-  //                   style: Theme.of(context).textTheme.titleSmall,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 }
 
 class _PopupWidget extends StatelessWidget {
@@ -125,8 +49,10 @@ class _PopupWidget extends StatelessWidget {
       color: Colors.black45,
       child: Center(
         child: Container(
-          width: width,
-          height: screenSize.height / 3,
+          constraints: BoxConstraints(
+            maxWidth: width,
+            minHeight: screenSize.height / 3,
+          ),
           decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(20),
@@ -169,13 +95,16 @@ class _PopupWidget extends StatelessWidget {
                     : StringsManager.oops,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              Text(
-                type == PopupType.loading
-                    ? StringsManager.listingYourCar
-                    : type == PopupType.success
-                    ? StringsManager.carListedSuccessfully
-                    : errorMessage,
-                style: Theme.of(context).textTheme.bodyMedium,
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p12),
+                child: Text(
+                  type == PopupType.loading
+                      ? StringsManager.listingYourCar
+                      : type == PopupType.success
+                      ? StringsManager.carListedSuccessfully
+                      : errorMessage,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
 
               Visibility(
@@ -196,16 +125,19 @@ class _PopupWidget extends StatelessWidget {
               ),
               Visibility(
                 visible: type == PopupType.error,
-                child: FilledButton(
-                  style: ButtonStyle(),
-                  onPressed: () {
-                    if (context.canPop()) {
-                      PopUpManager.hide();
-                    }
-                  },
-                  child: Text(
-                    StringsManager.okay,
-                    style: Theme.of(context).textTheme.titleSmall,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: AppPadding.p12),
+                  child: FilledButton(
+                    style: ButtonStyle(),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        PopUpManager.hide();
+                      }
+                    },
+                    child: Text(
+                      StringsManager.okay,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ),
                 ),
               ),

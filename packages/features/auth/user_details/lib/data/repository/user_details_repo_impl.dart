@@ -44,9 +44,18 @@ class UserDetailsRepoImpl extends UserDetailsRepo {
   // }
 
   @override
-  Future<Either<Failure, void>> addPhoneNumber(String phoneNumber) async {
+  Future<Either<Failure, void>> sendOTP(String phoneNumber) async {
     if (await networkInfo.isConnected) {
-      return dataSource.addPhoneNumber(phoneNumber);
+      return dataSource.sendOTP(phoneNumber);
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resendOTP(String phoneNumber) async {
+    if (await networkInfo.isConnected) {
+      return dataSource.resendOTP(phoneNumber);
     } else {
       return Left(BaseErrorType.noInternet.getFailure());
     }

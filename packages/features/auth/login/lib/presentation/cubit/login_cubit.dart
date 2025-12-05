@@ -18,14 +18,19 @@ class LoginCubit extends Cubit<LoginState> {
     result.fold(
       (failure) {
         emit(Error(failure));
-        print(failure.code);
-        print(failure.message);
       },
       (suc) {
-        emit(Success());
+        final user = suc.user;
+        if (user != null) {
+          if (user.phoneNumber != null &&
+              user.emailVerified &&
+              user.displayName != null) {
+            emit(SuccessToHome());
+          } else {
+            emit(SuccessToUserDetails());
+          }
+        }
       },
     );
   }
-
-
 }

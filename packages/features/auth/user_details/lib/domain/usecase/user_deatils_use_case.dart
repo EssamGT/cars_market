@@ -17,8 +17,11 @@ class UserDeatilsUseCase {
       repo.authStateChanges();
   // Future<AuthResponse> refreshSession() => repo.refreshSession();
 
-  Future<Either<Failure, void>> addPhoneNumber(String phoneNumber) async {
-    return await repo.addPhoneNumber(phoneNumber);
+  Future<Either<Failure, void>> sendOTP(String phoneNumber) async {
+    return await repo.sendOTP(phoneNumber);
+  }
+  Future<Either<Failure, void>> resendOTP(String phoneNumber) async {
+    return await repo.resendOTP(phoneNumber);
   }
 
   Future<Either<Failure, UserCredential>> verifyOTP(String otp) async {

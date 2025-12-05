@@ -9,7 +9,12 @@ class OtpTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p5),
+      padding: const EdgeInsets.only( 
+        left: AppPadding.p5,
+        right: AppPadding.p5,
+        top: AppPadding.p10,
+        bottom: AppPadding.p40,
+        ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         // mainAxisAlignment: MainAxisAlignment.center,

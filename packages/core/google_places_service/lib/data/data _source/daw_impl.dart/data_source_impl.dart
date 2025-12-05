@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_places_service/data/data%20_source/data_source.dart';
 import 'package:google_places_service/data/models/google_maps_auto_complete/google_maps_model.dart';
 import 'package:injectable/injectable.dart';
-import 'package:remote/remote/api_manager.dart';
+import 'package:remote/remote/api/api_manager.dart';
 import 'package:uuid/v4.dart';
 
 @Injectable(as: GooglePlacesService)

@@ -3,6 +3,8 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:router/routes_manager.dart';
 import 'package:shared_ui/shared_widgets/massege_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'package:user_details/presentation/cubit/user_details_cubit.dart';
@@ -43,7 +45,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
         buildWhen: (previous, current) {
           if (current is UserDetailsInitial ||
               current is UserDetailsGStopLoading ||
-              current is UserDetailsGError) {
+              current is UserDetailsGError ||
+              current is ConfirmDetails ||
+              current is MainLoading) {
             return true;
           } else {
             return false;
@@ -54,11 +58,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             LoadingPopUp.hide();
             MessageBar.show(context, state.failure.message);
           }
-          // if (state is UserDetailsInitial) {
-          //   LoadingPopUp.show(context: context, type: PopupType.loadingDots);
-          // } else {
-          //   LoadingPopUp.hide();
-          // }
+          if (state is ConfirmDetails) {
+            context.go(RoutesManager.home);
+          }
         },
         builder: (context, state) {
           return Scaffold(
@@ -67,7 +69,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               centerTitle: true,
               forceMaterialTransparency: true,
             ),
-            bottomNavigationBar: ContinueButton(enable: true),
+            bottomNavigationBar: ContinueButton(
+              loading: state is ConfirmDetailsLoading,
+            ),
             body: SingleChildScrollView(
               child: Form(
                 key: formKey,
@@ -76,7 +80,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   children: [
                     UserImageWidget(loading: state is UserDetailsInitial),
                     UserNameTextField(loading: state is UserDetailsInitial),
-                    UserPhoneNumberTextField(loading: state is UserDetailsInitial),
+                    UserPhoneNumberTextField(
+                      loading: state is UserDetailsInitial,
+                    ),
                     EmailPhoneVerify(loading: state is UserDetailsInitial),
 
                     // Spacer(),

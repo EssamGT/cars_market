@@ -18,7 +18,17 @@ class _Step1State extends State<Step1> with AutomaticKeepAliveClientMixin {
     super.build(context);
     return Column(
       key: ValueKey('step1'),
-      children: [ImagePicker(), CarDetails()],
+      children: [
+        // TextButton(
+        //   onPressed: () {
+        //     var cubit = AddCubit.get(context);
+        //     cubit.uploadCar();
+        //   },
+        //   child: Text('Next'),
+        // ),
+        ImagePicker(),
+        CarDetails(),
+      ],
     );
   }
 }

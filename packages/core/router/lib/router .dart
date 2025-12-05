@@ -5,12 +5,37 @@ import 'package:go_router/go_router.dart';
 import 'package:router/routes/routes_list.dart';
 import 'package:router/routes_manager.dart';
 
-final appRouter = GoRouter(
-  initialLocation: RoutesManager.login,
-  // getIt<FirebaseAuth>().currentUser == null
-  //     ? RoutesManager.onBoarding
-  //     : RoutesManager.home,
-  routes: [...routes],
-  errorBuilder: (context, state) =>
-      const Scaffold(body: Center(child: Text("404: Page not found"))),
-);
+GoRouter appRouter = createAppRouter();
+
+GoRouter createAppRouter() {
+  final initial = getInitialRoute();
+  return GoRouter(
+    initialLocation: initial,
+    routes: [...routes],
+    errorBuilder: (context, state) =>
+        const Scaffold(body: Center(child: Text("404: Page not found"))),
+  );
+}
+
+String getInitialRoute() {
+  var user = getIt<FirebaseAuth>().currentUser;
+  if (user == null) {
+    return RoutesManager.login;
+  }
+  user.reload();
+  if (user.phoneNumber != null &&
+      user.emailVerified &&
+      user.displayName != null) {
+    return RoutesManager.home;
+  }
+  if (user.phoneNumber == null &&
+          user.emailVerified &&
+          user.displayName == null ||
+      user.phoneNumber == null ||
+      user.emailVerified ||
+      user.displayName == null) {
+    return RoutesManager.userDetails;
+  } else {
+    return RoutesManager.login;
+  }
+}

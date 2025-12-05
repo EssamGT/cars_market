@@ -19,7 +19,11 @@ import 'package:add/presentation/cubit/add_cubit.dart' as _i268;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;
-import 'package:remote/remote/remote_manager.dart' as _i227;
+import 'package:remote/remote/storage/storage_manager.dart' as _i175;
+
+const String _dev = 'dev';
+const String _test = 'test';
+const String _prod = 'prod';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -29,7 +33,14 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i489.AddDataSource>(
-      () => _i794.AddDataSourceImpl(remoteManager: gh<_i227.RemoteManager>()),
+      () => _i794.AddDataSourceImpl(storageManger: gh<_i175.StorageManager>()),
+      registerFor: {_dev, _test},
+    );
+    gh.factory<_i489.AddDataSource>(
+      () => _i794.AddDataSourceImplProd(
+        storageManager: gh<_i175.StorageManager>(),
+      ),
+      registerFor: {_prod},
     );
     gh.factory<_i92.AddRepository>(
       () => _i671.AddRepoImpl(

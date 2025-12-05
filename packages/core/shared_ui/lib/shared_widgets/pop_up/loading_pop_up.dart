@@ -4,7 +4,7 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-enum PopupType { loading, loadingDots }
+enum PopupType { loading, loadingDots, fullScreenLoadingDots }
 
 class LoadingPopUp {
   static OverlayEntry? _popupEntry;
@@ -20,9 +20,11 @@ class LoadingPopUp {
     // already showing
 
     _popupEntry = OverlayEntry(
-      builder: (_) => type == PopupType.loading
-          ? _PopupWidget(type: type, errorMessage: errorMessage ?? "")
-          : _LoadingDots(type: type, errorMessage: errorMessage ?? ""),
+      builder: (_) => switch (type) {
+        PopupType.loading => _PopupWidget(type: type),
+        PopupType.loadingDots => _LoadingDots(type: type),
+        PopupType.fullScreenLoadingDots => _LoadingDots(type: type),
+      },
     );
 
     Overlay.of(context, rootOverlay: true).insert(_popupEntry!);
@@ -81,6 +83,27 @@ class _LoadingDots extends StatelessWidget {
         child: Lottie.asset(
           AssetsManager.loadingDots,
           package: AppConstants.assetsPackage,
+        ),
+      ),
+    );
+  }
+}
+
+class _FullScreenLoadingDots extends StatelessWidget {
+  final PopupType type;
+
+  const _FullScreenLoadingDots({required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.black45,
+      child: Container(
+        child: Center(
+          child: Lottie.asset(
+            AssetsManager.loadingDots,
+            package: AppConstants.assetsPackage,
+          ),
         ),
       ),
     );

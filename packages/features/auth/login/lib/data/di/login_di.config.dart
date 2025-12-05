@@ -18,7 +18,7 @@ import 'package:login/domain/repository/login_repo.dart' as _i636;
 import 'package:login/domain/usecase/login_use_case.dart' as _i936;
 import 'package:login/presentation/cubit/login_cubit.dart' as _i222;
 import 'package:remote/network_info/network_info.dart' as _i583;
-import 'package:remote/remote/remote_manager.dart' as _i227;
+import 'package:remote/remote/auth/auth_manager.dart' as _i227;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -28,7 +28,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i1048.LoginDataSource>(
-      () => _i486.DataSourceImpl(gh<_i227.RemoteManager>()),
+      () => _i486.DataSourceImpl(gh<_i227.AuthManager>()),
     );
     gh.lazySingleton<_i636.LoginRepo>(
       () => _i527.LoginRepoImpl(

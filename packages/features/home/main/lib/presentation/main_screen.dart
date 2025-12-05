@@ -2,7 +2,7 @@ import 'package:cars_market/di/di.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remote/remote/remote_manager.dart';
+import 'package:remote/remote/auth/auth_manager.dart';
 import 'package:router/routes_manager.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
 
@@ -31,7 +31,7 @@ class MainScreen extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      getIt<RemoteManager>().logout();
+                      getIt<AuthManager>().logout();
                       context.go(RoutesManager.login);
                     },
                     child: Text('logout'),

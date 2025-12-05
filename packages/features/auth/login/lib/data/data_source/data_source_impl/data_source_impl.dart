@@ -5,11 +5,11 @@ import 'package:error_handler/error_handler/auth_error_handler/auth_error_handle
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:login/data/data_source/data_source.dart';
-import 'package:remote/remote/remote_manager.dart';
+import 'package:remote/remote/auth/auth_manager.dart';
 
 @LazySingleton(as: LoginDataSource)
 class DataSourceImpl extends LoginDataSource {
-  RemoteManager remote;
+  AuthManager remote;
   DataSourceImpl(this.remote);
   @override
   Future<Either<Failure, UserCredential>> login(AuthModel auth) async {

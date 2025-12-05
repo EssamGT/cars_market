@@ -5,11 +5,11 @@ import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:remote/remote/remote_manager.dart';
+import 'package:remote/remote/auth/auth_manager.dart';
 
 @LazySingleton(as: DataSource)
 class DataSourceImpl extends DataSource {
-  RemoteManager remote;
+  AuthManager remote;
   DataSourceImpl(this.remote);
   @override
   Future<Either<Failure, UserCredential>> cereateAccount(AuthModel auth) async {
@@ -18,6 +18,7 @@ class DataSourceImpl extends DataSource {
         email: auth.email,
         password: auth.password,
       );
+
       return Right(response);
     } on FirebaseAuthException catch (authError) {
       return left(AuthErrorHandler.handleFirebaseAuthError(authError));

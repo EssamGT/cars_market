@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cars_market/di/di.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
@@ -9,7 +11,6 @@ import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
 import 'package:shared_ui/shared_widgets/massege_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'package:user_details/presentation/cubit/user_details_cubit.dart';
-import 'package:user_details/presentation/user_details_screen.dart';
 import 'package:user_details/presentation/widgets/otp_screen/widgets/otp_text_widget.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
@@ -21,16 +22,45 @@ class OtpVerifyScreen extends StatefulWidget {
 
 class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   late TextEditingController otpController;
+  GlobalKey<FormState> otpKey = GlobalKey<FormState>();
+
+  Timer? _resendTimer;
+  final StreamController<int> _resendController =
+      StreamController<int>.broadcast();
+
   @override
   void initState() {
     otpController = TextEditingController();
+    startResendCountdown();
     super.initState();
   }
 
   @override
   void dispose() {
     otpController.dispose();
+    _resendTimer?.cancel();
+    _resendController.close();
     super.dispose();
+  }
+
+  void startResendCountdown([int seconds = 60]) {
+    _resendTimer?.cancel();
+    int remaining = seconds;
+    _resendController.add(remaining);
+    _resendTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      remaining--;
+      if (remaining <= 0) {
+        _resendController.add(0);
+        timer.cancel();
+      } else {
+        _resendController.add(remaining);
+      }
+    });
+  }
+
+  void stopResendCountdown() {
+    _resendTimer?.cancel();
+    _resendController.add(0);
   }
 
   final int otpLength = 6;
@@ -58,7 +88,6 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
               listener: (context, state) {
                 if (state is PhoneVerified) {
                   LoadingPopUp.hide();
-
                   context.pop();
                 }
                 if (state is PhoneVerificationError) {
@@ -89,7 +118,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                 var cubit = getIt<UserDetailsCubit>();
 
                 return Form(
-                  key: formKey,
+                  key: otpKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -97,7 +126,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical: AppPadding.p40,
+                          // vertical: AppPadding.p12,
                           horizontal: AppPadding.p8,
                         ),
                         child: Pinput(
@@ -116,10 +145,14 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                           },
                           defaultPinTheme: getPinTheme(context),
                           onSubmitted: (value) {
-                            cubit.verifyOTP(value);
+                            if (otpKey.currentState!.validate()) {
+                              cubit.verifyOTP(value);
+                            }
                           },
                           onCompleted: (value) {
-                            cubit.verifyOTP(value);
+                            if (otpKey.currentState!.validate()) {
+                              cubit.verifyOTP(value);
+                            }
                           },
                           onTapOutside: (event) {
                             FocusScope.of(context).unfocus();
@@ -127,21 +160,67 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                           hapticFeedbackType: HapticFeedbackType.mediumImpact,
                           useNativeKeyboard: true,
                           keyboardType: TextInputType.number,
+                          errorTextStyle: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                          errorBuilder: (errorText, pin) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: AppPadding.p12,
+                              ),
+                              child: Text(
+                                errorText!,
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.error,
+                                    ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(StringsManager.resendCode),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: AppPadding.p8,
+                        ),
+                        child: StreamBuilder<int>(
+                          stream: _resendController.stream,
+                          initialData: 0,
+                          builder: (context, asyncSnapshot) {
+                            final remaining = asyncSnapshot.data ?? 0;
+                            return TextButton(
+                              onPressed: remaining == 0
+                                  ? () {
+                                      cubit.resendOTP();
+                                      startResendCountdown();
+                                    }
+                                  : null,
+                              style: ButtonStyle(
+                                overlayColor: WidgetStateProperty.all(
+                                  Theme.of(context).colorScheme.surface,
+                                ),
+                              ),
+
+                              child: Text(
+                                remaining == 0
+                                    ? StringsManager.resendCode
+                                    : "${StringsManager.resendCode} ( $remaining )",
+                              ),
+                            );
+                          },
+                        ),
                       ),
+                      // Text(state.toString()),
                       Spacer(),
                       CTextButton(
                         onTap: () {
                           FocusScope.of(context).unfocus();
-                          if (formKey.currentState!.validate()) {
+                          if (otpKey.currentState!.validate()) {
                             cubit.verifyOTP(otpController.text);
                           }
-
-                          // print(state);
                         },
                         // enable: false,
                         text: StringsManager.verifyNow,

@@ -56,7 +56,7 @@ class _UserNameTextFieldState extends State<UserNameTextField> {
           label: StringsManager.fullName,
           validationType: TextFieldValidationType.name,
           myNode: nameFocusNode,
-          next: phoneFocusNode,
+          next: UserPhoneNumberTextField.phoneFocusNode,
           enabled: state is! EmailVerified,
           loading: widget.loading,
           onChanged: (name) {

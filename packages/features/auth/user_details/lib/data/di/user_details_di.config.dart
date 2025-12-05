@@ -12,7 +12,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;
-import 'package:remote/remote/remote_manager.dart' as _i227;
+import 'package:remote/remote/auth/auth_manager.dart' as _i227;
 import 'package:user_details/data/data_source/impl/user_details_daw_impl.dart'
     as _i709;
 import 'package:user_details/data/data_source/user_details_data_source.dart'
@@ -35,11 +35,11 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i34.UserDetailsDataSource>(
-      () => _i709.UserDetailsDawImplD(gh<_i227.RemoteManager>()),
+      () => _i709.UserDetailsDawImplD(gh<_i227.AuthManager>()),
       registerFor: {_dev},
     );
     gh.factory<_i34.UserDetailsDataSource>(
-      () => _i709.UserDetailsDawImplP(gh<_i227.RemoteManager>()),
+      () => _i709.UserDetailsDawImplP(gh<_i227.AuthManager>()),
       registerFor: {_prod},
     );
     gh.factory<_i144.UserDetailsRepo>(

@@ -65,9 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (state is Error) {
                     MessageBar.show(context, state.failure.message);
                   }
-                  if (state is Success) {
+                  if (state is SuccessToHome) {
+                    context.go(RoutesManager.home);
+                  }
+                  if (state is SuccessToUserDetails) {
                     context.go(RoutesManager.userDetails);
-                    // MessageBar.show(context, 'ss', MessageBarType.sucsses);
                   }
                 },
                 builder: (context, state) {

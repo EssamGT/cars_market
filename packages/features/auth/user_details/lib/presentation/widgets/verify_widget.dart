@@ -132,8 +132,14 @@ class VerifyWidget extends StatelessWidget {
                                     ).colorScheme.primary,
                                   ),
                             )
-                          : InkWell(
-                              onTap: onVerify,
+                          : TextButton(
+                             
+                              onPressed: onVerify,
+                              style: ButtonStyle(
+                                overlayColor: WidgetStatePropertyAll(
+                                  Theme.of(context).colorScheme.surfaceContainerHighest,
+                                ),
+                              ),
                               child: Text(
                                 StringsManager.verifyNow,
                                 style: Theme.of(context).textTheme.bodyMedium,

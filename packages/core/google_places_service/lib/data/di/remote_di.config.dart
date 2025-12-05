@@ -23,7 +23,7 @@ import 'package:google_places_service/presentation/cubit/location_cubit.dart'
     as _i1023;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;
-import 'package:remote/remote/api_manager.dart' as _i120;
+import 'package:remote/remote/api/api_manager.dart' as _i120;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt

@@ -24,7 +24,7 @@ import 'package:forgot_password/presentation/cubit/forgot_password_cubit.dart'
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;
-import 'package:remote/remote/remote_manager.dart' as _i227;
+import 'package:remote/remote/auth/auth_manager.dart' as _i227;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -34,7 +34,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i7.ForgotPasswordDataSoure>(
-      () => _i386.ForgotPasswordDataSourceImpl(gh<_i227.RemoteManager>()),
+      () => _i386.ForgotPasswordDataSourceImpl(gh<_i227.AuthManager>()),
     );
     gh.lazySingleton<_i470.ForgotPasswordRepo>(
       () => _i327.ForgotPasswordRepoImpl(

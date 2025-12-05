@@ -4,11 +4,11 @@ import 'package:error_handler/error_handler/auth_error_handler/auth_error_handle
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:forgot_password/data/data_source/forgot_password_data_soure.dart';
 import 'package:injectable/injectable.dart';
-import 'package:remote/remote/remote_manager.dart';
+import 'package:remote/remote/auth/auth_manager.dart';
 
 @LazySingleton(as: ForgotPasswordDataSoure)
 class ForgotPasswordDataSourceImpl extends ForgotPasswordDataSoure {
-  RemoteManager remoteManager;
+  AuthManager remoteManager;
   ForgotPasswordDataSourceImpl(this.remoteManager);
   @override
   Future<Either<Failure, void>> forgotPassword(String email) async {

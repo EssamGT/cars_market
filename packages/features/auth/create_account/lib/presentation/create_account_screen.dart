@@ -83,11 +83,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   if (state is Success) {
                     // context.pop();
                     context.go(RoutesManager.userDetails);
-                    MessageBar.show(
-                      context,
-                      StringsManager.inbox,
-                      MessageBarType.success,
-                    );
+                    // MessageBar.show(
+                    //   context,
+                    //   StringsManager.inbox,
+                    //   MessageBarType.success,
+                    // );
                   }
                 },
                 child: BlocBuilder<CreateAccountCubit, CreateAccountState>(

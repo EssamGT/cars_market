@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 class CarsTableKeys {
   static const String id = 'id';
+  static const String userId = 'userId';
+  static const String createdAt = 'createdAt';
   static const String brand = 'brand';
   static const String model = 'model';
   static const String year = 'year';
@@ -28,6 +30,8 @@ class CarsTableKeys {
 
 class CarModel {
   String id;
+  String userId;
+  String createdAt;
   String brand;
   String model;
   String year;
@@ -51,6 +55,8 @@ class CarModel {
 
   CarModel({
     this.id = '',
+    this.userId = '',
+    this.createdAt = '',
     this.brand = '',
     this.model = '',
     this.year = '',
@@ -87,6 +93,8 @@ class CarModel {
   Map<String, dynamic> toJson() {
     return {
       CarsTableKeys.id: id,
+      CarsTableKeys.userId: userId,
+      CarsTableKeys.createdAt: createdAt,
       CarsTableKeys.brand: brand,
       CarsTableKeys.model: model,
       CarsTableKeys.year: int.parse(year),
