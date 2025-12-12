@@ -23,4 +23,5 @@ class StructuredFormattingEntity {
     data["secondary_text"] = secondaryText;
     return data;
   }
+
 }

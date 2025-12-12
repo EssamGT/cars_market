@@ -60,8 +60,13 @@ class _LocationTextFieldButtonState extends State<LocationTextFieldButton> {
 
               if (selected != null) {
                 // setState(() {
-                widget.assignedValueTo.description = selected.description;
-                widget.assignedValueTo.placeId = selected.placeId;
+                // widget.assignedValueTo.description = selected.description;
+                // widget.assignedValueTo.placeId = selected.placeId;
+                // widget.assignedValueTo.structuredFormatting =
+                //     selected.structuredFormatting;
+                setLocation(selected);
+                // print(widget.assignedValueTo.structuredFormatting.mainText);
+
                 controller.text = selected.description.replaceAll(
                   ", Egypt",
                   "",
@@ -97,6 +102,15 @@ class _LocationTextFieldButtonState extends State<LocationTextFieldButton> {
         ),
       ],
     );
+  }
+
+  setLocation(PredictionsEntity locEntity) {
+    widget.assignedValueTo.description = locEntity.description;
+    widget.assignedValueTo.placeId = locEntity.placeId;
+    widget.assignedValueTo.structuredFormatting =
+        locEntity.structuredFormatting;
+    widget.assignedValueTo.reference = locEntity.reference;
+    widget.assignedValueTo.types = locEntity.types;
   }
 }
 

@@ -1,34 +1,9 @@
 import 'package:data/models/car/car_image.dart';
+import 'package:data/models/car/car_model.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
 import 'package:google_places_service/domain/entity/structured_formatting_entity.dart';
-import 'package:image_picker/image_picker.dart';
 
-class CarsTableKeys {
-  static const String id = 'carId';
-  static const String userId = 'userId';
-  static const String createdAt = 'createdAt';
-  static const String brand = 'brand';
-  static const String model = 'model';
-  static const String year = 'year';
-  static const String description = 'description';
-  static const String bodyType = 'bodyType';
-  static const String fuelType = 'fuelType';
-  static const String gearboxType = 'gearboxType';
-  static const String mileage = 'mileage';
-  static const String paintColor = 'paintColor';
-  static const String paintCondition = 'paintCondition';
-  static const String interiorFeatures = 'interiorFeatures';
-  static const String modifications = 'modifications';
-  static const String serviceHistory = 'serviceHistory';
-  static const String price = 'price';
-  static const String version = 'version';
-  static const String safetyOptions = 'safetyOptions';
-  static const String negotiable = 'negotiable';
-  static const String images = 'images';
-  static const String location = 'location';
-}
-
-class CarModel {
+class CarEntity {
   String carId;
   String userId;
   String createdAt;
@@ -48,12 +23,11 @@ class CarModel {
   String price;
   String version;
   List<String> safetyOptions;
-  List<XFile> images;
-  List<CarImage>? uploadedImages;
+  List<CarImage>? carImages;
   bool negotiable;
   PredictionsEntity location;
 
-  CarModel({
+  CarEntity({
     this.carId = '',
     this.userId = '',
     this.createdAt = '',
@@ -72,22 +46,23 @@ class CarModel {
     this.price = '',
     this.serviceHistory = '',
     this.version = '',
-    // this.location = PredictionsEntity(
-    //   description: "",
-    //   placeId: "",
-    //   reference: "",
-    //   structuredFormatting:  StructuredFormattingEntity(
-    //     mainText: "",
-    //     secondaryText: "",
-    //   ),
-    //   types: const [],
-    // ),
-    required this.location,
+    PredictionsEntity? location,
     this.safetyOptions = const [],
-    this.images = const [],
+  
     this.negotiable = true,
-    this.uploadedImages,
-  });
+    this.carImages,
+  }) : location =
+           location ??
+           PredictionsEntity(
+             description: "",
+             placeId: '',
+             structuredFormatting: StructuredFormattingEntity(
+               mainText: '',
+               secondaryText: '',
+             ),
+             reference: '',
+             types: [],
+           );
 
   Map<String, dynamic> toJson() {
     return {
@@ -113,9 +88,35 @@ class CarModel {
       CarsTableKeys.version: version,
       CarsTableKeys.safetyOptions: safetyOptions,
       CarsTableKeys.negotiable: negotiable,
-      CarsTableKeys.images: uploadedImages!.map((e) => e.toJson()).toList(),
+      CarsTableKeys.images: carImages!.map((e) => e.toJson()).toList(),
       CarsTableKeys.location: location.toJson(),
       // Note: images are not included in JSON representation
     };
   }
+  CarEntity.fromJson(Map<String, dynamic> json)
+      : carId = json[CarsTableKeys.id] ?? '',
+        userId = json[CarsTableKeys.userId] ?? '',
+        createdAt = json[CarsTableKeys.createdAt] ?? '',
+        brand = json[CarsTableKeys.brand] ?? '',
+        model = json[CarsTableKeys.model] ?? '',
+        year = (json[CarsTableKeys.year] ?? '').toString(),
+        description = json[CarsTableKeys.description] ?? '',
+        bodyType = json[CarsTableKeys.bodyType] ?? '',
+        fuelType = json[CarsTableKeys.fuelType] ?? '',
+        gearboxType = json[CarsTableKeys.gearboxType] ?? '',
+        mileage = (json[CarsTableKeys.mileage] ?? '').toString(),
+        paintColor = json[CarsTableKeys.paintColor] ?? '',
+        paintCondition = json[CarsTableKeys.paintCondition] ?? '',
+        interiorFeatures = json[CarsTableKeys.interiorFeatures] ?? '',
+        modifications = json[CarsTableKeys.modifications] ?? '',
+        serviceHistory = json[CarsTableKeys.serviceHistory] ?? '',
+        price = (json[CarsTableKeys.price] ?? '').toString(),
+        version = json[CarsTableKeys.version] ?? '',
+        safetyOptions = List<String>.from(json[CarsTableKeys.safetyOptions] ?? []),
+        negotiable = json[CarsTableKeys.negotiable] ?? true,
+        carImages = (json[CarsTableKeys.images] as List<dynamic>?)
+            ?.map((e) => CarImage.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        location = PredictionsEntity.fromJson(
+            json[CarsTableKeys.location] as Map<String, dynamic>? ?? {});
 }

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/car_model.dart';
+import 'package:domain/entity/car_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -21,8 +22,8 @@ class StorageManager {
     required this.auth,
   });
   final carsImagesPath = dotenv.env[AppConstants.carsImagesPathKey];
-  final carsDataBase = dotenv.env[AppConstants.carsDataBaseKey];
-  final usersDataBase = dotenv.env[AppConstants.usersDataBaseKey];
+  final carsCollection = dotenv.env[AppConstants.carsDataBaseKey];
+  final usersCollection = dotenv.env[AppConstants.usersDataBaseKey];
 
   Future<List<CarImage>> uploadCarImages(List<XFile> images, String id) async {
     List<CarImage> carImages = [];
@@ -44,13 +45,28 @@ class StorageManager {
   Future<void> uploadCar(CarModel car) async {
     car.userId = auth.currentUser!.uid;
     await firestore
-        .collection(carsDataBase!)
+        .collection(carsCollection!)
         .doc(car.carId)
         .set(car.toJson())
         .then((ture) {
-          firestore.collection(usersDataBase!).doc(auth.currentUser!.uid).update({
-            'cars': FieldValue.arrayUnion([car.carId]),
-          });
+          firestore
+              .collection(usersCollection!)
+              .doc(auth.currentUser!.uid)
+              .update({
+                'cars': FieldValue.arrayUnion([car.carId]),
+              });
         });
+  }
+
+  Future<List<CarEntity>> getMainScreenCars() async {
+    final cars = await firestore
+        .collection(carsCollection!)
+        .orderBy(CarsTableKeys.createdAt, descending: true)
+        .limit(10)
+        .get(GetOptions(source: Source.server));
+    final carEntity = cars.docs
+        .map((d) => CarEntity.fromJson(d.data()))
+        .toList();
+    return carEntity;
   }
 }

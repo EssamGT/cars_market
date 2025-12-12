@@ -4,6 +4,8 @@ import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_places_service/domain/entity/predictions_entity.dart';
+import 'package:google_places_service/domain/entity/structured_formatting_entity.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/v4.dart';
@@ -17,9 +19,18 @@ class AddCubit extends Cubit<AddState> {
     initList();
   }
 
-
   static AddCubit get(BuildContext context) => BlocProvider.of(context);
-  CarModel car = CarModel();
+ CarModel car = CarModel(location:  PredictionsEntity(
+    description: '',
+    placeId: '',
+    structuredFormatting: StructuredFormattingEntity(
+      mainText: '',
+      secondaryText: '',
+    ),
+    reference: '',
+    types: [],
+  )
+);
   // final List<String> sug = allCarBrands;
   late ImagePicker picker;
   // late List<XFile> images;
@@ -30,9 +41,6 @@ class AddCubit extends Cubit<AddState> {
     car.safetyOptions = [];
     car.images = [];
   }
-
-
-
 
   void safetyOptionAdd(String safetyOption) {
     car.safetyOptions.add(safetyOption);
@@ -102,7 +110,7 @@ class AddCubit extends Cubit<AddState> {
   Future<void> uploadCar() async {
     emit(UploadingLoading());
     String uuid = UuidV4().generate();
-    car.id = uuid;
+    car.carId = uuid;
     car.createdAt = DateTime.now().toString();
     final result = await uploadImages(uuid);
     result.fold(
@@ -127,8 +135,6 @@ class AddCubit extends Cubit<AddState> {
     //   emit(UploadingSuccess());
     // });
   }
-
-  
 
   // bool step1Validation() {
   //   if (car.brand.isEmpty) {

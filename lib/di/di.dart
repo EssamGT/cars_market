@@ -6,7 +6,9 @@ import 'package:get_it/get_it.dart';
 import 'package:google_places_service/data/di/remote_di.dart';
 import 'package:injectable/injectable.dart';
 import 'package:login/data/di/login_di.dart';
+import 'package:main/data/di/di.dart';
 import 'package:remote/di/remote_di.dart';
+import 'package:storage/di/storage_di.dart';
 import 'package:user_details/data/di/user_details_di.dart';
 
 final getIt = GetIt.instance;
@@ -25,4 +27,7 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureAddDependencies(getIt, enviroment);
   await configureGooglePlacesServiceDependencies(getIt, enviroment);
   await configureUserDetailsDependencies(getIt, enviroment);
+  await configureStorageDependencies(getIt, enviroment);
+  await configureMainScreenDependencies(getIt, enviroment);
+  
 }

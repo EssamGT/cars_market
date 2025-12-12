@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
   constants:
     path: ../../../core/constants
   router:
@@ -20,6 +21,8 @@ dependencies:
     path: ../../../core/remote
   data:
     path: ../../../core/data
+  storage:
+    path: ../../../core/storage
   domain:
     path: ../../../core/domain
   error_handler:

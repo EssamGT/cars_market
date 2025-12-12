@@ -16,6 +16,8 @@ dependencies:
     path: ../constants
   data:
     path: ../data
+  domain:
+    path: ../domain
   assets:
     path: ../assets
   google_places_service:
