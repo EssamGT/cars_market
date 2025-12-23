@@ -16,15 +16,30 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late ScrollController scrollController;
   @override
   void initState() {
-    getIt.get<MainScreenCubit>().getMainScreenCars();
     super.initState();
+    scrollController = ScrollController();
+    getIt.get<MainScreenCubit>().getMainScreenCars();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 200) {
+      
+        print("haaaaa");
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    // Size screenSize = MediaQuery.of(context).size;
     return SafeArea(
       bottom: false,
       child: Scaffold(
@@ -45,7 +60,9 @@ class _MainScreenState extends State<MainScreen> {
                   return getIt.get<MainScreenCubit>().getMainScreenCars();
                 },
                 child: ListView.builder(
-                  
+                  addAutomaticKeepAlives: true,
+
+                  controller: scrollController,
                   itemCount: state.cars.length,
                   itemBuilder: (context, index) {
                     return CarCard(car: state.cars[index]);

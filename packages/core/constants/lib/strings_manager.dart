@@ -2,6 +2,7 @@ class StringsManager {
   static const String findYouCar = 'Find you dream car';
   static const String welcome = 'Welcome Back';
   static const String error = 'Error';
+  static const String spec = 'Specifications';
   static const String otpValidation = 'Please enter a valid OTP';
   static const String emailVerificationSent = 'Email verification sent check inbox';
   static const String success = 'Success';

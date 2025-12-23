@@ -1,6 +1,5 @@
 import 'package:data/models/car/car_image.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
-import 'package:google_places_service/domain/entity/structured_formatting_entity.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CarsTableKeys {

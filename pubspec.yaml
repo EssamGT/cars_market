@@ -145,6 +145,7 @@ melos:
         firebase_storage: ^13.0.4
         redacted: ^1.0.13
         phone_numbers_parser: ^9.0.16
+        cached_network_image: ^3.4.1
       
 
       dev_dependencies:

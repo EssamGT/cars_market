@@ -1,100 +1,16 @@
 import 'dart:io';
-import 'package:add/presentation/cubit/add_cubit.dart';
-import 'package:cars_market/di/di.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/car_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-class ImageWidget extends StatelessWidget {
-  final int imageIndex;
-  final List<XFile> images;
-
-  const ImageWidget({
-    super.key,
-    required this.imageIndex,
-    required this.images,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    return BlocProvider(
-      create: (context) => getIt.get<AddCubit>(),
-      child: InkWell(
-        onTap: () {
-          open(context, imageIndex);
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppSize.s8),
-          ),
-          margin: const EdgeInsets.all(AppMargin.m8),
-          height: AppSize.s93,
-          width: screenSize.width / 4,
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: AlignmentGeometry.center,
-
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(AppSize.s8),
-                child: Image.file(
-                  File(images[imageIndex].path),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Positioned(
-                top: -10,
-                right: -10,
-                child: IconButton(
-                  onPressed: () {
-                    AddCubit.get(context).deleteImage(imageIndex);
-                    
-                  },
-                  icon: Icon(
-                    Icons.delete,
-                    color: Theme.of(context).colorScheme.error,
-                    size: AppSize.s20,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void open(BuildContext context, final int index) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => GalleryPhotoViewWrapper(
-          galleryItems: images,
-          backgroundDecoration: const BoxDecoration(color: Colors.black),
-          initialIndex: index,
-          scrollDirection: Axis.horizontal,
-        ),
-      ),
-    );
-  }
-
-  // void open2(BuildContext context, final int index) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => PV(images: images, initialIndex: index),
-  //     ),
-  //   );
-  // }
-}
-
-class GalleryPhotoViewWrapper extends StatefulWidget {
-  GalleryPhotoViewWrapper({
+class GalleryNetworkPhotoView extends StatefulWidget {
+  GalleryNetworkPhotoView({
     super.key,
     this.loadingBuilder,
     this.backgroundDecoration,
@@ -114,16 +30,16 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
   final dynamic maxScale;
   final int initialIndex;
   final PageController pageController;
-  final List<XFile> galleryItems;
+  final List<CarImage> galleryItems;
   final Axis scrollDirection;
 
   @override
   State<StatefulWidget> createState() {
-    return _GalleryPhotoViewWrapperState();
+    return _GalleryNetworkPhotoViewState();
   }
 }
 
-class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
+class _GalleryNetworkPhotoViewState extends State<GalleryNetworkPhotoView> {
   late int currentIndex = widget.initialIndex;
 
   void onPageChanged(int index) {
@@ -135,12 +51,13 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.black,
           statusBarIconBrightness: Brightness.light,
-        ),
+        ) ,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         actionsPadding: EdgeInsets.all(AppPadding.p12),
@@ -175,7 +92,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
           scrollPhysics: BouncingScrollPhysics(),
           allowImplicitScrolling: true,
           pageSnapping: true,
-
+          
           // pageSnapping: true,
         ),
       ),
@@ -197,7 +114,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
     //     heroAttributes: PhotoViewHeroAttributes(tag: item.id),
     //   )
     PhotoViewGalleryPageOptions(
-      imageProvider: Image.file(File(widget.galleryItems[index].path)).image,
+      imageProvider: CachedNetworkImageProvider(widget.galleryItems[index].url),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained,
       maxScale: PhotoViewComputedScale.covered * 4.1,
@@ -212,6 +129,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
       basePosition: Alignment.center, // keeps image centered
       tightMode: true,
       gestureDetectorBehavior: HitTestBehavior.opaque,
+      
     );
   }
 }

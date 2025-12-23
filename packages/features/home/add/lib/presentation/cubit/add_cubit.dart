@@ -1,5 +1,6 @@
 import 'package:add/domain/use_case/add_use_case.dart';
 import 'package:dartz/dartz.dart';
+import 'package:data/models/car/car2.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class AddCubit extends Cubit<AddState> {
     types: [],
   )
 );
+CarModel2 car2 = CarModel2();
   // final List<String> sug = allCarBrands;
   late ImagePicker picker;
   // late List<XFile> images;
@@ -49,6 +51,7 @@ class AddCubit extends Cubit<AddState> {
 
   void safetyOptionRemove(String safetyOption) {
     car.safetyOptions.remove(safetyOption);
+  
     // emit(SafetyOptionsSlected());
   }
 
