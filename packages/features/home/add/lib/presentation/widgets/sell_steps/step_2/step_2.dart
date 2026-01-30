@@ -1,5 +1,6 @@
 import 'package:add/presentation/widgets/controller/sell_steps_controller.dart';
 import 'package:add/presentation/widgets/sell_steps/step_2/widgets/body_type.dart';
+import 'package:add/presentation/widgets/sell_steps/step_2/widgets/engine_spec.dart';
 import 'package:add/presentation/widgets/sell_steps/step_2/widgets/fuel_gear_type.dart';
 import 'package:add/presentation/widgets/sell_steps/step_2/widgets/interior_text_field.dart';
 import 'package:add/presentation/widgets/sell_steps/step_2/widgets/mileage_text_field.dart';
@@ -10,7 +11,6 @@ import 'package:add/presentation/widgets/sell_steps/step_2/widgets/service_histo
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class Step2 extends StatefulWidget {
   const Step2({super.key});
@@ -35,6 +35,7 @@ class _Step2State extends State<Step2> {
         key: ValueKey('step_2'),
         spacing: AppSize.s10,
         children: [
+          EngineSpec(),
           BodyType(),
           FuelGearType(),
           MileageTextField(),

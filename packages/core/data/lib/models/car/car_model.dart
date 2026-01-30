@@ -25,6 +25,8 @@ class CarsTableKeys {
   static const String negotiable = 'negotiable';
   static const String images = 'images';
   static const String location = 'location';
+  static const String engineCapacity = 'engineCapacity';
+  static const String engineCylinderNumber = 'engineCylinderNumber';
 }
 
 class CarModel {
@@ -33,6 +35,8 @@ class CarModel {
   String createdAt;
   String brand;
   String model;
+  String engineCapacity;
+  String engineCylinderNumber;
   String year;
   String description;
   String bodyType;
@@ -59,6 +63,8 @@ class CarModel {
     this.brand = '',
     this.model = '',
     this.year = '',
+    this.engineCapacity = '',
+    this.engineCylinderNumber = '',
     this.description = '',
     this.bodyType = '',
     this.fuelType = '',
@@ -95,6 +101,8 @@ class CarModel {
       CarsTableKeys.createdAt: createdAt,
       CarsTableKeys.brand: brand,
       CarsTableKeys.model: model,
+      CarsTableKeys.engineCapacity: engineCapacity,
+      CarsTableKeys.engineCylinderNumber: engineCylinderNumber,
       CarsTableKeys.year: int.parse(year),
       CarsTableKeys.description: description,
       CarsTableKeys.bodyType: bodyType,

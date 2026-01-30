@@ -9,7 +9,8 @@ class NetworkInfoImpl extends NetworkInfo {
     final List<ConnectivityResult> connectivityResult = await Connectivity()
         .checkConnectivity();
     if (connectivityResult.contains(ConnectivityResult.wifi) ||
-        connectivityResult.contains(ConnectivityResult.ethernet)) {
+        connectivityResult.contains(ConnectivityResult.ethernet) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
       return true;
     } else {
       return false;

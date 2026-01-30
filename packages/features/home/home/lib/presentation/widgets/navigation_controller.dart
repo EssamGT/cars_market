@@ -9,7 +9,7 @@ import 'package:search/presentation/search_screen.dart';
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
-  Widget getScreen(int index,) {
+  Widget getScreen(int index) {
     switch (index) {
       case 0:
         return MainScreen();
@@ -30,14 +30,14 @@ class NavigationController extends GetxController {
     Iconsax.home_1_copy,
     Iconsax.search_normal_copy,
     Iconsax.add_circle_copy,
-    Iconsax.heart_tick_copy,
-    Iconsax.profile_circle_copy,
+    Icons.favorite_border,
+    Icons.person_outline_rounded,
   ];
   final List<IconData> selectedScreensItems = [
     Iconsax.home,
     Iconsax.search_normal,
     Iconsax.add_circle,
-    Iconsax.heart_tick,
-    Iconsax.profile_circle,
+    Icons.favorite,
+    Icons.person_rounded,
   ];
 }

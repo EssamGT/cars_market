@@ -7,12 +7,14 @@ class SelectionPage extends StatefulWidget {
   final String title;
   final String emptyPage;
   final bool search;
+  final String? hintText;
   const SelectionPage({
     super.key,
     required this.givenList,
     required this.title,
     required this.emptyPage,
     this.search = true,
+    this.hintText,
   });
 
   @override
@@ -94,7 +96,7 @@ class _SelectionPageState extends State<SelectionPage> {
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(
-                              filterdList[index],
+                              '${filterdList[index]} ${widget.hintText ?? ''}',
 
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),

@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_service/domain/entity/structured_formatting_entity.dart';
 
 class PredictionsEntity {
@@ -6,6 +7,7 @@ class PredictionsEntity {
   String reference;
   StructuredFormattingEntity structuredFormatting;
   List<String> types;
+  LatLng latLng;
 
   PredictionsEntity({
     required this.description,
@@ -13,6 +15,7 @@ class PredictionsEntity {
     required this.reference,
     required this.structuredFormatting,
     required this.types,
+    required this.latLng,
   });
 
   PredictionsEntity.fromJson(Map<String, dynamic> json)
@@ -24,6 +27,10 @@ class PredictionsEntity {
       types = json["types"] != null ? List<String>.from(json["types"]) : [],
       structuredFormatting = StructuredFormattingEntity.fromJson(
         json["structured_formatting"],
+      ),
+      latLng = LatLng(
+        json["latitude"] as double? ?? 0.0,
+        json["longitude"] as double? ?? 0.0,
       );
 
   static List<PredictionsEntity> fromList(List<Map<String, dynamic>> list) {
@@ -36,7 +43,8 @@ class PredictionsEntity {
 
     data["place_id"] = placeId;
     data["reference"] = reference;
-
+    data["latitude"] = latLng.latitude;
+    data["longitude"] = latLng.longitude;
     data["structured_formatting"] = structuredFormatting.toJson();
 
     data["types"] = types;

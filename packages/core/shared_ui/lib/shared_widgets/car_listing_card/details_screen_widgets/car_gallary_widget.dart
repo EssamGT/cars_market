@@ -1,8 +1,6 @@
-import 'package:add/presentation/widgets/sell_steps/step_1/widgets/image_widget.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_price_widget.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/image_viewr.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/min_car_gallary_widget.dart';
 
 class CarGallaryWidget extends StatefulWidget {
@@ -17,15 +15,15 @@ class _CarGallaryWidgetState extends State<CarGallaryWidget> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      height: screenSize.height * 0.355,
+      height: screenSize.height * 0.480,
       // color: Colors.blue,
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
-            height: screenSize.height * 0.3,
+            height: screenSize.height * 0.425,
             // color: Colors.red,
             child: MinCarGallaryWidget(car: widget.car)
           ),

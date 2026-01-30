@@ -17,7 +17,7 @@ dependencies:
 
   data:
     path: ../data
-  error_handler: 
+  error_handler:
     path: ../error_handler
   shared_ui:
     path: ../shared_ui
@@ -29,8 +29,7 @@ dependencies:
   dartz: ^0.10.1
   flutter_dotenv: ^6.0.0
   flutter_bloc: ^9.1.1
-
-
+  google_maps_flutter: ^2.14.0
 
 dev_dependencies:
   flutter_test:

@@ -5,8 +5,10 @@ import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
 import 'package:google_places_service/domain/entity/structured_formatting_entity.dart';
+import 'package:google_places_service/domain/usecase/gps_use_case.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/v4.dart';
@@ -15,24 +17,26 @@ part 'add_state.dart';
 @lazySingleton
 class AddCubit extends Cubit<AddState> {
   AddUseCase addUseCase;
-
-  AddCubit(this.addUseCase) : super(AddInitial()) {
+  GpsUseCase gpsUseCase;
+  AddCubit(this.addUseCase, this.gpsUseCase) : super(AddInitial()) {
     initList();
   }
 
   static AddCubit get(BuildContext context) => BlocProvider.of(context);
- CarModel car = CarModel(location:  PredictionsEntity(
-    description: '',
-    placeId: '',
-    structuredFormatting: StructuredFormattingEntity(
-      mainText: '',
-      secondaryText: '',
+  CarModel car = CarModel(
+    location: PredictionsEntity(
+      description: '',
+      placeId: '',
+      structuredFormatting: StructuredFormattingEntity(
+        mainText: '',
+        secondaryText: '',
+      ),
+      reference: '',
+      types: [],
+      latLng: LatLng(0.0, 0.0),
     ),
-    reference: '',
-    types: [],
-  )
-);
-CarModel2 car2 = CarModel2();
+  );
+  CarModel2 car2 = CarModel2();
   // final List<String> sug = allCarBrands;
   late ImagePicker picker;
   // late List<XFile> images;
@@ -51,7 +55,7 @@ CarModel2 car2 = CarModel2();
 
   void safetyOptionRemove(String safetyOption) {
     car.safetyOptions.remove(safetyOption);
-  
+
     // emit(SafetyOptionsSlected());
   }
 
@@ -122,13 +126,22 @@ CarModel2 car2 = CarModel2();
       },
       (images) async {
         car.uploadedImages = images;
-        final carLastResult = await addUseCase.uploadCar(car);
-        carLastResult.fold(
+        final latLng = await gpsUseCase.getCarLocation(car.location.placeId);
+        latLng.fold(
           (error) {
-            emit(UploadingError(error));
+            emit(UploadingError(error.message));
           },
-          (suc) {
-            emit(UploadingSuccess());
+          (sucs) async {
+            car.location.latLng = sucs;
+            final carLastResult = await addUseCase.uploadCar(car);
+            carLastResult.fold(
+              (error) {
+                emit(UploadingError(error));
+              },
+              (suc) {
+                emit(UploadingSuccess());
+              },
+            );
           },
         );
       },

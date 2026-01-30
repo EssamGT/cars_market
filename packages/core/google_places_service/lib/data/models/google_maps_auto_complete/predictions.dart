@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
 
 import 'matched_substrings.dart';
@@ -84,12 +85,10 @@ class Predictions {
   toEntity() {
     return PredictionsEntity(
       description: description ?? "",
-
+      latLng: LatLng(0.0, 0.0),
       placeId: placeId ?? "",
       reference: reference ?? "",
-      structuredFormatting:
-          structuredFormatting?.toEntity(),
-
+      structuredFormatting: structuredFormatting?.toEntity(),
       types: types ?? [],
     );
   }

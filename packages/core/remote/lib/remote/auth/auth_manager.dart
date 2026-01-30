@@ -24,21 +24,18 @@ class AuthManager {
     );
   }
 
-
-
   Future<UserCredential> createAccount({
     required String email,
     required String password,
   }) async {
-    return await firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    ).then((s)async{
-       await firebaseStore.collection('users').doc(s.user!.uid).set({
-        'cars' :[],
-       });
-       return s;
-    });
+    return await firebaseAuth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((s) async {
+          await firebaseStore.collection('users').doc(s.user!.uid).set({
+            'cars': [],
+          });
+          return s;
+        });
   }
 
   Future<void> logout() async {
@@ -128,49 +125,16 @@ class AuthManager {
   Future<void> updateName(String name) async {
     await firebaseAuth.currentUser?.updateDisplayName(name);
   }
-  // Future<AuthResponse> refreshSession() async {
-  //   return await supabase.client.auth.refreshSession();
-  // }
-
-  // Future<List<CarImage>> uploadImages(List<XFile> images, String uuid) async {
-  //   List<CarImage> carImages = [];
-  //   // var id = UuidV4().generate();
-  //   for (var image in images.asMap().entries) {
-  //     int index = image.key;
-  //     String path = image.value.path;
-  //     final response = await supabase.client.storage
-  //         .from(AppConstants.imagesBucketId)
-  //         .upload('$uuid/$index', File(path));
-  //     CarImage carImage = CarImage(
-  //       path: response.replaceRange(
-  //         0,
-  //         AppConstants.imagesBucketId.length + 1,
-  //         '',
-  //       ),
-  //       url: supabase.client.storage
-  //           .from(AppConstants.imagesBucketId)
-  //           .getPublicUrl(
-  //             response.replaceRange(
-  //               0,
-  //               AppConstants.imagesBucketId.length + 1,
-  //               '',
-  //             ),
-  //           ),
-  //     );
-  //     carImages.add(carImage);
-  //     // print(carImage.path);
-  //     // print(carImage.url);
-  //   }
-  //   // print(carImages);
-
-  //   return carImages;
-  // }
-
-  // Future<void> uploadCar(CarModel car) async {
-  //   await supabase.client.from(AppConstants.carTable).insert(car.toJson());
-  // }
 
   User? getCurrentUser() {
     return firebaseAuth.currentUser;
+  }
+
+  String getPhoneNumber() {
+    return firebaseAuth.currentUser?.phoneNumber ?? '';
+  }
+
+  String getUserName() {
+    return firebaseAuth.currentUser?.displayName ?? '';
   }
 }

@@ -153,7 +153,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   },
                                   loading: state is Loading,
                                   text: StringsManager.cAccount,
-                                  hight: AppSize.s55,
+                                  height: AppSize.s55,
                                   width: AppSize.s30,
                                 ),
                               ],

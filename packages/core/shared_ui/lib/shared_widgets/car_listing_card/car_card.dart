@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:redacted/redacted.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_details_screen.dart';
+import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
 
 class CarCard extends StatefulWidget {
   final CarEntity car;
@@ -109,7 +111,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                     ],
                   ),
                   Text(
-                    '${widget.car.price} EGP',
+                    '${priceFormater(widget.car.price)} ${StringsManager.egp}',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                     ),
@@ -122,6 +124,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
       ),
     );
   }
+
 
   @override
   bool get wantKeepAlive => true;

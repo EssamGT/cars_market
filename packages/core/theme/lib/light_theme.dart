@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:theme/themes/app_bar_theme.dart';
 import 'package:theme/themes/button_theme.dart';
 import 'package:theme/themes/color_theme.dart';
+import 'package:theme/themes/expansion_tile_theme.dart';
 import 'package:theme/themes/imput_decoration.dart';
 import 'package:theme/themes/light_navigation_bar_theme.dart';
 import 'package:theme/themes/outlined_button_theme.dart';
@@ -25,6 +26,7 @@ ThemeData lightTheme() {
     textSelectionTheme: lightTextSlectionTheme(),
     navigationBarTheme: lightNavigationBarTheme(),
     searchBarTheme: lightSearchBarTheme(),
+    expansionTileTheme: lightExpantionTileTheme(),
     
   );
 }

@@ -17,6 +17,7 @@ import 'package:add/domain/repository/add_repository.dart' as _i92;
 import 'package:add/domain/use_case/add_use_case.dart' as _i166;
 import 'package:add/presentation/cubit/add_cubit.dart' as _i268;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:google_places_service/domain/usecase/gps_use_case.dart' as _i81;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;
 import 'package:remote/remote/storage/storage_manager.dart' as _i175;
@@ -52,7 +53,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i166.AddUseCase(addRepository: gh<_i92.AddRepository>()),
     );
     gh.lazySingleton<_i268.AddCubit>(
-      () => _i268.AddCubit(gh<_i166.AddUseCase>()),
+      () => _i268.AddCubit(gh<_i166.AddUseCase>(), gh<_i81.GpsUseCase>()),
     );
     return this;
   }

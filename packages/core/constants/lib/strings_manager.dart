@@ -4,7 +4,8 @@ class StringsManager {
   static const String error = 'Error';
   static const String spec = 'Specifications';
   static const String otpValidation = 'Please enter a valid OTP';
-  static const String emailVerificationSent = 'Email verification sent check inbox';
+  static const String emailVerificationSent =
+      'Email verification sent check inbox';
   static const String success = 'Success';
   static const String completeYourProfile = 'Complete your profile';
   static const String fullName = 'Full Name';
@@ -19,23 +20,30 @@ class StringsManager {
   static const String phoneVerification = 'Phone Verification';
   static const String otpTitle = 'Enter the code';
   static const String otpSubTitle = 'We sent a verification code to ';
+  static const String viewProfile = 'View Profile';
   // static const String uploading = 'Uploading...';
   static const String loading = 'Loading...';
   static const String location = 'Location *';
   static const String listingYourCar = 'Listing your car...';
   static const String warning = 'Warning';
+  static const String messageSellerOnWhatsApp = 'Message seller on WhatsApp';
   static const String oops = 'Oops!';
   static const String photos = 'Photos *';
   static const String okay = 'Okay';
   static const String carListedSuccessfully = 'Car listed successfully';
   static const String list = 'List your car';
   static const String brand = 'Brand *';
+  static const String dbrand = 'Brand';
   static const String brands = 'Brands';
   static const String year = 'Year *';
+  static const String dyear = 'Year';
   static const String version = 'Version';
   static const String model = 'Model *';
+  static const String dmodel = 'Model';
   static const String models = 'Models';
   static const String chose = 'Chose';
+  static const String nonNegotiablePrice = 'Non-Negotiable';
+  static const String negotiablePrice = 'Negotiable';
   static const String safetyOptionsSelected = 'Safety Options Selected';
   static const String back = 'Back';
   static const String stepIndicatorTitle1 = 'Identification';
@@ -46,11 +54,16 @@ class StringsManager {
   static const String bodyTypeError = 'No body type found';
   static const String pleaseAddAtLeast3Images = 'please Add At Least 3 Images';
   static const String fuelType = 'Fuel Type *';
+  static const String cylinderNumber = 'Cylinder Number *';
+  static const String dCylinderNumber = 'Cylinder Number';
+  static const String engineCapacity = 'Engine Capacity *';
+  static const String dEngineCapacity = 'Engine Capacity';
   static const String fuelTypes = 'Fuel Types';
   static const String price = 'Price *';
   static const String next = 'Next';
   static const String listMyCar = 'List My Car Now ';
   static const String negotiable = 'Negotiable';
+  static const String available = 'Available';
   static const String nonNegotiable = 'Non-Negotiable';
   static const String gearboxType = 'Gearbox Type *';
   static const String gearboxTypes = 'Gearbox Types';
@@ -67,7 +80,7 @@ class StringsManager {
   static const String serviceHistory = 'Service History';
   static const String serviceHistoryHint =
       'e.g.., Full service history available, Last serviced at 50,000 km';
-  static const String modifcations = 'Modifcations';
+  static const String modifications = 'Modifcations';
   static const String modifcationsHint =
       'e.g.., Upgraded exhaust system, Custom wheels, if none, leave blank';
   static const String modelError = "Model can't be empty";
@@ -106,6 +119,22 @@ class StringsManager {
   static const String addL = 'Sell';
   static const String favoritesL = 'Favorites';
   static const String profileL = 'Profile';
+  static const String sellerInformation = 'Seller Information';
+  static const String engine = 'Engine';
+  static const String dMileage = 'Mileage';
+  static const String dFuel = 'Fuel';
+  static const String dGearbox = 'Gearbox';
+  static const String dBodyType = 'Body Type';
+  static const String dPaintColor = 'Paint Color';
+  static const String dPaintCondition = 'Paint Condition';
+  static const String dLocation = 'Location';
+  static const String messageSeller = 'Message Seller';
+  static const String callSeller = 'Call Seller';
+  static const String egp = 'EGP';
+  static const String getDirections = 'Get Directions';
+  static const String cylinder = 'Cylinder';
+  static const String cc = 'CC';
+  static const String detailedInformation = 'Detailed Information';
 
   static const String browse =
       'Browse our extensive inventory of new and used vehicles from top brands.';

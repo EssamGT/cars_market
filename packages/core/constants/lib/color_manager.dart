@@ -36,7 +36,8 @@ abstract class ColorManager {
   static const Color textTertiary = Color(0xff757575);
 
   // Status
-  static const Color success = Color(0xff2E7D32);
+  static const Color success = Color(0xffdcfce7);
+  static const Color onSuccess = Color(0xff005100);
   static const Color warning = Color(0xffED6C02);
   static const Color error = Color(0xffD32F2F);
 

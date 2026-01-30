@@ -11,6 +11,8 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
+  constants:  
+    path: ../constants
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +33,7 @@ flutter:
     - assets/lottie/loadingd.json
     - assets/lottie/success.json
     - assets/lottie/error.json
+    
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/to/asset-from-package
@@ -43,10 +46,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/icons/CustomIcons.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

@@ -15,6 +15,8 @@ enum TextFieldButtonType {
   paintColor,
   paintCondition,
   fuelType,
+  engineCylinderNumber,
+  engineCapacity,
   bodyType,
   gearboxType,
   safetyOptions,
@@ -31,6 +33,7 @@ class TextFieldButton extends StatefulWidget {
   final bool enable;
   final double width;
   final AddCubit cubit;
+  final String? hintText;
   const TextFieldButton({
     super.key,
     // required this.hint,
@@ -42,7 +45,9 @@ class TextFieldButton extends StatefulWidget {
     this.validationType = TextFieldValidationType.none,
     this.enable = true,
     this.width = double.maxFinite,
-  });
+    this.hintText
+  }
+  );
 
   @override
   State<TextFieldButton> createState() => _TextFieldButtonState();
@@ -77,6 +82,10 @@ class _TextFieldButtonState extends State<TextFieldButton> {
       case TextFieldButtonType.none:
         controller.text = '';
         break;
+      case TextFieldButtonType.engineCylinderNumber:
+        controller.text = car.engineCylinderNumber;
+      case TextFieldButtonType.engineCapacity:
+        controller.text = car.engineCapacity;
     }
     super.initState();
   }
@@ -89,7 +98,6 @@ class _TextFieldButtonState extends State<TextFieldButton> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,6 +167,7 @@ class _TextFieldButtonState extends State<TextFieldButton> {
                           child: BlocProvider.value(
                             value: widget.cubit,
                             child: SelectionPage(
+                              hintText: widget.hintText,
                               givenList: widget.givenList,
                               title: widget.inPageTitle,
                               emptyPage: '',
@@ -203,6 +212,13 @@ class _TextFieldButtonState extends State<TextFieldButton> {
                   case TextFieldButtonType.none:
                     controller.text = '';
                     break;
+                  case TextFieldButtonType.engineCylinderNumber:
+                    car.engineCylinderNumber = selected;
+                    controller.text = car.engineCylinderNumber;
+
+                  case TextFieldButtonType.engineCapacity:
+                    car.engineCapacity = selected;
+                    controller.text = car.engineCapacity;
                 }
               }
             },
@@ -249,6 +265,12 @@ class _TextFieldButtonState extends State<TextFieldButton> {
                   break;
                 case TextFieldButtonType.none:
                   controller.text = '';
+                  break;
+                case TextFieldButtonType.engineCylinderNumber:
+                  controller.text = car.engineCylinderNumber;
+                  break;
+                case TextFieldButtonType.engineCapacity:
+                  controller.text = car.engineCapacity;
                   break;
               }
             },

@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         loading: state is Loading,
                         text: StringsManager.login,
-                        hight: AppSize.s55,
+                        height: AppSize.s55,
                         width: AppSize.s30,
                       ),
                       TwoTextButton(

@@ -4,31 +4,36 @@ import 'package:flutter/material.dart';
 class CTextButton extends StatelessWidget {
   final Function onTap;
   final String text;
-  final double hight;
+  final double height;
   final double width;
   final bool loading;
   final bool enable;
   final BorderRadius? radius;
+  final EdgeInsets padding;
   const CTextButton({
     super.key,
     required this.onTap,
     required this.text,
-    this.hight = AppSize.s50,
+    this.height = AppSize.s50,
     this.width = AppSize.s40,
     this.loading = false,
     this.radius,
     this.enable = true,
+    this.padding = const EdgeInsets.symmetric(vertical: AppPadding.p20),
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppPadding.p20),
+      padding: padding,
       child: Center(
         child: FilledButton(
           onPressed: () => loading || !enable ? null : onTap(),
           style: FilledButton.styleFrom(
-            minimumSize: Size(MediaQuery.of(context).size.width - width, hight),
+            minimumSize: Size(
+              MediaQuery.of(context).size.width - width,
+              height,
+            ),
             shape: RoundedRectangleBorder(
               borderRadius: radius ?? BorderRadius.circular(AppSize.s10),
             ),

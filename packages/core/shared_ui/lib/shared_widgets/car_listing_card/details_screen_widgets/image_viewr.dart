@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -53,14 +50,20 @@ class _GalleryNetworkPhotoViewState extends State<GalleryNetworkPhotoView> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.black,
+          statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
-        ) ,
+        ),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         actionsPadding: EdgeInsets.all(AppPadding.p12),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(Icons.arrow_back_ios_sharp, size: AppSize.s20),
+        ),
         actions: [
           Text(
             "${currentIndex + 1} / ${widget.galleryItems.length}",
@@ -92,7 +95,7 @@ class _GalleryNetworkPhotoViewState extends State<GalleryNetworkPhotoView> {
           scrollPhysics: BouncingScrollPhysics(),
           allowImplicitScrolling: true,
           pageSnapping: true,
-          
+
           // pageSnapping: true,
         ),
       ),
@@ -129,7 +132,6 @@ class _GalleryNetworkPhotoViewState extends State<GalleryNetworkPhotoView> {
       basePosition: Alignment.center, // keeps image centered
       tightMode: true,
       gestureDetectorBehavior: HitTestBehavior.opaque,
-      
     );
   }
 }

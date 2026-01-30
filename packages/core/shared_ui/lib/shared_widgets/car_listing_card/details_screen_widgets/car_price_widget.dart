@@ -1,7 +1,8 @@
+import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
 
 class CarPriceWidget extends StatelessWidget {
   final CarEntity car;
@@ -11,7 +12,7 @@ class CarPriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      height: 100,
+      height: AppSize.s100,
       margin: EdgeInsets.symmetric(horizontal: AppPadding.p14),
       padding: EdgeInsets.all(AppPadding.p20),
       decoration: BoxDecoration(
@@ -31,14 +32,19 @@ class CarPriceWidget extends StatelessWidget {
       ),
 
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(car.brand, style: Theme.of(context).textTheme.headlineSmall),
               Text(
-                priceFormater(car.price),
+                "${car.brand} ${car.model} ${car.version}",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              Text(
+                '${priceFormater(car.price)} ${StringsManager.egp}',
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -51,20 +57,21 @@ class CarPriceWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${car.model} ${car.version}',
+                "${StringsManager.dmodel} ${car.year}",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              Text(car.year, style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                car.negotiable
+                    ? StringsManager.negotiablePrice
+                    : StringsManager.nonNegotiablePrice,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium,
+              ),
             ],
           ),
         ],
       ),
     );
   }
-}
-
-String priceFormater(String price) {
-  final formatter = NumberFormat('#,###');
-  String formattedPrice = formatter.format(int.parse(price));
-  return formattedPrice;
 }

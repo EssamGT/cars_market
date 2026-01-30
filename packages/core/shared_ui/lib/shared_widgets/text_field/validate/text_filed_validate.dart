@@ -12,6 +12,8 @@ enum TextFieldValidationType {
   model,
   bodyType,
   fuelType,
+  engineCylinderNumber,
+  engineCapacity,
   gearboxType,
   mileage,
   paintColor,
@@ -102,6 +104,12 @@ class TextFieldValidator {
         return null;
       case TextFieldValidationType.location:
         if (input.isEmpty) return "Location can't be empty";
+        return null;
+      case TextFieldValidationType.engineCapacity:
+        if (input.isEmpty) return "Engine Capacity can't be empty";
+        return null;
+      case TextFieldValidationType.engineCylinderNumber:
+        if (input.isEmpty) return "Engine Cylinder Number can't be empty";
         return null;
       case TextFieldValidationType.price:
         if (input.isEmpty) return "Price can't be empty";
