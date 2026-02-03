@@ -1,8 +1,2 @@
-final List<String> gearboxTypes = [
-  "Automatic",
-  "Manual",
-  "CVT",
-  "Semi-Automatic",
-  "Dual-Clutch",
-  "Other",
-];
+final List<String> gearboxTypes = ["Automatic", "Manual"];
+final List<String> filterGearboxTypes = ["Any", "Automatic", "Manual"];

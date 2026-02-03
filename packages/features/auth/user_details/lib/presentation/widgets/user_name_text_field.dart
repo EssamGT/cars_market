@@ -2,7 +2,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/shared_widgets/text_field/c_text_field.dart';
-import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';
+import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 import 'package:user_details/presentation/cubit/user_details_cubit.dart';
 import 'package:user_details/presentation/widgets/user_phone_number_text_field.dart';
 

@@ -10,7 +10,6 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  supabase_flutter: ^2.10.1
   image_picker: ^1.2.0
   google_places_service:
     path: ../google_places_service

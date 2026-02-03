@@ -3,43 +3,42 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/brands.dart';
 import 'package:data/models/car/brands_models/car_models.dart';
-import 'package:data/models/car/car_model.dart';
+import 'package:data/models/car/car_filter_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
 import 'package:shared_ui/shared_widgets/slection_page/selection_page.dart';
 
-import 'validate/text_filed_validate.dart';
+import 'validate/text_field_validate.dart';
 
-class TextFieldButtonBrandAndModel extends StatefulWidget {
+class FilterTextFieldButtonBrandAndModel extends StatefulWidget {
   final bool enable;
   final double width;
-  final AddCubit cubit;
-  const TextFieldButtonBrandAndModel({
+  final CarFilterModel car;
+  const FilterTextFieldButtonBrandAndModel({
     super.key,
-    required this.cubit,
+    required this.car,
     this.enable = true,
     this.width = double.maxFinite,
   });
 
   @override
-  State<TextFieldButtonBrandAndModel> createState() =>
-      _TextFieldButtonBrandAndModelState();
+  State<FilterTextFieldButtonBrandAndModel> createState() =>
+      _FilterTextFieldButtonBrandAndModelState();
 }
 
-class _TextFieldButtonBrandAndModelState
-    extends State<TextFieldButtonBrandAndModel> {
+class _FilterTextFieldButtonBrandAndModelState
+    extends State<FilterTextFieldButtonBrandAndModel> {
   late TextEditingController brandController;
   late TextEditingController modelController;
 
-  late CarModel car;
+  late CarFilterModel car;
   @override
   void initState() {
     brandController = TextEditingController();
     modelController = TextEditingController();
-    car = widget.cubit.car;
-    brandController.text = car.brand;
-    modelController.text = car.model;
+    car = widget.car;
+    brandController.text = car.brand ?? '';
+    modelController.text = car.model ?? '';
     super.initState();
   }
 
@@ -63,7 +62,7 @@ class _TextFieldButtonBrandAndModelState
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: Text(
-                StringsManager.brand,
+                StringsManager.dbrand,
                 textAlign: TextAlign.start,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
@@ -77,30 +76,29 @@ class _TextFieldButtonBrandAndModelState
                 decoration: _inputDecoration(context),
                 onTap: () async {
                   String selectedBrand =
-                      (await popUpScreen<String>(
+                      (await rightPopUpScreen<String>(
                         context: context,
-                        child: BlocProvider.value(
-                          value: widget.cubit,
-                          child: SelectionPage(
-                            givenList: allCarBrands,
-                            title: StringsManager.brands,
-                            emptyPage: '',
-                          ),
+                        child: SelectionPage(
+                          givenList: allCarBrands,
+                          title: StringsManager.selectBrand,
+                          emptyPage: '',
                         ),
                       )) ??
                       "";
                   if (selectedBrand.isNotEmpty) {
                     if (selectedBrand == car.brand) return;
                     car.brand = selectedBrand;
-                    brandController.text = car.brand;
+                    brandController.text = car.brand ?? "";
                     car.model = '';
                     modelController.clear();
+                    setState(() {});
+                    print(car.brand);
                   }
                 },
 
                 style: Theme.of(context).textTheme.bodyMedium,
                 validator: (value) => TextFieldValidator.validateNormal(
-                  TextFieldValidationType.brand,
+                  TextFieldValidationType.car,
                   value!,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -124,7 +122,7 @@ class _TextFieldButtonBrandAndModelState
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: Text(
-                StringsManager.model,
+                StringsManager.dmodel,
                 textAlign: TextAlign.start,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
@@ -138,45 +136,39 @@ class _TextFieldButtonBrandAndModelState
                 decoration: _inputDecoration(context),
 
                 onTap: () async {
-                  if (car.brand.isEmpty) {
+                  if (car.brand?.isEmpty ?? true) {
                     String selectedBrand =
-                        (await popUpScreen<String>(
+                        (await rightPopUpScreen<String>(
                           context: context,
-                          child: BlocProvider.value(
-                            value: widget.cubit,
-                            child: SelectionPage(
-                              givenList: allCarBrands,
-                              title: StringsManager.brands,
-                              emptyPage: '',
-                            ),
+                          child: SelectionPage(
+                            givenList: allCarBrands,
+                            title: StringsManager.selectBrand,
+                            emptyPage: '',
                           ),
                         )) ??
                         "";
                     if (selectedBrand.isNotEmpty) {
                       if (selectedBrand == car.brand) return;
                       car.brand = selectedBrand;
-                      brandController.text = car.brand;
+                      brandController.text = car.brand ?? "";
                       car.model = '';
                       modelController.clear();
+                      setState(() {});
                     }
                   } else {
                     String selectedModel =
-                        (await popUpScreen<String>(
+                        (await rightPopUpScreen<String>(
                           context: context,
-                          child: BlocProvider.value(
-                            value: widget.cubit,
-                            child: SelectionPage(
-                              givenList:
-                                  carModels[widget.cubit.car.brand] ?? [],
-                              title: StringsManager.models,
-                              emptyPage: '',
-                            ),
+                          child: SelectionPage(
+                            givenList: carModels[car.brand] ?? [],
+                            title: StringsManager.selectModel,
+                            emptyPage: '',
                           ),
                         )) ??
                         "";
                     if (selectedModel.isNotEmpty) {
                       car.model = selectedModel;
-                      modelController.text = car.model;
+                      modelController.text = car.model ?? "";
                     }
                   }
                 },
@@ -204,7 +196,7 @@ class _TextFieldButtonBrandAndModelState
 
 InputDecoration _inputDecoration(BuildContext context) {
   return InputDecoration(
-    hintText: StringsManager.chose,
+    hintText: StringsManager.choose,
 
     hintStyle: Theme.of(context).textTheme.labelLarge,
     border: OutlineInputBorder(

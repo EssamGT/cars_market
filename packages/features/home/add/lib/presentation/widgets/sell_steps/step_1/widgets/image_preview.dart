@@ -18,7 +18,10 @@ class ImagePreview extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     var cubit = AddCubit.get(context);
     return Padding(
-      padding: const EdgeInsets.all(AppPadding.p14),
+        padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p14,
+        vertical: AppPadding.p5,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,

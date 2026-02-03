@@ -13,6 +13,7 @@ static const String onBoarding = '/onBording';
   static const String profile = '/profile';
   static const String menuScreen = '/menuScreen';
   static const String otpScreen = '/otpScreen';
+  static const String filterScreen = '/filterScreen';
   // static const String home = '/home';
   // static const String home = '/home';
 }

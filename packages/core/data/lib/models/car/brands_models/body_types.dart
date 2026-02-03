@@ -2,12 +2,12 @@ final List<String> carBodyTypes = [
   "Sedan",
   "SUV",
   "Hatchback",
-  "Coupe",
+  "4X4",
+  "Sports / Coupe",
   "Convertible",
-  "Pickup Truck",
-  "Van",
-  "Wagon",
-  "Crossover",
-  "Sports Car",
+  "Pickup",
+  "Estate / Wagon",
+  "Van / Bus",
+  "MVP"
   "Other",
 ];

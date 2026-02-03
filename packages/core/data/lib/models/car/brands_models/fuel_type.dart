@@ -3,8 +3,5 @@ final List<String> fuelTypes = [
   "Diesel",
   "Hybrid",
   "Electric",
-  "Plug-in Hybrid",
-  "CNG",
-  "LPG",
-  "Other",
+  "Natural Gas",
 ];

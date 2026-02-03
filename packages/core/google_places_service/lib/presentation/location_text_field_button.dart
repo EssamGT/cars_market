@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
 import 'package:google_places_service/presentation/location_page.dart';
-import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';
+import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class LocationTextFieldButton extends StatefulWidget {
   final PredictionsEntity assignedValueTo;
-  const LocationTextFieldButton({super.key, required this.assignedValueTo});
+  final bool filter;
+  const LocationTextFieldButton({
+    super.key,
+    required this.assignedValueTo,
+    this.filter = false,
+  });
 
   @override
   State<LocationTextFieldButton> createState() =>
@@ -39,7 +44,7 @@ class _LocationTextFieldButtonState extends State<LocationTextFieldButton> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
           child: Text(
-            StringsManager.location,
+            widget.filter ? StringsManager.dLocation : StringsManager.location,
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
@@ -53,7 +58,7 @@ class _LocationTextFieldButtonState extends State<LocationTextFieldButton> {
             decoration: textFieldButtonDecoration(context),
             onTap: () async {
               PredictionsEntity? selected =
-                  (await popUpScreen<PredictionsEntity>(
+                  (await rightPopUpScreen<PredictionsEntity>(
                     context: context,
                     child: LocationPage(),
                   ));
@@ -116,7 +121,7 @@ class _LocationTextFieldButtonState extends State<LocationTextFieldButton> {
 
 InputDecoration textFieldButtonDecoration(BuildContext context) {
   return InputDecoration(
-    hintText: StringsManager.chose,
+    hintText: StringsManager.choose,
     hintStyle: Theme.of(context).textTheme.labelLarge,
     border: OutlineInputBorder(
       borderSide: BorderSide(

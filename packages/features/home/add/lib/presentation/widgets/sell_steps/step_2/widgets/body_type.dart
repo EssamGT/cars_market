@@ -4,7 +4,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/text_field/text_field_button.dart';
-import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';
+import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class BodyType extends StatelessWidget {
   const BodyType({super.key});

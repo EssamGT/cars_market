@@ -11,10 +11,45 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  cars_market:
+    path: ../../../..
+  constants:
+    path: ../../../core/constants
+  router:
+    path: ../../../core/router
+  shared_ui:
+    path: ../../../core/shared_ui
+  remote:
+    path: ../../../core/remote
+  data:
+    path: ../../../core/data
+  domain:
+    path: ../../../core/domain
+  assets:
+    path: ../../../core/assets
+  error_handler:
+    path: ../../../core/error_handler
+  google_places_service:
+    path: ../../../core/google_places_service
+  go_router: ^16.2.4
+  get_it: ^9.2.0
+  injectable: ^2.7.1+4
+  dartz: ^0.10.1
+  flutter_bloc: ^9.1.1
+  get: ^4.7.2
+  iconsax_flutter: ^1.0.1
+  google_maps_flutter: ^2.14.0
+  googleapis: ^15.0.0
+  dio: ^5.9.0
+  pretty_dio_logger: ^1.4.0
+  flutter_image_compress: ^2.4.0
+  path_provider: ^2.1.5  
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator: ^2.12.0
+  build_runner: ^2.10.5
   flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the

@@ -15,9 +15,8 @@ dependencies:
     path: ../domain
   data:
     path: ../data
-  # supabase_flutter: ^2.10.1
-  firebase_core: ^4.2.0
-  firebase_auth: ^6.1.1
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
 
 dev_dependencies:
   flutter_test:

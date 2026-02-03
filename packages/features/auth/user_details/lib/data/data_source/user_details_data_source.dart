@@ -1,4 +1,3 @@
-// import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';

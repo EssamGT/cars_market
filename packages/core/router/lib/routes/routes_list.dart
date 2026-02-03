@@ -7,6 +7,7 @@ import 'package:home/presentation/home_screen.dart';
 import 'package:login/presentation/login_screen.dart';
 import 'package:on_bording/presentation/on_bording_screen.dart';
 import 'package:router/routes_manager.dart';
+import 'package:search/presentation/widgets/filter_screen/filter_screen.dart';
 import 'package:user_details/presentation/user_details_screen.dart';
 import 'package:user_details/presentation/widgets/otp_screen/otp_verify_screen.dart';
 
@@ -45,6 +46,12 @@ final routes = <RouteBase>[
     path: RoutesManager.otpScreen,
     pageBuilder: (context, state) {
       return customAnimationPage(child: OtpVerifyScreen(), state: state);
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.filterScreen,
+    pageBuilder: (context, state) {
+      return customAnimationPage(child: FilterScreen(), state: state);
     },
   ),
 ];

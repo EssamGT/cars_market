@@ -29,10 +29,9 @@ dependencies:
     path: ../../../core/error_handler
   cars_market:
     path: ../../../../../cars_market
-  supabase_flutter: ^2.10.1
   go_router: ^16.2.4
-  get_it: ^8.2.0
-  injectable: ^2.5.1
+  get_it: ^9.2.0
+  injectable: ^2.7.1+4
   connectivity_plus: ^7.0.0
   dartz: ^0.10.1
   flutter_bloc: ^9.1.1
@@ -42,8 +41,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  injectable_generator: ^2.8.1
-  build_runner: ^2.7.1
+  injectable_generator: ^2.12.0
+  build_runner: ^2.10.5
   flutter_lints: ^5.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

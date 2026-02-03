@@ -2,7 +2,8 @@ import 'package:constants/values_manager.dart';
 import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';
+import 'package:shared_ui/shared_widgets/text_field/text_field_button_decoration.dart';
+import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
@@ -219,7 +220,7 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
         controller.text = widget.car.price;
         break;
       case TextFieldUploadCarType.mileage:
-        controller.text = widget.car.mileage;
+        controller.text = widget.car.km;
         break;
       case TextFieldUploadCarType.year:
         controller.text = widget.car.year;
@@ -255,14 +256,6 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   controller.value = controller.value.copyWith(
-    //     text: widget.gvalue,
-    //     selection: TextSelection.collapsed(offset: widget.gvalue.length),
-    //     composing: TextRange.empty,
-    //   );
-    // });
-    // controller.text = widget.gvalue;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,118 +268,101 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
-        TextFormField(
-          // key: Key(widget.type.toString()),
-          maxLength: widget.maxLength,
-          controller: controller,
-          buildCounter:
-              (
-                context, {
-                required currentLength,
-                required isFocused,
-                required maxLength,
-              }) {
-                return widget.counter
-                    ? Text(
-                        '$currentLength/$maxLength',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      )
-                    : SizedBox();
-              },
-          decoration: InputDecoration(
-            prefixIcon: widget.price
-                ? Icon(
-                    Icons.attach_money,
-                    color: Theme.of(context).colorScheme.outline,
-                  )
-                : null,
-            hintText: widget.hint,
-            hintStyle: Theme.of(context).textTheme.labelLarge,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(AppSize.s8),
+        SizedBox(
+          height: TextFieldButtonDecoration.textFieldButtonHeight,
+          child: TextFormField(
+            maxLength: widget.maxLength,
+            controller: controller,
+            buildCounter:
+                (
+                  context, {
+                  required currentLength,
+                  required isFocused,
+                  required maxLength,
+                }) {
+                  return widget.counter
+                      ? Text(
+                          '$currentLength/$maxLength',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )
+                      : SizedBox();
+                },
+            decoration: TextFieldButtonDecoration.textfieldInputDecoration(
+              context,
+              widget.hint,
+              price: widget.price,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(AppSize.s8),
+            minLines: widget.minLiens,
+            maxLines: widget.maxLiens,
+            style: Theme.of(context).textTheme.bodyMedium,
+            validator: (value) => TextFieldValidator.validateNormal(
+              widget.validationType,
+              value!,
             ),
-            fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+            autovalidateMode: AutovalidateMode.onUnfocus,
+
+            onChanged: (value) {
+              switch (widget.type) {
+                case TextFieldUploadCarType.price:
+                  widget.car.price = value;
+
+                  break;
+                case TextFieldUploadCarType.mileage:
+                  widget.car.km = value;
+                  break;
+                case TextFieldUploadCarType.year:
+                  widget.car.year = value;
+                  break;
+                case TextFieldUploadCarType.version:
+                  widget.car.version = value;
+                  break;
+                case TextFieldUploadCarType.discription:
+                  widget.car.description = value;
+                  break;
+                case TextFieldUploadCarType.interiorFeatures:
+                  widget.car.interiorFeatures = value;
+                  break;
+                case TextFieldUploadCarType.modifications:
+                  widget.car.modifications = value;
+                  break;
+                case TextFieldUploadCarType.serviceHistory:
+                  widget.car.serviceHistory = value;
+                  break;
+                case TextFieldUploadCarType.none:
+                  break;
+              }
+            },
+            textInputAction: TextInputAction.done,
+            keyboardType: widget.keybordType,
+
+            autofocus: false,
+
+            onTapOutside: (event) {
+              FocusScope.of(context).unfocus();
+            },
+            inputFormatters: widget.format
+                ? [
+                    FilteringTextInputFormatter.digitsOnly, // only numbers
+                    TextInputFormatter.withFunction((oldValue, newValue) {
+                      if (newValue.text.isEmpty) return newValue;
+
+                      // Remove existing commas
+                      String digits = newValue.text.replaceAll(',', '');
+
+                      // Format number with commas
+                      final formatted = _formatter.format(int.parse(digits));
+
+                      // Calculate new cursor position
+                      return TextEditingValue(
+                        text: formatted,
+                        selection: TextSelection.collapsed(
+                          offset: formatted.length,
+                        ),
+                      );
+                    }),
+                  ]
+                : [],
           ),
-          minLines: widget.minLiens,
-          maxLines: widget.maxLiens,
-          style: Theme.of(context).textTheme.bodyMedium,
-          validator: (value) =>
-              TextFieldValidator.validateNormal(widget.validationType, value!),
-          autovalidateMode: AutovalidateMode.onUnfocus,
-
-          onChanged: (value) {
-            switch (widget.type) {
-              case TextFieldUploadCarType.price:
-                widget.car.price = value;
-
-                break;
-              case TextFieldUploadCarType.mileage:
-                widget.car.mileage = value;
-                print(widget.car.mileage);
-                break;
-              case TextFieldUploadCarType.year:
-                widget.car.year = value;
-                break;
-              case TextFieldUploadCarType.version:
-                widget.car.version = value;
-                break;
-              case TextFieldUploadCarType.discription:
-                widget.car.description = value;
-                break;
-              case TextFieldUploadCarType.interiorFeatures:
-                widget.car.interiorFeatures = value;
-                break;
-              case TextFieldUploadCarType.modifications:
-                widget.car.modifications = value;
-                break;
-              case TextFieldUploadCarType.serviceHistory:
-                widget.car.serviceHistory = value;
-                break;
-              case TextFieldUploadCarType.none:
-                break;
-            }
-          },
-          textInputAction: TextInputAction.done,
-          keyboardType: widget.keybordType,
-
-          autofocus: false,
-
-          onTapOutside: (event) {
-            FocusScope.of(context).unfocus();
-          },
-          inputFormatters: widget.format
-              ? [
-                  FilteringTextInputFormatter.digitsOnly, // only numbers
-                  TextInputFormatter.withFunction((oldValue, newValue) {
-                    if (newValue.text.isEmpty) return newValue;
-
-                    // Remove existing commas
-                    String digits = newValue.text.replaceAll(',', '');
-
-                    // Format number with commas
-                    final formatted = _formatter.format(int.parse(digits));
-
-                    // Calculate new cursor position
-                    return TextEditingValue(
-                      text: formatted,
-                      selection: TextSelection.collapsed(
-                        offset: formatted.length,
-                      ),
-                    );
-                  }),
-                ]
-              : [],
         ),
       ],
     );

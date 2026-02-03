@@ -4,6 +4,7 @@ import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
+
 // done
 class CarSpecsWidget extends StatelessWidget {
   final CarEntity car;
@@ -135,6 +136,8 @@ class CarSpecsWidget extends StatelessWidget {
   String engineCyFormater(String engineCy) {
     if (engineCy == 'I6' || engineCy == 'V6') {
       return engineCy;
+    } else if (engineCy == '3' || engineCy == '4') {
+      return 'I$engineCy';
     } else {
       return 'V$engineCy';
     }

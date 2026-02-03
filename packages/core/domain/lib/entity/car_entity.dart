@@ -82,7 +82,7 @@ class CarEntity {
       CarsTableKeys.bodyType: bodyType,
       CarsTableKeys.fuelType: fuelType,
       CarsTableKeys.gearboxType: gearboxType,
-      CarsTableKeys.mileage: int.parse(
+      CarsTableKeys.km: int.parse(
         mileage.replaceAll(RegExp(r'[^0-9]'), ''),
       ),
       CarsTableKeys.paintColor: paintColor,
@@ -113,7 +113,7 @@ class CarEntity {
       bodyType = json[CarsTableKeys.bodyType] ?? '',
       fuelType = json[CarsTableKeys.fuelType] ?? '',
       gearboxType = json[CarsTableKeys.gearboxType] ?? '',
-      mileage = (json[CarsTableKeys.mileage] ?? '').toString(),
+      mileage = (json[CarsTableKeys.km] ?? '').toString(),
       paintColor = json[CarsTableKeys.paintColor] ?? '',
       paintCondition = json[CarsTableKeys.paintCondition] ?? '',
       interiorFeatures = json[CarsTableKeys.interiorFeatures] ?? '',

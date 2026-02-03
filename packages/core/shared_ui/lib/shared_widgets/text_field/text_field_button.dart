@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
 import 'package:shared_ui/shared_widgets/slection_page/options_selection_page.dart';
 import 'package:shared_ui/shared_widgets/slection_page/selection_page.dart';
-import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';
+import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 enum TextFieldButtonType {
   brand,
@@ -45,9 +45,8 @@ class TextFieldButton extends StatefulWidget {
     this.validationType = TextFieldValidationType.none,
     this.enable = true,
     this.width = double.maxFinite,
-    this.hintText
-  }
-  );
+    this.hintText,
+  });
 
   @override
   State<TextFieldButton> createState() => _TextFieldButtonState();
@@ -112,12 +111,13 @@ class _TextFieldButtonState extends State<TextFieldButton> {
         ),
         SizedBox(
           width: widget.width,
+
           child: TextFormField(
             readOnly: true,
             enabled: widget.enable,
             controller: controller,
             decoration: InputDecoration(
-              hintText: StringsManager.chose,
+              hintText: StringsManager.choose,
 
               hintStyle: Theme.of(context).textTheme.labelLarge,
               border: OutlineInputBorder(
@@ -149,32 +149,29 @@ class _TextFieldButtonState extends State<TextFieldButton> {
               ),
             ),
             onTap: () async {
-              String selected = widget.type == TextFieldButtonType.safetyOptions
-                  ? (await popUpScreen<String>(
-                          context: context,
-                          child: BlocProvider.value(
-                            value: widget.cubit,
-                            child: OptionsSelectionPage(
-                              givenList: widget.givenList,
-                              title: widget.inPageTitle,
-                              emptyPage: '',
-                            ),
-                          ),
-                        )) ??
-                        ""
-                  : (await popUpScreen<String>(
-                          context: context,
-                          child: BlocProvider.value(
-                            value: widget.cubit,
-                            child: SelectionPage(
-                              hintText: widget.hintText,
-                              givenList: widget.givenList,
-                              title: widget.inPageTitle,
-                              emptyPage: '',
-                            ),
-                          ),
-                        )) ??
-                        "";
+              String selected =
+                  //  (await rightPopUpScreen<String>(
+                  //         context: context,
+                  //         child: OptionsSelectionPage(
+                  //           givenList: widget.givenList,
+                  //           title: widget.inPageTitle,
+                  //           emptyPage: '',
+                  //         ),
+                  //       )) ??
+                  //       "";
+                  (await rightPopUpScreen<String>(
+                    context: context,
+                    child: BlocProvider.value(
+                      value: widget.cubit,
+                      child: SelectionPage(
+                        hintText: widget.hintText,
+                        givenList: widget.givenList,
+                        title: widget.inPageTitle,
+                        emptyPage: '',
+                      ),
+                    ),
+                  )) ??
+                  "";
               if (selected.isNotEmpty) {
                 // widget.cubit.setBrand(selected);
                 switch (widget.type) {

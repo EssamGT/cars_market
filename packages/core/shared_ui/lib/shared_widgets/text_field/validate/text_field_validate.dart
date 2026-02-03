@@ -8,14 +8,14 @@ enum TextFieldValidationType {
   year,
   version,
   description,
-  brand,
+  car,
   model,
   bodyType,
   fuelType,
   engineCylinderNumber,
   engineCapacity,
   gearboxType,
-  mileage,
+  km,
   paintColor,
   paintCondition,
   price,
@@ -76,8 +76,8 @@ class TextFieldValidator {
         }
         return null;
 
-      case TextFieldValidationType.brand:
-        if (input.isEmpty) return "Brand can't be empty";
+      case TextFieldValidationType.car:
+        if (input.isEmpty) return "Car is required";
         return null;
       case TextFieldValidationType.model:
         if (input.isEmpty) return "Model can't be empty";
@@ -91,7 +91,7 @@ class TextFieldValidator {
       case TextFieldValidationType.gearboxType:
         if (input.isEmpty) return "Gearbox Type can't be empty";
         return null;
-      case TextFieldValidationType.mileage:
+      case TextFieldValidationType.km:
         if (input.isEmpty) return "Mileage Type can't be empty";
         if (input[0] == '0') return "Please enter a valid mileage";
         if (input.length > 9) return "Please enter a valid mileage";

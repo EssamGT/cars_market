@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:add/domain/use_case/add_use_case.dart';
 import 'package:dartz/dartz.dart';
-import 'package:data/models/car/car2.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'package:google_places_service/domain/usecase/gps_use_case.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/v4.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 part 'add_state.dart';
 
 @lazySingleton
@@ -36,11 +39,12 @@ class AddCubit extends Cubit<AddState> {
       latLng: LatLng(0.0, 0.0),
     ),
   );
-  CarModel2 car2 = CarModel2();
+  // CarModel2 car2 = CarModel2();
   // final List<String> sug = allCarBrands;
   late ImagePicker picker;
   // late List<XFile> images;
-
+  int imagesLimit = 10;
+  int imagesQuality = 100;
   initList() {
     picker = ImagePicker();
     // images = [];
@@ -60,7 +64,10 @@ class AddCubit extends Cubit<AddState> {
   }
 
   Future<void> getImages() async {
-    List<XFile> slectedImages = await picker.pickMultiImage();
+    List<XFile> slectedImages = await picker.pickMultiImage(
+      imageQuality: imagesQuality,
+      limit: imagesLimit,
+    );
     if (slectedImages.isEmpty) {
       return;
     } else {
@@ -70,7 +77,10 @@ class AddCubit extends Cubit<AddState> {
   }
 
   Future<void> addImages() async {
-    List<XFile> slectedImages = await picker.pickMultiImage();
+    List<XFile> slectedImages = await picker.pickMultiImage(
+      imageQuality: imagesQuality,
+      limit: imagesLimit - car.images.length,
+    );
     if (slectedImages.isEmpty) {
       return;
     } else {
@@ -80,6 +90,27 @@ class AddCubit extends Cubit<AddState> {
 
       emit(ImagesSelected(car.images));
     }
+  }
+
+  Future<void> compressImages(List<XFile> images) async {
+    List<XFile> compressedImages = [];
+    for (XFile image in images) {
+      final file = File(image.path);
+
+      final dir = await getTemporaryDirectory();
+      final targetPath = '${dir.path}/${const UuidV4().generate()}.webp';
+      final result = await FlutterImageCompress.compressAndGetFile(
+        file.absolute.path,
+        targetPath,
+        format: CompressFormat.webp,
+        quality: 80,
+        minWidth: 1600,
+      );
+      if (result != null) {
+        compressedImages.add(result);
+      }
+    }
+    car.willUploadImages = compressedImages;
   }
 
   Future<void> reorderImages(int oldIndex, int newIndex) async {
@@ -110,7 +141,9 @@ class AddCubit extends Cubit<AddState> {
   }
 
   Future<Either<String, List<CarImage>>> uploadImages(String uuid) async {
-    final response = await addUseCase.uploadImage(car.images, uuid);
+    await compressImages(car.images);
+
+    final response = await addUseCase.uploadImage(car.willUploadImages, uuid);
     return response;
   }
 

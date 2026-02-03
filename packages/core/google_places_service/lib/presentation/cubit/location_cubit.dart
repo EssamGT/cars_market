@@ -21,15 +21,15 @@ class LocationCubit extends Cubit<LocationState> {
         emit(Error(failure));
       },
       (data) async {
-        data.predictions.removeWhere((prediction) {
-          final types = prediction.types;
-          for (var type in types) {
-            if (blockedTypes.contains(type)) {
-              return true;
-            }
-          }
-          return false;
-        });
+        // data.predictions.removeWhere((prediction) {
+        //   final types = prediction.types;
+        //   for (var type in types) {
+        //     if (blockedTypes.contains(type)) {
+        //       return true;
+        //     }
+        //   }
+        //   return false;
+        // });
         emit(Success(data));
       },
     );

@@ -97,7 +97,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
-                    '${widget.car.year} · ${widget.car.mileage} KM',
+                    '${widget.car.year} · ${priceFormater(widget.car.mileage)} KM',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Row(
@@ -124,7 +124,6 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
       ),
     );
   }
-
 
   @override
   bool get wantKeepAlive => true;

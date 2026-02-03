@@ -3,7 +3,7 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:redacted/redacted.dart';
-import 'package:shared_ui/shared_widgets/text_field/validate/text_filed_validate.dart';
+import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class PhoneNumberTextField extends StatelessWidget {
   final TextEditingController controller;

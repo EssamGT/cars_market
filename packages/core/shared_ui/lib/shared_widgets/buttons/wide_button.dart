@@ -40,7 +40,7 @@ class WideButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                chose.isEmpty ? StringsManager.chose : chose,
+                chose.isEmpty ? StringsManager.choose : chose,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               Icon(

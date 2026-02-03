@@ -12,7 +12,7 @@ class ModifcationsTextFeild extends StatelessWidget {
     return NormalTextFieldUploadCar(
       car: getIt.get<AddCubit>().car,
 
-      hint: StringsManager.modifcationsHint,
+      hint: StringsManager.modificationsHint,
       type: TextFieldUploadCarType.modifications,
       title: StringsManager.modifications,
       keybordType: TextInputType.text,

@@ -1,11 +1,13 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:search/presentation/widgets/c_search_bar.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Search Screen'));
-    
+    return SafeArea(
+      child: Scaffold(body: Column(children: [CSearchBar()])),
+    );
   }
 }

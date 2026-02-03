@@ -1,0 +1,1 @@
+enum CarConditionType { usedCar, newCar }

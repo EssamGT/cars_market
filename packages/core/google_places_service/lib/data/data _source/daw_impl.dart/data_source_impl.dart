@@ -24,7 +24,7 @@ class GooglePlacesServiceDataSourceImpl implements GooglePlacesService {
         "components": "country:eg",
         "key": apiKey,
         "sessiontoken": sessiontoken,
-        // "types": "locality|point_of_interest|plus_code",
+        "types": "(regions)",
       },
     );
     return GoogleMapsModel.fromJson(response.data);

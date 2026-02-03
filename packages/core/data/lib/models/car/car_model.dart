@@ -1,3 +1,4 @@
+import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,8 +14,9 @@ class CarsTableKeys {
   static const String bodyType = 'bodyType';
   static const String fuelType = 'fuelType';
   static const String gearboxType = 'gearboxType';
-  static const String mileage = 'mileage';
+  static const String km = 'km';
   static const String paintColor = 'paintColor';
+  static const String carCondition = 'carCondition';
   static const String paintCondition = 'paintCondition';
   static const String interiorFeatures = 'interiorFeatures';
   static const String modifications = 'modifications';
@@ -42,7 +44,8 @@ class CarModel {
   String bodyType;
   String fuelType;
   String gearboxType;
-  String mileage;
+  String km;
+  CarConditionType carCondition;
   String paintColor;
   String paintCondition;
   String interiorFeatures;
@@ -52,6 +55,7 @@ class CarModel {
   String version;
   List<String> safetyOptions;
   List<XFile> images;
+  List<XFile> willUploadImages;
   List<CarImage>? uploadedImages;
   bool negotiable;
   PredictionsEntity location;
@@ -70,7 +74,8 @@ class CarModel {
     this.fuelType = '',
     this.gearboxType = '',
     this.interiorFeatures = '',
-    this.mileage = '',
+    this.km = '',
+    this.carCondition = CarConditionType.usedCar,
     this.modifications = '',
     this.paintColor = '',
     this.paintCondition = '',
@@ -89,6 +94,7 @@ class CarModel {
     // ),
     required this.location,
     this.safetyOptions = const [],
+    this.willUploadImages = const [],
     this.images = const [],
     this.negotiable = true,
     this.uploadedImages,
@@ -108,9 +114,7 @@ class CarModel {
       CarsTableKeys.bodyType: bodyType,
       CarsTableKeys.fuelType: fuelType,
       CarsTableKeys.gearboxType: gearboxType,
-      CarsTableKeys.mileage: int.parse(
-        mileage.replaceAll(RegExp(r'[^0-9]'), ''),
-      ),
+      CarsTableKeys.km: int.parse(km.replaceAll(RegExp(r'[^0-9]'), '')),
       CarsTableKeys.paintColor: paintColor,
       CarsTableKeys.paintCondition: paintCondition,
       CarsTableKeys.interiorFeatures: interiorFeatures,
@@ -122,6 +126,7 @@ class CarModel {
       CarsTableKeys.negotiable: negotiable,
       CarsTableKeys.images: uploadedImages!.map((e) => e.toJson()).toList(),
       CarsTableKeys.location: location.toJson(),
+      CarsTableKeys.carCondition: carCondition,
       // Note: images are not included in JSON representation
     };
   }
