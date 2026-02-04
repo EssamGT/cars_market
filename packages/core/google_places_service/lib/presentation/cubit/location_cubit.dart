@@ -1,7 +1,6 @@
 import 'package:data/models/failure/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_places_service/data/models/un_wanted_types.dart';
 import 'package:google_places_service/domain/entity/google_maps_entity.dart';
 import 'package:google_places_service/domain/usecase/gps_use_case.dart';
 import 'package:injectable/injectable.dart';

@@ -1,10 +1,7 @@
-import 'package:add/presentation/cubit/add_cubit.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/car_filter_model.dart';
-import 'package:data/models/car/car_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
 import 'package:shared_ui/shared_widgets/slection_page/options_selection_page.dart';
 import 'package:shared_ui/shared_widgets/slection_page/selection_page.dart';
