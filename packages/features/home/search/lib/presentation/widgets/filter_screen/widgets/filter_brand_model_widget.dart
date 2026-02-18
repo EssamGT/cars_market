@@ -8,7 +8,7 @@ class FilterBrandModelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [FilterTextFieldButtonBrandAndModel(car: SearchScreenCubit.get(context).carFilterModel)],
+      // children: [FilterTextFieldButtonBrandAndModel(car: SearchScreenCubit.get(context).carFilterModel)],
     );
   }
 }

@@ -16,7 +16,7 @@ class FilterKmWidget extends StatelessWidget {
       children: [
         FilterNormalTextField(
           carFilter: SearchScreenCubit.get(context).carFilterModel,
-          title: StringsManager.km,
+          title: StringsManager.kmLable,
           maxLength: 4,
           width: size.width * 0.44,
           price: false,

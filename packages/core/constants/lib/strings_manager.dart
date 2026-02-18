@@ -12,6 +12,7 @@ class StringsManager {
   static const String fullNameEx = 'Enter your full name';
   static const String phoneNumberEx = 'Enter your phone number';
   static const String phoneNumber = 'Phone Number';
+  static const String save = 'Save';
   static const String cnext = 'Continue';
   static const String verify = 'Verify';
   static const String verifyNow = 'Verify Now';
@@ -33,16 +34,33 @@ class StringsManager {
   static const String toPriceHint = 'EX.800,000';
   static const String min = 'Min';
   static const String max = 'Max';
-  static const String km = 'Kilometers (km)';
+  static const String kmLable = 'Kilometers (KM)';
+  static const String kmHint = 'e.g.., 55000 KM';
+  static const String km = 'KM';
+  static const String hpLable = 'Horsepower (Optional)';
+  static const String hpHint = 'e.g.., 150 HP';
+  static const String hp = 'HP';
+  static const String topSpeedLable = 'Top Speed (Optional)';
+  static const String topSpeedHint = 'e.g.., 200 km/h';
+  static const String topSpeed = 'Top Speed';
+  static const String fuelConsumptionLabel = 'Fuel Consumption (Optional)';
+  static const String fuelConsumptionHint = 'e.g.., 10 L/100 km';
+  static const String fuelConsumption = 'L/100 km';
+
   static const String priceFilterRange = 'Price Range';
   static const String noResultsFound = 'No Results Found';
   static const String usedLabel = 'Used';
   static const String newLabel = 'New';
+  static const String accidentedLabel = 'Accidented';
+  static const String yes = 'Yes';
+  static const String no = 'No';
   static const String carConditionLabel = 'Condition';
+  static const String carConditionError = 'Please select condition';
   // static const String uploading = 'Uploading...';
   static const String loading = 'Loading...';
   static const String location = 'Location';
   static const String listingYourCar = 'Listing your car...';
+  static const String imagesError = 'Please add at least 3 images';
   static const String warning = 'Warning';
   static const String messageSellerOnWhatsApp = 'Message seller on WhatsApp';
   static const String oops = 'Oops!';
@@ -51,12 +69,19 @@ class StringsManager {
   static const String carListedSuccessfully = 'Car listed successfully';
   static const String list = 'List your car';
   static const String brand = 'Brand';
+  static const String brandNotFound = 'Brand Not Found';
+  static const String modelNotFound = 'Model Not Found';
   static const String dbrand = 'Brand';
+  static const String ev = 'EV';
   static const String selectBrand = 'Select Brand';
+  static const String searchForBrand = 'Search for brand';
+  static const String searchForModel = 'Search for model';
   static const String yearLabel = 'Year';
   static const String yearHint = 'EX. 2010';
   static const String dyear = 'Year';
   static const String selectedCar = 'Selected Car';
+  static const String selectCar = 'Select a car';
+  static const String pleaseSelectCar = 'Please select a car';
   static const String versionLabel = 'Version (Optional)';
   static const String versionHint = 'EX. LX, Sport, Limited';
   static const String version = 'Version';
@@ -71,42 +96,59 @@ class StringsManager {
   static const String stepIndicatorTitle1 = 'Identification';
   static const String stepIndicatorTitle2 = 'Details';
   static const String stepIndicatorTitle3 = 'Pricing & Publish';
-  static const String bodyType = 'Body Type';
-  static const String bodyTypes = 'Body Types';
+
+  static const String fuelTypeError = 'Please select fuel type';
   static const String bodyTypeError = 'No body type found';
-  static const String pleaseAddAtLeast3Images = 'please Add At Least 3 Images';
-  static const String fuelType = 'Fuel Type';
+  static const String pleaseAddAtLeast3Images = 'Please add at least 3 images';
+  static const String fuelTypeLabel = 'Fuel Type';
   static const String dfuelType = 'Fuel Type';
-  static const String cylinderNumber = 'Cylinder Number';
-  static const String dCylinderNumber = 'Cylinder Number';
-  static const String engineCapacity = 'Engine Capacity';
-  static const String dEngineCapacity = 'Engine Capacity';
-  static const String fEngineCapacity = 'Engine Capacity (CC)';
+  static const String petrol = 'Petrol';
+  static const String diesel = 'Diesel';
+  static const String electric = 'Electric';
+  static const String hybrid = 'Hybrid';
+  static const String naturalGas = 'Natural Gas';
+  static const String plugInHybrid = 'Plug-in Hybrid';
+
   static const String fuelTypes = 'Fuel Types';
-  static const String price = 'Price';
+  static const String priceLabel = 'Price (EGP)';
+  static const String priceHint = 'EX. 100,000';
   static const String dprice = 'Price';
   static const String next = 'Next';
   static const String listMyCar = 'List My Car Now ';
-  static const String negotiable = 'Negotiable';
+  static const String negotiableLabel = 'Negotiable ? ';
+  static const String negotiableError = 'Please select negotiation';
   static const String available = 'Available';
   static const String nonNegotiable = 'Non-Negotiable';
   static const String transmissionTypeLabel = 'Transmission Type';
+  static const String transmissionTypeError = 'please select Transmission Type';
+  static const String automatic = 'Automatic';
+  static const String manual = 'Manual';
   static const String dgearboxType = 'Transmission Type';
   static const String transmissionTypes = 'Transmission Types';
-  static const String mileage = 'Kilometers (km)';
-  static const String mileageHint = 'e.g.., 55000';
-  static const String paintColor = 'Paint Color';
-  static const String paintColors = 'Paint Colors';
-  static const String paintCondition = 'Paint Condition';
+  // static const String mileage = 'Kilometers (KM)';
+
+  static const String paintColorLabel = 'Paint Color';
+  // static const String selectPaintColor = 'Select paint color';
+  static const String pleaseSelectPaintColor = 'Please select paint color';
+  static const String selectePaintColor = 'Select Paint Color';
+  static const String noPaintColorsFound = 'No paint colors found';
+  static const String paintConditionLabel = 'Paint Condition';
   static const String paintConditions = 'Paint Conditions';
+  static const String paintConditionError = 'Please select paint condition';
   static const String interiorFeatures = 'Interior Features (Optional)';
   static const String interiorFeaturesHint =
       'e.g.., Leather seats, Sunroof, Premium Sound System';
-  static const String safetyOptions = 'Safety Options (Optional)';
-  static const String serviceHistory = 'Service History (Optional)';
+  static const String featuresLabel = 'Features (Optional)';
+  static const String featuresHint = '+ Add Features';
+  static const String featuresSelected = 'Features Selected';
+  static const String featuresTitle = 'Features';
+  static const String safetyOptions = 'Safety Options';
+  static const String serviceHistoryLabelSellCar = 'Service History (Optional)';
+  static const String serviceHistoryLabel = 'Service History';
   static const String serviceHistoryHint =
       'e.g.., Full service history available, Last serviced at 50,000 km';
-  static const String modifications = 'Modifications (Optional)';
+  static const String modificationsLabelSellCar = 'Modifications (Optional)';
+  static const String modificationsLabel = 'Modifications';
   static const String modificationsHint =
       'e.g.., Upgraded exhaust system, Custom wheels, if none, leave blank';
   static const String modelError = "Model can't be empty";
@@ -141,12 +183,13 @@ class StringsManager {
   static const String createOne = 'Create one here';
   static const String login = 'Login';
   static const String homeL = 'Home';
-  static const String searchL = 'Search';
+  static const String searchLabel = 'Search';
   static const String addL = 'Sell';
   static const String favoritesL = 'Favorites';
   static const String profileL = 'Profile';
   static const String sellerInformation = 'Seller Information';
   static const String engine = 'Engine';
+  static const String engineSpec = 'Engine Specification';
   static const String dMileage = 'Mileage';
   static const String dFuel = 'Fuel';
   static const String dGearbox = 'Gearbox';
@@ -176,4 +219,458 @@ class StringsManager {
     {'t': pick, 's': browseTopb},
     {'t': makeIt, 's': compare},
   ];
+  //body type
+  static const String carBodyTypeLabel = 'Body Type';
+  static const String bodyTypes = 'Body Types';
+  static const String selecteCarBodyType = 'Select Body Type';
+  static const String noCarBodyTypesFound = 'No Body Types Found';
+  static const String pleaseSelectCarBodyType = 'Please select a body type';
+  static const String sedan = 'Sedan';
+  static const String suv = 'SUV';
+  static const String hatchback = 'Hatchback';
+  static const String fourByFour = '4X4';
+  static const String sportsCoupe = 'Sports / Coupe';
+  static const String convertible = 'Convertible';
+  static const String pickup = 'Pickup';
+  static const String estateWagon = 'Estate / Wagon';
+  static const String vanBus = 'Van / Bus';
+  static const String mvp = 'MVP';
+  static const String taxi = 'Taxi';
+  static const String other = 'Other';
+  // paint condition
+  static const String factoryPaint = 'Factory Paint';
+  static const String touchUps = 'Touch-ups';
+  static const String partialPaint = 'Partial Paint';
+  static const String fullRepaint = 'Fully Repainted';
+  // paint colors
+  static const String white = 'White';
+  static const String black = 'Black';
+  static const String silver = 'Silver';
+  static const String gray = 'Gray';
+  static const String blue = 'Blue';
+  static const String darkBlue = 'Dark Blue';
+  static const String darkGray = 'Dark Gray';
+  static const String red = 'Red';
+  static const String darkRed = 'Dark Red';
+  static const String green = 'Green';
+  static const String darkGreen = 'Dark Green';
+  static const String gold = 'Gold';
+  static const String bronze = 'Bronze';
+  static const String brown = 'Brown';
+  static const String mocha = 'Mocha';
+  static const String olive = 'Olive';
+  static const String yellow = 'Yellow';
+  static const String orange = 'Orange';
+  static const String cyan = 'Cyan';
+  static const String beige = 'Beige';
+  static const String champagne = 'Champagne';
+  static const String petroleum = 'Petroleum';
+  static const String eggplant = 'Eggplant';
+  static const String purple = 'Purple';
+  static const String otherCustom = 'Other / Custom';
+  static const String none = 'None';
+
+  // engine spec
+  static const String engineCylinderNumberLabel = 'Cylinder Number';
+  static const String dCylinderNumber = 'Cylinder Number';
+
+  static const String noEngineCylinderNumbersFound =
+      'No Engine Cylinder Numbers Found';
+  static const String vEngine = 'V';
+  static const String iEngine = 'I';
+  static const String selectEngineCylinder = 'Select Engine';
+  static const String pleaseSelectEngineCylinder =
+      'Please select engine cylinder number';
+  static const String i3Engine = '3 Cylinder';
+  static const String i4Engine = '4 Cylinder';
+  static const String i5Engine = '5 Cylinder';
+  static const String i6Engine = '6 Cylinder I6';
+  static const String v6Engine = '6 Cylinder V6';
+  static const String v8Engine = '8 Cylinder';
+  static const String v10Engine = '10 Cylinder';
+  static const String v12Engine = '12 Cylinder';
+  static const String v16Engine = '16 Cylinder';
+  static const String i3EngineSpec = 'I3';
+  static const String i4EngineSpec = 'I4';
+  static const String i5EngineSpec = 'I5';
+  static const String i6EngineSpec = 'I6';
+  static const String v6EngineSpec = 'V6';
+  static const String v8EngineSpec = 'V8';
+  static const String v10EngineSpec = 'V10';
+  static const String v12EngineSpec = 'V12';
+  static const String v16EngineSpec = 'V16';
+
+  //engine capacity
+  static const String engineCapacity = 'Engine Capacity';
+  static const String dEngineCapacity = 'Engine Capacity';
+  static const String engineCapacityLabel = 'Engine Capacity (CC)';
+  static const String noEngineCapacityFound = 'No Engine Capacity Found';
+  static const String selectEngineCapacity = 'Select Engine CC';
+  static const String pleaseSelectEngineCapacity =
+      'Please select engine capacity';
+  // only now
+  static const String c600 = '600 CC';
+  static const String c700 = '700 CC';
+  static const String c800 = '800 CC';
+  static const String c1000 = '1000 CC';
+  static const String c1100 = '1100 CC';
+  static const String c1200 = '1200 CC';
+  static const String c1300 = '1300 CC';
+  static const String c1400 = '1400 CC';
+  static const String c1500 = '1500 CC';
+  static const String c1600 = '1600 CC';
+  static const String c1800 = '1800 CC';
+  static const String c2000 = '2000 CC';
+  static const String c2100 = '2100 CC';
+  static const String c2200 = '2200 CC';
+  static const String c2300 = '2300 CC';
+  static const String c2400 = '2400 CC';
+  static const String c2500 = '2500 CC';
+  static const String c2600 = '2600 CC';
+  static const String c2700 = '2700 CC';
+  static const String c2800 = '2800 CC';
+  static const String c2900 = '2900 CC';
+  static const String c3000 = '3000 CC';
+  static const String c3200 = '3200 CC';
+  static const String c3300 = '3300 CC';
+  static const String c3400 = '3400 CC';
+  static const String c3500 = '3500 CC';
+  static const String c3600 = '3600 CC';
+  static const String c3700 = '3700 CC';
+  static const String c3800 = '3800 CC';
+  static const String c4000 = '4000 CC';
+  static const String c4100 = '4100 CC';
+  static const String c4200 = '4200 CC';
+  static const String c4400 = '4400 CC';
+  static const String c4500 = '4500 CC';
+  static const String c4800 = '4800 CC';
+  static const String c4600 = '4600 CC';
+  static const String c5000 = '5000 CC';
+  static const String c5200 = '5200 CC';
+  static const String c5300 = '5300 CC';
+  static const String c5500 = '5500 CC';
+  static const String c5700 = '5700 CC';
+  static const String c5800 = '5800 CC';
+  static const String c6000 = '6000 CC';
+  static const String c6200 = '6200 CC';
+  static const String c6300 = '6300 CC';
+  static const String c6400 = '6400 CC';
+  static const String c6500 = '6500 CC';
+  static const String c6600 = '6600 CC';
+  static const String c7000 = '7000 CC';
+  static const String c7200 = '7200 CC';
+  static const String c7500 = '7500 CC';
+  static const String c8000 = '8000 CC';
+
+  // features and options
+
+  static const String safetyFeatures = 'Safety Features';
+  static const String safetyFeaturesId = 'safety';
+  static const String driverAssistance = 'Driver Assistance (ADAS)';
+  static const String driverAssistanceId = 'driver_assistance';
+  static const String driverAirbagLabel = 'Driver Airbag';
+  static const String driverAirbagId = ' driver_airbag';
+  static const String passengerAirbagLabel = 'Passenger Airbag';
+  static const String passengerAirbagId = ' passenger_airbag';
+  static const String sideAirbagLabel = 'Side Airbag';
+  static const String sideAirbagId = ' side_airbag';
+  static const String absLabel = 'ABS';
+  static const String absId = ' abs';
+  static const String espLabel = 'ESP / ESC';
+  static const String espId = ' esp';
+  static const String isofixLabel = 'ISOFIX';
+  static const String isofixId = ' isofix';
+  static const String tclLabel = 'Traction Control';
+  static const String tclId = 'traction_control';
+  static const String epsLabel = 'Electronic Power Steering';
+  static const String epsId = 'eps';
+  static const String tpmsLabel = 'Tyre Pressure Monitoring System';
+  static const String tpmsId = 'tpms';
+  static const String immobilizerLabel = 'Immobilizer Key';
+  static const String immobilizerId = 'immobilizer';
+  static const String alarmLabel = 'Anti-theft Alarm';
+  static const String alarmId = 'alarm';
+  static const String warningFeatureLabel = 'Warning System';
+  static const String warningFeatureId = 'warning_system';
+  static const String eHandBrakeLabel = 'Electronic Handbrake';
+  static const String eHandBrakeId = 'e_hand_brake';
+  static const String rearFogLabel = 'Rear Fog Lights';
+  static const String rearFogId = 'rear_fog';
+  static const String activeHeadlightsLabel = 'Active Headlights';
+  static const String activeHeadlightsId = 'active_headlights';
+  static const String ledLightsLabel = 'LED Lights';
+  static const String ledLightsId = 'led_lights';
+  static const String fogLightsLabel = 'Fog Lights';
+  static const String fogLightsId = 'fog_lights';
+  static const String dayLightsLabel = 'Daytime Running Lights';
+  static const String dayLightsId = 'day_lights';
+  static const String forwardCrashWarningLabel = 'Forward Crash Warning';
+  static const String forwardCrashWarningId = 'forward_crash_warning';
+  static const String driverDrowsinessDetectionLabel =
+      'Driver Drowsiness Detection';
+  static const String driverDrowsinessDetectionId =
+      'driver_drowsiness_detection';
+  static const String driverAttentionWarningLabel = 'Driver Attention Warning';
+  static const String driverAttentionWarningId = 'driver_attention_warning';
+  static const String speedLimitRecogniseLabel = 'Speed Limit Recognition';
+  static const String speedLimitRecogniseId = 'speed_limit_recognise';
+  static const String emergencyBrakingLabel = 'Emergency Braking';
+  static const String emergencyBrakingId = 'emergency_braking';
+  static const String autoBrakingLabel = 'Automatic Braking At Low Speeds';
+  static const String autoBrakingId = 'auto_braking';
+  static const String distanseWarningLabel = 'Distance Warning';
+  static const String distanseWarningId = 'distanse_warning';
+  static const String emergencySosLabel = 'Emergency SOS';
+  static const String emergencySosId = 'emergency_sos';
+  static const String personsDetectionLabel = 'Persons Detection';
+  static const String personsDetectionId = 'persons_detection';
+  static const String autoHoldLabel = 'Auto Hold';
+  static const String autoHoldId = 'auto_hold';
+  static const String hillAssistLabel = 'Hill Assist';
+  static const String hillAssistId = 'hill_assist';
+  static const String frontParkingSensorsLabel = 'Front Parking Sensors';
+  static const String frontParkingSensorsId = 'front_parking_sensors';
+  static const String rearParkingSensorsLabel = 'Rear Parking Sensors';
+  static const String rearParkingSensorsId = 'rear_parking_sensors';
+  static const String parkingSensorsLabel = 'Parking Sensors';
+  static const String parkingSensorsId = 'parking_sensors';
+  static const String parkingAssistLabel = 'Parking Assist';
+  static const String parkingAssistId = 'parking_assist';
+  static const String autoParkingLabel = 'Automatic Parking';
+  static const String autoParkingId = 'auto_parking';
+  static const String camera360Label = '360 Camera';
+  static const String camera360Id = 'camera_360';
+  static const String carRearViewCameraLabel = 'Rear View Camera';
+  static const String carRearViewCameraId = 'rear_view_camera';
+  static const String carFrontViewCameraLabel = 'Front View Camera';
+  static const String carFrontViewCameraId = 'front_view_camera';
+  static const String adaptiveLightsLabel = 'Adaptive Lights';
+  static const String adaptiveLightsId = 'adaptive_lights';
+  static const String cruiseControlLabel = 'Cruise Control';
+  static const String cruiseControlId = 'cruise_control';
+  static const String adaptiveCruiseControlLabel = 'Adaptive Cruise Control';
+  static const String adaptiveCruiseControlId = 'adaptive_cruise_control';
+  static const String powerSteeringLabel = 'Power Steering';
+  static const String powerSteeringId = 'power_steering';
+  static const String multiSteeringLabel = 'Multi Steering Wheel';
+  static const String multiSteeringId = 'multi_steering';
+  static const String blindSpotLabel = 'Blind Spot Monitor';
+  static const String blindSpotId = 'blind_spot';
+  static const String intersectionAssistLabel = 'Intersection Assist';
+  static const String intersectionAssistId = 'intersection_assist';
+  static const String laneChangeAssistLabel = 'Lane Change Assist';
+  static const String laneChangeAssistId = 'lane_change_assist';
+  static const String laneKeepAssistLabel = 'Lane Keep Assist';
+  static const String laneKeepAssistId = 'lane_keep_assist';
+  static const String rainSensorLabel = 'Rain Sensor';
+  static const String rainSensorId = 'rain_sensor';
+  static const String soundFeatures = 'Sound & Multimedia';
+  static const String soundFeaturesId = 'sound';
+  static const String comfortFeatures = 'Comfort Features';
+  static const String comfortFeaturesId = 'comfort';
+  static const String otherFeatures = 'Other Features';
+  static const String otherFeaturesId = 'other';
+  static const String touchScreenLabel = 'Touch Screen';
+  static const String touchScreenId = 'touch_screen';
+  static const String navigationSystemLabel = 'Navigation System';
+  static const String navigationSystemId = 'navigation_system';
+  static const String gpsLabel = 'Car Tracing System (GPS)';
+  static const String gpsId = 'gps';
+  static const String radioLabel = 'Radio';
+  static const String radioId = 'radio';
+  static const String soundSystemLabel = 'Premium Sound System';
+  static const String soundSystemId = 'sound_system';
+  static const String bluetoothLabel = 'Bluetooth';
+  static const String bluetoothId = 'bluetooth';
+  static const String auxLabel = 'AUX';
+  static const String auxId = 'aux';
+  static const String usbCLabel = 'USB-C';
+  static const String usbCId = 'usb_c';
+  static const String usbLabel = 'USB';
+  static const String usbId = 'usb';
+  static const String carplayLabel = 'Apple CarPlay';
+  static const String carplayId = 'apple_carplay';
+  static const String androidAutoLabel = 'Android Auto';
+  static const String androidAutoId = 'android_auto';
+  static const String cdPlayerLabel = 'CD Player';
+  static const String cdPlayerId = 'cd_player';
+  static const String dvdPlayerLabel = 'DVD Player';
+  static const String dvdPlayerId = 'dvd_player';
+  static const String cdChangerLabel = 'CD Changer';
+  static const String cdChangerId = 'cd_changer';
+  static const String cassetteLabel = 'Cassette';
+  static const String cassetteId = 'cassette';
+  static const String acLabel = 'Air Conditioning';
+  static const String acId = 'ac';
+  static const String sunroofLabel = 'Sunroof';
+  static const String sunroofId = 'sunroof';
+  static const String powerWindowsLabel = 'Power Windows';
+  static const String powerWindowsId = 'power_windows';
+  static const String electricSeatsLabel = 'Electric Seats';
+  static const String electricSeatsId = 'electric_seats';
+  static const String heatedSeatsLabel = 'Heated Seats';
+  static const String heatedSeatsId = 'heated_seats';
+  static const String ventilatedSeatsLabel = 'Ventilated Seats';
+  static const String ventilatedSeatsId = 'ventilated_seats';
+  static const String memorySeatsLabel = 'Memory Seats';
+  static const String memorySeatsId = 'memory_seats';
+  static const String massageSeatsLabel = 'Massage Seats';
+  static const String massageSeatsId = 'massage_seats';
+  static const String heatedMirrorLabel = 'Heated Mirrors';
+  static const String heatedMirrorId = 'heated_mirror';
+  static const String electricMirrorsLabel = 'Electric Mirrors';
+  static const String electricMirrorsId = 'electric_mirrors';
+  static const String foldingMirrorsLabel = 'Folding Mirrors';
+  static const String foldingMirrorsId = 'folding_mirrors';
+  static const String tintLabel = 'Window Tint';
+  static const String tintId = 'tint';
+  static const String coolBoxLabel = 'Cool Box';
+  static const String coolBoxId = 'cool_box';
+  static const String electricSteeringWheelLabel = 'Electric Steering Wheel';
+  static const String electricSteeringWheelId = 'electric_steering_wheel';
+  static const String keylessLabel = 'Keyless Entry';
+  static const String keylessId = 'keyless';
+  static const String startLabel = 'Push Start Button';
+  static const String startId = 'start';
+  static const String remoteEngineStartLabel = 'Remote Engine Start';
+  static const String remoteEngineStartId = 'remote_engine_start';
+  static const String smartRemoteLabel = 'Smart Key';
+  static const String smartRemoteId = 'smart_key';
+  static const String remoteLabel = 'Remote Key';
+  static const String remoteId = 'remote';
+  static const String hudLabel = 'Head-Up Display';
+  static const String hudId = 'hud';
+  static const String dashCamLabel = 'Dash Cam';
+  static const String dashCamId = 'dash_cam';
+  static const String airSuspensionLabel = 'Air Suspension';
+  static const String airSuspensionId = 'air_suspension';
+  static const String brakeAssistLabel = 'Brake Assist';
+  static const String brakeAssistId = 'brake_assist';
+  static const String windowSwitchLabel = 'Window Switch';
+  static const String windowSwitchId = 'window_switch';
+  static const String lockLabel = 'Central Lock';
+  static const String lockId = 'lock';
+  static const String premiumWheelsLabel = 'Premium Wheels';
+  static const String premiumWheelsId = 'premium_wheels';
+  static const String spoilerLabel = 'Spoiler';
+  static const String spoilerId = 'spoiler';
+  static const String visionAndCamerasLabel = 'Vision & Cameras';
+  static const String visionAndCamerasId = 'vision_and_cameras';
+  static const String lightingAndVisibilityLabel = 'Lighting & Visibility';
+  static const String lightingAndVisibilityId = 'lighting_and_visibility';
+  static const String matrixLedHeadlightsLabel = 'Matrix LED Headlights';
+  static const String matrixLedHeadlightsId = 'matrix_led_headlights';
+  static const String autoHeadlightsLabel = 'Auto Headlights';
+  static const String autoHeadlightsId = 'auto_headlights';
+  static const String autoHighBeamLabel = 'Auto High Beam';
+  static const String autoHighBeamId = 'auto_high_beam';
+  static const String rainSensorWipersLabel = 'Auto Rain Wipers';
+  static const String rainSensorWipersId = 'auto_rain_wipers';
+  static const String technologyAndInfotainmentLabel =
+      'Technology & Infotainment';
+  static const String technologyAndInfotainmentId =
+      'technology_and_infotainment';
+  static const String wirelessChargingLabel = 'Wireless Charging';
+  static const String wirelessChargingId = 'wireless_charging';
+  static const String exteriorAndConvenienceLabel = 'Exterior & Convenience';
+  static const String exteriorAndConvenienceId = 'exterior_and_convenience';
+  static const String powerTailGateLabel = 'Electric Tail Gate';
+  static const String powerTailGateId = 'electric_tail_gate';
+  static const String childLockLabel = 'Child Lock';
+  static const String childLockId = 'child_lock';
+  static const String comfortWindowsLabel = 'Comfort Windows';
+  static const String comfortWindowsId = 'comfort_windows';
+
+  // airconditioning
+  static const String selectAircon = 'Select Air Conditioning Type';
+  static const String acTypeLabel = 'Air Conditioning (Optional)';
+
+  static const String manualAcLabel = 'Manual Air Conditioning';
+  static const String automaticAcLabel = 'Automatic Air Conditioning';
+  static const String automatic2ZonesAcLabel =
+      'Automatic 2 Zones Air Conditioning';
+  static const String automatic3ZonesAcLabel =
+      'Automatic 3 Zones Air Conditioning';
+  static const String automatic4ZonesAcLabel =
+      'Automatic 4 Zones Air Conditioning';
+  static const String noneAcLabel = 'No Air Conditioning';
+
+  // seats
+  static const String selectInteriorType = 'Select Interior';
+  static const String interiorTypeLabel = 'Select Interior (Optional)';
+
+  static const String clothSeats = 'Cloth';
+  static const String leatherSeats = 'Full Leather';
+  static const String partLeatherSeats = 'Part Leather';
+  static const String velourSeats = 'Velour';
+  static const String alcantaraSeats = 'Alcantara Seats';
+
+  static const String seatNumberHint = 'e.g.., 7 Seats';
+  static const String seatNumberLabel = 'Number of Seats (Optional)';
+  static const String seats = 'Seats';
+
+  // payment options
+  static const String paymentOptionsLabel = 'Payment Options';
+  static const String cashLabel = 'Cash';
+  static const String installmentLabel = 'Installment';
+  static const String cashOrInstallmentsLabel = 'Cash or Installments';
+  static const String exchangeLabel = 'Exchange';
+  static const String nonePaymentLabel = 'Select Payment Option';
+
+  static const String whatsappMessageLabel = 'WhatsApp Message ?';
+
+  // validations
+
+  static const String emptyEmailError = "Please enter your email address.";
+  static const String validEmailError = "Please enter a valid email address";
+  static const String emptyPhoneError = "Please enter your phone number.";
+  static const String validPhoneError = "Please enter a valid phone number.";
+  static const String emptyOtpError = "Please enter OTP.";
+  static const String validOtpError = "Please enter a valid OTP.";
+  static const String emptyPasswordError = "Please enter your password";
+  static const String validPasswordError =
+      "8+ chars: uppercase, lowercase, digit, symbol, no spaces";
+  static const String passwordMinLengthError = "At least 8 characters";
+  static const String emptyYearError = "Please enter year";
+  static const String validYearError = "Please enter a valid year";
+  static const String carRequiredError = "Please select a car";
+  static const String emptyModelError = "Please enter model";
+  static const String emptyBodyTypeError = "Please select body type";
+  static const String emptyFuelTypeError = "Please select fuel type";
+  static const String emptyGearboxTypeError = "Please select gearbox type";
+  static const String emptyMileageError = "Please enter mileage";
+  static const String validMileageError = "Please enter a valid mileage";
+  static const String emptyPaintColorError = "Please select paint color";
+  static const String emptyPaintConditionError =
+      "Please select paint condition";
+  static const String emptyLocationError = "Please enter location";
+  static const String emptyEngineCapacityError = "Please select engine";
+  static const String emptyEngineCylinderError =
+      "Please select engine cylinder number";
+  static const String emptyPriceError = "Please enter price";
+  static const String priceZeroError = "Price must be greater than 0";
+  static const String validPriceError = "Please enter a valid price";
+  static const String emptyDescriptionError = "Please enter description";
+  static const String descriptionMinLengthError =
+      "Description must be at least 20 characters";
+  static const String emptyNameError = "Please enter your name";
+  static const String nameMinLengthError = "Name must be at least 5 characters";
+  static const String emptyConfirmPasswordError =
+      "Please confirm your password";
+  static const String passwordsMismatchError = "Passwords do not match";
+  static const String seatNumberMinError = "Seat number must be at least 2";
+  static const String seatNumberMaxError = "Seat number must be at most 7";
+  static const String validHpError = "Please enter a valid horsepower value.";
+  static const String hpMustBeGreaterThanZeroError =
+      "Horsepower must be greater than 0";
+  static const String hpRealisticError =
+      "Please enter a realistic horsepower value.";
+  static const String fuelConsumptionRealisticError =
+      "Please enter a realistic fuel consumption value.";
+  static const String validFuelConsumptionError =
+      "Please enter a valid fuel consumption value.";
+  static const String zeroFuelConsumptionError =
+      "Fuel consumption must be greater than 0.";
+  static const String paymentOptionsError = "Please select payment options";
+  static const String whatsappMessageError = "Please select whatsapp message ?";
 }

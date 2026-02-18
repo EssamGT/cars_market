@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
 import 'package:error_handler/error_handler/base_errors/base_error_type.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_places_service/data/data%20_source/data_source.dart';
+import 'package:google_places_service/data/data_source/data_source.dart';
 import 'package:google_places_service/domain/entity/google_maps_entity.dart';
 import 'package:google_places_service/domain/repository/google_places_service_reop.dart';
 import 'package:injectable/injectable.dart';

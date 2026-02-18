@@ -18,7 +18,8 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.9
+
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -51,8 +52,8 @@ dependencies:
     path: packages/features/auth/user_details
   forgot_password:
     path: packages/features/auth/forgot_password
-  add:
-    path: packages/features/home/add
+  sell:
+    path: packages/features/home/sell
   main:
     path: packages/features/home/main
   remote:
@@ -66,10 +67,13 @@ dependencies:
   firebase_auth: ^6.1.4
   cloud_functions: ^6.0.6
 
+  firebase_storage: ^13.0.6
+  cloud_firestore: ^6.1.2
+
 dev_dependencies:
   melos: ^7.4.0
   injectable_generator: ^2.12.0
-  build_runner: ^2.10.5
+  build_runner: ^2.11.1
 workspace:
   - packages/core/theme
   - packages/core/data
@@ -91,24 +95,44 @@ workspace:
   - packages/features/home/home
   - packages/features/home/main
   - packages/features/home/search
-  - packages/features/home/add
+  - packages/features/home/sell
   - packages/features/home/favorites
   - packages/features/home/profile
 
 melos:
   scripts:
-    clean: melos clean
-    runner: flutter pub run build_runner build --delete-conflicting-outputs
-    clean and bootstrap: melos clean && melos bootstrap
+    clean:
+      run: melos clean
+
+    runner:
+      run: flutter pub run build_runner build --delete-conflicting-outputs
+
+    clean-bootstrap:
+      run: melos clean && melos bootstrap
+
     test:
       run: melos exec --concurrency=1 -- flutter test
 
-    update: flutter pub outdated
-    upgrade: flutter pub upgrade --major-versions
+    build:
+      run: melos exec --depends-on=build_runner -- dart run build_runner build --delete-conflicting-outputs
+
+    update:
+      run: melos exec -- flutter pub outdated
+
+    upgrade:
+      run: melos exec -- flutter pub upgrade
+    codegen:
+      run: dart run build_runner build --delete-conflicting-outputs
+      description: Generate code for all packages
+      exec:
+        concurrency: 1
+    generate:
+      run: melos exec -- dart run build_runner build --delete-conflicting-outputs
+      description: Run build_runner in all packages
   command:
     bootstrap:
       environment:
-        sdk: ^3.9.0
+        sdk: ^3.10.9
       dependencies:
         smooth_page_indicator: ^1.2.1
         flutter_bloc: ^9.1.1
@@ -141,8 +165,8 @@ melos:
         firebase_core: ^4.4.0
         firebase_auth: ^6.1.4
         cloud_functions: ^6.0.6
-        cloud_firestore: ^6.1.0
-        firebase_storage: ^13.0.4
+        cloud_firestore: ^6.1.2
+        firebase_storage: ^13.0.6
         redacted: ^1.0.13
         phone_numbers_parser: ^9.0.16
         cached_network_image: ^3.4.1
@@ -153,7 +177,7 @@ melos:
 
       dev_dependencies:
         injectable_generator: ^2.12.0
-        build_runner: ^2.10.5
+        build_runner: ^2.11.1
         dotted_border: ^2.0.0
 
   flutter_test:
@@ -179,32 +203,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-  # - assets/images/zekrak.png
-  # - assets/images/We.jpg
-  # - assets/images/UMM.jpg
-  # - assets/images/UM.jpg
-  # - assets/svg/api.svg
-  # - assets/svg/dart.svg
-  # - assets/svg/firebase.svg
-  # - assets/svg/flutter.svg
-  # - assets/svg/git.svg
-  # - assets/svg/sql.svg
-  # - assets/svg/postman.svg
-  # - assets/svg/subabase.svg
-  # - assets/svg/apple.svg
-  # - assets/svg/android.svg
-  # - assets/svg/desktop.svg
-  # - assets/svg/web.svg
-  # - assets/svg/multi.svg
-  # - assets/svg/clean.svg
-  # - assets/svg/github.svg
-  # - assets/svg/apple-store.svg
-  # - assets/svg/google-play.svg
-  # - assets/svg/email.svg
-  # - assets/svg/phone.svg
-  # - assets/svg/linkdin.svg
-  # - assets/svg/location.svg
-  # - assets/svg/whatsapp.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

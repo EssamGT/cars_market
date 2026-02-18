@@ -51,4 +51,18 @@ class PredictionsEntity {
 
     return data;
   }
+  factory PredictionsEntity.empty() {
+    return PredictionsEntity(
+      description: '',
+      placeId: '',
+      structuredFormatting: StructuredFormattingEntity(
+        mainText: '',
+        secondaryText: '',
+      ),
+      reference: '',
+      types: [],
+      latLng: LatLng(0.0, 0.0),
+    );
+  }
+
 }

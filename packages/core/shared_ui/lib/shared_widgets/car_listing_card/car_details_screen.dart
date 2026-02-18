@@ -5,12 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/bottom_navi_bar.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_gallary_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_location_widget.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_safety_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_specs_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/details_screen_app_bar.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/description_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/detailed_info_widget.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/interior_features_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/modifications_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/seller_info.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/service_history_widget.dart';
@@ -92,10 +90,9 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                 CarLocationWidget(car: widget.car),
                 DescriptionWidget(car: widget.car),
                 DetailedInfoWidget(car: widget.car),
-                CarSafetyWidget(car: widget.car),
-                InteriorFeaturesWidget(car: widget.car),
-                Modifications(car: widget.car),
+                // CarSafetyWidget(car: widget.car),
                 ServiceHistoryWidget(car: widget.car),
+                Modifications(car: widget.car),
                 SizedBox(height: AppSize.s80),
               ],
             ),

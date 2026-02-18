@@ -16,7 +16,7 @@ class FilterEngineCapacityWidget extends StatelessWidget {
       children: [
         FilterNormalTextField(
           carFilter: SearchScreenCubit.get(context).carFilterModel,
-          title: StringsManager.fEngineCapacity,
+          title: StringsManager.engineCapacityLabel,
           maxLength: 4,
           width: size.width * 0.44,
           price: false,

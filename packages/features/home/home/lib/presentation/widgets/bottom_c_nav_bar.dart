@@ -44,7 +44,7 @@ class BottomCNavBar extends StatelessWidget {
 
               onTap: () {
                 if (index == 2) {
-                  context.push(RoutesManager.add);
+                  context.push(RoutesManager.sellCarScreen);
                 } else {
                   controller.selectedIndex.value = index;
                 }

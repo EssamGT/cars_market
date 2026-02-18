@@ -1,9 +1,15 @@
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/brands_models/body_types.dart';
+import 'package:data/models/car/brands_models/engine_spec.dart';
+import 'package:data/models/car/brands_models/fuel_type.dart';
+import 'package:data/models/car/brands_models/paint_colors.dart';
+import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
-// done 
+
+// done
 class DetailedInfoWidget extends StatelessWidget {
   final CarEntity car;
   const DetailedInfoWidget({super.key, required this.car});
@@ -22,31 +28,51 @@ class DetailedInfoWidget extends StatelessWidget {
             children: [
               info(context, StringsManager.dbrand, car.brand),
               info(context, StringsManager.dmodel, car.model),
-              info(context, StringsManager.dyear, car.year),
+              info(context, StringsManager.dyear, car.year.toString()),
               Visibility(
-                visible: car.version.isNotEmpty,
-                child: info(context, StringsManager.version, car.version),
+                visible: car.version?.isNotEmpty ?? false,
+                child: info(context, StringsManager.version, car.version!),
               ),
               info(
                 context,
                 StringsManager.dCylinderNumber,
-                "${engineCyFormater(car.engineCylinderNumber)} ${StringsManager.cylinder}",
+                engineCyFormater(car.engineSpec.engineCylinderNumber.getEngineCylinderNumberName()),
               ),
               info(
                 context,
                 StringsManager.dEngineCapacity,
-                "${car.engineCapacity} ${StringsManager.cc}",
+                car.engineSpec.engineCapacity.getEngineCapacityName(),
               ),
               info(
                 context,
                 StringsManager.dMileage,
-                '${mileageFormater(car.mileage)} km',
+                '${mileageFormater(car.km)} km',
               ),
-              info(context, StringsManager.dGearbox, car.gearboxType),
-              info(context, StringsManager.dFuel, car.fuelType),
-              info(context, StringsManager.dBodyType, car.bodyType),
-              info(context, StringsManager.dPaintColor, car.paintColor),
-              info(context, StringsManager.dPaintCondition, car.paintCondition),
+              info(
+                context,
+                StringsManager.dGearbox,
+                car.transmissionType.getTransmissionTypeName(),
+              ),
+              info(
+                context,
+                StringsManager.dFuel,
+                car.engineSpec.fuelType.getFuelTypeName(),
+              ),
+              info(
+                context,
+                StringsManager.dBodyType,
+                car.bodyType.getCarBodyTypeName(),
+              ),
+              info(
+                context,
+                StringsManager.dPaintColor,
+                car.paintColor.getColorName(),
+              ),
+              info(
+                context,
+                StringsManager.dPaintCondition,
+                car.paintCondition.getPaintConditionText(),
+              ),
             ],
           ),
         ),

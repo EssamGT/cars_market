@@ -1,5 +1,5 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
 
 // **************************************************************************
 // InjectableConfigGenerator
@@ -19,7 +19,7 @@ import 'package:remote/network_info/network_info.dart' as _i583;
 import 'package:remote/network_info/network_info_impl.dart' as _i339;
 import 'package:remote/remote/api/api_manager.dart' as _i294;
 import 'package:remote/remote/auth/auth_manager.dart' as _i218;
-import 'package:remote/remote/storage/storage_manager.dart' as _i175;
+import 'package:remote/remote/firebase/firebase_db_manager.dart' as _i760;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -29,22 +29,22 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final remoteModule = _$RemoteModule();
-    gh.factory<_i294.ApiManager>(() => _i294.ApiManager());
     gh.singleton<_i59.FirebaseAuth>(() => remoteModule.firebaseAuth);
     gh.singleton<_i974.FirebaseFirestore>(() => remoteModule.firebaseFirestore);
     gh.singleton<_i457.FirebaseStorage>(() => remoteModule.firebaseStorage);
-    gh.factory<_i583.NetworkInfo>(() => _i339.NetworkInfoImpl());
-    gh.singleton<_i175.StorageManager>(
-      () => _i175.StorageManager(
+    gh.lazySingleton<_i294.ApiManager>(() => _i294.ApiManager());
+    gh.singleton<_i760.FirebaseDbManager>(
+      () => _i760.FirebaseDbManager(
         firestore: gh<_i974.FirebaseFirestore>(),
         storage: gh<_i457.FirebaseStorage>(),
         auth: gh<_i59.FirebaseAuth>(),
       ),
     );
+    gh.factory<_i583.NetworkInfo>(() => _i339.NetworkInfoImpl());
     gh.singleton<_i218.AuthManager>(
       () => _i218.AuthManager(
-        gh<_i59.FirebaseAuth>(),
-        gh<_i974.FirebaseFirestore>(),
+        firebaseAuth: gh<_i59.FirebaseAuth>(),
+        firebaseStore: gh<_i974.FirebaseFirestore>(),
       ),
     );
     return this;

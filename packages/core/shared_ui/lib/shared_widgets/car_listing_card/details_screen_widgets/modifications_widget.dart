@@ -2,7 +2,8 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
-// done 
+
+// done
 class Modifications extends StatelessWidget {
   final CarEntity car;
   const Modifications({super.key, required this.car});
@@ -10,7 +11,7 @@ class Modifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: car.modifications.isNotEmpty,
+      visible: car.modifications?.isNotEmpty ?? false,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s20),
@@ -31,7 +32,7 @@ class Modifications extends StatelessWidget {
               ),
               alignment: Alignment.centerLeft,
               child: Text(
-                StringsManager.modifications,
+                StringsManager.modificationsLabel,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -47,7 +48,7 @@ class Modifications extends StatelessWidget {
               ),
               alignment: Alignment.centerLeft,
               child: Text(
-                car.modifications,
+                car.modifications!,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),

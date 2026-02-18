@@ -1,15 +1,21 @@
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-String priceFormater(String price) {
+String priceFormater(int price) {
+  if (price == 0) {
+    return '';
+  }
   final formatter = NumberFormat('#,###');
-  String formattedPrice = formatter.format(int.parse(price));
+  String formattedPrice = formatter.format(price);
   return formattedPrice;
 }
 
-String mileageFormater(String mileage) {
+String mileageFormater(int mileage) {
+  if (mileage == 0) {
+    return '';
+  }
   final formatter = NumberFormat('#,###');
-  String formattedMileage = formatter.format(int.parse(mileage));
+  String formattedMileage = formatter.format(mileage);
   return formattedMileage;
 }
 

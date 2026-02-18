@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 part 'forgot_password_state.dart';
 
-@lazySingleton
+@injectable
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   ForgotPasswordUseCase useCase;
   ForgotPasswordCubit(this.useCase) : super(ForgotPasswordInitial());

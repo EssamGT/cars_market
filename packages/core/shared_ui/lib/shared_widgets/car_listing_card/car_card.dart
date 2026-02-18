@@ -7,6 +7,8 @@ import 'package:redacted/redacted.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_details_screen.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
 
+String heroTag(String carId, int index) => 'carImageHeroTag_${carId}_$index';
+
 class CarCard extends StatefulWidget {
   final CarEntity car;
   const CarCard({super.key, required this.car});
@@ -20,8 +22,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return GestureDetector(
-      onTap: () {
-        // Navigate to car details screen
+      onTap: () async {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -50,36 +51,47 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadiusGeometry.only(
-                topLeft: Radius.circular(AppSize.s20),
-                topRight: Radius.circular(AppSize.s20),
-              ),
-              child: Transform.scale(
-                scale: 1.2,
+            Hero(
+              transitionOnUserGestures: true,
+              tag: heroTag(widget.car.carId, 0),
+              // make tag unique for each car
+              flightShuttleBuilder:
+                  (
+                    flightContext,
+                    animation,
+                    flightDirection,
+                    fromHeroContext,
+                    toHeroContext,
+                  ) {
+                    return toHeroContext.widget;
+                  },
+              child: ClipRRect(
+                borderRadius: BorderRadiusGeometry.only(
+                  topLeft: Radius.circular(AppSize.s20),
+                  topRight: Radius.circular(AppSize.s20),
+                ),
                 child: CachedNetworkImage(
-                  imageUrl: widget.car.carImages!.first.url,
+                  imageUrl: widget.car.carImages.first.url,
                   height: AppSize.s200,
                   width: double.infinity,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                   placeholder: (context, url) => Container(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.surfaceContainerHighest,
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadiusGeometry.only(
+                        topLeft: Radius.circular(AppSize.s20),
+                        topRight: Radius.circular(AppSize.s20),
+                      ),
+                    ),
+
                     height: AppSize.s200,
                     width: double.infinity,
                   ).redacted(context: context, redact: true),
-                  //     Center(child: CircularProgressIndicator()),
+
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
-
-                // Image.network(
-                // car.carImages!.first.url,
-                //   height: AppSize.s200,
-                //   width: double.infinity,
-                //   fit: BoxFit.fitWidth,
-
-                // ),
               ),
             ),
             Padding(
@@ -97,7 +109,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
-                    '${widget.car.year} · ${priceFormater(widget.car.mileage)} KM',
+                    '${widget.car.year} · ${priceFormater(widget.car.km)} KM',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Row(

@@ -15,7 +15,7 @@ class _MinCarGallaryWidgetState extends State<MinCarGallaryWidget> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      itemCount: widget.car.carImages!.length,
+      itemCount: widget.car.carImages.length,
       padEnds: true,
 
       itemBuilder: (context, index) => GestureDetector(
@@ -23,14 +23,15 @@ class _MinCarGallaryWidgetState extends State<MinCarGallaryWidget> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => GalleryNetworkPhotoView(
-                galleryItems: widget.car.carImages!,
+                galleryItems: widget.car.carImages,
                 initialIndex: index,
+                carId: widget.car.carId,
               ),
             ),
           );
         },
         child: CachedNetworkImage(
-          imageUrl: widget.car.carImages![index].url,
+          imageUrl: widget.car.carImages[index].url,
           fit: BoxFit.cover,
         ),
       ),

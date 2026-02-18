@@ -11,7 +11,7 @@ class AuthManager {
   // final Supabase supabase;
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firebaseStore;
-  AuthManager(this.firebaseAuth, this.firebaseStore);
+  AuthManager({required this.firebaseAuth, required this.firebaseStore});
   String _verificationId = '';
   int? _lastResendToken;
   Future<UserCredential> login({

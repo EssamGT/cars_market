@@ -7,7 +7,7 @@ import 'package:login/domain/usecase/login_use_case.dart';
 
 part 'login_state.dart';
 
-@lazySingleton
+@injectable
 class LoginCubit extends Cubit<LoginState> {
   LoginUseCase usecase;
   LoginCubit(this.usecase) : super(LoginInitial());

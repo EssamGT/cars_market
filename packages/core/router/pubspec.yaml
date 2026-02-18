@@ -3,7 +3,7 @@ description: "A new Flutter package project."
 version: 0.0.1
 publish_to: none
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.9
   flutter: ">=1.17.0"
 resolution: workspace
 
@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   on_bording:
     path: ../../features/on_bording
+  data:
+    path: ../data
   cars_market:
     path: ../../..
   login:
@@ -28,8 +30,8 @@ dependencies:
     path: ../../features/home/main
   search:
     path: ../../features/home/search
-  add:
-    path: ../../features/home/add
+  sell:
+    path: ../../features/home/sell
   favorites:
     path: ../../features/home/favorites
   profile:
@@ -37,10 +39,11 @@ dependencies:
   firebase_core: ^4.4.0
   firebase_auth: ^6.1.4
   go_router: ^16.2.4
+  flutter_bloc: ^9.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

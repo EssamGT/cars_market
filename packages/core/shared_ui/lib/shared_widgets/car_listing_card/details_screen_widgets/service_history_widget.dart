@@ -10,7 +10,7 @@ class ServiceHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: car.serviceHistory.isNotEmpty,
+      visible: car.serviceHistory?.isNotEmpty ?? false,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s20),
@@ -30,7 +30,7 @@ class ServiceHistoryWidget extends StatelessWidget {
               ),
               alignment: Alignment.centerLeft,
               child: Text(
-                StringsManager.serviceHistory,
+                StringsManager.serviceHistoryLabel,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -46,7 +46,7 @@ class ServiceHistoryWidget extends StatelessWidget {
               ),
               alignment: Alignment.centerLeft,
               child: Text(
-                car.serviceHistory,
+                car.serviceHistory!,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),

@@ -231,6 +231,7 @@ class FilterNormalTextFieldState extends State<FilterNormalTextField> {
                 : [],
           ),
         ),
+        
       ],
     );
   }

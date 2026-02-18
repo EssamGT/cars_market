@@ -7,9 +7,10 @@ import 'package:injectable/injectable.dart';
 
 part 'location_state.dart';
 
-@lazySingleton
+@injectable
 class LocationCubit extends Cubit<LocationState> {
   GpsUseCase useCase;
+  @factoryMethod
   LocationCubit(this.useCase) : super(LocationInitial());
   static LocationCubit get(BuildContext context) => BlocProvider.of(context);
   Future<void> search(String query) async {

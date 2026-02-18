@@ -3,8 +3,7 @@ import 'package:constants/values_manager.dart';
 import 'package:data/models/car/car_filter_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
-import 'package:shared_ui/shared_widgets/slection_page/options_selection_page.dart';
-import 'package:shared_ui/shared_widgets/slection_page/selection_page.dart';
+import 'package:shared_ui/shared_widgets/selection_page/selection_page.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 enum FilterTextFieldButtonType {
@@ -17,7 +16,6 @@ enum FilterTextFieldButtonType {
   maxEngineCapacity,
   bodyType,
   gearboxType,
-  safetyOptions,
   none,
 }
 
@@ -80,9 +78,7 @@ class _FilterTextFieldButtonState extends State<FilterTextFieldButton> {
         controller.text = car.minEngineCapacity ?? "";
       case FilterTextFieldButtonType.maxEngineCapacity:
         controller.text = car.maxEngineCapacity ?? "";
-      case FilterTextFieldButtonType.safetyOptions:
-        controller.text =
-            '${car.safetyOptions?.length ?? 0} ${StringsManager.safetyOptions}';
+    
     }
     super.initState();
   }
@@ -147,26 +143,16 @@ class _FilterTextFieldButtonState extends State<FilterTextFieldButton> {
             ),
             onTap: () async {
               String selected =
-                  widget.type == FilterTextFieldButtonType.safetyOptions
-                  ? (await rightPopUpScreen<String>(
-                          context: context,
-                          child: OptionsSelectionPage(
-                            givenList: widget.givenList,
-                            title: widget.inPageTitle,
-                            emptyPage: '',
-                          ),
-                        )) ??
-                        ""
-                  : (await rightPopUpScreen<String>(
-                          context: context,
-                          child: SelectionPage(
-                            hintText: widget.hintText,
-                            givenList: widget.givenList,
-                            title: widget.inPageTitle,
-                            emptyPage: '',
-                          ),
-                        )) ??
-                        "";
+                  (await rightPopUpScreen<String>(
+                    context: context,
+                    child: SelectionPage(
+                      hintText: widget.hintText,
+                      givenList: widget.givenList,
+                      title: widget.inPageTitle,
+                      emptyPage: '',
+                    ),
+                  )) ??
+                  "";
               if (selected.isNotEmpty) {
                 // widget.cubit.setBrand(selected);
                 switch (widget.type) {
@@ -188,11 +174,7 @@ class _FilterTextFieldButtonState extends State<FilterTextFieldButton> {
                     car.gearboxType = selected;
                     controller.text = car.gearboxType ?? '';
                     break;
-                  case FilterTextFieldButtonType.safetyOptions:
-                    // car.safetyOptions = selected;
-                    controller.text =
-                        "${car.safetyOptions?.length ?? 0} ${StringsManager.safetyOptions}";
-                    break;
+                
                   case FilterTextFieldButtonType.none:
                     controller.text = '';
                     break;
@@ -245,9 +227,7 @@ class _FilterTextFieldButtonState extends State<FilterTextFieldButton> {
                 case FilterTextFieldButtonType.gearboxType:
                   controller.text = car.gearboxType ?? "";
                   break;
-                case FilterTextFieldButtonType.safetyOptions:
-                  controller.text = car.safetyOptions?.length.toString() ?? "";
-                  break;
+            
                 case FilterTextFieldButtonType.none:
                   controller.text = '';
                   break;

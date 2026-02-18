@@ -7,7 +7,7 @@ import 'package:main/data/data_source/main_screen_data_source.dart';
 import 'package:main/domain/repository/main_screen_repository.dart';
 import 'package:remote/network_info/network_info.dart';
 
-@Injectable(as: MainScreenRepository, env: [Environment.prod])
+@LazySingleton(as: MainScreenRepository, )
 class MainScreenRepositoryImpl extends MainScreenRepository {
   NetworkInfo networkInfo;
   MainScreenDataSource dataSource;
@@ -20,26 +20,6 @@ class MainScreenRepositoryImpl extends MainScreenRepository {
     if (await networkInfo.isConnected) {
       return await dataSource.getMainScreenCars();
     } else {
-      return Left(BaseErrorType.noInternet.getFailure());
-    }
-  }
-}
-
-@Injectable(as: MainScreenRepository, env: [Environment.dev, Environment.test])
-class MainScreenRepositoryImplDev extends MainScreenRepository {
-  NetworkInfo networkInfo;
-  MainScreenDataSource dataSource;
-  MainScreenRepositoryImplDev({
-    required this.networkInfo,
-    required this.dataSource,
-  });
-  @override
-  Future<Either<Failure, List<CarEntity>>> getMainScreenCars() async {
-    if (await networkInfo.isConnected) {
-      print('there is Internet Connection');
-      return await dataSource.getMainScreenCars();
-    } else {
-      print('No Internet Connection');
       return Left(BaseErrorType.noInternet.getFailure());
     }
   }

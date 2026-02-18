@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 part 'create_account_state.dart';
 
-@lazySingleton
+@injectable
 class CreateAccountCubit extends Cubit<CreateAccountState> {
   CreateAccountUseCase useCase;
   CreateAccountCubit(this.useCase) : super(CreateAccountInitial());

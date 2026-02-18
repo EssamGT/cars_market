@@ -36,14 +36,14 @@ class _LocationPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
-    var cubit = getIt<LocationCubit>();
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppPadding.p8),
-          child: BlocProvider.value(
-            value: getIt<LocationCubit>(),
+    return BlocProvider<LocationCubit>(
+      create: (context) => getIt.get<LocationCubit>(),
+      child: Builder(
+        builder: (context) => Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.p8),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -73,7 +73,8 @@ class _LocationPageState extends State<LocationPage> {
                     ),
                   ],
                   // search
-                  onChanged: (value) => cubit.search(value),
+                  onChanged: (value) =>
+                      LocationCubit.get(context).search(value),
                 ),
 
                 SizedBox(height: AppSize.s10),
@@ -152,6 +153,7 @@ class _LocationPageState extends State<LocationPage> {
             ),
           ),
         ),
+      ),
       ),
     );
   }

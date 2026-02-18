@@ -15,18 +15,16 @@ Future<T?> rightPopUpScreen<T>({
     },
     transitionBuilder: (_, animation, secondaryAnimation, _) {
       return SlideTransition(
-        position:
-            Tween<Offset>(
-              begin: const Offset(1, 0), // from right
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-            ),
+        position: Tween<Offset>(
+          begin: const Offset(1, 0), // from right
+          end: Offset.zero,
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.easeInOut)),
         child: FadeTransition(opacity: animation, child: child),
       );
     },
   );
 }
+
 Future<T?> bottomPopUpScreen<T>({
   required BuildContext context,
   required Widget child,
@@ -52,5 +50,49 @@ Future<T?> bottomPopUpScreen<T>({
         child: FadeTransition(opacity: animation, child: child),
       );
     },
+  );
+}
+
+
+
+customRightNavigation(BuildContext context, Widget child) {
+  return Navigator.push(
+    context,
+    PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => child,
+      transitionsBuilder: (_, animation, __, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
+      },
+    ),
+  );
+}
+
+customBottomNavigation(BuildContext context, Widget child) {
+  return Navigator.push(
+    context,
+    PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => child,
+      transitionsBuilder: (_, animation, __, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0, 0.1), // from bottom
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
+      },
+    ),
   );
 }

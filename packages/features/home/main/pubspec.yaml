@@ -4,13 +4,13 @@ version: 0.0.1
 publish_to: none
 resolution: workspace
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.9
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-    
+
   constants:
     path: ../../../core/constants
   router:
@@ -21,8 +21,8 @@ dependencies:
     path: ../../../core/remote
   data:
     path: ../../../core/data
-  storage:
-    path: ../../../core/storage
+  # storage:
+  #   path: ../../../core/storage
   domain:
     path: ../../../core/domain
   error_handler:
@@ -42,8 +42,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator: ^2.12.0
-  build_runner: ^2.10.5
-  flutter_lints: ^5.0.0
+  build_runner: ^2.11.1
+  flutter_lints: ^6.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

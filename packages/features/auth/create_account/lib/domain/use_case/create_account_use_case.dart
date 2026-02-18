@@ -5,7 +5,7 @@ import 'package:data/models/failure/failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@lazySingleton
 class CreateAccountUseCase {
   CreateAccountRepo repo;
   CreateAccountUseCase(this.repo);

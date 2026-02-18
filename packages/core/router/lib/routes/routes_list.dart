@@ -1,5 +1,6 @@
-import 'package:add/presentation/add_screen.dart';
+
 import 'package:create_account/presentation/create_account_screen.dart';
+import 'package:data/models/car/brands_models/car_models.dart';
 import 'package:flutter/material.dart';
 import 'package:forgot_password/presentation/forgot_password_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,9 @@ import 'package:login/presentation/login_screen.dart';
 import 'package:on_bording/presentation/on_bording_screen.dart';
 import 'package:router/routes_manager.dart';
 import 'package:search/presentation/widgets/filter_screen/filter_screen.dart';
+import 'package:sell/presentation/sell_screen.dart';
+import 'package:sell/presentation/widgets/sell_steps/step_1/widgets/car_selection/brand_selection_page.dart';
+import 'package:sell/presentation/widgets/sell_steps/step_1/widgets/car_selection/model_selection_page.dart';
 import 'package:user_details/presentation/user_details_screen.dart';
 import 'package:user_details/presentation/widgets/otp_screen/otp_verify_screen.dart';
 
@@ -33,30 +37,53 @@ final routes = <RouteBase>[
     builder: (context, state) => const HomeScreen(),
   ),
   GoRoute(
-    path: RoutesManager.add,
-    builder: (context, state) => const AddScreen(),
+    path: RoutesManager.sellCarScreen,
+    // builder: (context, state) => const AddScreen(),
+    pageBuilder: (context, state) {
+      return customBottomAnimationPage(child: const SellScreen(), state: state);
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.sellBrandSelection,
+    // builder: (context, state) => const AddScreen(),
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: const BrandSelectionPage(),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.sellModelSelection,
+    pageBuilder: (context, state) {
+      final models = state.extra as List<CarModel>? ?? [];
+      return customRightAnimationPage(
+        child: ModelSelectionPage(models: models),
+        state: state,
+      );
+    },
   ),
   GoRoute(
     path: RoutesManager.userDetails,
     pageBuilder: (context, state) {
-      return customAnimationPage(child: UserDetailsScreen(), state: state);
+      return customRightAnimationPage(child: UserDetailsScreen(), state: state);
     },
   ),
   GoRoute(
     path: RoutesManager.otpScreen,
     pageBuilder: (context, state) {
-      return customAnimationPage(child: OtpVerifyScreen(), state: state);
+      return customRightAnimationPage(child: OtpVerifyScreen(), state: state);
     },
   ),
   GoRoute(
     path: RoutesManager.filterScreen,
     pageBuilder: (context, state) {
-      return customAnimationPage(child: FilterScreen(), state: state);
+      return customRightAnimationPage(child: FilterScreen(), state: state);
     },
   ),
 ];
 
-CustomTransitionPage customAnimationPage({
+CustomTransitionPage customRightAnimationPage({
   required Widget child,
   required GoRouterState state,
   Duration duration = const Duration(milliseconds: 400),
@@ -69,6 +96,28 @@ CustomTransitionPage customAnimationPage({
       return SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(1, 0), // from right
+          end: Offset.zero,
+        ).animate(animation),
+        child: FadeTransition(opacity: animation, child: child),
+      );
+    },
+    transitionDuration: duration,
+  );
+}
+
+CustomTransitionPage customBottomAnimationPage({
+  required Widget child,
+  required GoRouterState state,
+  Duration duration = const Duration(milliseconds: 400),
+}) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      // Example: Fade + Slide animation
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 1), // from bottom
           end: Offset.zero,
         ).animate(animation),
         child: FadeTransition(opacity: animation, child: child),

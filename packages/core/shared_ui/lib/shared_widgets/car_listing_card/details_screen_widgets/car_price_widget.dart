@@ -1,5 +1,6 @@
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/brands_models/negotiation.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
@@ -61,12 +62,10 @@ class CarPriceWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
-                car.negotiable
+                car.negotiable == NegotiationType.yes
                     ? StringsManager.negotiablePrice
                     : StringsManager.nonNegotiablePrice,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),

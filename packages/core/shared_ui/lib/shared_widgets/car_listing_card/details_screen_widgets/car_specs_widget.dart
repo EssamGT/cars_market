@@ -1,6 +1,10 @@
 import 'package:assets/custom_icons_icons.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/brands_models/body_types.dart';
+import 'package:data/models/car/brands_models/fuel_type.dart';
+import 'package:data/models/car/brands_models/paint_colors.dart';
+import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
@@ -27,14 +31,13 @@ class CarSpecsWidget extends StatelessWidget {
                   context: context,
                   icon: CustomIcons.engine,
                   title: StringsManager.engine,
-                  value:
-                      '${engineCapacityFormater(car.engineCapacity)} ${engineCyFormater(car.engineCylinderNumber)} ',
+                  value: '${car.engineSpec.getEngineSpec()} ',
                 ),
                 specItemWidget(
                   context: context,
-                  icon: CustomIcons.mileage,
+                  icon: CustomIcons.km,
                   title: StringsManager.dMileage,
-                  value: '${mileageFormater(car.mileage)} km',
+                  value: '${mileageFormater(car.km)} km',
                 ),
               ],
             ),
@@ -49,13 +52,13 @@ class CarSpecsWidget extends StatelessWidget {
                   context: context,
                   icon: CustomIcons.gearbox,
                   title: StringsManager.dGearbox,
-                  value: car.gearboxType,
+                  value: car.transmissionType.getTransmissionTypeName(),
                 ),
                 specItemWidget(
                   context: context,
                   icon: CustomIcons.fuel,
                   title: StringsManager.dFuel,
-                  value: car.fuelType,
+                  value: car.engineSpec.fuelType.getFuelTypeName(),
                 ),
               ],
             ),
@@ -70,13 +73,13 @@ class CarSpecsWidget extends StatelessWidget {
                   context: context,
                   icon: CustomIcons.bodyType,
                   title: StringsManager.dBodyType,
-                  value: car.bodyType,
+                  value: car.bodyType.getCarBodyTypeName(),
                 ),
                 specItemWidget(
                   context: context,
                   icon: CustomIcons.paintColor,
                   title: StringsManager.dPaintColor,
-                  value: car.paintColor,
+                  value: car.paintColor.getColorName(),
                 ),
               ],
             ),
@@ -126,22 +129,22 @@ class CarSpecsWidget extends StatelessWidget {
     );
   }
 
-  String engineCapacityFormater(String engineCapacity) {
-    if (engineCapacity.length < 4) {
-      return '0.${engineCapacity[0]}L';
-    }
-    return '${engineCapacity[0]}.${engineCapacity[1]}L';
-  }
+  // String engineCapacityFormater(String engineCapacity) {
+  //   if (engineCapacity.length < 4) {
+  //     return '0.${engineCapacity[0]}L';
+  //   }
+  //   return '${engineCapacity[0]}.${engineCapacity[1]}L';
+  // }
 
-  String engineCyFormater(String engineCy) {
-    if (engineCy == 'I6' || engineCy == 'V6') {
-      return engineCy;
-    } else if (engineCy == '3' || engineCy == '4') {
-      return 'I$engineCy';
-    } else {
-      return 'V$engineCy';
-    }
-  }
+  // String engineCyFormater(String engineCy) {
+  //   if (engineCy == 'I6' || engineCy == 'V6') {
+  //     return engineCy;
+  //   } else if (engineCy == '3' || engineCy == '4') {
+  //     return 'I$engineCy';
+  //   } else {
+  //     return 'V$engineCy';
+  //   }
+  // }
 
   Widget text(BuildContext context) {
     return Row(

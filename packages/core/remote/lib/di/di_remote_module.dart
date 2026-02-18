@@ -7,8 +7,12 @@ import 'package:injectable/injectable.dart';
 abstract class RemoteModule {
   @singleton
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
+
   @singleton
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
+
   @singleton
   FirebaseStorage get firebaseStorage => FirebaseStorage.instance;
+
+
 }

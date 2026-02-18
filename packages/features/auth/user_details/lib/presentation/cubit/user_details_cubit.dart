@@ -13,7 +13,7 @@ part 'user_details_state.dart';
 
 enum AuthCheckType { phone, lPhone, lEmail, email, allOnce }
 
-@lazySingleton
+@injectable
 class UserDetailsCubit extends Cubit<UserDetailsState> {
   UserDeatilsUseCase useCase;
   StreamSubscription<User?>? _sub;

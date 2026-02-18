@@ -7,7 +7,7 @@ import 'package:main/domain/usecase/main_screen_use_case.dart';
 
 part 'main_screen_state.dart';
 
-@singleton
+@lazySingleton
 class MainScreenCubit extends Cubit<MainScreenState> {
   MainScreenUseCase useCase;
   MainScreenCubit(this.useCase) : super(MainScreenInitial());

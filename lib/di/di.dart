@@ -1,15 +1,15 @@
-import 'package:add/data/di/add_di.dart';
 import 'package:cars_market/di/di.config.dart';
-import 'package:create_account/data/di/create_account_di.dart';
-import 'package:forgot_password/data/di/forgot_password_di.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_places_service/data/di/remote_di.dart';
 import 'package:injectable/injectable.dart';
-import 'package:login/data/di/login_di.dart';
-import 'package:main/data/di/di.dart';
+import 'package:create_account/di/create_account_di.dart';
+import 'package:forgot_password/di/forgot_password_di.dart';
+import 'package:google_places_service/di/gps_di.dart';
+import 'package:login/di/login_di.dart';
+import 'package:main/di/main_screen_di.dart';
 import 'package:remote/di/remote_di.dart';
+import 'package:sell/di/sell_di.dart';
 import 'package:storage/di/storage_di.dart';
-import 'package:user_details/data/di/user_details_di.dart';
+import 'package:user_details/di/user_details_di.dart';
 
 final getIt = GetIt.instance;
 
@@ -24,10 +24,9 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureLoginDependencies(getIt, enviroment);
   await configureCreateAccountDependencies(getIt, enviroment);
   await configureForgotPasswordDependencies(getIt, enviroment);
-  await configureAddDependencies(getIt, enviroment);
-  await configureGooglePlacesServiceDependencies(getIt, enviroment);
   await configureUserDetailsDependencies(getIt, enviroment);
-  await configureStorageDependencies(getIt, enviroment);
+  await configureGooglePlacesServiceDependencies(getIt, enviroment);
+  await configureSellDependencies(getIt, enviroment);
+  // await configureStorageDependencies(getIt, enviroment);
   await configureMainScreenDependencies(getIt, enviroment);
-  
 }

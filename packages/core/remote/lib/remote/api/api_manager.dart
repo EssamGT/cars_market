@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-@injectable
+@lazySingleton
 class ApiManager {
   Dio dio = Dio()
     ..interceptors.add(

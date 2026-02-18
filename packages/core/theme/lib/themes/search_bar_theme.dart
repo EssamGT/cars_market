@@ -9,18 +9,18 @@ SearchBarThemeData lightSearchBarTheme() {
       lightTextTheme().bodyMedium,
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(AppSize.s8),),
+      RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(AppSize.s15),),
     ),
     shadowColor: WidgetStatePropertyAll(lightThemeColors().shadow),
     // overlayColor: WidgetStatePropertyAll(lightThemeColors().secondary)
-    elevation: WidgetStatePropertyAll(AppSize.s5),
-    backgroundColor: WidgetStatePropertyAll(lightThemeColors().surface.withAlpha(200)),
-     side: WidgetStatePropertyAll(
-      BorderSide(width: 0.5,
-      color: lightThemeColors().outline
-      
+    elevation: WidgetStatePropertyAll(AppSize.s10),
+    backgroundColor: WidgetStatePropertyAll(lightThemeColors().surface),
+    side: WidgetStatePropertyAll(
+      BorderSide(
+        color: lightThemeColors().onSurface.withAlpha(40),
+        width: 1,
       ),
-     )
+    ),
   
   );
 }

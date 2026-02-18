@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
 
 class GalleryNetworkPhotoView extends StatefulWidget {
   GalleryNetworkPhotoView({
@@ -15,6 +16,7 @@ class GalleryNetworkPhotoView extends StatefulWidget {
     this.maxScale,
     this.initialIndex = 0,
     required this.galleryItems,
+    required this.carId,
     this.scrollDirection = Axis.horizontal,
   }) : pageController = PageController(
          initialPage: initialIndex,
@@ -29,6 +31,7 @@ class GalleryNetworkPhotoView extends StatefulWidget {
   final PageController pageController;
   final List<CarImage> galleryItems;
   final Axis scrollDirection;
+  final String carId;
 
   @override
   State<StatefulWidget> createState() {
@@ -122,13 +125,21 @@ class _GalleryNetworkPhotoViewState extends State<GalleryNetworkPhotoView> {
       minScale: PhotoViewComputedScale.contained,
       maxScale: PhotoViewComputedScale.covered * 4.1,
 
-      heroAttributes: PhotoViewHeroAttributes(
-        tag: widget.galleryItems[index].path + index.toString(),
-        createRectTween: (begin, end) {
-          return MaterialRectCenterArcTween(begin: begin, end: end);
-        },
-        transitionOnUserGestures: true,
-      ),
+      // heroAttributes: PhotoViewHeroAttributes(
+      //   tag: heroTag(widget.carId, index), // make tag unique for each image
+      //   // createRectTween: (begin, end) {
+      //   //   return MaterialRectCenterArcTween(begin: begin, end: end);
+      //   // },
+      //   flightShuttleBuilder:
+      //       (
+      //         flightContext,
+      //         animation,
+      //         flightDirection,
+      //         fromHeroContext,
+      //         toHeroContext,
+      //       ) => toHeroContext.widget,
+      //   transitionOnUserGestures: true,
+      // ),
       basePosition: Alignment.center, // keeps image centered
       tightMode: true,
       gestureDetectorBehavior: HitTestBehavior.opaque,

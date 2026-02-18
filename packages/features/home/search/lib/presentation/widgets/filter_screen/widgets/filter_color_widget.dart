@@ -15,7 +15,7 @@ class FilterColorWidget extends StatelessWidget {
       car: SearchScreenCubit.get(context).carFilterModel,
       givenList: basePaintColors,
       enable: true,
-      inPageTitle: StringsManager.paintColors,
+      inPageTitle: StringsManager.selectePaintColor,
     );
   }
 }
