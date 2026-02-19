@@ -1,9 +1,7 @@
 import 'dart:ui';
 import 'package:constants/strings_manager.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shared_ui/shared_widgets/allert_bar/alert_massage.dart';
 import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
-
+import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'cubit/sell_cubit.dart';
 import 'widgets/sell_screen_app_bar.dart';
 import 'widgets/controller/sell_steps_controller.dart';
@@ -83,12 +81,10 @@ class _SellScreenState extends State<SellScreen> {
                     child: PopScope(
                       canPop: false,
                       onPopInvokedWithResult: (didPop, result) async {
-                        bool shouldExit = await showExitDialog(context);
-                        if (shouldExit) {
-                          return context.pop();
-                        } else {
-                          // return PopDisposition.doNotPop;
-                        }
+                        LoadingPopUp.show(
+                          context: context,
+                          type: PopupType.exit,
+                        );
                       },
 
                       child: Obx(() {

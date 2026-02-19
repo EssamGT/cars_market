@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
 
 class GalleryNetworkPhotoView extends StatefulWidget {
   GalleryNetworkPhotoView({
