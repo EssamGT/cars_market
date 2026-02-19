@@ -3,7 +3,14 @@ class StringsManager {
   static const String welcome = 'Welcome Back';
   static const String error = 'Error';
   static const String spec = 'Specifications';
+  static const String confirmExitLab = 'Exit !';
+  static const String confirmExitSub =
+      'Are you sure you want to exit\n all your progress will be lost';
+  static const String cancel = 'Cancel';
+  static const String exit = 'Exit';
   static const String otpValidation = 'Please enter a valid OTP';
+  static String maxImagesLimitReached(int imagesLimit) =>
+      'Maximum number of images reached only $imagesLimit images allowed';
   static const String emailVerificationSent =
       'Email verification sent check inbox';
   static const String success = 'Success';

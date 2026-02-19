@@ -16,6 +16,7 @@ import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/wahtsaap_message.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
+import 'package:data/models/location/location_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_places_service/domain/usecase/gps_use_case.dart';
@@ -65,7 +66,17 @@ class SellCubit extends Cubit<SellState> {
   }
 
   void setCarConditionType(CarConditionType condition) {
-    car.carCondition = condition;
+    if (car.carCondition != condition) {
+      car.carCondition = condition;
+      if (condition == CarConditionType.newCar) {
+        car.km = '0';
+        emit(NewCoditionSelected());
+      } else if (condition != CarConditionType.newCar &&
+          car.carCondition == CarConditionType.newCar) {
+        car.km = '';
+        emit(NewCoditionSelected());
+      }
+    }
   }
 
   void setTransmissionType(TransmissionType transmissionType) {
@@ -74,6 +85,10 @@ class SellCubit extends Cubit<SellState> {
 
   void setPaintColor(PaintColors paintColor) {
     car.paintColor = paintColor;
+  }
+
+  void setLocation(LocationModel location) {
+    car.location = location;
   }
 
   void setPaintCondition(PaintConditions paintCondition) {
@@ -205,12 +220,20 @@ class SellCubit extends Cubit<SellState> {
     if (slectedImages.isEmpty) {
       return;
     } else {
+      if (slectedImages.length > imagesLimit) {
+        slectedImages = slectedImages.sublist(0, imagesLimit);
+        emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
+      }
       car.selectedImages = slectedImages;
       // emit(ImagesSelected(car.images));
     }
   }
 
   Future<void> addImages() async {
+    if (car.selectedImages.length >= imagesLimit) {
+      emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
+      return;
+    }
     List<XFile> slectedImages = await picker.pickMultiImage(
       imageQuality: imagesQuality,
       limit: imagesLimit - car.selectedImages.length,
@@ -218,6 +241,13 @@ class SellCubit extends Cubit<SellState> {
     if (slectedImages.isEmpty) {
       return;
     } else {
+      if (slectedImages.length > imagesLimit - car.selectedImages.length) {
+        slectedImages = slectedImages.sublist(
+          0,
+          imagesLimit - car.selectedImages.length,
+        );
+        emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
+      }
       for (var element in slectedImages) {
         car.selectedImages.add(element);
       }
@@ -278,25 +308,52 @@ class SellCubit extends Cubit<SellState> {
       },
       (images) async {
         car.uploadedImages = images;
-        final latLng = await gpsUseCase.getCarLocation(car.location.placeId);
-        latLng.fold(
+
+        final carLastResult = await sellUseCase.uploadCar(car);
+        carLastResult.fold(
           (error) {
-            emit(UploadingError(error.message));
+            emit(UploadingError(error));
           },
-          (sucs) async {
-            car.location.latLng = sucs;
-            final carLastResult = await sellUseCase.uploadCar(car);
-            carLastResult.fold(
-              (error) {
-                emit(UploadingError(error));
-              },
-              (suc) {
-                emit(UploadingSuccess());
-              },
-            );
+          (suc) {
+            emit(UploadingSuccess());
           },
         );
       },
     );
   }
 }
+  // old function
+  // Future<void> uploadCar() async {
+  //   emit(UploadingLoading());
+  //   String uuid = UuidV4().generate();
+  //   car.carId = uuid;
+  //   car.createdAt = DateTime.now().toString();
+  //   final result = await uploadImages(uuid);
+  //   result.fold(
+  //     (error) {
+  //       emit(UploadingError(error));
+  //     },
+  //     (images) async {
+  //       car.uploadedImages = images;
+  //       final latLng = await gpsUseCase.getCarLocation(car.location.placeId);
+  //       latLng.fold(
+  //         (error) {
+  //           emit(UploadingError(error.message));
+  //         },
+  //         (sucs) async {
+  //           car.location.latLng = sucs;
+  //           final carLastResult = await sellUseCase.uploadCar(car);
+  //           carLastResult.fold(
+  //             (error) {
+  //               emit(UploadingError(error));
+  //             },
+  //             (suc) {
+  //               emit(UploadingSuccess());
+  //             },
+  //           );
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
+

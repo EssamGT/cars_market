@@ -39,7 +39,7 @@ class LoadingPopUp {
 class _PopupWidget extends StatelessWidget {
   final PopupType type;
 
-  const _PopupWidget({required this.type, });
+  const _PopupWidget({required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class _PopupWidget extends StatelessWidget {
 class _LoadingDots extends StatelessWidget {
   final PopupType type;
 
-  const _LoadingDots({required this.type, });
+  const _LoadingDots({required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +86,8 @@ class _LoadingDots extends StatelessWidget {
     );
   }
 }
+
+
 
 // class _FullScreenLoadingDots extends StatelessWidget {
 //   final PopupType type;

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
-import 'package:shared_ui/shared_widgets/massege_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'package:user_details/presentation/cubit/user_details_cubit.dart';
 import 'package:user_details/presentation/widgets/otp_screen/widgets/otp_text_widget.dart';

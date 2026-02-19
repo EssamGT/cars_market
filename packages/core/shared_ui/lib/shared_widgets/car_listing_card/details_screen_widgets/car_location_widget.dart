@@ -20,7 +20,7 @@ class CarLocationWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-      LocationWidget(car: car,),
+      // LocationWidget(car: car,),
       ],
     );
   }

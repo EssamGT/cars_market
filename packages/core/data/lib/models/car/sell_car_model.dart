@@ -12,7 +12,7 @@ import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/wahtsaap_message.dart';
 import 'package:data/models/car/car_image.dart';
-import 'package:google_places_service/domain/entity/predictions_entity.dart';
+import 'package:data/models/location/location_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CarsTableKeys {
@@ -64,6 +64,7 @@ class SellCarUploadModel {
   String carId;
   String userId;
   String createdAt;
+  LocationModel location;
 
   PaymentOptions paymentOptions;
   InteriorType interiorType;
@@ -87,7 +88,6 @@ class SellCarUploadModel {
   List<XFile> pendingUploadImages;
   List<CarImage>? uploadedImages;
   NegotiationType negotiable;
-  PredictionsEntity location;
   List<FeaturesList> features;
 
   SellCarUploadModel({
@@ -99,7 +99,7 @@ class SellCarUploadModel {
     this.wahtsaapMessage = WahtsaapMessage.none,
     CarBrand? brand,
     EngineSpec? engineSpec,
-
+    LocationModel? location2,
     this.interiorType = InteriorType.none,
     this.paymentOptions = PaymentOptions.none,
     this.seatsNumber = '',
@@ -125,7 +125,6 @@ class SellCarUploadModel {
     //   ),
     //   types: const [],
     // ),
-    PredictionsEntity? location,
     List<XFile>? selectedImages,
     List<XFile>? pendingUploadImages,
     List<FeaturesList>? features,
@@ -137,7 +136,7 @@ class SellCarUploadModel {
        selectedImages = selectedImages ?? [],
        pendingUploadImages = pendingUploadImages ?? [],
        features = features ?? [],
-       location = location ?? PredictionsEntity.empty();
+       location = location2 ?? LocationModel.empty();
 
   Map<String, dynamic> toJson() {
     return {
@@ -164,7 +163,8 @@ class SellCarUploadModel {
       CarsTableKeys.version: version,
       CarsTableKeys.negotiable: negotiable.name,
       CarsTableKeys.images: uploadedImages!.map((e) => e.toJson()).toList(),
-      CarsTableKeys.location: location.toJson(),
+      // only id 
+      CarsTableKeys.location: location.toJsonId(),
       CarsTableKeys.carCondition: carCondition.name,
       CarsTableKeys.interiorType: interiorType.name,
       CarsTableKeys.paymentOptions: paymentOptions.name,

@@ -7,7 +7,7 @@ import 'package:forgot_password/presentation/cubit/forgot_password_cubit.dart';
 import 'package:forgot_password/presentation/widgets/forgot_password_text.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
-import 'package:shared_ui/shared_widgets/massege_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/text_field/c_text_field.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 

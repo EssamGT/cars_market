@@ -11,8 +11,9 @@ import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/wahtsaap_message.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
+import 'package:data/models/location/location_model.dart';
 import 'package:domain/entity/car_entitys/engine_spec_entity.dart';
-import 'package:google_places_service/domain/entity/predictions_entity.dart';
+
 
 class CarEntity {
   final String carId;
@@ -37,7 +38,7 @@ class CarEntity {
   final List<FeaturesList>? features;
   final List<CarImage> carImages;
   final NegotiationType negotiable;
-  final PredictionsEntity location;
+  final LocationModel location;
   final PaymentOptions paymentOptions;
   final InteriorType interiorType;
   final AirConTypes airConType;
@@ -174,7 +175,7 @@ class CarEntity {
         (e) => e.name == json[CarsTableKeys.transmissionType],
         orElse: () => TransmissionType.none,
       ),
-      location = PredictionsEntity.fromJson(
+      location = LocationModel.fromJsonId(
         json[CarsTableKeys.location] as Map<String, dynamic>? ?? {},
       );
 }

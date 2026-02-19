@@ -4,6 +4,7 @@ import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/car_catalog.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
+import 'package:data/models/location/locations_catalog.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
-
 
 @singleton
 class FirebaseDbManager {
@@ -61,6 +61,14 @@ class FirebaseDbManager {
     final doc = await firestore.collection('catalog').doc("cars").get();
     if (doc.exists) {
       return CarCatalogModel.fromJson(doc.data()!);
+    }
+    return null;
+  }
+
+  Future<LocationsCatalog?> getLocationsCatalog() async {
+    final doc = await firestore.collection('catalog').doc("locations").get();
+    if (doc.exists) {
+      return LocationsCatalog.fromJson(doc.data()!);
     }
     return null;
   }

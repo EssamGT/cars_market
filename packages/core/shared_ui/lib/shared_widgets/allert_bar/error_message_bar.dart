@@ -5,7 +5,7 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 
 /// to do erro and  succes
-enum MessageBarType { success, error, worning }
+enum MessageBarType { success, error, warning }
 
 class MessageBar {
   MessageBar({
@@ -59,7 +59,7 @@ Icon getIcon(MessageBarType type) {
     case MessageBarType.error:
       return Icon(Icons.error, color: getColor(type));
 
-    case MessageBarType.worning:
+    case MessageBarType.warning:
       return Icon(Icons.error, color: getColor(type));
   }
 }
@@ -71,7 +71,7 @@ String getTitle(MessageBarType type, BuildContext context) {
     case MessageBarType.error:
       return StringsManager.error;
 
-    case MessageBarType.worning:
+    case MessageBarType.warning:
       return StringsManager.warning;
   }
 }
@@ -82,7 +82,7 @@ Color getColor(MessageBarType type) {
       return ColorManager.success;
     case MessageBarType.error:
       return ColorManager.error;
-    case MessageBarType.worning:
+    case MessageBarType.warning:
       return ColorManager.warning;
   }
 }

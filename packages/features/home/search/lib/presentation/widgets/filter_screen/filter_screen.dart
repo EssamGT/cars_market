@@ -34,7 +34,7 @@ class FilterScreen extends StatelessWidget {
                 YearFilterWidget(),
                 PriceFilterWidget(),
                 // to do location filter
-                FilterLocationWidget(),
+                // FilterLocationWidget(),
                 FilterKmWidget(),
                 FilterFuelTypeWidget(),
                 FilterGearBoxTypeWidget(),

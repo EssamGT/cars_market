@@ -11,7 +11,7 @@ import 'package:router/routes_manager.dart';
 import 'package:shared_ui/shared_widgets/buttons/colored_text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/two_text_button.dart';
-import 'package:shared_ui/shared_widgets/massege_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/text_field/c_text_field.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late GlobalKey<FormState> formKey;
   @override
   void initState() {
-    getIt.resetLazySingleton<LoginCubit>();
+    // getIt.resetLazySingleton<LoginCubit>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     emailNode = FocusNode();
@@ -45,15 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     emailNode.dispose();
     passwordNode.dispose();
-    getIt<LoginCubit>().close();
+    // getIt<LoginCubit>().close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return BlocProvider.value(
-      value: getIt.get<LoginCubit>(),
+    return BlocProvider(
+      create: (context) => getIt.get<LoginCubit>(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(

@@ -13,10 +13,11 @@ class _NewSelectionPage<T> extends StatefulWidget {
   final Widget Function(T)? leadingBuilder;
   final String Function(T) labelBuilder;
   final void Function(T)? onSelected;
+  final bool Function(T)? isSelected;
   final bool search;
   final void Function(T)? onItemTap;
 
-   const _NewSelectionPage({
+  const _NewSelectionPage({
     super.key,
     required this.title,
     required this.emptyPage,
@@ -26,15 +27,16 @@ class _NewSelectionPage<T> extends StatefulWidget {
     this.leadingBuilder,
     required this.labelBuilder,
     this.onSelected,
+    this.isSelected,
     this.search = false,
     this.onItemTap,
   });
 
   @override
   State<_NewSelectionPage<T>> createState() => _NewSelectionPageState<T>();
- }
+}
 
- class _NewSelectionPageState<T> extends State<_NewSelectionPage<T>> {
+class _NewSelectionPageState<T> extends State<_NewSelectionPage<T>> {
   late TextEditingController controller;
   late List<dynamic> filteredList;
 
@@ -129,9 +131,12 @@ class _NewSelectionPage<T> extends StatefulWidget {
                             itemCount: filteredList.length,
                             itemBuilder: (context, index) {
                               final item = filteredList[index];
-                              final isSelected = widget.field != null
+                              final isSelected = widget.isSelected != null
+                                  ? widget.isSelected?.call(item)
+                                  : widget.field != null
                                   ? widget.field!.value == item
                                   : widget.currentValue == item;
+
                               return Container(
                                 decoration: BoxDecoration(
                                   border: index != filteredList.length - 1
@@ -168,7 +173,7 @@ class _NewSelectionPage<T> extends StatefulWidget {
                                   splashColor: Theme.of(
                                     context,
                                   ).colorScheme.primary.withAlpha(50),
-                                  trailing: isSelected
+                                  trailing: isSelected ?? false
                                       ? Icon(
                                           Icons.check_circle_outline_outlined,
                                           size: AppSize.s22,
@@ -212,6 +217,8 @@ class NewSelectionPageGeneric<T> extends StatelessWidget {
   final T? currentValue;
   final Widget Function(T)? leadingBuilder;
   final String Function(T) labelBuilder;
+  final bool Function(T)? isSelected;
+
   final void Function(T)? onSelected;
   final bool search;
   final void Function(T)? onItemTap;
@@ -228,6 +235,7 @@ class NewSelectionPageGeneric<T> extends StatelessWidget {
     this.onSelected,
     this.search = false,
     this.onItemTap,
+    this.isSelected,
   });
 
   @override
@@ -236,7 +244,7 @@ class NewSelectionPageGeneric<T> extends StatelessWidget {
       title: title,
       emptyPage: emptyPage,
       primaryValues: values,
-
+      isSelected: isSelected,
       field: field,
       currentValue: currentValue,
       leadingBuilder: leadingBuilder,

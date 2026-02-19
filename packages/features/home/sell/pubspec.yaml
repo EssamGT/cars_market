@@ -21,6 +21,8 @@ dependencies:
     path: ../../../core/router
   shared_ui:
     path: ../../../core/shared_ui
+  storage:
+    path: ../../../core/storage
   remote:
     path: ../../../core/remote
   data:

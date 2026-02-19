@@ -7,6 +7,13 @@ final class AddInitial extends SellState {}
 
 class FuelTypeSlected extends SellState {}
 
+class NewCoditionSelected extends SellState {}
+
+class MaxImagesLimitReached extends SellState {
+  final int imagesLimit;
+  MaxImagesLimitReached({this.imagesLimit = 10});
+}
+
 class UploadingError extends SellState {
   final String errorMessage;
   UploadingError(this.errorMessage);
@@ -15,7 +22,3 @@ class UploadingError extends SellState {
 class UploadingSuccess extends SellState {}
 
 class UploadingLoading extends SellState {}
-
-
-
-

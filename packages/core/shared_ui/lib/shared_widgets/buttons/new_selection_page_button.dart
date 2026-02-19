@@ -350,169 +350,6 @@ class NewSelectionPageButton<T> extends StatelessWidget {
 //   }
 // }
 
-// class NewSelectionPageButtonTypes<T> extends StatelessWidget {
-//   final T currentValue;
-//   final List values;
-//   final List Function(T) secondPageValues;
-//   final String label;
-//   final String hint;
-//   final String dialogAppBarTitle;
-//   final String secondPageDialogAppBarTitle;
-//   final String emptyPage;
-//   final String secondPageEmptyPage;
-//   final void Function(T) onSelected;
-//   final void Function(T) onSecondPageSelected;
-//   final Widget Function(T)? leadingBuilder;
-//   final String Function(T) buttonLabelBuilder;
-//   final String Function(T) labelBuilder;
-//   final String Function(T) secondPageLabelBuilder;
-//   final String? Function(T?) validator;
-//   final double buttonWidth;
-//   final T secondPageCurrentValue;
-//   final bool search;
-//   final bool onlyInPageLeading;
-
-//   const NewSelectionPageButtonTypes({
-//     super.key,
-//     required this.currentValue,
-//     required this.values,
-//     required this.secondPageValues,
-//     required this.label,
-//     required this.hint,
-//     required this.dialogAppBarTitle,
-//     required this.secondPageDialogAppBarTitle,
-//     required this.emptyPage,
-//     required this.secondPageEmptyPage,
-//     required this.onSelected,
-//     required this.onSecondPageSelected,
-//     required this.buttonLabelBuilder,
-//     required this.secondPageLabelBuilder,
-//     this.leadingBuilder,
-//     required this.validator,
-//     this.search = false,
-//     this.onlyInPageLeading = false,
-//     this.buttonWidth = 0,
-//     required this.secondPageCurrentValue,
-//     required this.labelBuilder,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     double buttonWidth = this.buttonWidth == 0
-//         ? size.width - AppSize.s24
-//         : this.buttonWidth;
-//     return FormField<T>(
-//       initialValue: currentValue,
-//       validator: validator,
-//       builder: (FormFieldState<T> field) {
-//         return Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-//               child: Text(label, style: Theme.of(context).textTheme.bodyMedium),
-//             ),
-//             ElevatedButton(
-//               style:
-//                   CustomElevatedButtonDecoration.customElevatedbuttonStyleNonSelectable(
-//                     context: context,
-//                     width: buttonWidth,
-//                     error: field.hasError,
-//                   ),
-//               onPressed: () async {
-//                 customRightNavigation(
-//                   context,
-//                   NewSelectionPageGeneric<T>(
-//                     title: dialogAppBarTitle,
-//                     emptyPage: emptyPage,
-//                     dynamicValues: values,
-//                     field: field,
-//                     leadingBuilder: leadingBuilder != null
-//                         ? (dynamic item) => leadingBuilder!(item as T)
-//                         : null,
-//                     labelBuilder: (dynamic item) => labelBuilder(item as T),
-//                     onSelected: (dynamic item) => onSelected(item as T),
-//                     search: search,
-//                     onItemTap: (dynamic item) {
-//                       final typedItem = item as T;
-//                       onSelected(typedItem);
-//                       field.didChange(typedItem);
-//                       // Navigate to second page
-//                       customRightNavigation(
-//                         context,
-//                         NewSelectionPageGeneric<T>(
-//                           title: secondPageDialogAppBarTitle,
-//                           emptyPage: secondPageEmptyPage,
-//                           dynamicValues: secondPageValues(typedItem),
-//                           currentValue: secondPageCurrentValue!,
-//                           field: field,
-//                           labelBuilder: (dynamic item) =>
-//                               secondPageLabelBuilder(item as T),
-//                           onSelected: (dynamic selectedItem) {
-//                             onSecondPageSelected(selectedItem as T);
-
-//                             field.validate();
-//                             Navigator.pop(context); // Close second page
-//                             // Navigator.pop(context); // Close first page
-//                           },
-//                           search: search,
-//                         ),
-//                       );
-//                     },
-//                   ),
-//                 );
-//               },
-//               child: SizedBox(
-//                 width: buttonWidth - AppSize.s16,
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         ?onlyInPageLeading
-//                             ? null
-//                             : leadingBuilder?.call(field.value!),
-//                         SizedBox(
-//                           width: leadingBuilder == null
-//                               ? AppSize.s5
-//                               : AppSize.s12,
-//                         ),
-//                         Text(
-//                           field.value == null
-//                               ? hint
-//                               : buttonLabelBuilder(field.value!),
-//                           style: Theme.of(context).textTheme.labelLarge,
-//                         ),
-//                       ],
-//                     ),
-//                     Icon(
-//                       Icons.arrow_forward_ios,
-//                       color: field.hasError
-//                           ? Theme.of(context).colorScheme.error
-//                           : Theme.of(context).colorScheme.primary,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             if (field.hasError)
-//               Padding(
-//                 padding: const EdgeInsets.only(top: AppPadding.p8),
-//                 child: Text(
-//                   field.errorText!,
-//                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-//                     color: Theme.of(context).colorScheme.error,
-//                   ),
-//                 ),
-//               ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-// }
-
 // One type selection page button with two different lists
 class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
   final T currentValue;
@@ -619,6 +456,175 @@ class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
                             Navigator.pop(context);
                           },
 
+                          search: search,
+                        ),
+                      );
+                    },
+                  ),
+                );
+                onExit(field);
+              },
+              child: SizedBox(
+                width: buttonWidth - AppSize.s16,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        if (!onlyInPageLeading && leadingBuilder != null)
+                          leadingBuilder!.call(field.value!),
+                        SizedBox(
+                          width: leadingBuilder == null
+                              ? AppSize.s5
+                              : AppSize.s12,
+                        ),
+                        Text(
+                          field.value == null
+                              ? hint
+                              : buttonLabelBuilder(field.value!),
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                      ],
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: field.hasError
+                          ? Theme.of(context).colorScheme.error
+                          : Theme.of(context).colorScheme.primary,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (field.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: AppPadding.p8),
+                child: Text(
+                  field.errorText!,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class NewSelectionPageButtonCar<T, T2> extends StatelessWidget {
+  final T currentValue;
+  final T2 current2Value;
+  final bool Function(T)? isSelected;
+  final bool Function(T2)? isSelected2;
+
+  final List<T> values;
+  final List<T2> Function(T) secondPageValues;
+  final String label;
+  final String hint;
+  final String dialogAppBarTitle;
+  final String secondPageDialogAppBarTitle;
+  final String emptyPage;
+  final String secondPageEmptyPage;
+  final void Function(T, FormFieldState<T>)? onSelected;
+  final void Function(T, T2, FormFieldState<T>) onSecondPageSelected;
+  final void Function(FormFieldState<T>) onExit;
+  final Widget Function(T)? leadingBuilder;
+  final String Function(T) buttonLabelBuilder;
+  final String Function(T) labelBuilder;
+  final String Function(T2) secondPageLabelBuilder;
+  final String? Function(T?) validator;
+  final double buttonWidth;
+  final T2 secondPageCurrentValue;
+  final bool search;
+  final bool onlyInPageLeading;
+
+  const NewSelectionPageButtonCar({
+    super.key,
+    required this.currentValue,
+    required this.values,
+    required this.secondPageValues,
+    required this.label,
+    required this.hint,
+    required this.dialogAppBarTitle,
+    required this.secondPageDialogAppBarTitle,
+    required this.emptyPage,
+    required this.secondPageEmptyPage,
+    this.onSelected,
+    required this.onSecondPageSelected,
+    required this.labelBuilder,
+    required this.secondPageLabelBuilder,
+    required this.buttonLabelBuilder,
+    required this.validator,
+    required this.onExit,
+    this.leadingBuilder,
+    this.isSelected,
+    this.isSelected2,
+    this.search = false,
+    this.onlyInPageLeading = false,
+    this.buttonWidth = 0,
+    required this.secondPageCurrentValue,
+    required this.current2Value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double buttonWidth = this.buttonWidth == 0
+        ? size.width - AppSize.s24
+        : this.buttonWidth;
+    return FormField<T>(
+      initialValue: currentValue,
+      validator: validator,
+      builder: (FormFieldState<T> field) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: Text(label, style: Theme.of(context).textTheme.bodyMedium),
+            ),
+            ElevatedButton(
+              style:
+                  CustomElevatedButtonDecoration.customElevatedbuttonStyleNonSelectable(
+                    context: context,
+                    width: buttonWidth,
+                    error: field.hasError,
+                  ),
+              onPressed: () async {
+                await customRightNavigation(
+                  context,
+                  NewSelectionPageGeneric<T>(
+                    title: dialogAppBarTitle,
+                    emptyPage: emptyPage,
+                    leadingBuilder: leadingBuilder,
+                    values: values,
+                    currentValue: currentValue,
+
+                    labelBuilder: (dynamic item) => labelBuilder(item),
+                    isSelected: isSelected,
+                    search: search,
+                    onItemTap: (item) async {
+                      onSelected?.call(item, field);
+
+                      await customRightNavigation(
+                        context,
+                        NewSelectionPageGeneric<T2>(
+                          title: secondPageDialogAppBarTitle,
+                          emptyPage: secondPageEmptyPage,
+                          values: secondPageValues(item),
+                          currentValue: current2Value,
+
+                          labelBuilder: (dynamic item) =>
+                              secondPageLabelBuilder(item),
+                          onItemTap: (selectedItem) {
+                            onSecondPageSelected(item, selectedItem, field);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+
+                          isSelected: isSelected2,
                           search: search,
                         ),
                       );

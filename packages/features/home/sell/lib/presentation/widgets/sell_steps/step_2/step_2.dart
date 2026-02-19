@@ -5,7 +5,7 @@ import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/seat_number.
 import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/top_speed_text_field.dart';
 import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/body_type_widget.dart';
 import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/consumption_text_filed.dart';
-import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/engine_spec/engine_spec_widget.dart';
+import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/engine_spec_widget.dart';
 import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/fuel_type_widget.dart';
 import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/paint_condition_widget.dart';
 import 'package:sell/presentation/widgets/sell_steps/step_2/widgets/power_text_field.dart';

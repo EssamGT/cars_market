@@ -23,6 +23,25 @@ class SellStepsController extends GetxController {
   final Duration textDurationOut = const Duration(milliseconds: 450);
   final Duration opacityDuration = const Duration(milliseconds: 350);
   final Curve animationCurve = Curves.easeInOutCubic;
+
+  BuildContext? findFirstErrorField(BuildContext context) {
+    BuildContext? errorContext;
+    void visitor(Element element) {
+      if (errorContext != null) return; // already found
+      if (element is StatefulElement && element.state is FormFieldState) {
+        final fieldState = element.state as FormFieldState;
+        if (fieldState.hasError) {
+          errorContext = element;
+          return;
+        }
+      }
+      element.visitChildren(visitor);
+    }
+
+    (context as Element).visitChildren(visitor);
+    return errorContext;
+  }
+
   void changeIndex(int index) async {
     if (index < 0) return;
     if (index >= steps.length) {
@@ -32,6 +51,7 @@ class SellStepsController extends GetxController {
     }
     scrollController.jumpTo(0);
     animating.value = true;
+
     if (index > selectedIndex.value) {
       if (index == 2) {
         selectedIndex.value = index;
@@ -51,7 +71,6 @@ class SellStepsController extends GetxController {
           showPrev.value = true;
           animating.value = false;
         });
-      
       }
     }
     if (index < selectedIndex.value) {

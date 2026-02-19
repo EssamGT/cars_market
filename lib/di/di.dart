@@ -27,6 +27,6 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureUserDetailsDependencies(getIt, enviroment);
   await configureGooglePlacesServiceDependencies(getIt, enviroment);
   await configureSellDependencies(getIt, enviroment);
-  // await configureStorageDependencies(getIt, enviroment);
+  await configureStorageDependencies(getIt, enviroment);
   await configureMainScreenDependencies(getIt, enviroment);
 }

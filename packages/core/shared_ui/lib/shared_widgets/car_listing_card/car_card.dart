@@ -117,7 +117,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                       Icon(Icons.location_on_outlined, size: AppSize.s20),
                       SizedBox(width: AppSize.s2),
                       Text(
-                        widget.car.location.structuredFormatting.mainText,
+                        widget.car.location.nameEn,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ],

@@ -123,11 +123,25 @@ class NaviButtons extends StatelessWidget {
                   onPressed: controller.animating.value
                       ? () {}
                       : () {
-                          // if (controller.key.currentState!.validate()) {
+                          if (controller.key.currentState!.validate()) {
                             controller.changeIndex(
                               controller.selectedIndex.value + 1,
                             );
-                          // }
+                          } else {
+                            // Find first errored field and scroll to it
+                            final errorContext = controller.findFirstErrorField(
+                              controller.key.currentContext!,
+                            );
+                            if (errorContext != null) {
+                              Scrollable.ensureVisible(
+                                errorContext,
+                                duration: Duration(milliseconds: 400),
+                                curve: Curves.easeInOut,
+                                alignment:
+                                    0.3, // positions the error ~30% from the top
+                              );
+                            }
+                          }
                         },
                   style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(
