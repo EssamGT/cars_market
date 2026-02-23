@@ -7,11 +7,7 @@ class AppConstants {
   static const String carsDataBaseKey = 'CARS_DATABASE';
   static const String usersDataBaseKey = 'USERS_DATABASE';
 
-  static String googlePlacesAutoCompleteBaseUrl =
-      "https://maps.googleapis.com/maps/api/place/autocomplete/json";
 
-  static String getPlacesDetailsBaseUrl(String placeId) =>
-      "https://places.googleapis.com/v1/places/$placeId";
 
   static const Duration timeoutDuration = Duration(seconds: 5);
 

@@ -20,8 +20,10 @@ class StringsManager {
   static const String phoneNumberEx = 'Enter your phone number';
   static const String phoneNumber = 'Phone Number';
   static const String save = 'Save';
+  static const String seeAll = 'See All';
   static const String cnext = 'Continue';
   static const String verify = 'Verify';
+  static const String noLocationAvailable = 'No Location Available';
   static const String verifyNow = 'Verify Now';
   static const String verified = 'Verified';
   static const String resendCode = 'Resend Code';
@@ -46,11 +48,12 @@ class StringsManager {
   static const String km = 'KM';
   static const String hpLable = 'Horsepower (Optional)';
   static const String hpHint = 'e.g.., 150 HP';
-  static const String hp = 'HP';
+  static const String hp = 'Horesepower';
   static const String topSpeedLable = 'Top Speed (Optional)';
   static const String topSpeedHint = 'e.g.., 200 km/h';
   static const String topSpeed = 'Top Speed';
   static const String fuelConsumptionLabel = 'Fuel Consumption (Optional)';
+  static const String fuelConsumptionDisplayLabel = 'Consumption';
   static const String fuelConsumptionHint = 'e.g.., 10 L/100 km';
   static const String fuelConsumption = 'L/100 km';
 
@@ -126,6 +129,7 @@ class StringsManager {
   static const String negotiableError = 'Please select negotiation';
   static const String available = 'Available';
   static const String nonNegotiable = 'Non-Negotiable';
+  static const String negotiable = 'Negotiable';
   static const String transmissionTypeLabel = 'Transmission Type';
   static const String transmissionTypeError = 'please select Transmission Type';
   static const String automatic = 'Automatic';
@@ -146,6 +150,7 @@ class StringsManager {
   static const String interiorFeaturesHint =
       'e.g.., Leather seats, Sunroof, Premium Sound System';
   static const String featuresLabel = 'Features (Optional)';
+  static const String detailsfeaturesLabel = 'Features';
   static const String featuresHint = '+ Add Features';
   static const String featuresSelected = 'Features Selected';
   static const String featuresTitle = 'Features';
@@ -197,9 +202,9 @@ class StringsManager {
   static const String sellerInformation = 'Seller Information';
   static const String engine = 'Engine';
   static const String engineSpec = 'Engine Specification';
-  static const String dMileage = 'Mileage';
+  static const String detailsKmLabel = 'Kilometers';
   static const String dFuel = 'Fuel';
-  static const String dGearbox = 'Gearbox';
+  static const String detailsTransmissionLabel = 'Transmission';
   static const String dBodyType = 'Body Type';
   static const String dPaintColor = 'Paint Color';
   static const String dPaintCondition = 'Paint Condition';
@@ -210,7 +215,7 @@ class StringsManager {
   static const String getDirections = 'Get Directions';
   static const String cylinder = 'Cylinder';
   static const String cc = 'CC';
-  static const String detailedInformation = 'Detailed Information';
+  static const String details = 'Details';
 
   static const String browse =
       'Browse our extensive inventory of new and used vehicles from top brands.';
@@ -292,6 +297,7 @@ class StringsManager {
   static const String i4Engine = '4 Cylinder';
   static const String i5Engine = '5 Cylinder';
   static const String i6Engine = '6 Cylinder I6';
+  static const String s6Engine = '6 Cylinder';
   static const String v6Engine = '6 Cylinder V6';
   static const String v8Engine = '8 Cylinder';
   static const String v10Engine = '10 Cylinder';
@@ -591,6 +597,7 @@ class StringsManager {
   // airconditioning
   static const String selectAircon = 'Select Air Conditioning Type';
   static const String acTypeLabel = 'Air Conditioning (Optional)';
+  static const String detailsAcTypeLabel = 'Air Conditioning';
 
   static const String manualAcLabel = 'Manual Air Conditioning';
   static const String automaticAcLabel = 'Automatic Air Conditioning';
@@ -605,6 +612,7 @@ class StringsManager {
   // seats
   static const String selectInteriorType = 'Select Interior';
   static const String interiorTypeLabel = 'Select Interior (Optional)';
+  static const String detailsInteriorTypeLabel = 'Interior Type';
 
   static const String clothSeats = 'Cloth';
   static const String leatherSeats = 'Full Leather';
@@ -614,10 +622,12 @@ class StringsManager {
 
   static const String seatNumberHint = 'e.g.., 7 Seats';
   static const String seatNumberLabel = 'Number of Seats (Optional)';
+  static const String detailsSeatNumberLabel = 'Number of Seats';
   static const String seats = 'Seats';
 
   // payment options
   static const String paymentOptionsLabel = 'Payment Options';
+  static const String paymentOptionLabel = 'Payment Option';
   static const String cashLabel = 'Cash';
   static const String installmentLabel = 'Installment';
   static const String cashOrInstallmentsLabel = 'Cash or Installments';

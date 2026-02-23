@@ -13,6 +13,7 @@ import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/wahtsaap_message.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/location/location_model.dart';
+import 'package:google_places_service/data/models/text_search_model/text_search_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CarsTableKeys {
@@ -57,6 +58,7 @@ class CarsTableKeys {
   static const String location = 'location';
   static const String engineCapacity = 'engineCapacity';
   static const String engineCylinderNumber = 'engineCylinderNumber';
+  static const String googleMapsLocation = 'googleMapsLocation';
 }
 
 class SellCarUploadModel {
@@ -65,7 +67,7 @@ class SellCarUploadModel {
   String userId;
   String createdAt;
   LocationModel location;
-
+  TextSearchModel googleMapsLocation;
   PaymentOptions paymentOptions;
   InteriorType interiorType;
   String seatsNumber;
@@ -100,6 +102,8 @@ class SellCarUploadModel {
     CarBrand? brand,
     EngineSpec? engineSpec,
     LocationModel? location2,
+    TextSearchModel? googleMapsLocation,
+
     this.interiorType = InteriorType.none,
     this.paymentOptions = PaymentOptions.none,
     this.seatsNumber = '',
@@ -136,6 +140,7 @@ class SellCarUploadModel {
        selectedImages = selectedImages ?? [],
        pendingUploadImages = pendingUploadImages ?? [],
        features = features ?? [],
+       googleMapsLocation = googleMapsLocation ?? TextSearchModel.empty(),
        location = location2 ?? LocationModel.empty();
 
   Map<String, dynamic> toJson() {
@@ -160,10 +165,10 @@ class SellCarUploadModel {
       CarsTableKeys.serviceHistory: serviceHistory,
       CarsTableKeys.price:
           int.tryParse(price.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0,
-      CarsTableKeys.version: version,
+      CarsTableKeys.version: version.trim(),
       CarsTableKeys.negotiable: negotiable.name,
       CarsTableKeys.images: uploadedImages!.map((e) => e.toJson()).toList(),
-      // only id 
+      // only id
       CarsTableKeys.location: location.toJsonId(),
       CarsTableKeys.carCondition: carCondition.name,
       CarsTableKeys.interiorType: interiorType.name,
@@ -171,6 +176,7 @@ class SellCarUploadModel {
       CarsTableKeys.seatsNumber: seatsNumber,
       CarsTableKeys.airConType: airConType.name,
       CarsTableKeys.wahtsaapMessage: wahtsaapMessage.name,
+      CarsTableKeys.googleMapsLocation: googleMapsLocation.toJson(),
       // Note: images are not included in JSON representation
     };
   }

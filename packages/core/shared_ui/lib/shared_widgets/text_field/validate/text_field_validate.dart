@@ -174,7 +174,7 @@ class TextFieldValidator {
         }
         return null;
       case TextFieldValidationType.hp:
-        if (value == null || value.trim().isEmpty) {
+        if (value.isEmpty || value.trim().isEmpty) {
           return null; // optional → allow empty
         }
 
@@ -192,7 +192,7 @@ class TextFieldValidator {
 
         return null;
       case TextFieldValidationType.fuelConsumption:
-        if (value == null || value.trim().isEmpty) {
+        if (value.isEmpty || value.trim().isEmpty) {
           return null; // optional → allow empty
         }
 

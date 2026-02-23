@@ -7,82 +7,89 @@ import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
 
 // done
 class CarSpecsWidget extends StatelessWidget {
   final CarEntity car;
   const CarSpecsWidget({super.key, required this.car});
+  List<SpecData> specItems(CarEntity car) {
+    final fullList = [
+      SpecData(
+        icon: CustomIcons.engine,
+        title: StringsManager.engine,
+        value: car.engineSpec.getEngineSpec(),
+      ),
+      SpecData(
+        icon: CustomIcons.electric,
+        title: StringsManager.hp,
+        value: car.engineSpec.getHp(),
+      ),
+      SpecData(
+        icon: CustomIcons.km,
+        title: StringsManager.topSpeed,
+        value: car.engineSpec.getTopSpeed(),
+      ),
+      SpecData(
+        icon: CustomIcons.gearbox,
+        title: StringsManager.detailsTransmissionLabel,
+        value: car.transmissionType.getTransmissionTypeName(),
+      ),
+      SpecData(
+        icon: CustomIcons.fuel,
+        title: StringsManager.fuelTypeLabel,
+        value: car.engineSpec.fuelType == FuelType.electric
+            ? ''
+            : car.engineSpec.fuelType.getFuelTypeName(),
+      ),
+      SpecData(
+        icon: CustomIcons.bodyType,
+        title: StringsManager.bodyTypes,
+        value: car.bodyType.getCarBodyTypeName(),
+      ),
+      SpecData(
+        icon: CustomIcons.eco,
+        title: StringsManager.fuelConsumptionDisplayLabel,
+        value: car.engineSpec.getFuelConsumption(),
+      ),
+      SpecData(
+        icon: CustomIcons.paintColor,
+        title: StringsManager.paintColorLabel,
+        value: car.paintColor.getColorName(),
+      ),
+    ];
+    return fullList
+        .where((e) => e.value.isNotEmpty && e.value != "null")
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppPadding.p10),
+      padding: const EdgeInsets.only(left: AppPadding.p10, right: AppPadding.p10,),
       child: Column(
         children: [
           text(context),
-          Container(
-            margin: const EdgeInsets.only(top: AppMargin.m20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                specItemWidget(
-                  context: context,
-                  icon: CustomIcons.engine,
-                  title: StringsManager.engine,
-                  value: '${car.engineSpec.getEngineSpec()} ',
-                ),
-                specItemWidget(
-                  context: context,
-                  icon: CustomIcons.km,
-                  title: StringsManager.dMileage,
-                  value: '${mileageFormater(car.km)} km',
-                ),
-              ],
+          GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2.6,
+              crossAxisSpacing: AppSize.s10,
+              mainAxisSpacing: AppSize.s10,
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: AppMargin.m12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                specItemWidget(
-                  context: context,
-                  icon: CustomIcons.gearbox,
-                  title: StringsManager.dGearbox,
-                  value: car.transmissionType.getTransmissionTypeName(),
-                ),
-                specItemWidget(
-                  context: context,
-                  icon: CustomIcons.fuel,
-                  title: StringsManager.dFuel,
-                  value: car.engineSpec.fuelType.getFuelTypeName(),
-                ),
-              ],
+            padding: EdgeInsets.only(
+              left: AppPadding.p10,
+              right: AppPadding.p10,
+              top: AppPadding.p16
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: AppMargin.m12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                specItemWidget(
-                  context: context,
-                  icon: CustomIcons.bodyType,
-                  title: StringsManager.dBodyType,
-                  value: car.bodyType.getCarBodyTypeName(),
-                ),
-                specItemWidget(
-                  context: context,
-                  icon: CustomIcons.paintColor,
-                  title: StringsManager.dPaintColor,
-                  value: car.paintColor.getColorName(),
-                ),
-              ],
-            ),
+            itemCount: specItems(car).length,
+            itemBuilder: (context, index) {
+              return specItemWidget(
+                context: context,
+                specData: specItems(car)[index],
+              );
+            },
           ),
         ],
       ),
@@ -91,9 +98,7 @@ class CarSpecsWidget extends StatelessWidget {
 
   Widget specItemWidget({
     required BuildContext context,
-    required IconData icon,
-    required String title,
-    required String value,
+    required SpecData specData,
   }) {
     Size screenSize = MediaQuery.of(context).size;
     double iconSize = AppSize.s40;
@@ -111,7 +116,7 @@ class CarSpecsWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(
-            icon,
+            specData.icon,
             color: Theme.of(context).colorScheme.primary,
             size: iconSize,
           ),
@@ -120,31 +125,26 @@ class CarSpecsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: Theme.of(context).textTheme.bodySmall),
-              Text(value, style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                specData.title,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    specData.value,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ),
             ],
           ),
         ],
       ),
     );
   }
-
-  // String engineCapacityFormater(String engineCapacity) {
-  //   if (engineCapacity.length < 4) {
-  //     return '0.${engineCapacity[0]}L';
-  //   }
-  //   return '${engineCapacity[0]}.${engineCapacity[1]}L';
-  // }
-
-  // String engineCyFormater(String engineCy) {
-  //   if (engineCy == 'I6' || engineCy == 'V6') {
-  //     return engineCy;
-  //   } else if (engineCy == '3' || engineCy == '4') {
-  //     return 'I$engineCy';
-  //   } else {
-  //     return 'V$engineCy';
-  //   }
-  // }
 
   Widget text(BuildContext context) {
     return Row(
@@ -169,3 +169,87 @@ class CarSpecsWidget extends StatelessWidget {
     );
   }
 }
+
+class SpecData {
+  final String title;
+  final String value;
+  final IconData icon;
+
+  const SpecData({
+    required this.title,
+    required this.value,
+    required this.icon,
+  });
+}
+
+// Padding(
+//       padding: const EdgeInsets.all(AppPadding.p10),
+//       child: Column(
+//         children: [
+//           text(context),
+//           Container(
+//             margin: const EdgeInsets.only(top: AppMargin.m20),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: [
+//                 specItemWidget(
+//                   context: context,
+//                   icon: CustomIcons.engine,
+//                   title: StringsManager.engine,
+//                   value: '${car.engineSpec.getEngineSpec()} ',
+//                 ),
+//                 specItemWidget(
+//                   context: context,
+//                   icon: CustomIcons.km,
+//                   title: StringsManager.detailsKmLabel,
+//                   value: car.getCarKM(),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Container(
+//             margin: const EdgeInsets.only(top: AppMargin.m12),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: [
+//                 specItemWidget(
+//                   context: context,
+//                   icon: CustomIcons.gearbox,
+//                   title: StringsManager.detailsTransmissionLabel,
+//                   value: car.transmissionType.getTransmissionTypeName(),
+//                 ),
+//                 specItemWidget(
+//                   context: context,
+//                   icon: CustomIcons.fuel,
+//                   title: StringsManager.dFuel,
+//                   value: car.engineSpec.fuelType.getFuelTypeName(),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Container(
+//             margin: const EdgeInsets.only(top: AppMargin.m12),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: [
+//                 specItemWidget(
+//                   context: context,
+//                   icon: CustomIcons.bodyType,
+//                   title: StringsManager.dBodyType,
+//                   value: car.bodyType.getCarBodyTypeName(),
+//                 ),
+//                 specItemWidget(
+//                   context: context,
+//                   icon: CustomIcons.paintColor,
+//                   title: StringsManager.dPaintColor,
+//                   value: car.paintColor.getColorName(),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );

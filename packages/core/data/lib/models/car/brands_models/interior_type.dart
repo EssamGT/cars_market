@@ -19,4 +19,21 @@ extension InteriorTypeExtension on InteriorType {
         return StringsManager.selectInteriorType;
     }
   }
+
+  String get getTextForDetails {
+    switch (this) {
+      case InteriorType.cloth:
+        return StringsManager.clothSeats;
+      case InteriorType.fullLather:
+        return StringsManager.leatherSeats;
+      case InteriorType.partLather:
+        return StringsManager.partLeatherSeats;
+      case InteriorType.velour:
+        return StringsManager.velourSeats;
+      case InteriorType.other:
+        return StringsManager.other;
+      case InteriorType.none:
+        return "";
+    }
+  }
 }

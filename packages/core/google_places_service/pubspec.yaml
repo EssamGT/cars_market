@@ -17,6 +17,8 @@ dependencies:
 
   data:
     path: ../data
+  domain:
+    path: ../domain
   error_handler:
     path: ../error_handler
   shared_ui:
@@ -30,6 +32,7 @@ dependencies:
   flutter_dotenv: ^6.0.0
   flutter_bloc: ^9.1.1
   google_maps_flutter: ^2.14.0
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

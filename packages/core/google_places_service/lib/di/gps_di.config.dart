@@ -19,7 +19,7 @@ import 'package:google_places_service/data/repository/google_places_service_repo
 import 'package:google_places_service/domain/repository/google_places_service_reop.dart'
     as _i1017;
 import 'package:google_places_service/domain/usecase/gps_use_case.dart' as _i81;
-import 'package:google_places_service/presentation/cubit/location_cubit.dart'
+import 'package:google_places_service/presentation/location_page/cubit/location_cubit.dart'
     as _i1023;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:remote/network_info/network_info.dart' as _i583;

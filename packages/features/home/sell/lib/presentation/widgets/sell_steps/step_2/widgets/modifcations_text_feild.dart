@@ -11,11 +11,10 @@ class ModifcationsTextFeild extends StatelessWidget {
   Widget build(BuildContext context) {
     return NormalTextFieldUploadCar(
       car: getIt.get<SellCubit>().car,
-
       hint: StringsManager.modificationsHint,
       type: TextFieldUploadCarType.modifications,
       title: StringsManager.modificationsLabelSellCar,
-      keybordType: TextInputType.text,
+      keybordType: TextInputType.multiline,
       minLiens: 3,
       format: false,
     );

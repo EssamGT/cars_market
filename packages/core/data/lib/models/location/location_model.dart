@@ -53,4 +53,11 @@ class LocationModel {
       id: "",
     );
   }
+  String getLocationName() {
+    if (nameEn == governorateEn) {
+      return nameEn;
+    }
+
+    return '$nameEn, $governorateEn';
+  }
 }

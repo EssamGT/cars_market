@@ -3,6 +3,7 @@ import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/bottom_navi_bar.dart';
+import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_features_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_gallary_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_location_widget.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_specs_widget.dart';
@@ -56,9 +57,9 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.offset > 770 && !isVisible.value) {
+    if (_scrollController.offset > 800 && !isVisible.value) {
       isVisible.value = true;
-    } else if (_scrollController.offset <= 770 && isVisible.value) {
+    } else if (_scrollController.offset <= 800 && isVisible.value) {
       isVisible.value = false;
     }
   }
@@ -82,7 +83,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
           SingleChildScrollView(
             controller: _scrollController,
             child: Column(
-              spacing: AppSize.s20,
+              spacing: AppSize.s30,
               children: [
                 CarGallaryWidget(car: widget.car),
                 CarSpecsWidget(car: widget.car),
@@ -90,7 +91,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                 CarLocationWidget(car: widget.car),
                 DescriptionWidget(car: widget.car),
                 DetailedInfoWidget(car: widget.car),
-                // CarSafetyWidget(car: widget.car),
+                CarFeaturesWidget(car: widget.car),
                 ServiceHistoryWidget(car: widget.car),
                 Modifications(car: widget.car),
                 SizedBox(height: AppSize.s80),

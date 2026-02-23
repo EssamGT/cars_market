@@ -3,7 +3,7 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_places_service/domain/entity/predictions_entity.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
-import 'package:google_places_service/presentation/location_page.dart';
+import 'package:google_places_service/presentation/location_page/location_page.dart';
 import 'package:shared_ui/shared_widgets/text_field/text_field_button_decoration.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 

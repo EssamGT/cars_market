@@ -14,7 +14,7 @@ class ServiceHistoryTextFeild extends StatelessWidget {
       hint: StringsManager.serviceHistoryHint,
       type: TextFieldUploadCarType.serviceHistory,
       title: StringsManager.serviceHistoryLabelSellCar,
-      keybordType: TextInputType.text,
+      keybordType: TextInputType.multiline,
       minLiens: 3,
       format: false,
     );

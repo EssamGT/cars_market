@@ -23,6 +23,18 @@ class ApiManager {
     String path,
     Map<String, dynamic>? queryParameters,
   ) {
-    return dio.get(path, queryParameters: queryParameters,);
+    return dio.get(path, queryParameters: queryParameters);
+  }
+
+  Future<Response> postRequest(
+    String path,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? data,
+  ) {
+    return dio.post(
+      path,
+      options: Options(headers: headers),
+      data: data,
+    );
   }
 }

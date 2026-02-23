@@ -46,6 +46,8 @@ class _SellScreenState extends State<SellScreen> {
     super.dispose();
   }
 
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -65,6 +67,13 @@ class _SellScreenState extends State<SellScreen> {
                 MessageBarType.warning,
               );
             }
+            if (state is UploadingLoading ||
+                state is UploadingSuccess ||
+                state is UploadingError) {
+              loading = true;
+            } else {
+              loading = false;
+            }
           },
           child: Stack(
             children: [
@@ -81,10 +90,14 @@ class _SellScreenState extends State<SellScreen> {
                     child: PopScope(
                       canPop: false,
                       onPopInvokedWithResult: (didPop, result) async {
-                        LoadingPopUp.show(
-                          context: context,
-                          type: PopupType.exit,
-                        );
+                        if (!didPop) {
+                          if (loading == false) {
+                            LoadingPopUp.show(
+                              context: context,
+                              type: PopupType.exit,
+                            );
+                          }
+                        }
                       },
 
                       child: Obx(() {

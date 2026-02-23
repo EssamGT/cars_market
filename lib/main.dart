@@ -20,10 +20,9 @@ void main() async {
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // Top bar color
-      statusBarIconBrightness:
-          Brightness.light, // For Android (dark or light icons)
-      statusBarBrightness: Brightness.dark, // For iOS (dark or light content)
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
     ),
   );
 }
@@ -31,7 +30,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

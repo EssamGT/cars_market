@@ -42,6 +42,8 @@ class CarDetails extends StatelessWidget {
             hint: StringsManager.versionHint,
             type: TextFieldUploadCarType.version,
             title: StringsManager.versionLabel,
+            maxLiens: 1,
+            keybordType: TextInputType.text,
             validationType: TextFieldValidationType.version,
             format: false,
           ),

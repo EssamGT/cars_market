@@ -1,9 +1,8 @@
-import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:data/models/car/brands_models/negotiation.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
 
 class CarPriceWidget extends StatelessWidget {
   final CarEntity car;
@@ -40,12 +39,19 @@ class CarPriceWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "${car.brand} ${car.model} ${car.version}",
-                style: Theme.of(context).textTheme.headlineSmall,
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "${car.brand} ${car.model} ${car.version}",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
               ),
+              SizedBox(width: AppSize.s8),
               Text(
-                '${priceFormater(car.price)} ${StringsManager.egp}',
+                car.getPrice(),
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -58,13 +64,11 @@ class CarPriceWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${StringsManager.dmodel} ${car.year}",
+                "${car.year} ${car.getCarKM(withDot: true)}",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
-                car.negotiable == NegotiationType.yes
-                    ? StringsManager.negotiablePrice
-                    : StringsManager.nonNegotiablePrice,
+                "${car.carCondition.getConditionText()} · ${car.negotiable.getConditionDisplayText()}",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],

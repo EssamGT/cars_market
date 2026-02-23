@@ -15,7 +15,7 @@ dependencies:
     path: ../data
   image_picker: ^1.2.0
   google_maps_flutter: ^2.14.0
-
+  intl: ^0.20.2
   google_places_service:
     path: ../google_places_service
 dev_dependencies:

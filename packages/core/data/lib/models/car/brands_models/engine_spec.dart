@@ -2,18 +2,6 @@ import 'package:constants/strings_manager.dart';
 import 'package:data/models/car/brands_models/fuel_type.dart';
 import 'package:data/models/car/sell_car_model.dart';
 
-// final List<String> engineCylinderNumber = [
-//   "3",
-//   "4",
-//   "5",
-//   "I6",
-//   "V6",
-//   "8",
-//   "10",
-//   "12",
-//   "16",
-// ];
-
 enum EngineCylinderNumber { i3, i4, i5, i6, v6, v8, v10, v12, v16, none }
 
 extension EngineCylinderNumberExtension on EngineCylinderNumber {
@@ -42,33 +30,30 @@ extension EngineCylinderNumberExtension on EngineCylinderNumber {
     }
   }
 
-  // List<EngineCapacity> getEngineCapacity() {
-  //   switch (this) {
-  //     case EngineCylinderNumber.i3:
-  //       return i3EngineCapacities;
-
-  //     case EngineCylinderNumber.i4:
-  //       return i4EngineCapacities;
-  //     case EngineCylinderNumber.i5:
-  //       return i5EngineCapacities;
-  //     case EngineCylinderNumber.i6:
-  //       return i6EngineCapacities;
-  //     case EngineCylinderNumber.v6:
-  //       return v6EngineCapacities;
-
-  //     case EngineCylinderNumber.v8:
-  //       return v8EngineCapacities;
-  //     case EngineCylinderNumber.v10:
-  //       return v10EngineCapacities;
-
-  //     case EngineCylinderNumber.v12:
-  //       return v12EngineCapacities;
-  //     case EngineCylinderNumber.v16:
-  //       return v16EngineCapacities;
-  //     case EngineCylinderNumber.none:
-  //       return [];
-  //   }
-  // }
+  String getEngineCylinderNumberNameOnly() {
+    switch (this) {
+      case EngineCylinderNumber.i3:
+        return StringsManager.i3Engine;
+      case EngineCylinderNumber.i4:
+        return StringsManager.i4Engine;
+      case EngineCylinderNumber.i5:
+        return StringsManager.i5Engine;
+      case EngineCylinderNumber.i6:
+        return StringsManager.s6Engine;
+      case EngineCylinderNumber.v6:
+        return StringsManager.s6Engine;
+      case EngineCylinderNumber.v8:
+        return StringsManager.v8Engine;
+      case EngineCylinderNumber.v10:
+        return StringsManager.v10Engine;
+      case EngineCylinderNumber.v12:
+        return StringsManager.v12Engine;
+      case EngineCylinderNumber.v16:
+        return StringsManager.v16Engine;
+      case EngineCylinderNumber.none:
+        return StringsManager.selectEngineCylinder;
+    }
+  }
 
   String getEngineType() {
     switch (this) {
@@ -356,7 +341,7 @@ class EngineSpec {
   }) : engineCapacity =
            engineCapacity ??
            EngineCapacityModel(EngineCapacity.none, EngineCylinderNumber.none);
-  clear() {
+  void clear() {
     engineCapacity = EngineCapacityModel(
       EngineCapacity.none,
       EngineCylinderNumber.none,
@@ -368,7 +353,7 @@ class EngineSpec {
     fuelType = FuelType.none;
   }
 
-  clearEngine() {
+  void clearEngine() {
     engineCapacity = EngineCapacityModel(
       EngineCapacity.none,
       EngineCylinderNumber.none,
@@ -493,6 +478,7 @@ List<EngineCapacityModel> v8EngineCapacities = [
   EngineCapacityModel(EngineCapacity.c5000, EngineCylinderNumber.v8),
   EngineCapacityModel(EngineCapacity.c5200, EngineCylinderNumber.v8),
   EngineCapacityModel(EngineCapacity.c5500, EngineCylinderNumber.v8),
+  EngineCapacityModel(EngineCapacity.c5700, EngineCylinderNumber.v8),
   EngineCapacityModel(EngineCapacity.c5800, EngineCylinderNumber.v8),
   EngineCapacityModel(EngineCapacity.c6000, EngineCylinderNumber.v8),
   EngineCapacityModel(EngineCapacity.c6200, EngineCylinderNumber.v8),

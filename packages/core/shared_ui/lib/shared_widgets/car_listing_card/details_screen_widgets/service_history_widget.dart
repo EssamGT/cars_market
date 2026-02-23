@@ -2,6 +2,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
+
 // done
 class ServiceHistoryWidget extends StatelessWidget {
   final CarEntity car;
@@ -17,9 +18,7 @@ class ServiceHistoryWidget extends StatelessWidget {
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
         ),
         padding: const EdgeInsets.all(AppPadding.p8),
-        margin: const EdgeInsets.symmetric(
-          horizontal: AppMargin.m16,
-        ),
+        margin: const EdgeInsets.symmetric(horizontal: AppMargin.m16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

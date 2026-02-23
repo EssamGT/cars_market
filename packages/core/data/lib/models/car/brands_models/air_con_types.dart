@@ -26,4 +26,21 @@ extension AirConTypesExtension on AirConTypes {
         return StringsManager.selectAircon;
     }
   }
+
+  String get getTextForDetails {
+    switch (this) {
+      case AirConTypes.manual:
+        return StringsManager.manualAcLabel;
+      case AirConTypes.automatic:
+        return StringsManager.automaticAcLabel;
+      case AirConTypes.automatic2Zones:
+        return StringsManager.automatic2ZonesAcLabel;
+      case AirConTypes.automatic3Zones:
+        return StringsManager.automatic3ZonesAcLabel;
+      case AirConTypes.automatic4Zones:
+        return StringsManager.automatic4ZonesAcLabel;
+      case AirConTypes.none:
+        return '';
+    }
+  }
 }

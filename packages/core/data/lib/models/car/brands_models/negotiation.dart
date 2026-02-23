@@ -13,4 +13,15 @@ extension NegotiationTypeExtension on NegotiationType {
         return StringsManager.none;
     }
   }
+
+  String getConditionDisplayText() {
+    switch (this) {
+      case NegotiationType.yes:
+        return StringsManager.negotiable;
+      case NegotiationType.no:
+        return StringsManager.nonNegotiable;
+      case NegotiationType.none:
+        return StringsManager.none;
+    }
+  }
 }

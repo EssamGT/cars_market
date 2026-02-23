@@ -3,7 +3,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_places_service/presentation/cubit/location_cubit.dart';
+import 'package:google_places_service/presentation/location_page/cubit/location_cubit.dart';
 
 class LocationPage extends StatefulWidget {
   // PredictionsEntity assignedValueTo;

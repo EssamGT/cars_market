@@ -19,6 +19,14 @@ class EngineSpecEntity {
   });
 
   String getEngineSpec() {
+    if (fuelType == FuelType.electric) {
+      return fuelType.getFuelTypeName();
+    }
+    if (this.engineCapacity == EngineCapacity.none ||
+        engineCylinderNumber == EngineCylinderNumber.none) {
+      return '';
+    }
+
     int engineCapacity = int.parse(
       this.engineCapacity.getEngineCapacityName().replaceAll(
         RegExp(r'[^0-9]'),
@@ -30,6 +38,27 @@ class EngineSpecEntity {
     String engineTypeText = engineCylinderNumber.getEngineType();
 
     return '${engineCapacityDivider}L $engineTypeText ';
+  }
+
+  String getFuelConsumption() {
+    if (fuelConsumption == null || fuelConsumption!.isEmpty) {
+      return '';
+    }
+    return '$fuelConsumption L/100km';
+  }
+
+  String getTopSpeed() {
+    if (topSpeed == null || topSpeed!.isEmpty) {
+      return '';
+    }
+    return '$topSpeed km/h';
+  }
+
+  String getHp() {
+    if (hp == null || hp!.isEmpty) {
+      return '';
+    }
+    return '$hp HP';
   }
 
   Map<String, dynamic> toJson() {

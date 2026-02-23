@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:redacted/redacted.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_details_screen.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
 
 String heroTag(String carId, int index) => 'carImageHeroTag_${carId}_$index';
 
@@ -75,20 +74,23 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                   height: AppSize.s200,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(AppSize.s20),
-                        topRight: Radius.circular(AppSize.s20),
+                  placeholder: (context, url) =>
+                      Container(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerHighest,
+                        height: AppSize.s200,
+                        width: double.infinity,
+                      ).redacted(
+                        context: context,
+                        redact: true,
+                        configuration: RedactedConfiguration(
+                          defaultBorderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(AppSize.s20),
+                            topRight: Radius.circular(AppSize.s20),
+                          ),
+                        ),
                       ),
-                    ),
-
-                    height: AppSize.s200,
-                    width: double.infinity,
-                  ).redacted(context: context, redact: true),
 
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
@@ -109,24 +111,44 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
-                    '${widget.car.year} · ${priceFormater(widget.car.km)} KM',
+                    '${widget.car.year} ${widget.car.getCarKM(withDot: true)}',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
+                  Transform.translate(
+                    offset: Offset(-4, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // spacing: AppSize.s,
+                      children: [
+                        Icon(Icons.location_on_outlined, size: AppSize.s20),
+
+                        Text(
+                          widget.car.location.getLocationName(),
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                      ],
+                    ),
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.location_on_outlined, size: AppSize.s20),
-                      SizedBox(width: AppSize.s2),
                       Text(
-                        widget.car.location.nameEn,
-                        style: Theme.of(context).textTheme.labelLarge,
+                        widget.car.getPrice(),
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                      ),
+                      Text(
+                        widget.car.carCondition.getConditionText(),
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                       ),
                     ],
-                  ),
-                  Text(
-                    '${priceFormater(widget.car.price)} ${StringsManager.egp}',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
                   ),
                 ],
               ),

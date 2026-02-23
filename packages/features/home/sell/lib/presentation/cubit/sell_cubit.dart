@@ -67,13 +67,14 @@ class SellCubit extends Cubit<SellState> {
 
   void setCarConditionType(CarConditionType condition) {
     if (car.carCondition != condition) {
-      car.carCondition = condition;
       if (condition == CarConditionType.newCar) {
         car.km = '0';
+        car.carCondition = condition;
         emit(NewCoditionSelected());
       } else if (condition != CarConditionType.newCar &&
           car.carCondition == CarConditionType.newCar) {
         car.km = '';
+        car.carCondition = condition;
         emit(NewCoditionSelected());
       }
     }
@@ -308,7 +309,18 @@ class SellCubit extends Cubit<SellState> {
       },
       (images) async {
         car.uploadedImages = images;
-
+        final googleLocation = await gpsUseCase.getLocationByName(
+          car.location.getLocationName(),
+        );
+        googleLocation.fold(
+          (error) {
+            print(error.message);
+            print(error.code);
+          },
+          (s) {
+            car.googleMapsLocation = s;
+          },
+        );
         final carLastResult = await sellUseCase.uploadCar(car);
         carLastResult.fold(
           (error) {

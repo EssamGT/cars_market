@@ -11,7 +11,7 @@ enum TextFieldUploadCarType {
   km,
   year,
   version,
-  discription,
+  description,
   modifications,
   serviceHistory,
   hp,
@@ -58,6 +58,7 @@ class NormalTextFieldUploadCar extends StatefulWidget {
 
 class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
   late TextEditingController controller;
+  late FocusNode focusNode;
   final NumberFormat _formatter = NumberFormat("#,###");
   @override
   void initState() {
@@ -75,7 +76,7 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
       case TextFieldUploadCarType.version:
         controller.text = widget.car.version;
         break;
-      case TextFieldUploadCarType.discription:
+      case TextFieldUploadCarType.description:
         controller.text = widget.car.description;
         break;
 
@@ -101,13 +102,14 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
         controller.text = '';
         break;
     }
-
+    focusNode = FocusNode();
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -181,7 +183,7 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
                   case TextFieldUploadCarType.version:
                     widget.car.version = value;
                     break;
-                  case TextFieldUploadCarType.discription:
+                  case TextFieldUploadCarType.description:
                     widget.car.description = value;
                     break;
 
@@ -207,17 +209,30 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
                     break;
                 }
               },
-              textInputAction: TextInputAction.done,
+              // textInputAction: TextInputAction.done,
               keyboardType: widget.keybordType,
               autofocus: false,
+              focusNode: focusNode,
+              ignorePointers: false,
+              onTapUpOutside: (event) {
+                focusNode.unfocus();
+                field.validate();
+              },
+              onTapAlwaysCalled: true,
 
+              onEditingComplete: () {
+                focusNode.unfocus();
+                field.validate();
+              },
               onTapOutside: (event) {
-                FocusScope.of(context).unfocus();
+                focusNode.unfocus();
+
                 field.validate();
               },
               onFieldSubmitted: (newValue) {
                 field.validate();
               },
+
               inputFormatters: widget.format
                   ? [
                       FilteringTextInputFormatter.digitsOnly, // only numbers

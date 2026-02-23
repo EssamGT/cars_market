@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_places_service/data/models/text_search_model/text_search_model.dart';
 import 'package:google_places_service/domain/entity/google_maps_entity.dart';
 import 'package:google_places_service/domain/repository/google_places_service_reop.dart';
 import 'package:injectable/injectable.dart';
@@ -11,6 +12,8 @@ class GpsUseCase {
   GpsUseCase(this.repo);
   Future<Either<Failure, GoogleMapsEntity>> autoComplete(String input) =>
       repo.getAutoComplete(input);
+  Future<Either<Failure, TextSearchModel>> getLocationByName(String input) =>
+      repo.getLocationByName(input);
   Future<Either<Failure, LatLng>> getCarLocation(String placeId) async {
     return await repo.getCarLocation(placeId);
   }

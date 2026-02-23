@@ -12,7 +12,7 @@ class DescriptionTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return NormalTextFieldUploadCar(
       car: getIt.get<SellCubit>().car,
-      type: TextFieldUploadCarType.discription,
+      type: TextFieldUploadCarType.description,
       title: StringsManager.description,
       minLiens: 5,
       // hint: StringsManager.descriptionHint,
@@ -20,6 +20,7 @@ class DescriptionTextField extends StatelessWidget {
       counter: true,
       format: false,
       maxLength: 1000,
+      keybordType: TextInputType.multiline,
     );
   }
 }

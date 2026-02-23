@@ -19,9 +19,7 @@ class CarConditionWidget extends StatelessWidget {
           .where((e) => e != CarConditionType.none)
           .toList(),
       labelBuilder: (e) => e.getConditionText(),
-      onSelected: (value) {
-        cubit.setCarConditionType(value);
-      },
+      onSelected: (value) => cubit.setCarConditionType(value),
       validator: (value) => TextFieldValidator.validateNormal(
         TextFieldValidationType.carCondition,
         value?.getConditionText() ?? '',

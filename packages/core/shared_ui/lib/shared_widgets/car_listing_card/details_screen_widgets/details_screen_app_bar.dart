@@ -2,7 +2,7 @@ import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/shared_func.dart';
+
 // done
 class DetailsScreenAppBar extends StatelessWidget {
   final CarEntity car;
@@ -70,7 +70,7 @@ class DetailsScreenAppBar extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
-                "${priceFormater(car.price)} EGP",
+                car.getPrice(),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -101,4 +101,3 @@ class DetailsScreenAppBar extends StatelessWidget {
     return Brightness.values[startBackgroundChange > 180 ? 0 : 1];
   }
 }
-
