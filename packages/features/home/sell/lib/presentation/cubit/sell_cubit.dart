@@ -76,8 +76,11 @@ class SellCubit extends Cubit<SellState> {
         car.km = '';
         car.carCondition = condition;
         emit(NewCoditionSelected());
+      } else {
+        car.carCondition = condition;
       }
     }
+    print(car.carCondition.getConditionText());
   }
 
   void setTransmissionType(TransmissionType transmissionType) {
