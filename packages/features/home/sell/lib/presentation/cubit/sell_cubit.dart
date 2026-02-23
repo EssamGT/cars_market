@@ -80,7 +80,6 @@ class SellCubit extends Cubit<SellState> {
         car.carCondition = condition;
       }
     }
-    print(car.carCondition.getConditionText());
   }
 
   void setTransmissionType(TransmissionType transmissionType) {
