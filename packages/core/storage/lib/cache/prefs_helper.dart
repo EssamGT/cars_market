@@ -15,13 +15,13 @@ class PrefsHelper {
     await _sharedPreferences.setString('cars_catalog', jsonString);
   }
 
-  CarCatalogModel? getCarCatalog() {
+  CarCatalogModel getCarCatalog() {
     String? jsonString = _sharedPreferences.getString('cars_catalog');
     if (jsonString != null) {
       Map<String, dynamic> jsonMap = jsonDecode(jsonString);
       return CarCatalogModel.fromJson(jsonMap);
     }
-    return null;
+    return CarCatalogModel.empty();
   }
 
   Future<void> setLocationCatalog(LocationsCatalog locCatalog) async {
@@ -29,12 +29,12 @@ class PrefsHelper {
     await _sharedPreferences.setString('locations_catalog', jsonString);
   }
 
-  LocationsCatalog? getLocationCatalog() {
+  LocationsCatalog getLocationCatalog() {
     String? jsonString = _sharedPreferences.getString('locations_catalog');
     if (jsonString != null) {
       Map<String, dynamic> jsonMap = jsonDecode(jsonString);
       return LocationsCatalog.fromJson(jsonMap);
     }
-    return null;
+    return LocationsCatalog.empty();
   }
 }

@@ -57,20 +57,20 @@ class FirebaseDbManager {
         });
   }
 
-  Future<CarCatalogModel?> getCarCatalog() async {
+  Future<CarCatalogModel> getCarCatalog() async {
     final doc = await firestore.collection('catalog').doc("cars").get();
     if (doc.exists) {
       return CarCatalogModel.fromJson(doc.data()!);
     }
-    return null;
+    throw Exception("server error");
   }
 
-  Future<LocationsCatalog?> getLocationsCatalog() async {
+  Future<LocationsCatalog> getLocationsCatalog() async {
     final doc = await firestore.collection('catalog').doc("locations").get();
     if (doc.exists) {
       return LocationsCatalog.fromJson(doc.data()!);
     }
-    return null;
+    throw Exception("server error");
   }
 
   Future<List<CarEntity>> getMainScreenCars() async {

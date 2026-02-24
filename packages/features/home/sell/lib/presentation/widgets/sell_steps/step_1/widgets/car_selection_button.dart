@@ -21,13 +21,13 @@ class CarSelectionButton extends StatelessWidget {
     );
   }
 
-  final CarCatalogModel? carCatalog = getIt.get<PrefsHelper>().getCarCatalog();
+  final CarCatalogModel carCatalog = getIt.get<PrefsHelper>().getCarCatalog();
 
   @override
   Widget build(BuildContext context) {
     SellCubit cubit = SellCubit.get(context);
     return NewSelectionPageButtonCar<CarBrand, CarModel>(
-      values: carCatalog?.brands ?? CarCatalog.brands,
+      values: carCatalog.brands,
       secondPageValues: (CarBrand car) => car.models,
       currentValue: cubit.car.brand,
       current2Value: cubit.car.brand.selectedModel,

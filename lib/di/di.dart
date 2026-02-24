@@ -9,6 +9,7 @@ import 'package:main/di/main_screen_di.dart';
 import 'package:remote/di/remote_di.dart';
 import 'package:sell/di/sell_di.dart';
 import 'package:storage/di/storage_di.dart';
+import 'package:sync_manager/di/sync_manager_di.dart';
 import 'package:user_details/di/user_details_di.dart';
 
 final getIt = GetIt.instance;
@@ -28,5 +29,6 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureGooglePlacesServiceDependencies(getIt, enviroment);
   await configureSellDependencies(getIt, enviroment);
   await configureStorageDependencies(getIt, enviroment);
+  await configureSyncManagerDependencies(getIt, enviroment);
   await configureMainScreenDependencies(getIt, enviroment);
 }

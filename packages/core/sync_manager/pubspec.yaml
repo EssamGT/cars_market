@@ -1,7 +1,7 @@
-name: main
+name: sync_manager
 description: "A new Flutter package project."
 version: 0.0.1
-publish_to: none
+publish_to: "none"
 resolution: workspace
 environment:
   sdk: ^3.10.9
@@ -10,38 +10,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  constants:
-    path: ../../../core/constants
-  sync_manager:
-    path: ../../../core/sync_manager
-  storage:
-    path: ../../../core/storage
-  router:
-    path: ../../../core/router
-  shared_ui:
-    path: ../../../core/shared_ui
-  remote:
-    path: ../../../core/remote
-  data:
-    path: ../../../core/data
-  # storage:
-  #   path: ../../../core/storage
-  domain:
-    path: ../../../core/domain
-  error_handler:
-    path: ../../../core/error_handler
-  cars_market:
-    path: ../../../../../cars_market
-  go_router: ^16.2.4
   get_it: ^9.2.0
   injectable: ^2.7.1+4
   connectivity_plus: ^7.0.0
   dartz: ^0.10.1
-  flutter_bloc: ^9.1.1
-  get: ^4.7.2
-  iconsax_flutter: ^1.0.1
-  cached_network_image: ^3.4.1
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
+  firebase_storage: ^13.0.6
+  cloud_firestore: ^6.1.2
+  flutter_dotenv: ^6.0.0
+
+  cars_market:
+    path: ../../../../cars_market
+  error_handler:
+    path: ../error_handler
+  remote:
+    path: ../remote
+  storage:
+    path: ../storage
+  domain:
+    path: ../domain
+  constants:
+    path: ../constants
+  data:
+    path: ../data
+  path: ^1.9.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

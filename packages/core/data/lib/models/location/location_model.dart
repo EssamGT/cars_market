@@ -1,4 +1,5 @@
-import 'package:data/models/location/locations_catalog.dart';
+import 'package:cars_market/di/di.dart';
+import 'package:storage/cache/prefs_helper.dart';
 
 class LocationModel {
   String nameEn;
@@ -28,7 +29,8 @@ class LocationModel {
   }
 
   factory LocationModel.fromJsonId(Map<String, dynamic> json) {
-    return locationCatalog.firstWhere(
+    final locationCatalog = getIt.get<PrefsHelper>().getLocationCatalog();
+    return locationCatalog.locationsCatalog.firstWhere(
       (element) => element.id == json["id"],
       orElse: () => LocationModel.empty(),
     );

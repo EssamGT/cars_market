@@ -19,6 +19,7 @@ class PowerTextField extends StatelessWidget {
       keybordType: TextInputType.number,
       maxLength: 4,
       prefixText: StringsManager.hp,
+      format: false,
     );
   }
 }

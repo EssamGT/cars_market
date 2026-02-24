@@ -60,6 +60,8 @@ dependencies:
     path: packages/core/remote
   storage:
     path: packages/core/storage
+  sync_manager:
+    path: packages/core/sync_manager
   get_it: ^9.2.0
   injectable: ^2.7.1+4
   flutter_dotenv: ^6.0.0
@@ -83,6 +85,7 @@ workspace:
   - packages/core/remote
   - packages/core/storage
   - packages/core/assets
+  - packages/core/sync_manager
   - packages/core/shared_ui
   - packages/core/error_handler
   - packages/core/google_places_service
