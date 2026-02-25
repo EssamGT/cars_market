@@ -9,7 +9,6 @@ import 'package:search/presentation/widgets/filter_screen/widgets/filter_engine_
 import 'package:search/presentation/widgets/filter_screen/widgets/filter_fuel_type_widget.dart';
 import 'package:search/presentation/widgets/filter_screen/widgets/filter_geay_box_type_widget.dart';
 import 'package:search/presentation/widgets/filter_screen/widgets/filter_km_widget.dart';
-import 'package:search/presentation/widgets/filter_screen/widgets/filter_location_widget.dart';
 import 'package:search/presentation/widgets/filter_screen/widgets/filter_paint_condition_widget.dart';
 import 'package:search/presentation/widgets/filter_screen/widgets/filter_screen_app_bar.dart';
 import 'package:search/presentation/widgets/filter_screen/widgets/price_filter_widget.dart';

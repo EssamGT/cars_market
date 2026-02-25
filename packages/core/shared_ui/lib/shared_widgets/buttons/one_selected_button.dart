@@ -2,7 +2,7 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/buttons/elevated_button_decoration.dart';
 
-class NewOneSelectedButton<T extends Enum> extends StatelessWidget {
+class OneSelectedButton<T extends Enum> extends StatelessWidget {
   final String label;
   final T currentValue;
   final List<T> values;
@@ -10,7 +10,7 @@ class NewOneSelectedButton<T extends Enum> extends StatelessWidget {
   final String? Function(T?)? validator;
   final String Function(T) labelBuilder;
   final EdgeInsets padding;
-  const NewOneSelectedButton({
+  const OneSelectedButton({
     super.key,
     required this.label,
     required this.currentValue,

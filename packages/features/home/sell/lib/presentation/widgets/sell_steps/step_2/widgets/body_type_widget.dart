@@ -4,7 +4,7 @@ import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
 import 'package:flutter/material.dart';
 import 'package:sell/presentation/cubit/sell_cubit.dart';
-import 'package:shared_ui/shared_widgets/buttons/new_selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class BodyTypeWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class BodyTypeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        NewSelectionPageButton<CarBodyType>(
+        SelectionPageButton<CarBodyType>(
           values: CarBodyType.values
               .where((e) => e != CarBodyType.none)
               .toList(),

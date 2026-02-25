@@ -38,8 +38,6 @@ dependencies:
     path: packages/core/constants
   google_places_service:
     path: packages/core/google_places_service
-  location_display:
-    path: packages/core/location_display
   router:
     path: packages/core/router
   on_bording:
@@ -89,7 +87,6 @@ workspace:
   - packages/core/shared_ui
   - packages/core/error_handler
   - packages/core/google_places_service
-  - packages/core/location_display
   - packages/features/on_bording
   - packages/features/auth/login
   - packages/features/auth/user_details

@@ -5,7 +5,7 @@ import 'package:data/models/car/brands_models/fuel_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sell/presentation/cubit/sell_cubit.dart';
-import 'package:shared_ui/shared_widgets/buttons/new_selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class EngineSpecWidget extends StatelessWidget {
@@ -30,7 +30,7 @@ class EngineSpecWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            NewSelectionPageButtonSameType<
+            SelectionPageButtonSameType<
               EngineSpec,
               EngineCylinderNumber,
               EngineCapacityModel

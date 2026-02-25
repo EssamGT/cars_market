@@ -26,8 +26,6 @@ dependencies:
     path: ../assets
   google_places_service:
     path: ../google_places_service
-  location_display:
-    path: ../location_display
   sell:
     path: ../../features/home/sell
   another_flushbar: ^1.12.32

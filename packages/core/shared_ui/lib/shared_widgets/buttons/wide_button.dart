@@ -68,17 +68,3 @@ class WideButton extends StatelessWidget {
     );
   }
 }
-// Container(
-//         width: screenSize.width,
-//         height: AppSize.s50,
-//         padding: EdgeInsets.all(AppPadding.p8),
-//         decoration: BoxDecoration(
-//           color: Theme.of(context).colorScheme.onSecondary,
-//           borderRadius: BorderRadius.circular(AppSize.s8),
-//           boxShadow: [
-//             BoxShadow(
-//               color: Theme.of(context).colorScheme.shadow,
-//               blurRadius: AppSize.s2,
-//               spreadRadius: AppSize.s1,
-//             ),
-//           ],

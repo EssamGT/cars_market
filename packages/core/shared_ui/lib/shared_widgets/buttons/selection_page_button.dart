@@ -2,10 +2,10 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/buttons/elevated_button_decoration.dart';
 import 'package:shared_ui/shared_widgets/pop_up/pop_up.dart';
-import 'package:shared_ui/shared_widgets/selection_page/new_selection_page.dart';
+import 'package:shared_ui/shared_widgets/selection_page/selection_page.dart';
 
 // Base generic selection page button (private)
-class _NewSelectionPageButton<T> extends StatelessWidget {
+class _SelectionPageButton<T> extends StatelessWidget {
   final T currentValue;
   final List<T> values;
   final String label;
@@ -21,7 +21,7 @@ class _NewSelectionPageButton<T> extends StatelessWidget {
   final bool onlyInPageLeading;
   final Widget Function(BuildContext, FormFieldState<T>) selectionPageBuilder;
 
-  const _NewSelectionPageButton({
+  const _SelectionPageButton({
     super.key,
     required this.currentValue,
     required this.values,
@@ -120,7 +120,7 @@ class _NewSelectionPageButton<T> extends StatelessWidget {
 }
 
 // Single type selection page button
-class NewSelectionPageButton<T> extends StatelessWidget {
+class SelectionPageButton<T> extends StatelessWidget {
   final T currentValue;
   final List<T> values;
   final String label;
@@ -135,7 +135,7 @@ class NewSelectionPageButton<T> extends StatelessWidget {
   final bool search;
   final bool onlyInPageLeading;
 
-  const NewSelectionPageButton({
+  const SelectionPageButton({
     super.key,
     required this.currentValue,
     required this.values,
@@ -154,7 +154,7 @@ class NewSelectionPageButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _NewSelectionPageButton<T>(
+    return _SelectionPageButton<T>(
       currentValue: currentValue,
       values: values,
       label: label,
@@ -168,7 +168,7 @@ class NewSelectionPageButton<T> extends StatelessWidget {
       search: search,
       onlyInPageLeading: onlyInPageLeading,
       buttonWidth: buttonWidth,
-      selectionPageBuilder: (context, field) => NewSelectionPageGeneric(
+      selectionPageBuilder: (context, field) => SelectionPageGeneric(
         title: dialogAppBarTitle,
         emptyPage: emptyPage,
         values: values,
@@ -184,174 +184,8 @@ class NewSelectionPageButton<T> extends StatelessWidget {
   }
 }
 
-// Two-types selection page button for pages with different types on first and second page
-// class NewSelectionPageButtonTwoTypes<T1, T2> extends StatelessWidget {
-//   final T1 currentValue;
-//   final List<T1> values;
-//   final List<T2> Function(T1) secondPageValues;
-//   final String label;
-//   final String hint;
-//   final String dialogAppBarTitle;
-//   final String secondPageDialogAppBarTitle;
-//   final String emptyPage;
-//   final String secondPageEmptyPage;
-//   final void Function(T1) onSelected;
-//   final void Function(T2) onSecondPageSelected;
-//   final Widget Function(T1)? leadingBuilder;
-//   final String Function(T1, T2) buttonLabelBuilder;
-//   final String Function(T1) labelBuilder;
-//   final String Function(T2) secondPageLabelBuilder;
-//   final String? Function(T1?) validator;
-//   final double buttonWidth;
-//   final T2 secondPageCurrentValue;
-//   final bool search;
-//   final bool onlyInPageLeading;
-
-//   const NewSelectionPageButtonTwoTypes({
-//     super.key,
-//     required this.currentValue,
-//     required this.values,
-//     required this.secondPageValues,
-//     required this.label,
-//     required this.hint,
-//     required this.dialogAppBarTitle,
-//     required this.secondPageDialogAppBarTitle,
-//     required this.emptyPage,
-//     required this.secondPageEmptyPage,
-//     required this.onSelected,
-//     required this.onSecondPageSelected,
-//     required this.buttonLabelBuilder,
-//     required this.secondPageLabelBuilder,
-//     this.leadingBuilder,
-//     required this.validator,
-//     this.search = false,
-//     this.onlyInPageLeading = false,
-//     this.buttonWidth = 0,
-//     required this.secondPageCurrentValue,
-//     required this.labelBuilder,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     double buttonWidth = this.buttonWidth == 0
-//         ? size.width - AppSize.s24
-//         : this.buttonWidth;
-//     return FormField<T1>(
-//       initialValue: currentValue,
-//       validator: validator,
-//       builder: (FormFieldState<T1> field) {
-//         return Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-//               child: Text(label, style: Theme.of(context).textTheme.bodyMedium),
-//             ),
-//             ElevatedButton(
-//               style:
-//                   CustomElevatedButtonDecoration.customElevatedbuttonStyleNonSelectable(
-//                     context: context,
-//                     width: buttonWidth,
-//                     error: field.hasError,
-//                   ),
-//               onPressed: () async {
-//                 customRightNavigation(
-//                   context,
-//                   NewSelectionPageGeneric<T1>(
-//                     title: dialogAppBarTitle,
-//                     emptyPage: emptyPage,
-//                     values: values,
-//                     field: field,
-//                     leadingBuilder: leadingBuilder != null
-//                         ? (dynamic item) => leadingBuilder!(item as T1)
-//                         : null,
-//                     labelBuilder: (dynamic item) => labelBuilder(item as T1),
-//                     onSelected: (dynamic item) => onSelected(item as T1),
-//                     search: search,
-//                     onItemTap: (dynamic item) {
-//                       final typedItem = item as T1;
-//                       onSelected(typedItem);
-//                       field.didChange(typedItem);
-//                       // Navigate to second page
-//                       customRightNavigation(
-//                         context,
-//                         NewSelectionPageGeneric<T2>(
-//                           title: secondPageDialogAppBarTitle,
-//                           emptyPage: secondPageEmptyPage,
-//                           values: secondPageValues(typedItem),
-//                           currentValue: secondPageCurrentValue!,
-//                           labelBuilder: (dynamic item) =>
-//                               secondPageLabelBuilder(item as T2),
-//                           onSelected: (dynamic selectedItem) {
-//                             onSecondPageSelected(selectedItem as T2);
-
-//                             field.validate();
-//                             Navigator.pop(context); // Close second page
-//                             // Navigator.pop(context); // Close first page
-//                           },
-//                           search: search,
-//                         ),
-//                       );
-//                     },
-//                   ),
-//                 );
-//               },
-//               child: SizedBox(
-//                 width: buttonWidth - AppSize.s16,
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         ?onlyInPageLeading
-//                             ? null
-//                             : leadingBuilder?.call(field.value!),
-//                         SizedBox(
-//                           width: leadingBuilder == null
-//                               ? AppSize.s5
-//                               : AppSize.s12,
-//                         ),
-//                         Text(
-//                           field.value == null
-//                               ? hint
-//                               : buttonLabelBuilder(
-//                                   field.value!,
-//                                   secondPageCurrentValue!,
-//                                 ),
-//                           style: Theme.of(context).textTheme.labelLarge,
-//                         ),
-//                       ],
-//                     ),
-//                     Icon(
-//                       Icons.arrow_forward_ios,
-//                       color: field.hasError
-//                           ? Theme.of(context).colorScheme.error
-//                           : Theme.of(context).colorScheme.primary,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             if (field.hasError)
-//               Padding(
-//                 padding: const EdgeInsets.only(top: AppPadding.p8),
-//                 child: Text(
-//                   field.errorText!,
-//                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-//                     color: Theme.of(context).colorScheme.error,
-//                   ),
-//                 ),
-//               ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-// }
-
 // One type selection page button with two different lists
-class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
+class SelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
   final T currentValue;
   final T2 Function(FormFieldState<T>) current2Value;
   final T3 Function(FormFieldState<T>) current3Value;
@@ -376,7 +210,7 @@ class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
   final bool search;
   final bool onlyInPageLeading;
 
-  const NewSelectionPageButtonSameType({
+  const SelectionPageButtonSameType({
     super.key,
     required this.currentValue,
     required this.values,
@@ -430,7 +264,7 @@ class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
               onPressed: () async {
                 await customRightNavigation(
                   context,
-                  NewSelectionPageGeneric<T2>(
+                  SelectionPageGeneric<T2>(
                     title: dialogAppBarTitle,
                     emptyPage: emptyPage,
 
@@ -443,7 +277,7 @@ class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
 
                       await customRightNavigation(
                         context,
-                        NewSelectionPageGeneric<T3>(
+                        SelectionPageGeneric<T3>(
                           title: secondPageDialogAppBarTitle,
                           emptyPage: secondPageEmptyPage,
                           values: secondPageValues(item),
@@ -513,7 +347,7 @@ class NewSelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
   }
 }
 
-class NewSelectionPageButtonCar<T, T2> extends StatelessWidget {
+class SelectionPageButtonCar<T, T2> extends StatelessWidget {
   final T currentValue;
   final T2 current2Value;
   final bool Function(T)? isSelected;
@@ -540,7 +374,7 @@ class NewSelectionPageButtonCar<T, T2> extends StatelessWidget {
   final bool search;
   final bool onlyInPageLeading;
 
-  const NewSelectionPageButtonCar({
+  const SelectionPageButtonCar({
     super.key,
     required this.currentValue,
     required this.values,
@@ -595,7 +429,7 @@ class NewSelectionPageButtonCar<T, T2> extends StatelessWidget {
               onPressed: () async {
                 await customRightNavigation(
                   context,
-                  NewSelectionPageGeneric<T>(
+                  SelectionPageGeneric<T>(
                     title: dialogAppBarTitle,
                     emptyPage: emptyPage,
                     leadingBuilder: leadingBuilder,
@@ -610,7 +444,7 @@ class NewSelectionPageButtonCar<T, T2> extends StatelessWidget {
 
                       await customRightNavigation(
                         context,
-                        NewSelectionPageGeneric<T2>(
+                        SelectionPageGeneric<T2>(
                           title: secondPageDialogAppBarTitle,
                           emptyPage: secondPageEmptyPage,
                           values: secondPageValues(item),

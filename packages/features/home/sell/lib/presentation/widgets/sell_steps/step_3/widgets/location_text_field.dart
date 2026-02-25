@@ -3,7 +3,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:data/models/location/location_model.dart';
 import 'package:flutter/material.dart';
 import 'package:sell/presentation/cubit/sell_cubit.dart';
-import 'package:shared_ui/shared_widgets/buttons/new_selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 import 'package:storage/cache/prefs_helper.dart';
 
@@ -12,7 +12,7 @@ class LocationTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NewSelectionPageButton<LocationModel>(
+    return SelectionPageButton<LocationModel>(
       currentValue: getIt<SellCubit>().car.location,
       values: getIt.get<PrefsHelper>().getLocationCatalog().locationsCatalog,
       label: StringsManager.location,

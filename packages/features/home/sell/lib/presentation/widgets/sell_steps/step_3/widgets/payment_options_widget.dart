@@ -3,7 +3,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:flutter/material.dart';
 import 'package:sell/presentation/cubit/sell_cubit.dart';
-import 'package:shared_ui/shared_widgets/buttons/new_selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class PaymentOptionsWidget extends StatelessWidget {
@@ -12,7 +12,7 @@ class PaymentOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SellCubit cubit = getIt.get<SellCubit>();
-    return NewSelectionPageButton<PaymentOptions>(
+    return SelectionPageButton<PaymentOptions>(
       values: PaymentOptions.values
           .where((e) => e != PaymentOptions.none)
           .toList(),

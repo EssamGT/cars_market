@@ -4,7 +4,7 @@ import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_ui/shared_widgets/buttons/new_selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class PaintColorWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class PaintColorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
     SellCubit cubit = getIt.get<SellCubit>();
-    return NewSelectionPageButton<PaintColors>(
+    return SelectionPageButton<PaintColors>(
       values: PaintColors.values
           .where((e) => e != PaintColors.none)
           .toList(),

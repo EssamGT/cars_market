@@ -8,7 +8,7 @@ import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/brands.dart';
 import 'package:flutter/material.dart';
 
-import 'package:shared_ui/shared_widgets/buttons/new_selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 import 'package:storage/cache/prefs_helper.dart';
 
@@ -26,7 +26,7 @@ class CarSelectionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SellCubit cubit = SellCubit.get(context);
-    return NewSelectionPageButtonCar<CarBrand, CarModel>(
+    return SelectionPageButtonCar<CarBrand, CarModel>(
       values: carCatalog.brands,
       secondPageValues: (CarBrand car) => car.models,
       currentValue: cubit.car.brand,

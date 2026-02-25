@@ -30,26 +30,3 @@ class SelectionPageAppBar extends StatelessWidget
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-
-// SizedBox(
-//       width: MediaQuery.sizeOf(context).width,
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         children: [
-//           IconButton(
-//             icon: Icon(
-//               Icons.arrow_back_ios_new_outlined,
-
-//               color: Theme.of(context).colorScheme.onError,
-//             ),
-//             onPressed: () => Navigator.pop(context),
-//           ),
-//           Text(
-//             title,
-//             textAlign: TextAlign.center,
-//             style: Theme.of(context).textTheme.headlineSmall,
-//           ),
-//         ],
-//       ),
-//     );

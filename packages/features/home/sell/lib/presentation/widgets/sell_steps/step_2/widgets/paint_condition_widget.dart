@@ -3,7 +3,7 @@ import 'package:cars_market/di/di.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_ui/shared_widgets/buttons/new_one_selected_button.dart';
+import 'package:shared_ui/shared_widgets/buttons/one_selected_button.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
 class PaintConditionWidget extends StatelessWidget {
@@ -12,7 +12,7 @@ class PaintConditionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SellCubit cubit = getIt<SellCubit>();
-    return NewOneSelectedButton<PaintConditions>(
+    return OneSelectedButton<PaintConditions>(
       label: StringsManager.paintConditionLabel,
       currentValue: cubit.car.paintCondition,
       values: PaintConditions.values
