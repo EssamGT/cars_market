@@ -14,9 +14,9 @@ class TopSpeedTextField extends StatelessWidget {
       hint: StringsManager.topSpeedHint,
       car: getIt.get<SellCubit>().car,
       type: TextFieldUploadCarType.topSpeed,
-      title: StringsManager.topSpeedLable,
+      title: StringsManager.topSpeedLabel,
       validationType: TextFieldValidationType.topSpeed,
-      keybordType: TextInputType.number,
+      keyboardType: TextInputType.number,
       maxLength: 3,
       prefixText: StringsManager.topSpeed,
     );

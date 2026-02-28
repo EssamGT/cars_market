@@ -1,5 +1,5 @@
 import 'package:constants/strings_manager.dart';
-import 'package:data/models/car/brands_models/wahtsaap_message.dart';
+import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:flutter/material.dart';
 import 'package:sell/presentation/cubit/sell_cubit.dart';
 import 'package:shared_ui/shared_widgets/buttons/one_selected_button.dart';
@@ -16,11 +16,11 @@ class _WhatsAppMessageWidgetState extends State<WhatsAppMessageWidget> {
   @override
   Widget build(BuildContext context) {
     SellCubit cubit = SellCubit.get(context);
-    return OneSelectedButton<WahtsaapMessage>(
+    return OneSelectedButton<WhatsAppMessage>(
       label: StringsManager.whatsappMessageLabel,
       currentValue: cubit.car.wahtsaapMessage,
-      values: WahtsaapMessage.values
-          .where((e) => e != WahtsaapMessage.none)
+      values: WhatsAppMessage.values
+          .where((e) => e != WhatsAppMessage.none)
           .toList(),
       labelBuilder: (e) => e.getConditionText(),
       onSelected: (value) {

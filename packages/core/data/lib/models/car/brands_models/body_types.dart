@@ -60,7 +60,7 @@ extension CarbodyTypeExtension on CarBodyType {
       case CarBodyType.other:
         return StringsManager.other;
       case CarBodyType.none:
-        return StringsManager.selecteCarBodyType;
+        return StringsManager.selectCarBodyType;
     }
   }
 

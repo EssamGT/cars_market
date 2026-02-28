@@ -19,9 +19,9 @@ class PaintColorWidget extends StatelessWidget {
           .where((e) => e != PaintColors.none)
           .toList(),
       currentValue: cubit.car.paintColor,
-      dialogAppBarTitle: StringsManager.selectePaintColor,
+      dialogAppBarTitle: StringsManager.selectPaintColor,
       emptyPage: StringsManager.noPaintColorsFound,
-      hint: StringsManager.selectePaintColor,
+      hint: StringsManager.selectPaintColor,
       label: StringsManager.paintColorLabel,
       onSelected: (PaintColors color) => cubit.setPaintColor(color),
       search: true,

@@ -1,182 +1,6 @@
 import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/car_models.dart';
 
-// const List<String> allCarBrands = [
-//   // 🇩🇪 Germany
-//   "BMW",
-//   "Mercedes-Benz",
-//   "Audi",
-//   "Volkswagen",
-//   "Porsche",
-//   "Opel",
-//   "Maybach",
-
-//   "Smart",
-
-//   // 🇯🇵 Japan
-//   "Toyota",
-//   "Lexus",
-//   "Nissan",
-//   "Infiniti",
-//   "Honda",
-//   "Acura",
-//   "Mazda",
-//   "Subaru",
-//   "Mitsubishi",
-//   "Suzuki",
-//   "Daihatsu",
-//   "Isuzu",
-
-//   // 🇰🇷 Korea
-//   "Hyundai",
-//   "Kia",
-//   "Genesis",
-
-//   // 🇫🇷 France
-//   "Peugeot",
-//   "Citroën",
-//   "Renault",
-//   "DS Automobiles",
-//   "Bugatti",
-
-//   // 🇮🇹 Italy
-//   "Fiat",
-//   "Alfa Romeo",
-//   "Ferrari",
-//   "Maserati",
-//   "Lamborghini",
-//   "Pagani",
-
-//   // 🇸🇪 Sweden
-//   "Volvo",
-//   "Polestar",
-//   "Koenigsegg",
-
-//   // 🇬🇧 United Kingdom
-//   "Aston Martin",
-//   "Bentley",
-//   "Rolls-Royce",
-//   "McLaren",
-//   "Mini (UK)",
-//   "Jaguar",
-//   "Land Rover",
-//   "Lotus",
-//   "Vauxhall",
-
-//   // 🇪🇸 Spain
-//   "SEAT",
-//   "Cupra",
-
-//   // 🇺🇸 United States
-//   "Ford",
-//   "Chevrolet",
-//   "GMC",
-//   "Cadillac",
-//   "Chrysler",
-//   "Dodge",
-//   "Jeep",
-//   "Ram",
-//   "Lincoln",
-//   "Buick",
-//   "Tesla",
-//   "Lucid",
-//   "Rivian",
-//   "Hummer",
-
-//   // 🇨🇦 Canada
-//   "Campagna",
-//   "Conquest Vehicles",
-
-//   // 🇨🇳 China
-//   "Great Wall",
-//   "Haval",
-//   "Changan",
-//   "NIO",
-//   "XPeng",
-//   "Hongqi",
-//   "Lynk & Co",
-//   "Zeekr",
-//   "Leapmotor",
-//   "MG",
-//   "BYTON",
-//   "Wuling",
-//   "Baojun",
-//   "NEVS",
-
-//   // 🇮🇳 India
-//   "Tata",
-//   "Mahindra",
-//   "Maruti Suzuki",
-
-//   // 🇻🇳 Vietnam
-//   "VinFast",
-
-//   // 🇲🇾 Malaysia
-//   "Proton",
-//   "Perodua",
-
-//   // 🇮🇷 Iran
-//   "IKCO",
-//   "Saipa",
-
-//   // 🇹🇷 Turkey
-//   "TOGG",
-
-//   // 🇷🇺 Russia
-//   "Lada",
-//   "GAZ",
-
-//   // 🇨🇭 Switzerland
-//   "Rinspeed",
-
-//   // 🇳🇱 Netherlands
-//   "Spyker",
-//   "VDL Nedcar",
-
-//   // 🇷🇴 Romania
-//   "Dacia",
-
-//   // 🇨🇿 Czech Republic
-//   "Škoda",
-
-//   // 🇺🇦 Ukraine
-//   "ZAZ",
-
-//   // 🇧🇷 Brazil
-//   "Troller",
-
-//   // 🇦🇺 Australia
-//   "Holden",
-
-//   // 🇮🇩 Indonesia
-//   "Esemka",
-
-//   // 🇸🇦 Saudi Arabia
-//   "Ceer",
-
-//   // 🇪🇬 Egypt
-//   "Nasr",
-
-//   // EV startups / New brands 🌍
-//   "Fisker",
-//   "Faraday Future",
-//   "Aptera",
-//   "Canoo",
-//   "Lordstown",
-//   "Lucid Motors",
-//   "VinFast",
-//   "NIO",
-//   "XPeng",
-//   "Rivian",
-//   "Zeekr",
-//   "BYD",
-//   "Polestar",
-//   "Aiways",
-//   "Leapmotor",
-//   "Li Auto",
-//   "WM Motor",
-// ];
-
 class CarBrand {
   final String id;
   final String name;
@@ -205,9 +29,11 @@ class CarBrand {
     return CarBrand._(
       id: id,
       name: name,
-      logoUrl: logoUrl ?? AppConstants.defaultCarImageUrl(id),
+      logoUrl: logoUrl ?? AppConstants.basetBrandLogoUrl(id),
       models: models,
-      selectedModel: selectedModel ?? const CarModel(id: '', name: ''),
+      selectedModel:
+          selectedModel ??
+          const CarModel(id: '', name: '', brand: '', brandId: ''),
       version: version ?? 1.0,
     );
   }
@@ -224,11 +50,13 @@ class CarBrand {
       name: name ?? '',
       logoUrl: logoUrl ?? '',
       models: models ?? [],
-      selectedModel: selectedModel ?? const CarModel(id: '', name: ''),
+      selectedModel:
+          selectedModel ??
+          const CarModel(id: '', name: '', brand: '', brandId: ''),
       version: version ?? 1.0,
     );
   }
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
@@ -252,6 +80,78 @@ class CarBrand {
       //     ? CarModel.fromJson(json['selectedModel'])
       //     : const CarModel(id: '', name: ''),
       version: json['version'] ?? 1.0,
+    );
+  }
+  // List<CarModel> forFilter() {
+  //   final filteredModels = List<CarModel>.from(models);
+  //   filteredModels.insert(
+  //     0,
+  //     CarModel(id: '', name: 'All', brand: name, brandId: id),
+  //   );
+  //   return filteredModels;
+  // }
+}
+
+class CarBrandFilter {
+  final String? id;
+  final String name;
+  final String logoUrl;
+
+  final List<CarModelFilter> models;
+  final CarModelFilter selectedModel;
+  CarBrandFilter({
+    this.id,
+    required this.name,
+    String? logoUrl,
+    this.models = const [],
+    CarModelFilter? selectedModel,
+  }) : selectedModel = selectedModel ?? CarModelFilter.nullable(),
+       logoUrl = logoUrl ?? AppConstants.basetBrandLogoUrl(id ?? "");
+
+  List<CarModelFilter> forFilter() {
+    final filteredModels = List<CarModelFilter>.from(models);
+    if (filteredModels.isEmpty || filteredModels.first.id != null) {
+      filteredModels.insert(
+        0,
+        CarModelFilter(id: null, name: 'All', brand: name, brandId: id),
+      );
+    }
+    return filteredModels;
+  }
+
+  // static List<CarModelFilter> _withAllModel(
+  //   List<CarModelFilter> models,
+  //   String? brandName,
+  //   String? brandId,
+  // ) {
+  //   final filteredModels = List<CarModelFilter>.from(models);
+  //   if (filteredModels.isEmpty || filteredModels.first.id != null) {
+  //     filteredModels.insert(
+  //       0,
+  //       CarModelFilter(
+  //         id: null,
+  //         name: 'All',
+  //         brand: brandName,
+  //         brandId: brandId,
+  //       ),
+  //     );
+  //   }
+  //   return filteredModels;
+  // }
+
+  factory CarBrandFilter.empty({
+    String? id,
+    String? name,
+    String? logoUrl,
+    List<CarModelFilter>? models,
+    CarModelFilter? selectedModel,
+  }) {
+    return CarBrandFilter(
+      id: id,
+      name: name ?? '',
+      logoUrl: logoUrl,
+      models: models ?? [],
+      selectedModel: selectedModel ?? CarModelFilter.nullable(),
     );
   }
 }

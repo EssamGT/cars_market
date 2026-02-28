@@ -16,7 +16,7 @@ class SeatNumber extends StatelessWidget {
       type: TextFieldUploadCarType.seatNumber,
       title: StringsManager.seatNumberLabel,
       validationType: TextFieldValidationType.seatNumber,
-      keybordType: TextInputType.number,
+      keyboardType: TextInputType.number,
       maxLength: 1,
       prefixText: StringsManager.seats,
     );

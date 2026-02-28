@@ -120,9 +120,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   controller1: passwordController,
                                   controller2: cpasswordController,
                                   hint1: StringsManager.enterPassword,
-                                  hint2: StringsManager.cYourpassword,
+                                  hint2: StringsManager.confirmYourPassword,
                                   label1: StringsManager.password,
-                                  label2: StringsManager.cpassword,
+                                  label2: StringsManager.confirmPassword,
                                   myNode1: passwordFocus,
                                   myNode2: cpasswordFoucs,
                                   validationType:

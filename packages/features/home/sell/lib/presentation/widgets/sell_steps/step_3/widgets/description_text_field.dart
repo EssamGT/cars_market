@@ -20,7 +20,7 @@ class DescriptionTextField extends StatelessWidget {
       counter: true,
       format: false,
       maxLength: 1000,
-      keybordType: TextInputType.multiline,
+      keyboardType: TextInputType.multiline,
     );
   }
 }

@@ -1,15 +1,15 @@
 import 'package:constants/strings_manager.dart';
 
-enum WahtsaapMessage { yes, no, none }
+enum WhatsAppMessage { yes, no, none }
 
-extension WahtsaapMessageExtension on WahtsaapMessage {
+extension WhatsAppMessageExtension on WhatsAppMessage {
   String getConditionText() {
     switch (this) {
-      case WahtsaapMessage.yes:
+      case WhatsAppMessage.yes:
         return StringsManager.yes;
-      case WahtsaapMessage.no:
+      case WhatsAppMessage.no:
         return StringsManager.no;
-      case WahtsaapMessage.none:
+      case WhatsAppMessage.none:
         return StringsManager.none;
     }
   }

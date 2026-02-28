@@ -177,7 +177,7 @@ extension PaintColorsExtension on PaintColors {
       case PaintColors.otherCustom:
         return StringsManager.otherCustom;
       case PaintColors.none:
-        return StringsManager.selectePaintColor;
+        return StringsManager.selectPaintColor;
     }
   }
 }

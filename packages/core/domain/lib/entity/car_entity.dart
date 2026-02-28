@@ -8,7 +8,7 @@ import 'package:data/models/car/brands_models/negotiation.dart';
 import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
-import 'package:data/models/car/brands_models/wahtsaap_message.dart';
+import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/location_model.dart';
@@ -47,7 +47,7 @@ class CarEntity {
   final AirConTypes airConType;
   final String? seatsNumber;
   final CarConditionType carCondition;
-  final WahtsaapMessage wahtsaapMessage;
+  final WhatsAppMessage wahtsaapMessage;
 
   const CarEntity({
     required this.carId,
@@ -195,9 +195,9 @@ class CarEntity {
       features = json[CarsTableKeys.features] == null
           ? null
           : resolveFeaturesFromJson(json[CarsTableKeys.features]),
-      wahtsaapMessage = WahtsaapMessage.values.firstWhere(
+      wahtsaapMessage = WhatsAppMessage.values.firstWhere(
         (e) => e.name == json[CarsTableKeys.wahtsaapMessage],
-        orElse: () => WahtsaapMessage.none,
+        orElse: () => WhatsAppMessage.none,
       ),
       transmissionType = TransmissionType.values.firstWhere(
         (e) => e.name == json[CarsTableKeys.transmissionType],

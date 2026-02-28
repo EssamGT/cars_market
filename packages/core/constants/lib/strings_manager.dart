@@ -20,8 +20,9 @@ class StringsManager {
   static const String phoneNumberEx = 'Enter your phone number';
   static const String phoneNumber = 'Phone Number';
   static const String save = 'Save';
+  static const String startTypingToSearch = 'Start typing to search...';
   static const String seeAll = 'See All';
-  static const String cnext = 'Continue';
+  static const String nextButtonLabel = 'Continue';
   static const String verify = 'Verify';
   static const String noLocationAvailable = 'No Location Available';
   static const String verifyNow = 'Verify Now';
@@ -43,13 +44,13 @@ class StringsManager {
   static const String toPriceHint = 'EX.800,000';
   static const String min = 'Min';
   static const String max = 'Max';
-  static const String kmLable = 'Kilometers (KM)';
+  static const String kmLabel = 'Kilometers (KM)';
   static const String kmHint = 'e.g.., 55000 KM';
   static const String km = 'KM';
-  static const String hpLable = 'Horsepower (Optional)';
+  static const String hpLabel = 'Horsepower (Optional)';
   static const String hpHint = 'e.g.., 150 HP';
-  static const String hp = 'Horesepower';
-  static const String topSpeedLable = 'Top Speed (Optional)';
+  static const String hp = 'Horsepower';
+  static const String topSpeedLabel = 'Top Speed (Optional)';
   static const String topSpeedHint = 'e.g.., 200 km/h';
   static const String topSpeed = 'Top Speed';
   static const String fuelConsumptionLabel = 'Fuel Consumption (Optional)';
@@ -81,14 +82,12 @@ class StringsManager {
   static const String brand = 'Brand';
   static const String brandNotFound = 'Brand Not Found';
   static const String modelNotFound = 'Model Not Found';
-  static const String dbrand = 'Brand';
   static const String ev = 'EV';
   static const String selectBrand = 'Select Brand';
   static const String searchForBrand = 'Search for brand';
   static const String searchForModel = 'Search for model';
   static const String yearLabel = 'Year';
   static const String yearHint = 'EX. 2010';
-  static const String dyear = 'Year';
   static const String selectedCar = 'Selected Car';
   static const String selectCar = 'Select a car';
   static const String pleaseSelectCar = 'Please select a car';
@@ -96,7 +95,6 @@ class StringsManager {
   static const String versionHint = 'EX. LX, Sport, Limited';
   static const String version = 'Version';
   static const String model = 'Model';
-  static const String dmodel = 'Model';
   static const String selectModel = 'Select Model';
   static const String choose = 'Choose';
   static const String nonNegotiablePrice = 'Non-Negotiable';
@@ -111,7 +109,7 @@ class StringsManager {
   static const String bodyTypeError = 'No body type found';
   static const String pleaseAddAtLeast3Images = 'Please add at least 3 images';
   static const String fuelTypeLabel = 'Fuel Type';
-  static const String dfuelType = 'Fuel Type';
+
   static const String petrol = 'Petrol';
   static const String diesel = 'Diesel';
   static const String electric = 'Electric';
@@ -122,7 +120,7 @@ class StringsManager {
   static const String fuelTypes = 'Fuel Types';
   static const String priceLabel = 'Price (EGP)';
   static const String priceHint = 'EX. 100,000';
-  static const String dprice = 'Price';
+  static const String price = 'Price';
   static const String next = 'Next';
   static const String listMyCar = 'List My Car Now ';
   static const String negotiableLabel = 'Negotiable ? ';
@@ -134,14 +132,13 @@ class StringsManager {
   static const String transmissionTypeError = 'please select Transmission Type';
   static const String automatic = 'Automatic';
   static const String manual = 'Manual';
-  static const String dgearboxType = 'Transmission Type';
   static const String transmissionTypes = 'Transmission Types';
   // static const String mileage = 'Kilometers (KM)';
 
   static const String paintColorLabel = 'Paint Color';
   // static const String selectPaintColor = 'Select paint color';
   static const String pleaseSelectPaintColor = 'Please select paint color';
-  static const String selectePaintColor = 'Select Paint Color';
+  static const String selectPaintColor = 'Select Paint Color';
   static const String noPaintColorsFound = 'No paint colors found';
   static const String paintConditionLabel = 'Paint Condition';
   static const String paintConditions = 'Paint Conditions';
@@ -186,8 +183,8 @@ class StringsManager {
   static const String haveAccount = 'Already have an account? ';
   static const String dontHaveAccount = "Don't have an account? ";
   static const String password = 'Password';
-  static const String cYourpassword = 'Confirm your password';
-  static const String cpassword = 'Confirm password';
+  static const String confirmYourPassword = 'Confirm your password';
+  static const String confirmPassword = 'Confirm password';
   static const String enterEmail = 'Enter your email';
   static const String enterPassword = 'Enter your Password';
   static const String guestMode = 'Continue as Guest';
@@ -221,20 +218,20 @@ class StringsManager {
       'Browse our extensive inventory of new and used vehicles from top brands.';
   static const String getStarted = 'Get Started';
   static const String pick = 'Pick your car';
-  static const String browseTopb =
+  static const String browseTopBrands =
       'Browse top brands with detailed specs and offers.';
   static const String makeIt = 'Make it yours';
   static const String compare =
       'Compare prices, check details, and complete your purchase with ease.';
   static const List<Map<String, String>> titles = [
     {'t': findYouCar, 's': browse},
-    {'t': pick, 's': browseTopb},
+    {'t': pick, 's': browseTopBrands},
     {'t': makeIt, 's': compare},
   ];
   //body type
   static const String carBodyTypeLabel = 'Body Type';
   static const String bodyTypes = 'Body Types';
-  static const String selecteCarBodyType = 'Select Body Type';
+  static const String selectCarBodyType = 'Select Body Type';
   static const String noCarBodyTypesFound = 'No Body Types Found';
   static const String pleaseSelectCarBodyType = 'Please select a body type';
   static const String sedan = 'Sedan';
@@ -431,8 +428,8 @@ class StringsManager {
   static const String emergencyBrakingId = 'emergency_braking';
   static const String autoBrakingLabel = 'Automatic Braking At Low Speeds';
   static const String autoBrakingId = 'auto_braking';
-  static const String distanseWarningLabel = 'Distance Warning';
-  static const String distanseWarningId = 'distanse_warning';
+  static const String distanceWarningLabel = 'Distance Warning';
+  static const String distanceWarningId = 'distance_warning';
   static const String emergencySosLabel = 'Emergency SOS';
   static const String emergencySosId = 'emergency_sos';
   static const String personsDetectionLabel = 'Persons Detection';

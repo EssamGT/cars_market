@@ -30,9 +30,9 @@ class KmTextField extends StatelessWidget {
           hint: StringsManager.kmHint,
           car: getIt.get<SellCubit>().car,
           type: TextFieldUploadCarType.km,
-          title: StringsManager.kmLable,
+          title: StringsManager.kmLabel,
           validationType: TextFieldValidationType.km,
-          keybordType: TextInputType.number,
+          keyboardType: TextInputType.number,
           maxLength: 8,
           prefixText: StringsManager.km,
         );

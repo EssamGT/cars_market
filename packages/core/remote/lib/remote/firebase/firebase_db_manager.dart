@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/car_catalog.dart';
+import 'package:data/models/car/car_filter_model.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/locations_catalog.dart';
@@ -77,6 +78,49 @@ class FirebaseDbManager {
     final cars = await firestore
         .collection(carsDataBase!)
         .orderBy(CarsTableKeys.createdAt, descending: true)
+        .limit(10)
+        .get(GetOptions(source: Source.server));
+    final carEntity = cars.docs
+        .map((d) => CarEntity.fromJson(d.data()))
+        .toList();
+    return carEntity;
+  }
+
+  Future<List<CarEntity>> searchScreenCars(CarFilterModel searchModel) async {
+    final cars = await firestore
+        .collection(carsDataBase!)
+        .where(CarsTableKeys.brandId, isEqualTo: searchModel.brand.id)
+        .where(
+          CarsTableKeys.modelId,
+          isEqualTo: searchModel.brand.selectedModel.id,
+        )
+        .where(CarsTableKeys.location, isEqualTo: searchModel.location)
+        .where(
+          CarsTableKeys.year,
+          isGreaterThanOrEqualTo: searchModel.minYear,
+          isLessThanOrEqualTo: searchModel.maxYear,
+        )
+        .where(
+          CarsTableKeys.price,
+          isGreaterThanOrEqualTo: searchModel.minPrice,
+          isLessThanOrEqualTo: searchModel.maxPrice,
+        )
+        .where(
+          CarsTableKeys.km,
+          isGreaterThanOrEqualTo: searchModel.minKm,
+          isLessThanOrEqualTo: searchModel.maxKm,
+        )
+        .where(CarsTableKeys.fuelType, isEqualTo: searchModel.fuelType)
+        .where(CarsTableKeys.bodyType, isEqualTo: searchModel.bodyType)
+        .where(CarsTableKeys.paintColor, isEqualTo: searchModel.paintColor)
+        .where(
+          CarsTableKeys.paintCondition,
+          isEqualTo: searchModel.paintCondition,
+        )
+        .where(
+          CarsTableKeys.transmissionType,
+          isEqualTo: searchModel.transmissionType,
+        )
         .limit(10)
         .get(GetOptions(source: Source.server));
     final carEntity = cars.docs

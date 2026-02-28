@@ -13,7 +13,7 @@ import 'package:data/models/car/brands_models/negotiation.dart';
 import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
-import 'package:data/models/car/brands_models/wahtsaap_message.dart';
+import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/location_model.dart';
@@ -143,7 +143,7 @@ class SellCubit extends Cubit<SellState> {
     }
   }
 
-  void setWahtsaapMessage(WahtsaapMessage wahtsaapMessage) {
+  void setWahtsaapMessage(WhatsAppMessage wahtsaapMessage) {
     if (car.wahtsaapMessage != wahtsaapMessage) {
       car.wahtsaapMessage = wahtsaapMessage;
     }

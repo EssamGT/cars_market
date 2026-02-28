@@ -18,11 +18,11 @@ class DetailedInfoWidget extends StatelessWidget {
   const DetailedInfoWidget({super.key, required this.car});
   List<DetailsItem> getInfoList(CarEntity car) {
     List<DetailsItem> fullList = [
-      DetailsItem(title: StringsManager.dbrand, subTitle: car.brand),
-      DetailsItem(title: StringsManager.dmodel, subTitle: car.model),
+      DetailsItem(title: StringsManager.brand, subTitle: car.brand),
+      DetailsItem(title: StringsManager.model, subTitle: car.model),
       DetailsItem(title: StringsManager.version, subTitle: car.version!),
 
-      DetailsItem(title: StringsManager.dyear, subTitle: car.year.toString()),
+      DetailsItem(title: StringsManager.yearLabel, subTitle: car.year.toString()),
       DetailsItem(
         title: StringsManager.carConditionLabel,
         subTitle: car.carCondition.getConditionText(),

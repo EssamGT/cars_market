@@ -15,7 +15,7 @@ class PriceTextField extends StatelessWidget {
       title: StringsManager.priceLabel,
       type: TextFieldUploadCarType.price,
       hint: StringsManager.priceHint,
-      keybordType: TextInputType.number,
+      keyboardType: TextInputType.number,
       format: true,
       validationType: TextFieldValidationType.price,
       prefixText: StringsManager.egp,

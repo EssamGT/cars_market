@@ -23,9 +23,9 @@ class BodyTypeWidget extends StatelessWidget {
               .toList(),
           currentValue: cubit.car.bodyType,
           search: true,
-          dialogAppBarTitle: StringsManager.selecteCarBodyType,
+          dialogAppBarTitle: StringsManager.selectCarBodyType,
           emptyPage: StringsManager.noCarBodyTypesFound,
-          hint: StringsManager.selecteCarBodyType,
+          hint: StringsManager.selectCarBodyType,
           label: StringsManager.carBodyTypeLabel,
           onSelected: (CarBodyType bodyType) => cubit.setBodyType(bodyType),
 

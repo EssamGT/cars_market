@@ -11,30 +11,29 @@ class YearFilterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FilterNormalTextField(
           carFilter: SearchScreenCubit.get(context).carFilterModel,
-          title: StringsManager.dyear,
+          title: StringsManager.yearLabel,
           maxLength: 4,
           width: size.width * 0.44,
-          price: false,
-          counter: false,
           format: false,
-          validationType: TextFieldValidationType.year,
+          validationType: TextFieldValidationType.minYear,
           hint: StringsManager.min,
+          keyboardType: TextInputType.number,
           type: FilterNormalTextFieldType.minYear,
         ),
         FilterNormalTextField(
           carFilter: SearchScreenCubit.get(context).carFilterModel,
           maxLength: 4,
           width: size.width * 0.44,
-          price: false,
-          counter: false,
           format: false,
-          validationType: TextFieldValidationType.year,
+          validationType: TextFieldValidationType.maxYear,
+
           hint: StringsManager.max,
+          keyboardType: TextInputType.number,
           type: FilterNormalTextFieldType.maxYear,
         ),
       ],

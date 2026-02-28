@@ -368,11 +368,11 @@ class SelectionPageButtonCar<T, T2> extends StatelessWidget {
   final String Function(T) buttonLabelBuilder;
   final String Function(T) labelBuilder;
   final String Function(T2) secondPageLabelBuilder;
-  final String? Function(T?) validator;
+  final String? Function(T?)? validator;
   final double buttonWidth;
-  final T2 secondPageCurrentValue;
   final bool search;
   final bool onlyInPageLeading;
+  final bool filter;
 
   const SelectionPageButtonCar({
     super.key,
@@ -390,7 +390,7 @@ class SelectionPageButtonCar<T, T2> extends StatelessWidget {
     required this.labelBuilder,
     required this.secondPageLabelBuilder,
     required this.buttonLabelBuilder,
-    required this.validator,
+    this.validator,
     required this.onExit,
     this.leadingBuilder,
     this.isSelected,
@@ -398,8 +398,8 @@ class SelectionPageButtonCar<T, T2> extends StatelessWidget {
     this.search = false,
     this.onlyInPageLeading = false,
     this.buttonWidth = 0,
-    required this.secondPageCurrentValue,
     required this.current2Value,
+    this.filter = false,
   });
 
   @override
@@ -440,28 +440,35 @@ class SelectionPageButtonCar<T, T2> extends StatelessWidget {
                     isSelected: isSelected,
                     search: search,
                     onItemTap: (item) async {
-                      onSelected?.call(item, field);
+                      if (filter && item == values[0]) {
+                        onSelected?.call(item, field);
+                        Navigator.pop(context);
+                      } else {
+                        if (!filter) {
+                          onSelected?.call(item, field);
+                        }
 
-                      await customRightNavigation(
-                        context,
-                        SelectionPageGeneric<T2>(
-                          title: secondPageDialogAppBarTitle,
-                          emptyPage: secondPageEmptyPage,
-                          values: secondPageValues(item),
-                          currentValue: current2Value,
+                        await customRightNavigation(
+                          context,
+                          SelectionPageGeneric<T2>(
+                            title: secondPageDialogAppBarTitle,
+                            emptyPage: secondPageEmptyPage,
+                            values: secondPageValues(item),
+                            currentValue: current2Value,
 
-                          labelBuilder: (dynamic item) =>
-                              secondPageLabelBuilder(item),
-                          onItemTap: (selectedItem) {
-                            onSecondPageSelected(item, selectedItem, field);
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                          },
+                            labelBuilder: (dynamic item) =>
+                                secondPageLabelBuilder(item),
+                            onItemTap: (selectedItem) {
+                              onSecondPageSelected(item, selectedItem, field);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
 
-                          isSelected: isSelected2,
-                          search: search,
-                        ),
-                      );
+                            isSelected: isSelected2,
+                            search: search,
+                          ),
+                        );
+                      }
                     },
                   ),
                 );

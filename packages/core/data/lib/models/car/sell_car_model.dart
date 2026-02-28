@@ -10,7 +10,7 @@ import 'package:data/models/car/brands_models/negotiation.dart';
 import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
-import 'package:data/models/car/brands_models/wahtsaap_message.dart';
+import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/location/location_model.dart';
 import 'package:google_places_service/data/models/text_search_model/text_search_model.dart';
@@ -73,7 +73,7 @@ class SellCarUploadModel {
   String seatsNumber;
   String year;
   AirConTypes airConType;
-  WahtsaapMessage wahtsaapMessage;
+  WhatsAppMessage wahtsaapMessage;
   String description;
   CarBodyType bodyType;
   TransmissionType transmissionType;
@@ -98,7 +98,7 @@ class SellCarUploadModel {
     this.createdAt = '',
 
     this.year = '',
-    this.wahtsaapMessage = WahtsaapMessage.none,
+    this.wahtsaapMessage = WhatsAppMessage.none,
     CarBrand? brand,
     EngineSpec? engineSpec,
     LocationModel? location2,

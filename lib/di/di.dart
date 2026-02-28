@@ -7,6 +7,7 @@ import 'package:google_places_service/di/gps_di.dart';
 import 'package:login/di/login_di.dart';
 import 'package:main/di/main_screen_di.dart';
 import 'package:remote/di/remote_di.dart';
+import 'package:search/di/search_di.dart';
 import 'package:sell/di/sell_di.dart';
 import 'package:storage/di/storage_di.dart';
 import 'package:sync_manager/di/sync_manager_di.dart';
@@ -27,8 +28,9 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureForgotPasswordDependencies(getIt, enviroment);
   await configureUserDetailsDependencies(getIt, enviroment);
   await configureGooglePlacesServiceDependencies(getIt, enviroment);
-  await configureSellDependencies(getIt, enviroment);
   await configureStorageDependencies(getIt, enviroment);
   await configureSyncManagerDependencies(getIt, enviroment);
   await configureMainScreenDependencies(getIt, enviroment);
+  await configureSellDependencies(getIt, enviroment);
+  await configureSearchDependencies(getIt, enviroment);
 }

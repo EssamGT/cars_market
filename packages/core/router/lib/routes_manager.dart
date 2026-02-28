@@ -8,6 +8,7 @@ class RoutesManager {
   static const String newUserDataScreen = '/newUserDataScreen';
   static const String main = '/main';
   static const String search = '/search';
+  static const String searchResults = '/searchResults';
   static const String sellCarScreen = '/sellCarScreen';
   static const String sellBrandSelection = '/sellBrandSelection';
   static const String sellModelSelection = '/sellModelSelection';

@@ -6,7 +6,8 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:router/routes_manager.dart';
 
 class CSearchBar extends StatelessWidget {
-  const CSearchBar({super.key});
+  final void Function(String)? onChanged;
+  const CSearchBar({super.key, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class CSearchBar extends StatelessWidget {
         hintStyle: WidgetStateProperty.all(
           Theme.of(context).textTheme.bodyMedium,
         ),
-
+        onChanged: (value) => onChanged?.call(value),
         padding: WidgetStateProperty.all(const EdgeInsets.all(AppPadding.p10)),
         trailing: [
           IconButton(

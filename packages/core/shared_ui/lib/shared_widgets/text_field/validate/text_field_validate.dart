@@ -1,6 +1,5 @@
 import 'package:constants/strings_manager.dart';
-import 'package:data/models/car/brands_models/body_types.dart'
-    show CarBodyType, CarbodyTypeExtension;
+import 'package:data/models/car/brands_models/body_types.dart';
 import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:data/models/car/brands_models/engine_spec.dart';
 import 'package:data/models/car/brands_models/fuel_type.dart';
@@ -8,7 +7,7 @@ import 'package:data/models/car/brands_models/negotiation.dart';
 import 'package:data/models/car/brands_models/paint_colors.dart';
 import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
-import 'package:data/models/car/brands_models/wahtsaap_message.dart';
+import 'package:data/models/car/brands_models/whatsapp_message.dart';
 
 enum TextFieldValidationType {
   email,
@@ -44,10 +43,20 @@ enum TextFieldValidationType {
   paymentOptions,
   whatsappMessage,
   images,
+  minYear,
+  maxYear,
+  minPrice,
+  maxPrice,
+  minKm,
+  maxKm,
 }
 
 class TextFieldValidator {
-  static String? validateNormal(TextFieldValidationType type, String value) {
+  static String? validateNormal(
+    TextFieldValidationType type,
+    String value, [
+    String? value2,
+  ]) {
     final input = value.trim();
 
     switch (type) {
@@ -95,6 +104,26 @@ class TextFieldValidator {
         if (year == 0) return StringsManager.emptyYearError;
         if (input.length != 4) return StringsManager.validYearError;
         if (year < 1900) return StringsManager.validYearError;
+        if (year > DateTime.now().year + 1) {
+          return StringsManager.validYearError;
+        }
+        return null;
+      case TextFieldValidationType.minYear:
+        int year = int.tryParse(input) ?? 0;
+        if (year == 0) return null;
+        if (input.length != 4) return StringsManager.validYearError;
+        if (year < 1900) return StringsManager.validYearError;
+        if (year > DateTime.now().year + 1) {
+          return StringsManager.validYearError;
+        }
+        return null;
+      case TextFieldValidationType.maxYear:
+        int year = int.tryParse(input) ?? 0;
+        int minYear = int.tryParse(value2 ?? "") ?? 0;
+        if (year == 0) return null;
+        if (input.length != 4) return StringsManager.validYearError;
+        if (year < 1900) return StringsManager.validYearError;
+        if (year < minYear) return StringsManager.validYearError;
         if (year > DateTime.now().year + 1) {
           return StringsManager.validYearError;
         }
@@ -230,7 +259,7 @@ class TextFieldValidator {
         }
         return null;
       case TextFieldValidationType.whatsappMessage:
-        if (value == WahtsaapMessage.none.getConditionText()) {
+        if (value == WhatsAppMessage.none.getConditionText()) {
           return StringsManager.whatsappMessageError;
         }
         return null;

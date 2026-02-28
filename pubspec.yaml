@@ -52,6 +52,8 @@ dependencies:
     path: packages/features/auth/forgot_password
   sell:
     path: packages/features/home/sell
+  search:
+    path: packages/features/home/search
   main:
     path: packages/features/home/main
   remote:

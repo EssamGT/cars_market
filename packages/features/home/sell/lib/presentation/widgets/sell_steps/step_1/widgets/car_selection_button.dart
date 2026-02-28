@@ -2,13 +2,12 @@ import 'package:cars_market/di/di.dart';
 import 'package:data/models/car/brands_models/car_catalog.dart';
 import 'package:data/models/car/brands_models/car_models.dart';
 import 'package:sell/presentation/cubit/sell_cubit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:constants/strings_manager.dart';
-import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/brands.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shared_ui/shared_widgets/buttons/selection_page_button.dart';
+import 'package:shared_ui/shared_widgets/car_listing_card/brand_logo_builder.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 import 'package:storage/cache/prefs_helper.dart';
 
@@ -43,7 +42,7 @@ class CarSelectionButton extends StatelessWidget {
       secondPageLabelBuilder: (CarModel model) => model.name,
       secondPageDialogAppBarTitle: StringsManager.selectModel,
 
-      leadingBuilder: (CarBrand car) => brandLogoBuilder(car, context),
+      leadingBuilder: (CarBrand car) => BrandLogoBuilder(url: car.logoUrl),
       onlyInPageLeading: false,
       // onSelected: (CarBrand car, field) {
       //   print(field.value?.name);
@@ -67,7 +66,7 @@ class CarSelectionButton extends StatelessWidget {
       onExit: (field) {
         field.validate();
       },
-      secondPageCurrentValue: cubit.car.brand.selectedModel,
+  
       validator: (car) => TextFieldValidator.validateNormal(
         TextFieldValidationType.car,
 
@@ -77,36 +76,3 @@ class CarSelectionButton extends StatelessWidget {
   }
 }
 
-Widget brandLogoBuilder(CarBrand carBrand, BuildContext context) {
-  return carBrand.logoUrl.isNotEmpty
-      ? Container(
-          width: AppSize.s40,
-          height: AppSize.s40,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(shape: BoxShape.circle),
-          child: CachedNetworkImage(
-            imageUrl: carBrand.logoUrl,
-            fit: BoxFit.contain,
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-          ),
-        )
-      : Container(
-          width: AppSize.s35,
-          height: AppSize.s35,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Theme.of(context).colorScheme.outline),
-          ),
-          child: const Icon(Icons.directions_car),
-        );
-}
-
-String carInfoBuilder(CarBrand? carBrand) {
-  if (carBrand == null ||
-      carBrand.name.isEmpty ||
-      carBrand.selectedModel.name.isEmpty) {
-    return StringsManager.selectCar;
-  }
-  return "${carBrand.name} ${carBrand.selectedModel.name}";
-}

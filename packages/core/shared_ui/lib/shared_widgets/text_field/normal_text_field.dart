@@ -29,7 +29,7 @@ class NormalTextFieldUploadCar extends StatefulWidget {
   final String? prefixText;
   final int? maxLiens;
   final int? minLiens;
-  final TextInputType? keybordType;
+  final TextInputType? keyboardType;
   final bool counter;
   final bool format;
 
@@ -44,7 +44,7 @@ class NormalTextFieldUploadCar extends StatefulWidget {
     this.minLiens,
     this.maxLength,
     this.validationType = TextFieldValidationType.none,
-    this.keybordType,
+    this.keyboardType,
     this.counter = false,
     this.format = true,
     required this.car,
@@ -210,7 +210,7 @@ class NormalTextFieldUploadCarState extends State<NormalTextFieldUploadCar> {
                 }
               },
               // textInputAction: TextInputAction.done,
-              keyboardType: widget.keybordType,
+              keyboardType: widget.keyboardType,
               autofocus: false,
               focusNode: focusNode,
               ignorePointers: false,

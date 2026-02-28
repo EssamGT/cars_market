@@ -31,7 +31,7 @@ class FuelConsumptionTextField extends StatelessWidget {
           type: TextFieldUploadCarType.fuelConsumption,
           title: StringsManager.fuelConsumptionLabel,
           validationType: TextFieldValidationType.fuelConsumption,
-          keybordType: TextInputType.number,
+          keyboardType: TextInputType.number,
           maxLength: 4,
           prefixText: StringsManager.fuelConsumption,
           format: false,

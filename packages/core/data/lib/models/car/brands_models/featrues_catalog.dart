@@ -268,8 +268,8 @@ FeaturesList driverAssistance = FeaturesList(
       icon: CustomIcons.warning,
     ),
     FeatureModel(
-      name: StringsManager.distanseWarningLabel,
-      id: StringsManager.distanseWarningId,
+      name: StringsManager.distanceWarningLabel,
+      id: StringsManager.distanceWarningId,
       icon: CustomIcons.distanseWarning,
     ),
   ],

@@ -14,7 +14,7 @@ class ModifcationsTextFeild extends StatelessWidget {
       hint: StringsManager.modificationsHint,
       type: TextFieldUploadCarType.modifications,
       title: StringsManager.modificationsLabelSellCar,
-      keybordType: TextInputType.multiline,
+      keyboardType: TextInputType.multiline,
       minLiens: 3,
       format: false,
     );

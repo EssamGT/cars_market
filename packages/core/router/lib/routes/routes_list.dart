@@ -7,6 +7,7 @@ import 'package:login/presentation/login_screen.dart';
 import 'package:on_bording/presentation/on_bording_screen.dart';
 import 'package:router/routes_manager.dart';
 import 'package:search/presentation/widgets/filter_screen/filter_screen.dart';
+import 'package:search/presentation/widgets/search_result/search_result_screen.dart';
 import 'package:sell/presentation/sell_screen.dart';
 
 import 'package:user_details/presentation/user_details_screen.dart';
@@ -57,6 +58,15 @@ final routes = <RouteBase>[
     path: RoutesManager.filterScreen,
     pageBuilder: (context, state) {
       return customRightAnimationPage(child: FilterScreen(), state: state);
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.searchResults,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: SearchResultScreen(),
+        state: state,
+      );
     },
   ),
 ];

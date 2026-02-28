@@ -21,7 +21,7 @@ class ContinueButton extends StatelessWidget {
             cubit.confirmUserDetails();
           }
         },
-        text: StringsManager.cnext,
+        text: StringsManager.nextButtonLabel,
         // enable: loading,
       ),
     );

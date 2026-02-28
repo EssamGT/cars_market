@@ -1,3 +1,4 @@
+import 'package:cars_market/di/di.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,13 +20,13 @@ class FilterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const FilterScreenAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppPadding.p16),
-          child: BlocProvider<SearchScreenCubit>(
-            create: (context) => SearchScreenCubit(),
+    return BlocProvider.value(
+      value: getIt.get<SearchScreenCubit>(),
+      child: Scaffold(
+        appBar: const FilterScreenAppBar(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.p16),
             child: Column(
               spacing: AppSize.s20,
               children: [
