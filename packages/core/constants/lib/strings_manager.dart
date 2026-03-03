@@ -2,12 +2,15 @@ class StringsManager {
   static const String findYouCar = 'Find you dream car';
   static const String welcome = 'Welcome Back';
   static const String error = 'Error';
+  static const String all = 'All';
   static const String spec = 'Specifications';
   static const String confirmExitLab = 'Exit !';
   static const String confirmExitSub =
       'Are you sure you want to exit\n all your progress will be lost';
   static const String cancel = 'Cancel';
   static const String exit = 'Exit';
+  static const String reset = 'Reset';
+  static const String search = 'Search';
   static const String otpValidation = 'Please enter a valid OTP';
   static String maxImagesLimitReached(int imagesLimit) =>
       'Maximum number of images reached only $imagesLimit images allowed';
@@ -647,13 +650,17 @@ class StringsManager {
   static const String passwordMinLengthError = "At least 8 characters";
   static const String emptyYearError = "Please enter year";
   static const String validYearError = "Please enter a valid year";
+  static const String validYearMax =
+      "Max year should be greater than or equal to min year";
+  static const String validYearMin =
+      "Min year should be less than or equal to max year";
   static const String carRequiredError = "Please select a car";
   static const String emptyModelError = "Please enter model";
   static const String emptyBodyTypeError = "Please select body type";
   static const String emptyFuelTypeError = "Please select fuel type";
   static const String emptyGearboxTypeError = "Please select gearbox type";
   static const String emptyMileageError = "Please enter mileage";
-  static const String validMileageError = "Please enter a valid mileage";
+  static const String validKmError = "Please enter a valid Km value";
   static const String emptyPaintColorError = "Please select paint color";
   static const String emptyPaintConditionError =
       "Please select paint condition";

@@ -6,37 +6,20 @@ import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate
 
 class YearFilterWidget extends StatelessWidget {
   const YearFilterWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FilterNormalTextField(
-          carFilter: SearchScreenCubit.get(context).carFilterModel,
-          title: StringsManager.yearLabel,
-          maxLength: 4,
-          width: size.width * 0.44,
-          format: false,
-          validationType: TextFieldValidationType.minYear,
-          hint: StringsManager.min,
-          keyboardType: TextInputType.number,
-          type: FilterNormalTextFieldType.minYear,
-        ),
-        FilterNormalTextField(
-          carFilter: SearchScreenCubit.get(context).carFilterModel,
-          maxLength: 4,
-          width: size.width * 0.44,
-          format: false,
-          validationType: TextFieldValidationType.maxYear,
-
-          hint: StringsManager.max,
-          keyboardType: TextInputType.number,
-          type: FilterNormalTextFieldType.maxYear,
-        ),
-      ],
+    SearchScreenCubit cubit = SearchScreenCubit.get(context);
+    return DoubleFilterTextField(
+      title: StringsManager.yearLabel,
+      initValue1: cubit.searchModel.minYear,
+      initValue2: cubit.searchModel.maxYear,
+      type1: FilterTextFieldValidationType.minYear,
+      type2: FilterTextFieldValidationType.maxYear,
+      onChanged1: (value) => cubit.setMinYear(value),
+      onChanged2: (value) => cubit.setMaxYear(value),
+      maxLength: 4,
+      format: false,
+      keyboardType: TextInputType.number,
     );
   }
 }

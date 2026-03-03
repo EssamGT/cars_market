@@ -10,14 +10,16 @@ class OneSelectedButton<T extends Enum> extends StatelessWidget {
   final String? Function(T?)? validator;
   final String Function(T) labelBuilder;
   final EdgeInsets padding;
+  final double spacing;
   const OneSelectedButton({
     super.key,
     required this.label,
     required this.currentValue,
     required this.values,
     required this.onSelected,
-     this.validator,
+    this.validator,
     required this.labelBuilder,
+    this.spacing = AppSize.s10,
     this.padding = const EdgeInsets.symmetric(vertical: AppPadding.p10),
   });
 
@@ -49,11 +51,11 @@ class OneSelectedButton<T extends Enum> extends StatelessWidget {
               Wrap(
                 alignment: WrapAlignment.start,
                 runSpacing: AppSize.s10,
-                spacing: AppSize.s10,
+                spacing: spacing,
                 children: [
                   ...List.generate(
                     values.length,
-                    (index) => SelecteButton(
+                    (index) => SelectButton(
                       value: values[index],
                       field: field,
                       onSelected: onSelected,
@@ -65,7 +67,7 @@ class OneSelectedButton<T extends Enum> extends StatelessWidget {
               Visibility(
                 visible: field.hasError,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: AppPadding.p8,),
+                  padding: const EdgeInsets.only(top: AppPadding.p8),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -85,13 +87,13 @@ class OneSelectedButton<T extends Enum> extends StatelessWidget {
   }
 }
 
-class SelecteButton<T extends Enum> extends StatelessWidget {
+class SelectButton<T extends Enum> extends StatelessWidget {
   final FormFieldState<T> field;
   final T value;
   final void Function(T) onSelected;
   final String Function(T) labelBuilder;
 
-  const SelecteButton({
+  const SelectButton({
     super.key,
     required this.field,
     required this.onSelected,
@@ -113,7 +115,7 @@ class SelecteButton<T extends Enum> extends StatelessWidget {
           field.validate();
         }
       },
-      style: CustomElevatedButtonDecoration.customElevatedbuttonStyle(
+      style: CustomElevatedButtonDecoration.customElevatedButtonStyle2(
         context: context,
         isSelected: isSelected,
         width: width,

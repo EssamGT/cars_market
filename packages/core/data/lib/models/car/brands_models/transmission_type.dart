@@ -3,7 +3,7 @@ import 'package:constants/strings_manager.dart';
 final List<String> gearboxTypes = ["Automatic", "Manual"];
 final List<String> filterGearboxTypes = ["Any", "Automatic", "Manual"];
 
-enum TransmissionType { automatic, manual, none }
+enum TransmissionType { none, automatic, manual }
 
 extension TransmissionTypeExtension on TransmissionType {
   String getTransmissionTypeName() {
@@ -14,6 +14,17 @@ extension TransmissionTypeExtension on TransmissionType {
         return StringsManager.manual;
       default:
         return '';
+    }
+  }
+
+  String getTransmissionTypeNameForFilter() {
+    switch (this) {
+      case TransmissionType.automatic:
+        return StringsManager.automatic;
+      case TransmissionType.manual:
+        return StringsManager.manual;
+      default:
+        return StringsManager.all;
     }
   }
 }

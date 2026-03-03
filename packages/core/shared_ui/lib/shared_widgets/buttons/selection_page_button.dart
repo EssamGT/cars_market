@@ -58,7 +58,7 @@ class _SelectionPageButton<T> extends StatelessWidget {
             ),
             ElevatedButton(
               style:
-                  CustomElevatedButtonDecoration.customElevatedbuttonStyleNonSelectable(
+                  CustomElevatedButtonDecoration.customElevatedButtonStyleNonSelectable(
                     context: context,
                     width: buttonWidth,
                     error: field.hasError,
@@ -256,7 +256,7 @@ class SelectionPageButtonSameType<T, T2, T3> extends StatelessWidget {
             ),
             ElevatedButton(
               style:
-                  CustomElevatedButtonDecoration.customElevatedbuttonStyleNonSelectable(
+                  CustomElevatedButtonDecoration.customElevatedButtonStyleNonSelectable(
                     context: context,
                     width: buttonWidth,
                     error: field.hasError,
@@ -421,7 +421,7 @@ class SelectionPageButtonCar<T, T2> extends StatelessWidget {
             ),
             ElevatedButton(
               style:
-                  CustomElevatedButtonDecoration.customElevatedbuttonStyleNonSelectable(
+                  CustomElevatedButtonDecoration.customElevatedButtonStyleNonSelectable(
                     context: context,
                     width: buttonWidth,
                     error: field.hasError,

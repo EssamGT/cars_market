@@ -2,6 +2,8 @@ import 'package:constants/strings_manager.dart';
 import 'package:flutter/material.dart';
 
 enum PaintColors {
+  none,
+
   white,
   black,
   silver,
@@ -27,15 +29,14 @@ enum PaintColors {
   eggplant,
   purple,
   otherCustom,
-  none,
 }
 
 enum PaintConditions {
+  none,
   factoryPaint,
   touchUps,
-  paritcalPaint,
+  particlePaint,
   fullRepaint,
-  none,
 }
 
 class PaintColor {
@@ -124,7 +125,7 @@ extension PaintColorsExtension on PaintColors {
     }
   }
 
-  String getColorName() {
+  String getColorName([bool forFilter = false]) {
     switch (this) {
       case PaintColors.white:
         return StringsManager.white;
@@ -177,23 +178,29 @@ extension PaintColorsExtension on PaintColors {
       case PaintColors.otherCustom:
         return StringsManager.otherCustom;
       case PaintColors.none:
+        if (forFilter) {
+          return StringsManager.all;
+        }
         return StringsManager.selectPaintColor;
     }
   }
 }
 
 extension PaintConditionExtension on PaintConditions {
-  String getPaintConditionText() {
+  String getPaintConditionText([bool forFilter = false]) {
     switch (this) {
       case PaintConditions.factoryPaint:
         return StringsManager.factoryPaint;
       case PaintConditions.touchUps:
         return StringsManager.touchUps;
-      case PaintConditions.paritcalPaint:
+      case PaintConditions.particlePaint:
         return StringsManager.partialPaint;
       case PaintConditions.fullRepaint:
         return StringsManager.fullRepaint;
       default:
+        if (forFilter) {
+          return StringsManager.all;
+        }
         return '';
     }
   }

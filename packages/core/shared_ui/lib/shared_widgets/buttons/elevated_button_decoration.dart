@@ -2,7 +2,7 @@ import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButtonDecoration {
-  static ButtonStyle customElevatedbuttonStyle({
+  static ButtonStyle customElevatedButtonStyle({
     required BuildContext context,
     required bool isSelected,
     required double width,
@@ -34,7 +34,39 @@ class CustomElevatedButtonDecoration {
     );
   }
 
-  static ButtonStyle customElevatedbuttonStyleNonSelectable({
+  static ButtonStyle customElevatedButtonStyle2({
+    required BuildContext context,
+    required bool isSelected,
+    required double width,
+    required bool error,
+  }) {
+    return ElevatedButton.styleFrom(
+      // minimumSize: Size(width, AppSize.s45),
+      // maximumSize: Size(width, AppSize.s45),
+      backgroundColor: isSelected
+          ? Theme.of(context).primaryColor
+          : Theme.of(context).colorScheme.surfaceContainerHighest,
+
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSize.s18,
+        vertical: AppSize.s12,
+      ),
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSize.s30),
+        side: BorderSide(
+          color: isSelected
+              ? Theme.of(context).primaryColor
+              : error
+              ? Theme.of(context).colorScheme.error
+              : Theme.of(context).colorScheme.surfaceContainerHighest,
+          width: AppSize.s0_5,
+        ),
+      ),
+    );
+  }
+
+  static ButtonStyle customElevatedButtonStyleNonSelectable({
     required BuildContext context,
     required double width,
     required bool error,
@@ -48,13 +80,14 @@ class CustomElevatedButtonDecoration {
         horizontal: AppSize.s8,
         vertical: AppSize.s14,
       ),
-      //  elevation: AppSize.s2,
+      // shadowColor: Theme.of(context).colorScheme.shadow,
+
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s8),
         side: BorderSide(
           color: error
               ? Theme.of(context).colorScheme.error
-              : Theme.of(context).colorScheme.outline,
+              : Theme.of(context).colorScheme.surfaceContainerHighest,
           width: AppSize.s0_5,
         ),
       ),
@@ -69,7 +102,7 @@ class CustomElevatedButtonDecoration {
       minimumSize: Size(width, AppSize.s65),
       maximumSize: Size(width, AppSize.s65),
       backgroundColor: Theme.of(context).colorScheme.primary,
-       overlayColor: Theme.of(context).colorScheme.surface,
+      overlayColor: Theme.of(context).colorScheme.surface,
       padding: const EdgeInsets.symmetric(
         horizontal: AppSize.s8,
         vertical: AppSize.s14,
@@ -89,7 +122,7 @@ class CustomElevatedButtonDecoration {
     required BuildContext context,
     required double width,
   }) {
-    return customElevatedbuttonStyleNonSelectable(
+    return customElevatedButtonStyleNonSelectable(
       context: context,
       width: width,
       error: false,

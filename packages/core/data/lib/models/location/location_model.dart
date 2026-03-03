@@ -55,6 +55,15 @@ class LocationModel {
       id: "",
     );
   }
+  factory LocationModel.all() {
+    return LocationModel(
+      nameEn: "All",
+      nameAr: "الكل",
+      governorateEn: "",
+      governorateAr: "",
+      id: "",
+    );
+  }
   String getLocationName() {
     if (nameEn == governorateEn) {
       return nameEn;

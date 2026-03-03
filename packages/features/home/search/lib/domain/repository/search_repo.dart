@@ -4,5 +4,6 @@ import 'package:data/models/failure/failure.dart';
 import 'package:domain/entity/car_entity.dart';
 
 abstract class SearchRepo {
-  Future<Either<Failure, List<CarEntity>>> search(CarFilterModel searchModel);
+  Future<Either<Failure, List<CarEntity>>> search(
+    CarFilterModelRequest searchModel);
 }

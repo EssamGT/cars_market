@@ -9,42 +9,16 @@ class PriceFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // FilterNormalTextField(
-            //   carFilter:SearchScreenCubit.get(context).carFilterModel,
-            //   maxLength: 4,
-            //   title: StringsManager.dprice,
-            //   width: size.width * 0.44,
-            //   price: true,
-            //   counter: false,
-            //   format: true,
-            //   validationType: TextFieldValidationType.price,
-            //   hint: StringsManager.min,
-            //   type: FilterNormalTextFieldType.fromPrice,
-              
-            // ),
-            // FilterNormalTextField(
-            //   carFilter: SearchScreenCubit.get(context).carFilterModel,
-            //   maxLength: 4,
-            //   width: size.width * 0.44,
-            //   price: true,
-            //   counter: false,
-            //   format: true,
-            //   validationType: TextFieldValidationType.price,
-            //   hint: StringsManager.max,
-            //   type: FilterNormalTextFieldType.minPrice,
-            // ),
-          ],
-        ),
-      ],
+    SearchScreenCubit cubit = SearchScreenCubit.get(context);
+    return DoubleFilterTextField(
+      title: StringsManager.priceLabel,
+      initValue1: cubit.searchModel.minPrice,
+      initValue2: cubit.searchModel.maxPrice,
+      type1: FilterTextFieldValidationType.minPrice,
+      type2: FilterTextFieldValidationType.maxPrice,
+      onChanged1: (value) => cubit.setMinPrice(value),
+      onChanged2: (value) => cubit.setMaxPrice(value),
+      keyboardType: TextInputType.number,
     );
   }
 }

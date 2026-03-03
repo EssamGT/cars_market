@@ -9,35 +9,16 @@ class FilterKmWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        // FilterNormalTextField(
-        //   carFilter: SearchScreenCubit.get(context).carFilterModel,
-        //   title: StringsManager.kmLable,
-        //   maxLength: 4,
-        //   width: size.width * 0.44,
-        //   price: false,
-        //   counter: false,
-        //   format: true,
-        //   validationType: TextFieldValidationType.km,
-        //   hint: StringsManager.min,
-        //   type: FilterNormalTextFieldType.minYear,
-        // ),
-        // FilterNormalTextField(
-        //   carFilter: SearchScreenCubit.get(context).carFilterModel,
-        //   maxLength: 4,
-        //   width: size.width * 0.44,
-        //   price: false,
-        //   counter: false,
-        //   format: true,
-        //   validationType: TextFieldValidationType.km,
-        //   hint: StringsManager.max,
-        //   type: FilterNormalTextFieldType.minYear,
-        // ),
-      ],
+    SearchScreenCubit cubit = SearchScreenCubit.get(context);
+    return DoubleFilterTextField(
+      title: StringsManager.kmLabel,
+      initValue1: cubit.searchModel.minKm,
+      initValue2: cubit.searchModel.maxKm,
+      type1: FilterTextFieldValidationType.minKm,
+      type2: FilterTextFieldValidationType.maxKm,
+      onChanged1: (value) => cubit.setMinKm(value),
+      onChanged2: (value) => cubit.setMaxKm(value),
+      keyboardType: TextInputType.number,
     );
   }
 }

@@ -33,7 +33,7 @@ String carInfoBuilder(CarBrand? carBrand) {
   return "${carBrand.name} ${carBrand.selectedModel.name}";
 }
 
-String carInfoBuilderFilter(CarBrandFilter? carBrand) {
+String carInfoBuilderFilter(CarBrand? carBrand) {
   if (carBrand == null || carBrand.name.isEmpty) {
     return StringsManager.selectCar;
   }

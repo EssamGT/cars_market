@@ -86,40 +86,68 @@ class FirebaseDbManager {
     return carEntity;
   }
 
-  Future<List<CarEntity>> searchScreenCars(CarFilterModel searchModel) async {
+  Future<List<CarEntity>> searchScreenCars(
+    CarFilterModelRequest searchModel,
+  ) async {
     final cars = await firestore
         .collection(carsDataBase!)
-        .where(CarsTableKeys.brandId, isEqualTo: searchModel.brand.id)
+        .where(
+          CarsTableKeys.brandId,
+          isEqualTo: searchModel.brandId,
+          isNull: searchModel.brandId == null,
+        )
         .where(
           CarsTableKeys.modelId,
-          isEqualTo: searchModel.brand.selectedModel.id,
+          isEqualTo: searchModel.modelId,
+          isNull: searchModel.modelId == null,
         )
-        .where(CarsTableKeys.location, isEqualTo: searchModel.location)
+        .where(
+          CarsTableKeys.location,
+          isEqualTo: searchModel.location,
+          isNull: searchModel.location == null,
+        )
         .where(
           CarsTableKeys.year,
           isGreaterThanOrEqualTo: searchModel.minYear,
           isLessThanOrEqualTo: searchModel.maxYear,
+          isNull: searchModel.minYear == null && searchModel.maxYear == null,
         )
         .where(
           CarsTableKeys.price,
           isGreaterThanOrEqualTo: searchModel.minPrice,
           isLessThanOrEqualTo: searchModel.maxPrice,
+          isNull: searchModel.minPrice == null && searchModel.maxPrice == null,
         )
         .where(
           CarsTableKeys.km,
           isGreaterThanOrEqualTo: searchModel.minKm,
           isLessThanOrEqualTo: searchModel.maxKm,
+          isNull: searchModel.minKm == null && searchModel.maxKm == null,
         )
-        .where(CarsTableKeys.fuelType, isEqualTo: searchModel.fuelType)
-        .where(CarsTableKeys.bodyType, isEqualTo: searchModel.bodyType)
-        .where(CarsTableKeys.paintColor, isEqualTo: searchModel.paintColor)
+        .where(
+          CarsTableKeys.fuelType,
+          isEqualTo: searchModel.fuelType,
+          isNull: searchModel.fuelType == null,
+        )
+        .where(
+          CarsTableKeys.bodyType,
+          isEqualTo: searchModel.bodyType,
+          isNull: searchModel.bodyType == null,
+        )
+        .where(
+          CarsTableKeys.paintColor,
+          isEqualTo: searchModel.paintColor,
+          isNull: searchModel.paintColor == null,
+        )
         .where(
           CarsTableKeys.paintCondition,
           isEqualTo: searchModel.paintCondition,
+          isNull: searchModel.paintCondition == null,
         )
         .where(
           CarsTableKeys.transmissionType,
           isEqualTo: searchModel.transmissionType,
+          isNull: searchModel.transmissionType == null,
         )
         .limit(10)
         .get(GetOptions(source: Source.server));

@@ -11,6 +11,6 @@ class AppConstants {
 
   static const Duration timeoutDuration = Duration(seconds: 5);
 
-  static String basetBrandLogoUrl(String brand) =>
+  static String baseBrandLogoUrl(String brand) =>
       'https://firebasestorage.googleapis.com/v0/b/carsmarket-8b9a8.firebasestorage.app/o/brands_logos%2F$brand.webp?alt=media&token=f87198bd-b584-4ded-9792-604882fca88d';
 }

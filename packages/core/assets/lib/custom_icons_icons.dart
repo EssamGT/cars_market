@@ -72,10 +72,10 @@ class CustomIcons {
   static const IconData sedan = IconData(0xe849, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData smallHatch = IconData(0xe84a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData fourByFour = IconData(0xe84b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData convertiable = IconData(0xe84c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData convertible = IconData(0xe84c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData suv = IconData(0xe84d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData truck = IconData(0xe84e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData wagen = IconData(0xe84f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData wagon = IconData(0xe84f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData smallSuv = IconData(0xe850, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData carCondition = IconData(0xe851, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData coolBox = IconData(0xe852, fontFamily: _kFontFam, fontPackage: _kFontPkg);

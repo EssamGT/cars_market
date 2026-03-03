@@ -10,6 +10,6 @@ class SearchUseCase {
   final SearchRepo searchRepo;
   SearchUseCase(this.searchRepo);
   Future<Either<Failure, List<CarEntity>>> search(
-    CarFilterModel searchModel,
+    CarFilterModelRequest searchModel,
   ) async => searchRepo.search(searchModel);
 }

@@ -17,6 +17,7 @@ final List<String> carBodyTypes = [
 ];
 
 enum CarBodyType {
+  none,
   sedan,
   suv,
   hatchback,
@@ -29,11 +30,10 @@ enum CarBodyType {
   mvp,
   taxi,
   other,
-  none,
 }
 
-extension CarbodyTypeExtension on CarBodyType {
-  String getCarBodyTypeName() {
+extension CarBodyTypeExtension on CarBodyType {
+  String getCarBodyTypeName([bool isForFilter = false]) {
     switch (this) {
       case CarBodyType.sedan:
         return StringsManager.sedan;
@@ -60,6 +60,9 @@ extension CarbodyTypeExtension on CarBodyType {
       case CarBodyType.other:
         return StringsManager.other;
       case CarBodyType.none:
+        if (isForFilter) {
+          return StringsManager.all;
+        }
         return StringsManager.selectCarBodyType;
     }
   }
@@ -77,11 +80,11 @@ extension CarbodyTypeExtension on CarBodyType {
       case CarBodyType.sportsCoupe:
         return CustomIcons.sport;
       case CarBodyType.convertible:
-        return CustomIcons.convertiable;
+        return CustomIcons.convertible;
       case CarBodyType.pickup:
         return CustomIcons.truck;
       case CarBodyType.estateWagon:
-        return CustomIcons.wagen;
+        return CustomIcons.wagon;
       case CarBodyType.vanBus:
         return CustomIcons.van;
       case CarBodyType.mvp:
@@ -91,8 +94,7 @@ extension CarbodyTypeExtension on CarBodyType {
       case CarBodyType.other:
         return CustomIcons.sedan;
       case CarBodyType.none:
-        return Icons.car_crash;
+        return CustomIcons.carCondition;
     }
   }
-  
 }

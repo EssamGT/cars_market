@@ -51,6 +51,15 @@ enum TextFieldValidationType {
   maxKm,
 }
 
+enum FilterTextFieldValidationType {
+  minYear,
+  maxYear,
+  minPrice,
+  maxPrice,
+  minKm,
+  maxKm,
+}
+
 class TextFieldValidator {
   static String? validateNormal(
     TextFieldValidationType type,
@@ -150,8 +159,8 @@ class TextFieldValidator {
         return null;
       case TextFieldValidationType.km:
         if (input.isEmpty) return StringsManager.emptyMileageError;
-        if (input[0] == '0') return StringsManager.validMileageError;
-        if (input.length > 9) return StringsManager.validMileageError;
+        if (input[0] == '0') return StringsManager.validKmError;
+        if (input.length > 9) return StringsManager.validKmError;
         return null;
       case TextFieldValidationType.paintColor:
         if (input.isEmpty || input == PaintColors.none.getColorName()) {
@@ -274,6 +283,77 @@ class TextFieldValidator {
         return null;
 
       default:
+        return null;
+    }
+  }
+
+  static String? filterValidate(
+    FilterTextFieldValidationType type,
+    String value1,
+    String value2,
+  ) {
+    switch (type) {
+      case FilterTextFieldValidationType.minYear:
+        int? year = int.tryParse(value1);
+        int? maxYear = int.tryParse(value2);
+        if (year == null) return null;
+        maxYear ??= 0;
+        if (value1.length != 4) return StringsManager.validYearError;
+        if (year < 1900) return StringsManager.validYearError;
+        if (year > DateTime.now().year + 1) {
+          return StringsManager.validYearError;
+        }
+        if (year > maxYear && maxYear != 0)
+          return StringsManager.validYearError;
+        return null;
+      case FilterTextFieldValidationType.maxYear:
+        int? year = int.tryParse(value1);
+        int? minYear = int.tryParse(value2);
+        if (year == null) return null;
+        minYear ??= 0;
+        if (value1.length != 4) return StringsManager.validYearError;
+        if (year < 1900) return StringsManager.validYearError;
+        if (year < minYear) return StringsManager.validYearError;
+        if (year > DateTime.now().year + 1) {
+          return StringsManager.validYearError;
+        }
+        return null;
+      case FilterTextFieldValidationType.minPrice:
+        int? price = int.tryParse(value1);
+        int? maxPrice = int.tryParse(value2);
+        if (price == null) return null;
+        maxPrice ??= 0;
+        if (price < 0) return StringsManager.validPriceError;
+        if (price > maxPrice && maxPrice != 0) {
+          return StringsManager.validPriceError;
+        }
+        return null;
+      case FilterTextFieldValidationType.maxPrice:
+        int? price = int.tryParse(value1);
+        int? minPrice = int.tryParse(value2);
+        if (price == null) return null;
+        minPrice ??= 0;
+        if (price < 0) return StringsManager.validPriceError;
+        if (price < minPrice) return StringsManager.validPriceError;
+        return null;
+      case FilterTextFieldValidationType.minKm:
+        int? km = int.tryParse(value1);
+        int? maxKm = int.tryParse(value2);
+        if (km == null) return null;
+        maxKm ??= 0;
+        if (km < 0) return StringsManager.validKmError;
+        if (km > maxKm && maxKm != 0) {
+          return StringsManager.validKmError;
+        }
+        return null;
+
+      case FilterTextFieldValidationType.maxKm:
+        int? km = int.tryParse(value1);
+        int? minKm = int.tryParse(value2);
+        if (km == null) return null;
+        minKm ??= 0;
+        if (km < 0) return StringsManager.validKmError;
+        if (km < minKm) return StringsManager.validKmError;
         return null;
     }
   }

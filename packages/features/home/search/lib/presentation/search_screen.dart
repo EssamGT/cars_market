@@ -98,14 +98,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                         titleAlignment:
                                             ListTileTitleAlignment.center,
                                         leading: BrandLogoBuilder(
-                                          url: item is CarBrandFilter
+                                          url: item is CarBrand
                                               ? item.logoUrl
-                                              : (item as CarModelFilter).getLogoUrl(),
+                                              : (item as CarModel).getLogoUrl(),
                                         ),
                                         title: Text(
-                                          item is CarBrandFilter
+                                          item is CarBrand
                                               ? item.name
-                                              : (item as CarModelFilter)
+                                              : (item as CarModel)
                                                     .getFullName(),
                                           style: Theme.of(
                                             context,

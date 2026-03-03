@@ -1,6 +1,5 @@
 import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/brands.dart';
-import 'package:data/models/car/brands_models/car_models.dart';
 
 class CarCatalog {
   // static List<CarBrand> brands = <CarBrand>[
@@ -151,47 +150,54 @@ class CarCatalogModel {
   factory CarCatalogModel.empty() {
     return CarCatalogModel(version: 1.0, brands: []);
   }
-  CarCatalogFilterModel toFilterModel() {
-    return CarCatalogFilterModel(
-      version: version,
-      brands: brands
-          .map((brand) => CarBrandFilter(
-                id: brand.id,
-                name: brand.name,
-                logoUrl: brand.logoUrl,
-                models: brand.models
-                    .map((model) => CarModelFilter(
-                          id: model.id,
-                          name: model.name,
-                          brandId: model.brandId,
-                          brand: model.brand,
-                        ))
-                    .toList(),
-              ))
-          .toList(),
-    );
-  }
-}
 
-class CarCatalogFilterModel {
-  final double version;
-  final List<CarBrandFilter> brands;
-  CarCatalogFilterModel({
-    required this.version,
-    List<CarBrandFilter> brands = const [],
-  }) : brands = _withAllBrand(brands);
-
-  static List<CarBrandFilter> _withAllBrand(List<CarBrandFilter> brands) {
-    final filteredBrands = List<CarBrandFilter>.from(brands);
-    filteredBrands.insert(
-      0,
-      CarBrandFilter(
-        id: null,
-        name: "All",
-        logoUrl: AppConstants.basetBrandLogoUrl("all"),
-        models: [],
-      ),
-    );
+  List<CarBrand> forFilter() {
+    final filteredBrands = List<CarBrand>.from(brands);
+    filteredBrands.insert(0, CarBrand.all());
     return filteredBrands;
   }
+
+  // CarCatalogFilterModel toFilterModel() {
+  //   return CarCatalogFilterModel(
+  //     version: version,
+  //     brands: brands
+  //         .map((brand) => CarBrandFilter(
+  //               id: brand.id,
+  //               name: brand.name,
+  //               logoUrl: brand.logoUrl,
+  //               models: brand.models
+  //                   .map((model) => CarModelFilter(
+  //                         id: model.id,
+  //                         name: model.name,
+  //                         brandId: model.brandId,
+  //                         brand: model.brand,
+  //                       ))
+  //                   .toList(),
+  //             ))
+  //         .toList(),
+  //   );
+  // }
 }
+
+// class CarCatalogFilterModel {
+//   final double version;
+//   final List<CarBrandFilter> brands;
+//   CarCatalogFilterModel({
+//     required this.version,
+//     List<CarBrandFilter> brands = const [],
+//   }) : brands = _withAllBrand(brands);
+
+//   static List<CarBrandFilter> _withAllBrand(List<CarBrandFilter> brands) {
+//     final filteredBrands = List<CarBrandFilter>.from(brands);
+//     filteredBrands.insert(
+//       0,
+//       CarBrandFilter(
+//         id: null,
+//         name: "All",
+//         logoUrl: AppConstants.baseBrandLogoUrl("all"),
+//         models: [],
+//       ),
+//     );
+//     return filteredBrands;
+//   }
+// }

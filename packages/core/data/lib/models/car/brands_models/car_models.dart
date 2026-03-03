@@ -13,7 +13,7 @@ class CarModel {
     required this.brandId,
   });
   String getLogoUrl() {
-    return AppConstants.basetBrandLogoUrl(brandId);
+    return AppConstants.baseBrandLogoUrl(brandId);
   }
 
   Map<String, dynamic> toJson() {
@@ -33,30 +33,30 @@ class CarModel {
   }
 }
 
-class CarModelFilter {
-  final String? id;
-  final String name;
-  final String? brand;
-  final String? brandId;
+// class CarModelFilter {
+//   final String? id;
+//   final String name;
+//   final String? brand;
+//   final String? brandId;
 
-  const CarModelFilter({this.id, required this.name, this.brand, this.brandId});
+//   const CarModelFilter({this.id, required this.name, this.brand, this.brandId});
 
-  factory CarModelFilter.nullable() {
-    return const CarModelFilter(
-      id: null,
-      name: '',
-      brand: null,
-      brandId: null,
-    );
-  }
-  String getLogoUrl() {
-    return AppConstants.basetBrandLogoUrl(brandId ?? '');
-  }
+//   factory CarModelFilter.nullable() {
+//     return const CarModelFilter(
+//       id: null,
+//       name: '',
+//       brand: null,
+//       brandId: null,
+//     );
+//   }
+//   String getLogoUrl() {
+//     return AppConstants.baseBrandLogoUrl(brandId ?? '');
+//   }
 
-  String getFullName() {
-    return "$brand $name";
-  }
-}
+//   String getFullName() {
+//     return "$brand $name";
+//   }
+// }
 
 List<CarModel> toyotaModels = [
   CarModel(id: "corolla", name: "Corolla", brand: "Toyota", brandId: "toyota"),

@@ -12,26 +12,26 @@ class FilterBrandModelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SearchScreenCubit cubit = SearchScreenCubit.get(context);
-    return SelectionPageButtonCar<CarBrandFilter, CarModelFilter>(
+    return SelectionPageButtonCar<CarBrand, CarModel>(
       values: cubit.carCatalog,
-      secondPageValues: (CarBrandFilter car) => car.forFilter(),
+      secondPageValues: (CarBrand car) => car.forFilter(),
       currentValue: cubit.searchModel.brand,
       current2Value: cubit.searchModel.brand.selectedModel,
       filter: true,
-      isSelected: (CarBrandFilter car) {
+      isSelected: (CarBrand car) {
         return cubit.searchModel.brand.name == car.name;
       },
-      isSelected2: (CarModelFilter model) {
+      isSelected2: (CarModel model) {
         return cubit.searchModel.brand.selectedModel.name == model.name &&
             cubit.searchModel.brand.id == model.brandId;
       },
       dialogAppBarTitle: StringsManager.selectBrand,
       search: true,
-      labelBuilder: (CarBrandFilter car) => car.name,
-      secondPageLabelBuilder: (CarModelFilter model) => model.name,
+      labelBuilder: (CarBrand car) => car.name,
+      secondPageLabelBuilder: (CarModel model) => model.name,
       secondPageDialogAppBarTitle: StringsManager.selectModel,
 
-      leadingBuilder: (CarBrandFilter car) =>
+      leadingBuilder: (CarBrand car) =>
           BrandLogoBuilder(url: car.logoUrl),
       onlyInPageLeading: false,
       // onSelected: (CarBrandFilter car, field) {
@@ -42,13 +42,13 @@ class FilterBrandModelWidget extends StatelessWidget {
       secondPageEmptyPage: StringsManager.modelNotFound,
       hint: StringsManager.selectCar,
       label: StringsManager.selectCar,
-      buttonLabelBuilder: (CarBrandFilter car) => carInfoBuilderFilter(car),
-      onSelected: (CarBrandFilter brand, field) {
+      buttonLabelBuilder: (CarBrand car) => carInfoBuilderFilter(car),
+      onSelected: (CarBrand brand, field) {
         cubit.setCarBrand(brand);
         field.didChange(brand);
       },
       onSecondPageSelected: (brand, model, field) {
-        final lastBrand = CarBrandFilter(
+        final lastBrand = CarBrand(
           id: brand.id,
           name: brand.name,
           models: brand.models,

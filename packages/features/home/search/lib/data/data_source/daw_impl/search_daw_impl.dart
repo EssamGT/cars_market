@@ -12,7 +12,7 @@ class SearchDawImpl extends SearchDataSource {
   SearchDawImpl(this.firebaseDbManager);
   @override
   Future<Either<Failure, List<CarEntity>>> search(
-    CarFilterModel searchModel,
+    CarFilterModelRequest searchModel,
   ) async {
     try {
       final result = await firebaseDbManager.searchScreenCars(searchModel);

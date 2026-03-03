@@ -15,7 +15,7 @@ class SearchRepoImpl extends SearchRepo {
   SearchRepoImpl(this.searchDataSource, this.networkInfo);
   @override
   Future<Either<Failure, List<CarEntity>>> search(
-    CarFilterModel searchModel,
+    CarFilterModelRequest searchModel,
   ) async {
     if (await networkInfo.isConnected) {
       return await searchDataSource.search(searchModel);

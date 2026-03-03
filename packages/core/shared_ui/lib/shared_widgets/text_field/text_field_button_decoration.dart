@@ -93,7 +93,7 @@ class TextFieldButtonDecoration {
       hintStyle: Theme.of(context).textTheme.labelLarge,
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Theme.of(context).colorScheme.outline,
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
           width: AppSize.s0_5,
         ),
         borderRadius: BorderRadius.circular(AppSize.s8),
@@ -102,7 +102,7 @@ class TextFieldButtonDecoration {
         borderSide: BorderSide(
           color: error
               ? Theme.of(context).colorScheme.error
-              : Theme.of(context).colorScheme.outline,
+              : Theme.of(context).colorScheme.surfaceContainerHighest,
           width: AppSize.s0_5,
         ),
         borderRadius: BorderRadius.circular(AppSize.s8),
