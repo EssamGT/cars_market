@@ -659,7 +659,7 @@ class StringsManager {
   static const String emptyBodyTypeError = "Please select body type";
   static const String emptyFuelTypeError = "Please select fuel type";
   static const String emptyGearboxTypeError = "Please select gearbox type";
-  static const String emptyMileageError = "Please enter mileage";
+  static const String emptyKmError = "Please enter km";
   static const String validKmError = "Please enter a valid Km value";
   static const String emptyPaintColorError = "Please select paint color";
   static const String emptyPaintConditionError =

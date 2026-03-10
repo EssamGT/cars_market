@@ -158,7 +158,7 @@ class TextFieldValidator {
         if (input.isEmpty) return StringsManager.emptyGearboxTypeError;
         return null;
       case TextFieldValidationType.km:
-        if (input.isEmpty) return StringsManager.emptyMileageError;
+        if (input.isEmpty) return StringsManager.emptyKmError;
         if (input[0] == '0') return StringsManager.validKmError;
         if (input.length > 9) return StringsManager.validKmError;
         return null;

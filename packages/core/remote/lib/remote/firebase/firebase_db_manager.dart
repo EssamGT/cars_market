@@ -27,6 +27,7 @@ class FirebaseDbManager {
   final carsImagesPath = dotenv.env[AppConstants.carsImagesPathKey];
   final carsDataBase = dotenv.env[AppConstants.carsDataBaseKey];
   final usersDataBase = dotenv.env[AppConstants.usersDataBaseKey];
+
   Future<List<CarImage>> uploadCarImages(List<XFile> images, String id) async {
     List<CarImage> carImages = [];
     final storageRef = storage.ref();
@@ -86,71 +87,169 @@ class FirebaseDbManager {
     return carEntity;
   }
 
+  Future<void> allCatalogs() async {
+    final carCatalogs = CarCatalogModel(
+      version: 1.0,
+      brands: CarCatalog.brands,
+    );
+    final locations = LocationsCatalog(locationsCatalog: locationCatalog);
+    await firestore.collection('catalog').doc("cars").set(carCatalogs.toJson());
+    await firestore
+        .collection('catalog')
+        .doc("locations")
+        .set(locations.toJson());
+  }
+
+  // Future<List<CarEntity>> searchScreenCars(
+  //   CarFilterModelRequest searchModel,
+  // ) async {
+  //   final cars = await firestore
+  //       .collection(carsDataBase!)
+  //       .where(
+  //         CarsTableKeys.brandId,
+  //         isEqualTo: searchModel.brandId,
+  //       )
+  //       .where(
+  //         CarsTableKeys.modelId,
+  //         isEqualTo: searchModel.modelId,
+  //       )
+  //       .where(
+  //         CarsTableKeys.location,
+  //         isEqualTo: searchModel.location,
+  //       )
+  //       .where(
+  //         CarsTableKeys.year,
+  //         isGreaterThanOrEqualTo: searchModel.minYear,
+  //         isLessThanOrEqualTo: searchModel.maxYear,
+  //       )
+  //       .where(
+  //         CarsTableKeys.price,
+  //         isGreaterThanOrEqualTo: searchModel.minPrice,
+  //         isLessThanOrEqualTo: searchModel.maxPrice,
+  //       )
+  //       .where(
+  //         CarsTableKeys.km,
+  //         isGreaterThanOrEqualTo: searchModel.minKm,
+  //         isLessThanOrEqualTo: searchModel.maxKm,
+  //       )
+  //       .where(
+  //         CarsTableKeys.fuelType,
+  //         isEqualTo: searchModel.fuelType,
+  //       )
+  //       .where(
+  //         CarsTableKeys.bodyType,
+  //         isEqualTo: searchModel.bodyType,
+  //       )
+  //       .where(
+  //         CarsTableKeys.paintColor,
+  //         isEqualTo: searchModel.paintColor,
+  //       )
+  //       .where(
+  //         CarsTableKeys.paintCondition,
+  //         isEqualTo: searchModel.paintCondition,
+  //       )
+  //       .where(
+  //         CarsTableKeys.transmissionType,
+  //         isEqualTo: searchModel.transmissionType,
+  //       )
+  //       .limit(10)
+  //       .get(GetOptions(source: Source.server));
+  //   final carEntity = cars.docs
+  //       .map((d) => CarEntity.fromJson(d.data()))
+  //       .toList();
+  //   return carEntity;
+  // }
   Future<List<CarEntity>> searchScreenCars(
     CarFilterModelRequest searchModel,
   ) async {
-    final cars = await firestore
-        .collection(carsDataBase!)
-        .where(
-          CarsTableKeys.brandId,
-          isEqualTo: searchModel.brandId,
-          isNull: searchModel.brandId == null,
-        )
-        .where(
-          CarsTableKeys.modelId,
-          isEqualTo: searchModel.modelId,
-          isNull: searchModel.modelId == null,
-        )
-        .where(
-          CarsTableKeys.location,
-          isEqualTo: searchModel.location,
-          isNull: searchModel.location == null,
-        )
-        .where(
-          CarsTableKeys.year,
-          isGreaterThanOrEqualTo: searchModel.minYear,
-          isLessThanOrEqualTo: searchModel.maxYear,
-          isNull: searchModel.minYear == null && searchModel.maxYear == null,
-        )
-        .where(
-          CarsTableKeys.price,
-          isGreaterThanOrEqualTo: searchModel.minPrice,
-          isLessThanOrEqualTo: searchModel.maxPrice,
-          isNull: searchModel.minPrice == null && searchModel.maxPrice == null,
-        )
-        .where(
-          CarsTableKeys.km,
-          isGreaterThanOrEqualTo: searchModel.minKm,
-          isLessThanOrEqualTo: searchModel.maxKm,
-          isNull: searchModel.minKm == null && searchModel.maxKm == null,
-        )
-        .where(
-          CarsTableKeys.fuelType,
-          isEqualTo: searchModel.fuelType,
-          isNull: searchModel.fuelType == null,
-        )
-        .where(
-          CarsTableKeys.bodyType,
-          isEqualTo: searchModel.bodyType,
-          isNull: searchModel.bodyType == null,
-        )
-        .where(
-          CarsTableKeys.paintColor,
-          isEqualTo: searchModel.paintColor,
-          isNull: searchModel.paintColor == null,
-        )
-        .where(
-          CarsTableKeys.paintCondition,
-          isEqualTo: searchModel.paintCondition,
-          isNull: searchModel.paintCondition == null,
-        )
-        .where(
-          CarsTableKeys.transmissionType,
-          isEqualTo: searchModel.transmissionType,
-          isNull: searchModel.transmissionType == null,
-        )
-        .limit(10)
-        .get(GetOptions(source: Source.server));
+    print("searching with model: ${searchModel.toJson()}");
+    Query<Map<String, dynamic>> query = firestore.collection(carsDataBase!);
+    if (searchModel.brandId != null) {
+      query = query.where(
+        CarsTableKeys.brandId,
+        isEqualTo: searchModel.brandId,
+      );
+    }
+    if (searchModel.modelId != null) {
+      query = query.where(
+        CarsTableKeys.modelId,
+        isEqualTo: searchModel.modelId,
+      );
+    }
+    if (searchModel.location != null) {
+      query = query.where(
+        CarsTableKeys.location,
+        isEqualTo: searchModel.location!.toJsonId(),
+      );
+    }
+    if (searchModel.minYear != null) {
+      query = query.where(
+        CarsTableKeys.year,
+        isGreaterThanOrEqualTo: searchModel.minYear,
+      );
+    }
+    if (searchModel.maxYear != null) {
+      query = query.where(
+        CarsTableKeys.year,
+        isLessThanOrEqualTo: searchModel.maxYear,
+      );
+    }
+    if (searchModel.minPrice != null) {
+      query = query.where(
+        CarsTableKeys.price,
+        isGreaterThanOrEqualTo: searchModel.minPrice,
+      );
+    }
+    if (searchModel.maxPrice != null) {
+      query = query.where(
+        CarsTableKeys.price,
+        isLessThanOrEqualTo: searchModel.maxPrice,
+      );
+    }
+    if (searchModel.minKm != null) {
+      query = query.where(
+        CarsTableKeys.km,
+        isGreaterThanOrEqualTo: searchModel.minKm,
+      );
+    }
+    if (searchModel.maxKm != null) {
+      query = query.where(
+        CarsTableKeys.km,
+        isLessThanOrEqualTo: searchModel.maxKm,
+      );
+    }
+    if (searchModel.transmissionType != null) {
+      query = query.where(
+        CarsTableKeys.transmissionType,
+        isEqualTo: searchModel.transmissionType!.name,
+      );
+    }
+    if (searchModel.fuelType != null) {
+      query = query.where(
+        '${CarsTableKeys.engineSpec}.${CarsTableKeys.fuelType}',
+        isEqualTo: searchModel.fuelType!.name,
+      );
+    }
+    if (searchModel.bodyType != null) {
+      query = query.where(
+        CarsTableKeys.bodyType,
+        isEqualTo: searchModel.bodyType!.name,
+      );
+    }
+    if (searchModel.paintColor != null) {
+      query = query.where(
+        CarsTableKeys.paintColor,
+        isEqualTo: searchModel.paintColor!.name,
+      );
+    }
+    if (searchModel.paintCondition != null) {
+      query = query.where(
+        CarsTableKeys.paintCondition,
+        isEqualTo: searchModel.paintCondition!.name,
+      );
+    }
+
+    final cars = await query.limit(10).get(GetOptions(source: Source.server));
     final carEntity = cars.docs
         .map((d) => CarEntity.fromJson(d.data()))
         .toList();

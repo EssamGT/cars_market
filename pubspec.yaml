@@ -68,10 +68,8 @@ dependencies:
   firebase_core: ^4.4.0
   firebase_auth: ^6.1.4
   cloud_functions: ^6.0.6
-
   firebase_storage: ^13.0.6
   cloud_firestore: ^6.1.2
-
 dev_dependencies:
   melos: ^7.4.0
   injectable_generator: ^2.12.0

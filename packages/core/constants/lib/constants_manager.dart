@@ -1,11 +1,13 @@
 class AppConstants {
-  static const String constantsPakage = 'constants';
+  static const String constantsPackage = 'constants';
   static const String assetsPackage = 'assets';
   static const String env = '.env';
   static const String mapsApiKey = 'MAPS_API_KEY';
   static const String carsImagesPathKey = 'CARS_IMAGES_PATH';
   static const String carsDataBaseKey = 'CARS_DATABASE';
   static const String usersDataBaseKey = 'USERS_DATABASE';
+  static const String algoliaAppIdKey = 'ALGOLIA_APP_ID';
+  static const String algoliaApiKeyKey = 'ALGOLIA_API_KEY';
 
 
 

@@ -52,6 +52,8 @@ class _SellScreenState extends State<SellScreen> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final double indicatorHeight = AppSize.s60;
+    final double naviButtonHeight = AppSize.s80;
+
     return BlocProvider.value(
       value: getIt.get<SellCubit>(),
       child: Scaffold(
@@ -79,11 +81,12 @@ class _SellScreenState extends State<SellScreen> {
             children: [
               SingleChildScrollView(
                 controller: controller.scrollController,
+                physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.only(top: indicatorHeight + AppPadding.p8),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight:
-                        screenSize.height - indicatorHeight + AppPadding.p8,
+                        screenSize.height - (indicatorHeight + naviButtonHeight + AppPadding.p8) ,
                     minWidth: screenSize.width,
                   ),
                   child: IntrinsicHeight(

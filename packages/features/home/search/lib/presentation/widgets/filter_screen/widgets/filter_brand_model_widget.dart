@@ -31,8 +31,7 @@ class FilterBrandModelWidget extends StatelessWidget {
       secondPageLabelBuilder: (CarModel model) => model.name,
       secondPageDialogAppBarTitle: StringsManager.selectModel,
 
-      leadingBuilder: (CarBrand car) =>
-          BrandLogoBuilder(url: car.logoUrl),
+      leadingBuilder: (CarBrand car) => BrandLogoBuilder(url: car.logoUrl),
       onlyInPageLeading: false,
       // onSelected: (CarBrandFilter car, field) {
       //   print(field.value?.name);
@@ -54,7 +53,7 @@ class FilterBrandModelWidget extends StatelessWidget {
           models: brand.models,
           selectedModel: model,
         );
-        cubit.setCarBrand(lastBrand);
+        cubit.setCarModel(model);
         field.didChange(lastBrand);
       },
       onExit: (field) {

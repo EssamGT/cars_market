@@ -94,7 +94,6 @@ class CarFilterModel {
   }
 
   CarFilterModelRequest toRequest() {
-    print("brand id: ${brand.id}");
     return CarFilterModelRequest()
       ..brandId = brand.id.isEmpty ? null : brand.id
       ..modelId = brand.selectedModel.id.isEmpty ? null : brand.selectedModel.id
@@ -149,4 +148,51 @@ class CarFilterModelRequest {
   PaintColors? paintColor;
   PaintConditions? paintCondition;
   CarFilterModelRequest();
+  bool isNull() {
+    if (brandId != null ||
+        modelId != null ||
+        minYear != null ||
+        maxYear != null ||
+        bodyType != null ||
+        fuelType != null ||
+        transmissionType != null ||
+        minKm != null ||
+        maxKm != null ||
+        minPrice != null ||
+        maxPrice != null ||
+        minEngineCapacity != null ||
+        maxEngineCapacity != null ||
+        minEngineCylinderNumber != null ||
+        maxEngineCylinderNumber != null ||
+        location != null ||
+        paintColor != null ||
+        paintCondition != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "brandId": brandId,
+      "modelId": modelId,
+      "minYear": minYear,
+      "maxYear": maxYear,
+      "bodyType": bodyType?.name,
+      "fuelType": fuelType?.name,
+      "transmissionType": transmissionType?.name,
+      "minKm": minKm,
+      "maxKm": maxKm,
+      "minPrice": minPrice,
+      "maxPrice": maxPrice,
+      "minEngineCapacity": minEngineCapacity,
+      "maxEngineCapacity": maxEngineCapacity,
+      "minEngineCylinderNumber": minEngineCylinderNumber,
+      "maxEngineCylinderNumber": maxEngineCylinderNumber,
+      "location": location?.toJson(),
+      "paintColor": paintColor?.name,
+      "paintCondition": paintCondition?.name,
+    };
+  }
 }
