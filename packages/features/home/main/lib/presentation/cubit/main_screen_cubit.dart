@@ -12,9 +12,7 @@ part 'main_screen_state.dart';
 @lazySingleton
 class MainScreenCubit extends Cubit<MainScreenState> {
   MainScreenUseCase useCase;
-  MainScreenCubit(this.useCase) : super(MainScreenInitial()) {
-    getIt.get<SyncManagerUseCase>().syncData();
-  }
+  MainScreenCubit(this.useCase) : super(MainScreenInitial());
   MainScreenCubit get(BuildContext context) => BlocProvider.of(context);
   Future getMainScreenCars() async {
     emit(MainScreenLoading());

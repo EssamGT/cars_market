@@ -7,5 +7,5 @@ Future<void> configureSyncManagerDependencies(
   GetIt getIt,
   String? environment,
 ) async {
-  getIt.init(environment: environment);
+   getIt.init(environment: environment);
 }

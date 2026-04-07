@@ -160,4 +160,12 @@ class SearchScreenCubit extends Cubit<SearchScreenState> {
   void setMinKm(String minKm) {
     searchModel.minKm = minKm;
   }
+
+  void setMinEngineCapacity(String minEngineCapacity) {
+    searchModel.minEngineCapacity = minEngineCapacity;
+  }
+
+  void setMaxEngineCapacity(String maxEngineCapacity) {
+    searchModel.maxEngineCapacity = maxEngineCapacity;
+  }
 }

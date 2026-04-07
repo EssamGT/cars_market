@@ -18,7 +18,7 @@ class _WhatsAppMessageWidgetState extends State<WhatsAppMessageWidget> {
     SellCubit cubit = SellCubit.get(context);
     return OneSelectedButton<WhatsAppMessage>(
       label: StringsManager.whatsappMessageLabel,
-      currentValue: cubit.car.wahtsaapMessage,
+      currentValue: cubit.car.whatsappMessage,
       values: WhatsAppMessage.values
           .where((e) => e != WhatsAppMessage.none)
           .toList(),

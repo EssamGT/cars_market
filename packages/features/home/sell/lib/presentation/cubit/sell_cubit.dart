@@ -144,8 +144,8 @@ class SellCubit extends Cubit<SellState> {
   }
 
   void setWahtsaapMessage(WhatsAppMessage wahtsaapMessage) {
-    if (car.wahtsaapMessage != wahtsaapMessage) {
-      car.wahtsaapMessage = wahtsaapMessage;
+    if (car.whatsappMessage != wahtsaapMessage) {
+      car.whatsappMessage = wahtsaapMessage;
     }
   }
 

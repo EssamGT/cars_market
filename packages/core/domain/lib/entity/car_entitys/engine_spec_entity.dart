@@ -5,6 +5,7 @@ import 'package:data/models/car/sell_car_model.dart';
 class EngineSpecEntity {
   EngineCapacity engineCapacity;
   EngineCylinderNumber engineCylinderNumber;
+  int? engineCapacityValue;
   String? hp;
   String? topSpeed;
   String? fuelConsumption;
@@ -16,6 +17,7 @@ class EngineSpecEntity {
     this.hp,
     this.topSpeed,
     this.fuelConsumption,
+    this.engineCapacityValue,
   });
 
   String getEngineSpec() {
@@ -82,6 +84,7 @@ class EngineSpecEntity {
         orElse: () => EngineCylinderNumber.none,
       ),
       hp = json[CarsTableKeys.hp],
+      engineCapacityValue = json[CarsTableKeys.engineCapacityValue],
       topSpeed = json[CarsTableKeys.topSpeed],
       fuelConsumption = json[CarsTableKeys.fuelConsumption],
       fuelType = FuelType.values.firstWhere(

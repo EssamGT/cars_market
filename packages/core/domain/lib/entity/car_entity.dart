@@ -196,7 +196,7 @@ class CarEntity {
           ? null
           : resolveFeaturesFromJson(json[CarsTableKeys.features]),
       wahtsaapMessage = WhatsAppMessage.values.firstWhere(
-        (e) => e.name == json[CarsTableKeys.wahtsaapMessage],
+        (e) => e.name == json[CarsTableKeys.whatsappMessage],
         orElse: () => WhatsAppMessage.none,
       ),
       transmissionType = TransmissionType.values.firstWhere(

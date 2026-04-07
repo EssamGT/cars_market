@@ -212,7 +212,7 @@ enum EngineCapacity {
 }
 
 extension EngineCapacityExtension on EngineCapacity {
-  String getEngineCapacityName() {
+  String getEngineCapacityName([bool filter = false]) {
     switch (this) {
       case EngineCapacity.c600:
         return StringsManager.c600;
@@ -319,7 +319,121 @@ extension EngineCapacityExtension on EngineCapacity {
       case EngineCapacity.c8000:
         return StringsManager.c8000;
       case EngineCapacity.none:
+        if (filter) {
+          return StringsManager.none;
+        }
         return StringsManager.selectEngineCapacity;
+    }
+  }
+
+  String getEngineCapacityValue() {
+    switch (this) {
+      case EngineCapacity.c600:
+        return StringsManager.c600Value;
+      case EngineCapacity.c700:
+        return StringsManager.c700Value;
+      case EngineCapacity.c800:
+        return StringsManager.c800Value;
+      case EngineCapacity.c1000:
+        return StringsManager.c1000Value;
+      case EngineCapacity.c1100:
+        return StringsManager.c1100Value;
+      case EngineCapacity.c1200:
+        return StringsManager.c1200Value;
+      case EngineCapacity.c1300:
+        return StringsManager.c1300Value;
+      case EngineCapacity.c1400:
+        return StringsManager.c1400Value;
+      case EngineCapacity.c1500:
+        return StringsManager.c1500Value;
+      case EngineCapacity.c1600:
+        return StringsManager.c1600Value;
+      case EngineCapacity.c1800:
+        return StringsManager.c1800Value;
+      case EngineCapacity.c2000:
+        return StringsManager.c2000Value;
+      case EngineCapacity.c2100:
+        return StringsManager.c2100Value;
+      case EngineCapacity.c2200:
+        return StringsManager.c2200Value;
+      case EngineCapacity.c2300:
+        return StringsManager.c2300Value;
+      case EngineCapacity.c2400:
+        return StringsManager.c2400Value;
+      case EngineCapacity.c2500:
+        return StringsManager.c2500Value;
+      case EngineCapacity.c2600:
+        return StringsManager.c2600Value;
+      case EngineCapacity.c2700:
+        return StringsManager.c2700Value;
+      case EngineCapacity.c2800:
+        return StringsManager.c2800Value;
+      case EngineCapacity.c2900:
+        return StringsManager.c2900Value;
+      case EngineCapacity.c3000:
+        return StringsManager.c3000Value;
+      case EngineCapacity.c3200:
+        return StringsManager.c3200Value;
+      case EngineCapacity.c3300:
+        return StringsManager.c3300Value;
+      case EngineCapacity.c3400:
+        return StringsManager.c3400Value;
+      case EngineCapacity.c3500:
+        return StringsManager.c3500Value;
+      case EngineCapacity.c3600:
+        return StringsManager.c3600Value;
+      case EngineCapacity.c3700:
+        return StringsManager.c3700Value;
+      case EngineCapacity.c3800:
+        return StringsManager.c3800Value;
+      case EngineCapacity.c4000:
+        return StringsManager.c4000Value;
+      case EngineCapacity.c4100:
+        return StringsManager.c4100Value;
+      case EngineCapacity.c4200:
+        return StringsManager.c4200Value;
+      case EngineCapacity.c4400:
+        return StringsManager.c4400Value;
+      case EngineCapacity.c4500:
+        return StringsManager.c4500Value;
+      case EngineCapacity.c4600:
+        return StringsManager.c4600Value;
+      case EngineCapacity.c4800:
+        return StringsManager.c4800Value;
+      case EngineCapacity.c5000:
+        return StringsManager.c5000Value;
+      case EngineCapacity.c5200:
+        return StringsManager.c5200Value;
+      case EngineCapacity.c5300:
+        return StringsManager.c5300Value;
+      case EngineCapacity.c5500:
+        return StringsManager.c5500Value;
+      case EngineCapacity.c5700:
+        return StringsManager.c5700Value;
+      case EngineCapacity.c5800:
+        return StringsManager.c5800Value;
+      case EngineCapacity.c6000:
+        return StringsManager.c6000Value;
+      case EngineCapacity.c6200:
+        return StringsManager.c6200Value;
+      case EngineCapacity.c6300:
+        return StringsManager.c6300Value;
+      case EngineCapacity.c6400:
+        return StringsManager.c6400Value;
+      case EngineCapacity.c6500:
+        return StringsManager.c6500Value;
+      case EngineCapacity.c6600:
+        return StringsManager.c6600Value;
+      case EngineCapacity.c7000:
+        return StringsManager.c7000Value;
+      case EngineCapacity.c7200:
+        return StringsManager.c7200Value;
+      case EngineCapacity.c7500:
+        return StringsManager.c7500Value;
+      case EngineCapacity.c8000:
+        return StringsManager.c8000Value;
+      case EngineCapacity.none:
+        return StringsManager.empty;
     }
   }
 }
@@ -374,6 +488,9 @@ class EngineSpec {
       CarsTableKeys.engineCapacity: engineCapacity.engineCapacity.name,
       CarsTableKeys.engineCylinderNumber:
           engineCapacity.engineCylinderNumber.name,
+      CarsTableKeys.engineCapacityValue: int.parse(
+        engineCapacity.engineCapacity.getEngineCapacityValue(),
+      ),
       CarsTableKeys.hp: hp,
       CarsTableKeys.topSpeed: topSpeed,
       CarsTableKeys.fuelConsumption: fuelConsumption,

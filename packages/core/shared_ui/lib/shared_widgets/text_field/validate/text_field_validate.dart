@@ -58,6 +58,8 @@ enum FilterTextFieldValidationType {
   maxPrice,
   minKm,
   maxKm,
+  minEngineCapacity,
+  maxEngineCapacity,
 }
 
 class TextFieldValidator {
@@ -346,7 +348,6 @@ class TextFieldValidator {
           return StringsManager.validKmError;
         }
         return null;
-
       case FilterTextFieldValidationType.maxKm:
         int? km = int.tryParse(value1);
         int? minKm = int.tryParse(value2);
@@ -355,7 +356,26 @@ class TextFieldValidator {
         if (km < 0) return StringsManager.validKmError;
         if (km < minKm) return StringsManager.validKmError;
         return null;
+      case FilterTextFieldValidationType.minEngineCapacity:
+        int? engineCapacity = int.tryParse(value1);
+        int? maxEngineCapacity = int.tryParse(value2);
+        if (engineCapacity == null) return null;
+        maxEngineCapacity ??= 0;
+        if (engineCapacity < 0) return StringsManager.validEngineCapacityError;
+        if (engineCapacity > maxEngineCapacity && maxEngineCapacity != 0) {
+          return StringsManager.validEngineCapacityError;
+        }
+        return null;
+      case FilterTextFieldValidationType.maxEngineCapacity:
+        int? engineCapacity = int.tryParse(value1);
+        int? minEngineCapacity = int.tryParse(value2);
+        if (engineCapacity == null) return null;
+        minEngineCapacity ??= 0;
+        if (engineCapacity < 0) return StringsManager.validEngineCapacityError;
+        if (engineCapacity < minEngineCapacity) return StringsManager.validEngineCapacityError;
+        return null;
     }
+
   }
 
   static String? twoPasswordValidator(String value, String value2) {

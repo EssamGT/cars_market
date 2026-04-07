@@ -24,7 +24,8 @@ class CarsTableKeys {
   static const String brandName = 'brandName';
   static const String modelId = 'modelId';
   static const String modelName = 'modelName';
-  static const String wahtsaapMessage = 'wahtsaapMessage';
+  static const String whatsappMessage = 'whatsappMessage';
+  static const String engineCapacityValue = 'engineCapacityValue';
 
   static const String engineSpec = 'engineSpec';
   static const String hp = 'hp';
@@ -73,7 +74,7 @@ class SellCarUploadModel {
   String seatsNumber;
   String year;
   AirConTypes airConType;
-  WhatsAppMessage wahtsaapMessage;
+  WhatsAppMessage whatsappMessage;
   String description;
   CarBodyType bodyType;
   TransmissionType transmissionType;
@@ -98,7 +99,7 @@ class SellCarUploadModel {
     this.createdAt = '',
 
     this.year = '',
-    this.wahtsaapMessage = WhatsAppMessage.none,
+    this.whatsappMessage = WhatsAppMessage.none,
     CarBrand? brand,
     EngineSpec? engineSpec,
     LocationModel? location2,
@@ -175,7 +176,7 @@ class SellCarUploadModel {
       CarsTableKeys.paymentOptions: paymentOptions.name,
       CarsTableKeys.seatsNumber: seatsNumber,
       CarsTableKeys.airConType: airConType.name,
-      CarsTableKeys.wahtsaapMessage: wahtsaapMessage.name,
+      CarsTableKeys.whatsappMessage: whatsappMessage.name,
       CarsTableKeys.googleMapsLocation: googleMapsLocation.toJson(),
       // Note: images are not included in JSON representation
     };

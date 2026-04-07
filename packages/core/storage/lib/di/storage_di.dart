@@ -8,4 +8,5 @@ Future<void> configureStorageDependencies(
   String? environment,
 ) async {
   getIt.init(environment: environment);
+  await getIt.allReady();
 }

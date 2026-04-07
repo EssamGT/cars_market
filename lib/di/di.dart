@@ -15,13 +15,13 @@ import 'package:user_details/di/user_details_di.dart';
 
 final getIt = GetIt.instance;
 
-@InjectableInit(
-  initializerName: 'init', // default
-  preferRelativeImports: true, // default
-  asExtension: true, // default
-)
+// @InjectableInit(
+//   initializerName: 'init', // default
+//   preferRelativeImports: true, // default
+//   asExtension: true, // default
+// )
 Future<void> configureDependencies(String? enviroment) async {
-  getIt.init(environment: enviroment);
+  // getIt.init(environment: enviroment);
   await configureRemoteDependencies(getIt, enviroment);
   await configureLoginDependencies(getIt, enviroment);
   await configureCreateAccountDependencies(getIt, enviroment);
