@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
+import 'package:data/models/user/user_data.dart';
 import 'package:error_handler/error_handler/auth_error_handler/auth_error_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
@@ -75,6 +76,16 @@ class UserDetailsDawImpl extends UserDetailsDataSource {
   Future<Either<Failure, void>> updateName(String name) async {
     try {
       remote.updateName(name);
+      return const Right(null);
+    } on FirebaseAuthException catch (ex) {
+      return Left(AuthErrorHandler.handleFirebaseAuthError(ex));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> setUserData(UserData userData) async {
+    try {
+      remote.setUserData(userData);
       return const Right(null);
     } on FirebaseAuthException catch (ex) {
       return Left(AuthErrorHandler.handleFirebaseAuthError(ex));

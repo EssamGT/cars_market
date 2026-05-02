@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:constants/strings_manager.dart';
-import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/alert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'cubit/sell_cubit.dart';
 import 'widgets/sell_screen_app_bar.dart';

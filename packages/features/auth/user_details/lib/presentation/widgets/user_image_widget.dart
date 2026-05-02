@@ -13,30 +13,10 @@ class UserImageWidget extends StatelessWidget {
       child: Center(
         child: SizedBox(
           height: AppSize.s140,
-          child: Stack(
-            children: [
-              CircleAvatar(
-                radius: 60,
-                child: Icon(Icons.person, size: AppSize.s60),
-              ).redacted(context: context, redact: loading),
-              Positioned(
-                bottom: 4,
-                right: 0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.onError,
-                    radius: AppSize.s20,
-                    child: Icon(
-                      Icons.add,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      size: AppSize.s24,
-                    ),
-                  ),
-                ).redacted(context: context, redact: loading),
-              ),
-            ],
-          ),
+          child: CircleAvatar(
+            radius: 60,
+            child: Icon(Icons.person, size: AppSize.s60),
+          ).redacted(context: context, redact: loading),
         ),
       ),
     );

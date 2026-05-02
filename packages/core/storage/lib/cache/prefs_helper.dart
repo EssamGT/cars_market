@@ -37,4 +37,12 @@ class PrefsHelper {
     }
     return LocationsCatalog.empty();
   }
+
+  void setFavoriteCarsIds(List<String> ids) {
+    _sharedPreferences.setStringList('favorite_cars_ids', ids);
+  }
+
+  List<String> getFavoriteCarsIds() {
+    return _sharedPreferences.getStringList('favorite_cars_ids') ?? [];
+  }
 }

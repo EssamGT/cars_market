@@ -35,13 +35,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i398.DataSource>(
       () => _i120.DataSourceImpl(gh<_i218.AuthManager>()),
     );
-    gh.lazySingleton<_i52.CreateAccountRepo>(
+    gh.factory<_i52.CreateAccountRepo>(
       () => _i842.CreateAccountRepoImpl(
         gh<_i583.NetworkInfo>(),
         gh<_i398.DataSource>(),
       ),
     );
-    gh.lazySingleton<_i146.CreateAccountUseCase>(
+    gh.factory<_i146.CreateAccountUseCase>(
       () => _i146.CreateAccountUseCase(gh<_i52.CreateAccountRepo>()),
     );
     gh.factory<_i349.CreateAccountCubit>(

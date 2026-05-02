@@ -65,7 +65,7 @@ class _UserPhoneNumberTextFieldState extends State<UserPhoneNumberTextField> {
           number: number,
           onInputChanged: (phone) {
             cubit.setUserPhoneNumber(phone.phoneNumber ?? '');
-            print(cubit.userDetails.phoneNumber);
+            // print(cubit.userDetails.phoneNumber);
             // print(phone);
           },
         );

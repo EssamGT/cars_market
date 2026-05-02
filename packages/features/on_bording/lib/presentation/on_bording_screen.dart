@@ -7,8 +7,8 @@ import 'package:on_bording/presentation/cubit/on_bording_cubit_cubit.dart';
 import 'package:on_bording/presentation/widgets/bottom_widget.dart';
 import 'package:router/routes_manager.dart';
 
-class OnBordingScreen extends StatelessWidget {
-  OnBordingScreen({super.key});
+class OnBoardingScreen extends StatelessWidget {
+  OnBoardingScreen({super.key});
   final List<String> images = [
     AssetsManager.b1,
     AssetsManager.b2,

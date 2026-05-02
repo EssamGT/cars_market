@@ -20,7 +20,7 @@ import 'package:user_details/data/data_source/user_details_data_source.dart'
 import 'package:user_details/data/repository/user_details_repo_impl.dart'
     as _i347;
 import 'package:user_details/domain/repository/user_details_repo.dart' as _i144;
-import 'package:user_details/domain/usecase/user_deatils_use_case.dart' as _i78;
+import 'package:user_details/domain/usecase/user_details_use_case.dart' as _i78;
 import 'package:user_details/presentation/cubit/user_details_cubit.dart'
     as _i309;
 
@@ -40,11 +40,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i583.NetworkInfo>(),
       ),
     );
-    gh.lazySingleton<_i78.UserDeatilsUseCase>(
-      () => _i78.UserDeatilsUseCase(gh<_i144.UserDetailsRepo>()),
+    gh.lazySingleton<_i78.UserDetailsUseCase>(
+      () => _i78.UserDetailsUseCase(gh<_i144.UserDetailsRepo>()),
     );
     gh.factory<_i309.UserDetailsCubit>(
-      () => _i309.UserDetailsCubit(gh<_i78.UserDeatilsUseCase>()),
+      () => _i309.UserDetailsCubit(gh<_i78.UserDetailsUseCase>()),
     );
     return this;
   }

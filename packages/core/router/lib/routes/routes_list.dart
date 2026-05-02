@@ -3,20 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:forgot_password/presentation/forgot_password_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home/presentation/home_screen.dart';
+import 'package:language/presentation/language_screen.dart';
+import 'package:listed_cars/presentation/listed_cars_screen.dart';
 import 'package:login/presentation/login_screen.dart';
+import 'package:notifications/presentation/notifications_screen.dart';
 import 'package:on_bording/presentation/on_bording_screen.dart';
 import 'package:router/routes_manager.dart';
 import 'package:search/presentation/widgets/filter_screen/filter_screen.dart';
 import 'package:search/presentation/widgets/search_result/search_result_screen.dart';
 import 'package:sell/presentation/sell_screen.dart';
-
+import 'package:update_user_data/data/models/card_model.dart';
+import 'package:update_user_data/presentation/personal_info_screen.dart';
+import 'package:update_user_data/presentation/widgets/edit_user_profile/edit_user_profile.dart';
+import 'package:update_user_data/presentation/widgets/otp_screen/otp_verify_screen.dart';
 import 'package:user_details/presentation/user_details_screen.dart';
 import 'package:user_details/presentation/widgets/otp_screen/otp_verify_screen.dart';
 
 final routes = <RouteBase>[
   GoRoute(
     path: RoutesManager.onBoarding,
-    builder: (context, state) => OnBordingScreen(),
+    builder: (context, state) => OnBoardingScreen(),
   ),
   GoRoute(
     path: RoutesManager.login,
@@ -27,7 +33,7 @@ final routes = <RouteBase>[
     builder: (context, state) => const CreateAccountScreen(),
   ),
   GoRoute(
-    path: RoutesManager.forgotPasword,
+    path: RoutesManager.forgotPassword,
     builder: (context, state) => const ForgotPasswordScreen(),
   ),
   GoRoute(
@@ -55,6 +61,15 @@ final routes = <RouteBase>[
     },
   ),
   GoRoute(
+    path: RoutesManager.otpScreenForPhoneUpdate,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: OtpVerifyScreenForPhoneUpdate(),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
     path: RoutesManager.filterScreen,
     pageBuilder: (context, state) {
       return customRightAnimationPage(child: FilterScreen(), state: state);
@@ -65,6 +80,45 @@ final routes = <RouteBase>[
     pageBuilder: (context, state) {
       return customRightAnimationPage(
         child: SearchResultScreen(),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.personalInfo,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: PersonalInfoScreen(),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.listedCars,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(child: ListedCarsScreen(), state: state);
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.language,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(child: LanguageScreen(), state: state);
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.notifications,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: NotificationsScreen(),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.editUserProfile,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: EditUserProfile(editType: state.extra as PersonalInfoEditType),
         state: state,
       );
     },

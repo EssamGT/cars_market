@@ -1,6 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
+import 'package:data/models/user/user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class UserDetailsDataSource {
@@ -12,4 +13,5 @@ abstract class UserDetailsDataSource {
   Future<Either<Failure, UserCredential>> verifyOTP(String otp);
   Future<Either<Failure, User?>> getCurrentUser();
   Future<Either<Failure, void>> updateName(String name);
+  Future<Either<Failure, void>> setUserData(UserData userData);
 }

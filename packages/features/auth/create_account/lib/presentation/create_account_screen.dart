@@ -11,7 +11,7 @@ import 'package:router/routes_manager.dart';
 import 'package:shared_ui/shared_widgets/buttons/colored_text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/two_text_button.dart';
-import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/alert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/text_field/c_text_field.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/two_password_text_filed.dart';
@@ -30,18 +30,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   late GlobalKey<FormState> formKey;
   late FocusNode email;
   late FocusNode passwordFocus;
-  late FocusNode cpasswordFoucs;
+  late FocusNode cpasswordFocus;
 
   @override
   void initState() {
-    getIt.resetLazySingleton<CreateAccountCubit>();
+    // getIt.resetLazySingleton<CreateAccountCubit>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     cpasswordController = TextEditingController();
     formKey = GlobalKey<FormState>();
     email = FocusNode();
     passwordFocus = FocusNode();
-    cpasswordFoucs = FocusNode();
+    cpasswordFocus = FocusNode();
     super.initState();
   }
 
@@ -52,8 +52,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     cpasswordController.dispose();
     email.dispose();
     passwordFocus.dispose();
-    cpasswordFoucs.dispose();
-    getIt<CreateAccountCubit>().close();
+    cpasswordFocus.dispose();
+    // getIt<CreateAccountCubit>().close();
     super.dispose();
   }
 
@@ -62,8 +62,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: BlocProvider.value(
-        value: getIt.get<CreateAccountCubit>(),
+      body: BlocProvider(
+        create: (context) => getIt.get<CreateAccountCubit>(),
         child: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: screenSize.height),
@@ -124,16 +124,19 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   label1: StringsManager.password,
                                   label2: StringsManager.confirmPassword,
                                   myNode1: passwordFocus,
-                                  myNode2: cpasswordFoucs,
+                                  myNode2: cpasswordFocus,
                                   validationType:
                                       TextFieldValidationType.confirmPassword,
-                                  supmit: () {
+                                  submit: () {
                                     if (formKey.currentState!.validate()) {
                                       cubit.login(
                                         AuthModel(
                                           email: emailController.text,
                                           password: passwordController.text,
                                         ),
+                                      );
+                                      print(
+                                        "${cubit.state.toString()}#############################################",
                                       );
                                     }
                                   },

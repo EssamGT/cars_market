@@ -13,8 +13,7 @@ dependencies:
 
   constants:
     path: ../../../core/constants
-  sync_manager:
-    path: ../../../core/sync_manager
+
   storage:
     path: ../../../core/storage
   router:

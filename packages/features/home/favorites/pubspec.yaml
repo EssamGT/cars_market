@@ -11,9 +11,39 @@ dependencies:
   flutter:
     sdk: flutter
 
+  constants:
+    path: ../../../core/constants
+
+  storage:
+    path: ../../../core/storage
+  router:
+    path: ../../../core/router
+  shared_ui:
+    path: ../../../core/shared_ui
+  remote:
+    path: ../../../core/remote
+  data:
+    path: ../../../core/data
+  domain:
+    path: ../../../core/domain
+  error_handler:
+    path: ../../../core/error_handler
+  cars_market:
+    path: ../../../../../cars_market
+  go_router: ^16.2.4
+  get_it: ^9.2.0
+  injectable: ^2.7.1+4
+  connectivity_plus: ^7.0.0
+  dartz: ^0.10.1
+  flutter_bloc: ^9.1.1
+  get: ^4.7.2
+  iconsax_flutter: ^1.0.1
+  cached_network_image: ^3.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator: ^2.12.0
+  build_runner: ^2.11.1
   flutter_lints: ^6.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
+import 'package:data/models/user/user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class UserDetailsRepo {
@@ -10,5 +11,6 @@ abstract class UserDetailsRepo {
   Future<Either<Failure, void>> resendOTP(String phoneNumber);
   Future<Either<Failure, UserCredential>> verifyOTP(String otp);
   Future<Either<Failure, void>> updateName(String name);
+  Future<Either<Failure, void>> setUserData(UserData userData);
   // Future<Either<Failure, User?>> getCurrentUser();
 }

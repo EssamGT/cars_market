@@ -1,5 +1,40 @@
 class StringsManager {
   static const String findYouCar = 'Find you dream car';
+  static const String personalInformations = 'Personal Information';
+  static const String listedCars = 'Listed Cars';
+  static const String language = 'Language';
+  static const String account = 'ACCOUNT';
+  static const String update = 'Update';
+  static const String createdAt = 'Created At';
+  static const String logout = 'Log Out';
+  static const String updateName = 'Name Update';
+  static const String newName = 'New Name';
+  static const String contactDetails = 'Contact Details';
+  static const String profileAccount = 'Profile Account';
+  static const String emailVerificationPending = 'Email Verification Pending';
+  static const String checkYourMailBox =
+      'Check Your Mail Box to verify your email and login again';
+  static String updateSuccess(String name) => '$name Updated Successfully';
+  static const String updateNameTitle = 'Enter Your New Name';
+  static const String newNameIsRequired = 'New name is required';
+  static const String newEmailIsRequired = 'New email is required';
+  static const String newPhoneIsRequired = 'New phone is required';
+  static const String newPasswordIsRequired = 'New password is required';
+  static const String updateEmail = 'Email Update ';
+  static const String updateEmailTitle = 'Enter Your New Email Address';
+  static const String newEmail = 'New Email';
+  static const String updatePhoneNumber = 'Phone Number Update';
+  static const String newPhoneNumber = 'New Phone Number';
+  static const String updatePhoneNumberTitle = 'Enter Your New Phone Number';
+  static const String updatePassword = 'Password Update';
+  static const String updatePasswordTitle = 'Enter Your New Password';
+  static const String newPassword = 'New Password';
+
+  static const String deleteAccount = 'Delete Account';
+  static const String preferences = 'PREFERENCES';
+  static const String support = 'Contact Support';
+  static const String darkMode = 'Dark Mode';
+  static const String notifications = 'Notifications';
   static const String welcome = 'Welcome Back';
   static const String error = 'Error';
   static const String all = 'All';
@@ -188,6 +223,7 @@ class StringsManager {
   static const String password = 'Password';
   static const String confirmYourPassword = 'Confirm your password';
   static const String confirmPassword = 'Confirm password';
+  static const String confirmNewPassword = 'Confirm new password';
   static const String enterEmail = 'Enter your email';
   static const String enterPassword = 'Enter your Password';
   static const String guestMode = 'Continue as Guest';
@@ -714,7 +750,8 @@ class StringsManager {
   static const String emptyGearboxTypeError = "Please select gearbox type";
   static const String emptyKmError = "Please enter km";
   static const String validKmError = "Please enter a valid Km value";
-  static const String validEngineCapacityError = "Please enter a valid engine capacity";
+  static const String validEngineCapacityError =
+      "Please enter a valid engine capacity";
   static const String emptyPaintColorError = "Please select paint color";
   static const String emptyPaintConditionError =
       "Please select paint condition";

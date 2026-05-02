@@ -12,7 +12,7 @@ class DataSourceImpl extends DataSource {
   AuthManager remote;
   DataSourceImpl(this.remote);
   @override
-  Future<Either<Failure, UserCredential>> cereateAccount(AuthModel auth) async {
+  Future<Either<Failure, UserCredential>> createAccount(AuthModel auth) async {
     try {
       final response = await remote.createAccount(
         email: auth.email,

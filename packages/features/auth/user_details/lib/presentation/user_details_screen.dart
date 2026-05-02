@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:router/routes_manager.dart';
-import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/alert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'package:user_details/presentation/cubit/user_details_cubit.dart';
 import 'package:user_details/presentation/widgets/continue_button.dart';
@@ -24,23 +24,12 @@ class UserDetailsScreen extends StatefulWidget {
 }
 
 class _UserDetailsScreenState extends State<UserDetailsScreen> {
-  @override
-  void initState() {
-    getIt.resetLazySingleton<UserDetailsCubit>();
 
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    getIt<UserDetailsCubit>().close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: getIt<UserDetailsCubit>(),
+    return BlocProvider(
+      create: (context) => getIt<UserDetailsCubit>(),
       child: BlocConsumer<UserDetailsCubit, UserDetailsState>(
         buildWhen: (previous, current) {
           if (current is UserDetailsInitial ||

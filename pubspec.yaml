@@ -40,6 +40,8 @@ dependencies:
     path: packages/core/google_places_service
   router:
     path: packages/core/router
+  data:
+    path: packages/core/data
   on_bording:
     path: packages/features/on_bording
   create_account:
@@ -54,8 +56,14 @@ dependencies:
     path: packages/features/home/sell
   search:
     path: packages/features/home/search
+  favorites:
+    path: packages/features/home/favorites
   main:
     path: packages/features/home/main
+  profile:
+    path: packages/features/home/profile/profile
+  update_user_data:
+    path: packages/features/home/profile/update_user_data
   remote:
     path: packages/core/remote
   storage:
@@ -97,7 +105,12 @@ workspace:
   - packages/features/home/search
   - packages/features/home/sell
   - packages/features/home/favorites
-  - packages/features/home/profile
+  - packages/features/home/profile/profile
+  - packages/features/home/profile/update_user_data
+  - packages/features/home/profile/language
+  - packages/features/home/profile/listed_cars
+  - packages/features/home/profile/notifications
+  
 
 melos:
   scripts:

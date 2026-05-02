@@ -6,6 +6,7 @@ import 'package:data/models/car/car_filter_model.dart';
 import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/locations_catalog.dart';
+import 'package:data/models/user/user_data.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -50,12 +51,14 @@ class FirebaseDbManager {
         .collection(carsDataBase!)
         .doc(car.carId)
         .set(car.toJson())
-        .then((ture) {
+        .then((_) {
           firestore
               .collection(usersDataBase!)
               .doc(auth.currentUser!.uid)
               .update({
-                'cars': FieldValue.arrayUnion([car.carId]),
+                UserDataKeys.userListedCarsIds: FieldValue.arrayUnion([
+                  car.carId,
+                ]),
               });
         });
   }
@@ -213,5 +216,71 @@ class FirebaseDbManager {
           .toList();
       return carEntity;
     }
+  }
+
+  Future<List> getUserFavoriteCarsIds() async {
+    final doc = await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .get();
+    if (doc.exists) {
+      List<dynamic> favoriteCars = doc.data()!['favoriteCars'] ?? [];
+      return favoriteCars;
+    }
+    throw Exception("server error");
+  }
+
+  Future<UserData> getUserData() async {
+    final doc = await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .get();
+    if (doc.exists) {
+      final userDataFromDoc = UserData.fromJson(doc.data()!);
+      final UserData userData = UserData(
+        favoriteCarsIds: userDataFromDoc.favoriteCarsIds,
+        userListedCarsIds: userDataFromDoc.userListedCarsIds,
+        id: auth.currentUser!.uid,
+        name: auth.currentUser!.displayName ?? "",
+        email: auth.currentUser!.email ?? "",
+        phoneNumber: auth.currentUser!.phoneNumber ?? "",
+        verifiedEmail: auth.currentUser!.emailVerified,
+        createdAt: userDataFromDoc.createdAt,
+      );
+      return userData;
+    }
+    return UserData.init();
+  }
+
+  Future<void> addCarToFavorites(String carId) async {
+    await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .update({
+          UserDataKeys.favoriteCarsIds: FieldValue.arrayUnion([carId]),
+        });
+  }
+
+  Future<void> removeCarFromFavorites(String carId) async {
+    await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .update({
+          UserDataKeys.favoriteCarsIds: FieldValue.arrayRemove([carId]),
+        });
+  }
+
+  Future<List<CarEntity>> getCarsByIds(List<String> carIds) async {
+    if (carIds.isEmpty) {
+      return [];
+    }
+    final cars = await firestore
+        .collection(carsDataBase!)
+        .where(CarsTableKeys.id, whereIn: carIds)
+        .get(GetOptions(source: Source.server));
+    final carEntity = cars.docs
+        .map((d) => CarEntity.fromJson(d.data()))
+        .toList();
+    return carEntity;
   }
 }

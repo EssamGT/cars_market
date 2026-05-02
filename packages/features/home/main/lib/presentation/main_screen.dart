@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/presentation/cubit/main_screen_cubit.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
+import 'package:shared_ui/shared_widgets/loading/loading_c.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +18,6 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     scrollController = ScrollController();
-    getIt.get<MainScreenCubit>().getMainScreenCars();
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent - 200) {
@@ -43,10 +43,14 @@ class _MainScreenState extends State<MainScreen> {
           bloc: getIt.get<MainScreenCubit>(),
           builder: (context, state) {
             if (state is MainScreenLoading) {
-              return Center(child: CircularProgressIndicator());
+              return loadingC(context);
             }
             if (state is MainScreenFailure) {
-              return Center(child: Text('Error: ${state.failure.message}'));
+              return RefreshIndicator(
+                  onRefresh: () {
+                  return getIt.get<MainScreenCubit>().getMainScreenCars();
+                },
+                child: Center(child: Text('Error: ${state.failure.message}')));
             }
             if (state is MainScreenCars) {
               return RefreshIndicator(
@@ -71,4 +75,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-

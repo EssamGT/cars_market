@@ -1,3 +1,4 @@
+import 'package:data/models/user/user_data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sync_manager/domain/repository/sync_manager_repo.dart';
 
@@ -8,4 +9,5 @@ class SyncManagerUseCase {
   Future<void> syncData() => repo.syncData();
   Future<void> syncLocationCatalog() => repo.syncLocationCatalog();
   Future<void> syncCarsCatalog() => repo.syncCarsCatalog();
+  Future<UserData> getUserData() => repo.getUserData();
 }

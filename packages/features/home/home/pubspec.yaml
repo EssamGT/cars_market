@@ -36,7 +36,15 @@ dependencies:
   favorites:
     path: ../favorites
   profile:
-    path: ../profile
+    path: ../profile/profile
+  listed_cars:
+    path: ../profile/listed_cars
+  update_user_data:
+    path: ../profile/update_user_data
+  language:
+    path: ../profile/language
+  notifications:
+    path: ../profile/notifications
   go_router: ^16.2.4
   get_it: ^9.2.0
   injectable: ^2.7.1+4

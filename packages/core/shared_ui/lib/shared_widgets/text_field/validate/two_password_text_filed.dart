@@ -12,7 +12,7 @@ class TwoPasswordTextFiled extends StatefulWidget {
   final String hint1;
   final String hint2;
   final bool loading;
-  final VoidCallback? supmit;
+  final VoidCallback? submit;
   final TextFieldValidationType validationType;
   const TwoPasswordTextFiled({
     super.key,
@@ -25,7 +25,7 @@ class TwoPasswordTextFiled extends StatefulWidget {
     required this.myNode2,
     this.label1 = '',
     this.label2 = '',
-    this.supmit,
+    this.submit,
     this.loading = false,
   });
 
@@ -40,7 +40,8 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
   void initState() {
     if (widget.validationType == TextFieldValidationType.password ||
         widget.validationType == TextFieldValidationType.loginPassword ||
-        widget.validationType == TextFieldValidationType.confirmPassword) {
+        widget.validationType == TextFieldValidationType.confirmPassword ||
+        widget.validationType == TextFieldValidationType.newPassword) {
       obsec = true;
       obsec2 = true;
     } else {
@@ -83,6 +84,8 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
                   widget.validationType == TextFieldValidationType.password ||
                       widget.validationType ==
                           TextFieldValidationType.confirmPassword ||
+                      widget.validationType ==
+                          TextFieldValidationType.newPassword ||
                       widget.validationType ==
                           TextFieldValidationType.loginPassword
                   ? IconButton(
@@ -170,8 +173,8 @@ class _TwoPasswordTextFiledState extends State<TwoPasswordTextFiled> {
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (_) {
               FocusScope.of(context).unfocus();
-              if (widget.supmit != null) {
-                widget.supmit!();
+              if (widget.submit != null) {
+                widget.submit!();
               }
             },
           ),

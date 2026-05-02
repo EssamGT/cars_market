@@ -12,6 +12,7 @@ class PhoneNumberTextField extends StatelessWidget {
   final PhoneNumber? number;
   final FocusNode? phoneFocusNode;
   final bool loading;
+  final bool phoneUpdate;
   const PhoneNumberTextField({
     super.key,
     required this.controller,
@@ -20,6 +21,7 @@ class PhoneNumberTextField extends StatelessWidget {
     this.number,
     this.phoneFocusNode,
     this.loading = false,
+    this.phoneUpdate = false,
   });
 
   @override
@@ -77,10 +79,15 @@ class PhoneNumberTextField extends StatelessWidget {
                   textFieldController: controller,
                   formatInput: false,
                   maxLength: 11,
-                  validator: (phoneNumber) => TextFieldValidator.validateNormal(
-                    TextFieldValidationType.phone,
-                    phoneNumber!,
-                  ),
+                  validator: phoneUpdate
+                      ? (phoneNumber) => TextFieldValidator.validateNormal(
+                          TextFieldValidationType.newPhone,
+                          phoneNumber!,
+                        )
+                      : (phoneNumber) => TextFieldValidator.validateNormal(
+                          TextFieldValidationType.phone,
+                          phoneNumber!,
+                        ),
                   keyboardType: const TextInputType.numberWithOptions(
                     signed: true,
                     decimal: true,

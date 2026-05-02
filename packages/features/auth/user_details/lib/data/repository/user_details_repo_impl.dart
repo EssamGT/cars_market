@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
+import 'package:data/models/user/user_data.dart';
 import 'package:error_handler/error_handler/base_errors/base_error_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -78,9 +79,16 @@ class UserDetailsRepoImpl extends UserDetailsRepo {
       return Left(BaseErrorType.noInternet.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> setUserData(UserData userData) async {
+    if (await networkInfo.isConnected) {
+      return dataSource.setUserData(userData);
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
 }
-
-
 
 // import 'package:dartz/dartz.dart';
 // import 'package:data/models/failure/failure.dart';

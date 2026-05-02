@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:remote/network_info/network_info.dart';
 
-@LazySingleton(as: CreateAccountRepo)
+@Injectable(as: CreateAccountRepo)
 class CreateAccountRepoImpl extends CreateAccountRepo {
   NetworkInfo networkInfo;
   DataSource dataSource;
@@ -16,7 +16,7 @@ class CreateAccountRepoImpl extends CreateAccountRepo {
   @override
   Future<Either<Failure, UserCredential>> createAccount(AuthModel auth) async {
     if (await networkInfo.isConnected) {
-      return await dataSource.cereateAccount(auth);
+      return await dataSource.createAccount(auth);
     } else {
       return Left(BaseErrorType.noInternet.getFailure());
     }

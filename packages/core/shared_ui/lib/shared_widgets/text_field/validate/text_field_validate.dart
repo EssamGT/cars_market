@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/globle.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
 import 'package:data/models/car/brands_models/car_condition.dart';
@@ -13,6 +14,9 @@ enum TextFieldValidationType {
   email,
   phone,
   password,
+  newEmail,
+  newPhone,
+  newPassword,
   confirmPassword,
   none,
   loginPassword,
@@ -33,6 +37,7 @@ enum TextFieldValidationType {
   location,
   carCondition,
   name,
+  newName,
   hp,
   topSpeed,
   fuelConsumption,
@@ -76,6 +81,12 @@ class TextFieldValidator {
         final regex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
         if (!regex.hasMatch(input)) return StringsManager.validEmailError;
         return null;
+      case TextFieldValidationType.newEmail:
+        if (input.isEmpty) return StringsManager.emptyEmailError;
+        final regex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+        if (!regex.hasMatch(input)) return StringsManager.validEmailError;
+        if (input == userData.email) return StringsManager.newEmailIsRequired;
+        return null;
 
       case TextFieldValidationType.phone:
         if (input.isEmpty) return StringsManager.emptyPhoneError;
@@ -85,6 +96,17 @@ class TextFieldValidator {
         if (input[0] == '0' && input.length == 10) {
           return StringsManager.validPhoneError;
         }
+        return null;
+      case TextFieldValidationType.newPhone:
+        if (input.isEmpty) return StringsManager.emptyPhoneError;
+        final regex = RegExp(r'^[0-9]{8,15}$');
+        if (!regex.hasMatch(input)) return StringsManager.validPhoneError;
+        if (input.length < 10) return StringsManager.validPhoneError;
+        if (input[0] == '0' && input.length == 10) {
+          return StringsManager.validPhoneError;
+        }
+        if (input == userData.phoneNumber.replaceRange(0, 2, "")) return StringsManager.newPhoneIsRequired;
+        if (input == userData.phoneNumber.replaceRange(0, 3, "")) return StringsManager.newPhoneIsRequired;
         return null;
       case TextFieldValidationType.otp:
         if (input.isEmpty) return StringsManager.emptyOtpError;
@@ -201,6 +223,12 @@ class TextFieldValidator {
       case TextFieldValidationType.name:
         if (input.isEmpty) return StringsManager.emptyNameError;
         if (input.length < 5) return StringsManager.nameMinLengthError;
+        return null;
+      case TextFieldValidationType.newName:
+        if (input.isEmpty) return StringsManager.emptyNameError;
+        if (input.length < 5) return StringsManager.nameMinLengthError;
+        if (input == userData.name) return StringsManager.newNameIsRequired;
+        if (input == userData.name.trim()) return StringsManager.newNameIsRequired;
         return null;
       case TextFieldValidationType.seatNumber:
         if (value.trim().isEmpty) {
@@ -372,10 +400,10 @@ class TextFieldValidator {
         if (engineCapacity == null) return null;
         minEngineCapacity ??= 0;
         if (engineCapacity < 0) return StringsManager.validEngineCapacityError;
-        if (engineCapacity < minEngineCapacity) return StringsManager.validEngineCapacityError;
+        if (engineCapacity < minEngineCapacity)
+          return StringsManager.validEngineCapacityError;
         return null;
     }
-
   }
 
   static String? twoPasswordValidator(String value, String value2) {

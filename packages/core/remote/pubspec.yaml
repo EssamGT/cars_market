@@ -26,6 +26,8 @@ dependencies:
     path: ../error_handler
   domain:
     path: ../domain
+  storage:
+    path: ../storage
   constants:
     path: ../constants
   data:

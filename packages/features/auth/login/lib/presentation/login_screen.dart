@@ -11,7 +11,7 @@ import 'package:router/routes_manager.dart';
 import 'package:shared_ui/shared_widgets/buttons/colored_text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/text_button.dart';
 import 'package:shared_ui/shared_widgets/buttons/two_text_button.dart';
-import 'package:shared_ui/shared_widgets/allert_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/alert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/text_field/c_text_field.dart';
 import 'package:shared_ui/shared_widgets/text_field/validate/text_field_validate.dart';
 
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   horizontal: AppPadding.p16,
                                 ),
                                 onTap: () {
-                                  context.push(RoutesManager.forgotPasword);
+                                  context.push(RoutesManager.forgotPassword);
                                 },
                               ),
                             ],

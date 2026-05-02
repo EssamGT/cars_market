@@ -1,10 +1,10 @@
 class RoutesManager {
   static const String home = '/home';
-  static const String onBoarding = '/onBording';
+  static const String onBoarding = '/onBoarding';
   static const String login = '/login';
   static const String userDetails = '/userDetails';
   static const String createAccount = '/createAccount';
-  static const String forgotPasword = '/forgotPasword';
+  static const String forgotPassword = '/forgotPassword';
   static const String newUserDataScreen = '/newUserDataScreen';
   static const String main = '/main';
   static const String search = '/search';
@@ -16,8 +16,14 @@ class RoutesManager {
   static const String profile = '/profile';
   static const String menuScreen = '/menuScreen';
   static const String otpScreen = '/otpScreen';
+  static const String otpScreenForPhoneUpdate = '/otpScreenForPhoneUpdate';
   static const String filterScreen = '/filterScreen';
   static const String carSelection = '/carSelection';
+  static const String listedCars = '/listedCars';
+  static const String personalInfo = '/personalInfo';
+  static const String language = '/language';
+  static const String notifications = '/notifications';
+  static const String editUserProfile = '/editUserProfile';
   // static const String home = '/home';
   // static const String home = '/home';
 }

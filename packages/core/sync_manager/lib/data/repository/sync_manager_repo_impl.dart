@@ -1,3 +1,4 @@
+import 'package:data/models/user/user_data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:remote/network_info/network_info.dart';
 import 'package:sync_manager/data/data_source/sync_manager_data_source.dart';
@@ -28,5 +29,13 @@ class SyncManagerRepoImpl extends SyncManagerRepo {
     if (await networkInfo.isConnected) {
       return dataSource.syncLocationCatalog();
     }
+  }
+
+  @override
+  Future<UserData> getUserData() async {
+    if (await networkInfo.isConnected) {
+      return dataSource.getUserData();
+    }
+    return UserData.init();
   }
 }

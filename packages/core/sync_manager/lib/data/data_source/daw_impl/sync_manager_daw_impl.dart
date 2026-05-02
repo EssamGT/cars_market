@@ -1,3 +1,4 @@
+import 'package:data/models/user/user_data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:remote/remote/firebase/firebase_db_manager.dart';
 import 'package:storage/cache/prefs_helper.dart';
@@ -45,6 +46,17 @@ class SyncManagerDawImpl extends SyncManagerDataSource {
     } catch (e) {
       //temp
       print(e.toString());
+    }
+  }
+
+  @override
+  Future<UserData> getUserData() async {
+    try {
+      final userData = await firebaseDbManager.getUserData();
+      return userData;
+    } catch (e) {
+      print(e.toString());
+      return UserData.init();
     }
   }
 }

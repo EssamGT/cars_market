@@ -1,10 +1,14 @@
+import 'package:cars_market/di/di.dart';
+import 'package:cars_market/globle/globle.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
+import 'package:favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:remote/remote/firebase/firebase_db_manager.dart';
 
 // done
-class DetailsScreenAppBar extends StatelessWidget {
+class DetailsScreenAppBar extends StatefulWidget {
   final CarEntity car;
   final bool isAppBarTransparent;
   final int startBackgroundChange;
@@ -15,6 +19,12 @@ class DetailsScreenAppBar extends StatelessWidget {
     required this.startBackgroundChange,
   });
 
+  @override
+  State<DetailsScreenAppBar> createState() => _DetailsScreenAppBarState();
+}
+
+class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
+  final fire = getIt.get<FirebaseDbManager>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,10 +52,21 @@ class DetailsScreenAppBar extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              if (userData.favoriteCarsIds.contains(widget.car.carId)) {
+                removeFromFavorite();
+              } else {
+                addToFavorite();
+              }
+              setState(() {});
+            },
             icon: Icon(
-              Icons.favorite_border,
-              color: getIconColor(context),
+              userData.favoriteCarsIds.contains(widget.car.carId)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: userData.favoriteCarsIds.contains(widget.car.carId)
+                  ? Theme.of(context).colorScheme.error
+                  : getIconColor(context),
               size: AppSize.s20,
             ),
           ),
@@ -59,18 +80,18 @@ class DetailsScreenAppBar extends StatelessWidget {
           ),
         ],
         title: AnimatedOpacity(
-          opacity: isAppBarTransparent ? 0.0 : 1.0,
+          opacity: widget.isAppBarTransparent ? 0.0 : 1.0,
           duration: Duration(milliseconds: 300),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${car.brand} ${car.model} ${car.year} ${car.version}",
+                "${widget.car.brand} ${widget.car.model} ${widget.car.year} ${widget.car.version}",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
-                car.getPrice(),
+                widget.car.getPrice(),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -83,21 +104,33 @@ class DetailsScreenAppBar extends StatelessWidget {
   Color getBackgroundColor(BuildContext context) {
     return Theme.of(
       context,
-    ).colorScheme.surface.withAlpha(startBackgroundChange);
+    ).colorScheme.surface.withAlpha(widget.startBackgroundChange);
   }
 
   Color getIconColor(BuildContext context) {
-    if (startBackgroundChange < 100) {
+    if (widget.startBackgroundChange < 100) {
       return Theme.of(
         context,
-      ).colorScheme.surface.withAlpha(255 - startBackgroundChange);
+      ).colorScheme.surface.withAlpha(255 - widget.startBackgroundChange);
     }
     return Theme.of(
       context,
-    ).colorScheme.onError.withAlpha(startBackgroundChange);
+    ).colorScheme.onError.withAlpha(widget.startBackgroundChange);
   }
 
   Brightness getIconBrightness() {
-    return Brightness.values[startBackgroundChange > 180 ? 0 : 1];
+    return Brightness.values[widget.startBackgroundChange > 180 ? 0 : 1];
+  }
+
+  Future<void> addToFavorite() async {
+    userData.favoriteCarsIds.add(widget.car.carId);
+    await fire.addCarToFavorites(widget.car.carId);
+    getIt.get<FavoritesCubit>().getFavCars(userData.favoriteCarsIds);
+  }
+
+  Future<void> removeFromFavorite() async {
+    userData.favoriteCarsIds.remove(widget.car.carId);
+    await fire.removeCarFromFavorites(widget.car.carId);
+    getIt.get<FavoritesCubit>().getFavCars(userData.favoriteCarsIds);
   }
 }
