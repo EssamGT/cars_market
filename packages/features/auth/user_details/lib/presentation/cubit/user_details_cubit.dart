@@ -48,7 +48,6 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
 
             if (user != null) {
               await user.reload();
-              print('dada');
               if (submit) {
                 if (user.phoneNumber != null &&
                     user.emailVerified &&
@@ -58,11 +57,11 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
                     name: user.displayName ?? '',
                     email: user.email ?? '',
                     phoneNumber: user.phoneNumber ?? '',
-                  
+
                     verifiedEmail: user.emailVerified,
                     createdAt: DateTime.now().toIso8601String(),
                     favoriteCarsIds: [],
-                    userListedCarsIds: [],
+                    listedCarsIds: [],
                   );
                   final res = await useCase.setUserData(userData);
                   res.fold(
@@ -231,6 +230,7 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
         emit(PhoneVerificationError(failure));
       },
       (r) {
+        userDetails.phoneNumber = phoneNumber;
         emit(PhoneVerificationSend());
       },
     );

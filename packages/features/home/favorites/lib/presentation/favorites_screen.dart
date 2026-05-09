@@ -4,7 +4,7 @@ import 'package:favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
-import 'package:shared_ui/shared_widgets/loading/loading_c.dart' show loadingC;
+import 'package:shared_ui/shared_widgets/loading/loading_c.dart' show LoadingC;
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -38,12 +38,13 @@ class FavoritesScreen extends StatelessWidget {
                   },
                   child: ListView.builder(
                     itemCount: state.favCars.length,
+
                     itemBuilder: (context, index) =>
                         CarCard(car: state.favCars[index]),
                   ),
                 );
               }
-              return loadingC(context);
+              return LoadingC();
             },
           ),
         ),

@@ -24,14 +24,10 @@ ColorScheme lightThemeColors() {
     error: ColorManager.error,
     onError: ColorManager.textPrimary,
     surface: ColorManager.background,
-    surfaceContainerHighest : ColorManager.surfaceVariant,
+    surfaceContainerHighest: ColorManager.surfaceVariant,
     onSurface: ColorManager.secondary,
     outline: ColorManager.outline,
     shadow: ColorManager.shadow,
     scrim: ColorManager.textPrimary.withAlpha(50),
-    
-    
-    
-    
   );
 }

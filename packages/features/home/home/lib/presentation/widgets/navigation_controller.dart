@@ -9,6 +9,12 @@ import 'package:search/presentation/search_screen.dart';
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
+  void resetIndex() {
+    Future.delayed(Duration(milliseconds: 200), () {
+      selectedIndex.value = 0;
+    });
+  }
+
   Widget getScreen(int index) {
     switch (index) {
       case 0:

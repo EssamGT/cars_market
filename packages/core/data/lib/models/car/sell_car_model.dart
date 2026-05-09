@@ -12,6 +12,7 @@ import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:data/models/car/car_image.dart';
+import 'package:data/models/car/car_status.dart';
 import 'package:data/models/location/location_model.dart';
 import 'package:google_places_service/data/models/text_search_model/text_search_model.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,8 +25,11 @@ class CarsTableKeys {
   static const String brandName = 'brandName';
   static const String modelId = 'modelId';
   static const String modelName = 'modelName';
+  static const String leads = 'leads';
+  static const String views = 'views';
   static const String whatsappMessage = 'whatsappMessage';
   static const String engineCapacityValue = 'engineCapacityValue';
+  static const String status = 'status';
 
   static const String engineSpec = 'engineSpec';
   static const String hp = 'hp';
@@ -73,6 +77,7 @@ class SellCarUploadModel {
   InteriorType interiorType;
   String seatsNumber;
   String year;
+  CarStatus status;
   AirConTypes airConType;
   WhatsAppMessage whatsappMessage;
   String description;
@@ -90,6 +95,8 @@ class SellCarUploadModel {
   List<XFile> selectedImages;
   List<XFile> pendingUploadImages;
   List<CarImage>? uploadedImages;
+  List<String> leads;
+  List<String> views;
   NegotiationType negotiable;
   List<FeaturesList> features;
 
@@ -97,7 +104,7 @@ class SellCarUploadModel {
     this.carId = '',
     this.userId = '',
     this.createdAt = '',
-
+    this.status = CarStatus.pendingReview,
     this.year = '',
     this.whatsappMessage = WhatsAppMessage.none,
     CarBrand? brand,
@@ -136,6 +143,8 @@ class SellCarUploadModel {
 
     this.negotiable = NegotiationType.none,
     this.uploadedImages,
+    this.leads = const [],
+    this.views = const [],
   }) : brand = brand ?? CarBrand.empty(),
        engineSpec = engineSpec ?? EngineSpec(),
        selectedImages = selectedImages ?? [],
@@ -152,6 +161,7 @@ class SellCarUploadModel {
       CarsTableKeys.brandId: brand.id,
       CarsTableKeys.modelId: brand.selectedModel.id,
       CarsTableKeys.brandName: brand.name,
+      CarsTableKeys.status: status.name,
       CarsTableKeys.modelName: brand.selectedModel.name,
       CarsTableKeys.engineSpec: engineSpec.toJson(),
       CarsTableKeys.year: int.tryParse(year) ?? 0,
@@ -178,6 +188,8 @@ class SellCarUploadModel {
       CarsTableKeys.airConType: airConType.name,
       CarsTableKeys.whatsappMessage: whatsappMessage.name,
       CarsTableKeys.googleMapsLocation: googleMapsLocation.toJson(),
+      CarsTableKeys.leads: leads,
+      CarsTableKeys.views: views,
       // Note: images are not included in JSON representation
     };
   }

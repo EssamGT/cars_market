@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cars_market/globle/globle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/car_catalog.dart';
@@ -8,6 +9,7 @@ import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/locations_catalog.dart';
 import 'package:data/models/user/user_data.dart';
 import 'package:domain/entity/car_entity.dart';
+import 'package:error_handler/error_handler/firebase_error_handler/firebase_error_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -56,9 +58,7 @@ class FirebaseDbManager {
               .collection(usersDataBase!)
               .doc(auth.currentUser!.uid)
               .update({
-                UserDataKeys.userListedCarsIds: FieldValue.arrayUnion([
-                  car.carId,
-                ]),
+                UserDataKeys.listedCarsIds: FieldValue.arrayUnion([car.carId]),
               });
         });
   }
@@ -230,6 +230,44 @@ class FirebaseDbManager {
     throw Exception("server error");
   }
 
+  Future<void> setUserData(UserData userData) async {
+    final uid = auth.currentUser?.uid;
+    if (uid != null) {
+      await firestore
+          .collection(usersDataBase!)
+          .doc(uid)
+          .set(userData.toJson());
+    }
+  }
+
+  Future<void> deleteUserData() async {
+    final user = auth.currentUser;
+    if (user != null) {
+      // delete user data from storage
+      await Future.wait(
+        userData.listedCarsIds.map((carId) async {
+          try {
+            final result = await storage
+                .ref()
+                .child('$carsImagesPath/$carId')
+                .listAll();
+            await Future.wait(result.items.map((item) => item.delete()));
+          } catch (e) {
+            print('Failed to delete storage for car $carId: $e');
+          }
+        }),
+      );
+      // delete user data from firestore
+      await Future.wait(
+        userData.listedCarsIds.map(
+          (carId) => firestore.collection(carsDataBase!).doc(carId).delete(),
+        ),
+      );
+
+      await firestore.collection(usersDataBase!).doc(user.uid).delete();
+    }
+  }
+
   Future<UserData> getUserData() async {
     final doc = await firestore
         .collection(usersDataBase!)
@@ -239,12 +277,72 @@ class FirebaseDbManager {
       final userDataFromDoc = UserData.fromJson(doc.data()!);
       final UserData userData = UserData(
         favoriteCarsIds: userDataFromDoc.favoriteCarsIds,
-        userListedCarsIds: userDataFromDoc.userListedCarsIds,
+        listedCarsIds: userDataFromDoc.listedCarsIds,
         id: auth.currentUser!.uid,
-        name: auth.currentUser!.displayName ?? "",
-        email: auth.currentUser!.email ?? "",
-        phoneNumber: auth.currentUser!.phoneNumber ?? "",
-        verifiedEmail: auth.currentUser!.emailVerified,
+        name: auth.currentUser!.displayName ?? userDataFromDoc.name,
+        email: auth.currentUser!.email ?? userDataFromDoc.email,
+        phoneNumber:
+            auth.currentUser!.phoneNumber ?? userDataFromDoc.phoneNumber,
+        verifiedEmail: userDataFromDoc.verifiedEmail,
+        createdAt: userDataFromDoc.createdAt,
+      );
+      return userData;
+    }
+    return UserData.init();
+  }
+
+  Future<UserData> getOwnerData(String userId) async {
+    final doc = await firestore.collection(usersDataBase!).doc(userId).get();
+    if (doc.exists) {
+      final userDataFromDoc = UserData.fromJson(doc.data()!);
+      final UserData userData = UserData(
+        favoriteCarsIds: userDataFromDoc.favoriteCarsIds,
+        listedCarsIds: userDataFromDoc.listedCarsIds,
+        id: userDataFromDoc.id,
+        name: userDataFromDoc.name,
+        email: userDataFromDoc.email,
+        phoneNumber: userDataFromDoc.phoneNumber,
+        verifiedEmail: userDataFromDoc.verifiedEmail,
+        createdAt: userDataFromDoc.createdAt,
+      );
+      return userData;
+    }
+    throw FirebaseErrorType.notFound;
+  }
+
+  Future<void> updateUserNameDB(String newName) async {
+    await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .update({UserDataKeys.name: newName});
+  }
+
+  Future<void> updateUserEmailDB(String newEmail) async {
+    await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .update({UserDataKeys.email: newEmail});
+  }
+
+  Future<void> updateUserPhoneDB(String newPhone) async {
+    await firestore
+        .collection(usersDataBase!)
+        .doc(auth.currentUser!.uid)
+        .update({UserDataKeys.phoneNumber: newPhone});
+  }
+
+  Future<UserData> getListedCarUSerData(String userId) async {
+    final doc = await firestore.collection(usersDataBase!).doc(userId).get();
+    if (doc.exists) {
+      final userDataFromDoc = UserData.fromJson(doc.data()!);
+      final UserData userData = UserData(
+        favoriteCarsIds: userDataFromDoc.favoriteCarsIds,
+        listedCarsIds: userDataFromDoc.listedCarsIds,
+        id: userDataFromDoc.id,
+        name: userDataFromDoc.name,
+        email: userDataFromDoc.email,
+        phoneNumber: userDataFromDoc.phoneNumber,
+        verifiedEmail: userDataFromDoc.verifiedEmail,
         createdAt: userDataFromDoc.createdAt,
       );
       return userData;
@@ -282,5 +380,17 @@ class FirebaseDbManager {
         .map((d) => CarEntity.fromJson(d.data()))
         .toList();
     return carEntity;
+  }
+
+  Future<void> view(String carId, String userId) async {
+    await firestore.collection(carsDataBase!).doc(carId).update({
+      CarsTableKeys.views: FieldValue.arrayUnion([userId]),
+    });
+  }
+
+  Future<void> lead(String carId, String userId) async {
+    await firestore.collection(carsDataBase!).doc(carId).update({
+      CarsTableKeys.leads: FieldValue.arrayUnion([userId]),
+    });
   }
 }

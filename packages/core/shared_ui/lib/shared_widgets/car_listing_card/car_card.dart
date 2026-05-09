@@ -3,8 +3,9 @@ import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:redacted/redacted.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/car_details_screen.dart';
+import 'package:router/routes_manager.dart';
 
 String heroTag(String carId, int index) => 'carImageHeroTag_${carId}_$index';
 
@@ -22,12 +23,13 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
     super.build(context);
     return GestureDetector(
       onTap: () async {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CarDetailsScreen(car: widget.car),
-          ),
-        );
+        context.push(RoutesManager.carDetails, extra: widget.car);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => CarDetailsScreen(car: widget.car),
+        //   ),
+        // );
       },
       child: Container(
         height: AppSize.s350,

@@ -88,7 +88,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 hint: StringsManager.enterEmail,
                                 validationType: TextFieldValidationType.email,
                                 enabled: state is! Loading,
-                                supmit: () {
+                                submit: () {
                                   if (formKey.currentState!.validate()) {
                                     cubit.forgotPassword(emailController.text);
                                   }

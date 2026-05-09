@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cars_market/globle/globle.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data/models/failure/failure.dart';
@@ -9,16 +8,19 @@ import 'package:error_handler/error_handler/auth_error_handler/auth_error_handle
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
+import 'package:remote/remote/firebase/firebase_db_manager.dart';
 
 @singleton
 class AuthManager {
   // final Supabase supabase;
   final FirebaseAuth firebaseAuth;
-  final FirebaseFirestore firebaseStore;
-  AuthManager({required this.firebaseAuth, required this.firebaseStore});
+  final FirebaseDbManager dbManager;
+
+  AuthManager({required this.firebaseAuth, required this.dbManager});
   String _verificationId = '';
   int? _lastResendToken;
   final usersDataBase = dotenv.env[AppConstants.usersDataBaseKey];
+
   Future<UserCredential> login({
     required String email,
     required String password,
@@ -51,25 +53,7 @@ class AuthManager {
   }
 
   Future<UserData> getUserData() async {
-    final doc = await firebaseStore
-        .collection(usersDataBase!)
-        .doc(firebaseAuth.currentUser!.uid)
-        .get();
-    if (doc.exists) {
-      final userDataFromDoc = UserData.fromJson(doc.data()!);
-      final UserData userData = UserData(
-        favoriteCarsIds: userDataFromDoc.favoriteCarsIds,
-        userListedCarsIds: userDataFromDoc.userListedCarsIds,
-        id: firebaseAuth.currentUser!.uid,
-        name: firebaseAuth.currentUser!.displayName ?? "",
-        email: firebaseAuth.currentUser!.email ?? "",
-        phoneNumber: firebaseAuth.currentUser!.phoneNumber ?? "",
-        verifiedEmail: firebaseAuth.currentUser!.emailVerified,
-        createdAt: userDataFromDoc.createdAt,
-      );
-      return userData;
-    }
-    return UserData.init();
+    return await dbManager.getUserData();
   }
 
   Future<void> logout() async {
@@ -86,18 +70,13 @@ class AuthManager {
   }
 
   Future<void> setUserData(UserData userData) async {
-    final uid = firebaseAuth.currentUser?.uid;
-    if (uid != null) {
-      await firebaseStore
-          .collection(usersDataBase!)
-          .doc(uid)
-          .set(userData.toJson());
-    }
+    return await dbManager.setUserData(userData);
   }
 
   Future<Either<Failure, void>> sendOTP(
     String phoneNumber, [
     int? forceResendingToken,
+    bool isUpdate = false,
   ]) async {
     final completer = Completer<void>();
 
@@ -110,8 +89,11 @@ class AuthManager {
           try {
             final current = firebaseAuth.currentUser;
             if (current != null) {
-              // If user is signed in, link the phone credential to the existing account
-              await current.linkWithCredential(credential);
+              if (isUpdate) {
+                await current.updatePhoneNumber(credential);
+              } else {
+                await current.linkWithCredential(credential);
+              }
             }
             if (!completer.isCompleted) completer.complete();
             print('Auto verification successful.');
@@ -150,8 +132,11 @@ class AuthManager {
     }
   }
 
-  Future<Either<Failure, void>> resendOTP(String phoneNumber) {
-    return sendOTP(phoneNumber, _lastResendToken);
+  Future<Either<Failure, void>> resendOTP(
+    String phoneNumber, [
+    bool isUpdate = false,
+  ]) async {
+    return sendOTP(phoneNumber, _lastResendToken, isUpdate);
   }
 
   Future<UserCredential> verifyOTP(String otp) async {
@@ -162,12 +147,21 @@ class AuthManager {
     return await firebaseAuth.currentUser!.linkWithCredential(credential);
   }
 
+  Future<void> deleteAccount() async {
+    final user = firebaseAuth.currentUser;
+    if (user != null) {
+      await dbManager.deleteUserData();
+      await user.delete();
+    }
+  }
+
   Future<void> forgotPassword(String email) async {
     await firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   Future<void> updateName(String name) async {
     await firebaseAuth.currentUser?.updateDisplayName(name);
+    // await dbManager.updateUserNameDB(name);
   }
 
   User? getCurrentUser() {
@@ -184,35 +178,32 @@ class AuthManager {
 
   Future<void> userNameUpdated(String newDisplayName) async {
     await firebaseAuth.currentUser!.updateDisplayName(newDisplayName);
-    await firebaseStore
-        .collection(usersDataBase!)
-        .doc(firebaseAuth.currentUser!.uid)
-        .update({UserDataKeys.name: newDisplayName});
+    await dbManager.updateUserNameDB(newDisplayName);
+
     userData = await getUserData();
   }
 
   Future<void> userEmailUpdated(String newEmail) async {
     await firebaseAuth.currentUser!.verifyBeforeUpdateEmail(newEmail);
-    // await firebaseStore
-    //     .collection(usersDataBase!)
-    //     .doc(firebaseAuth.currentUser!.uid)
-    //     .update({UserDataKeys.email: newEmail});
-    // userData = await getUserData();
+    
   }
 
   Future<void> userPhoneUpdated(String otp) async {
-
-    await firebaseAuth.currentUser!.updatePhoneNumber(
-      PhoneAuthProvider.credential(
-        verificationId: _verificationId,
-        smsCode: otp,
-      ),
+    final credential = PhoneAuthProvider.credential(
+      verificationId: _verificationId,
+      smsCode: otp,
     );
+
+    await firebaseAuth.currentUser!.updatePhoneNumber(credential);
     // await firebaseStore
     //     .collection(usersDataBase!)
     //     .doc(firebaseAuth.currentUser!.uid)
     //     .update({UserDataKeys.phoneNumber: newPhone});
     // userData = await getUserData();
+  }
+
+  Future<void> updatePhoneNumberDB(String newPhone) async {
+    await dbManager.updateUserPhoneDB(newPhone);
   }
 
   Future<void> userPasswordUpdated(String newPassword) async {

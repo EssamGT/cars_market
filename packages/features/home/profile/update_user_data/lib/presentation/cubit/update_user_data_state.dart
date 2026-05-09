@@ -11,6 +11,8 @@ final class UpdateUserDataPending extends UpdateUserDataState {}
 
 final class UpdateUserDataSuccess extends UpdateUserDataState {}
 
+final class UserDataDeletedSuccess extends UpdateUserDataState {}
+
 final class PhoneVerificationSubmittingInProgress extends UpdateUserDataState {}
 
 final class PhoneVerificationError extends UpdateUserDataState {

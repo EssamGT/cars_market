@@ -1,8 +1,12 @@
+import 'package:car_listing/di/car_listing_di.dart';
 import 'package:favorites/di/favorites_di.dart';
 import 'package:get_it/get_it.dart';
 import 'package:create_account/di/create_account_di.dart';
 import 'package:forgot_password/di/forgot_password_di.dart';
 import 'package:google_places_service/di/gps_di.dart';
+import 'package:injectable/injectable.dart';
+
+import 'package:listed_cars/di/listed_cars_di.dart';
 import 'package:login/di/login_di.dart';
 import 'package:main/di/main_screen_di.dart';
 import 'package:profile/di/profile_di.dart';
@@ -15,6 +19,11 @@ import 'package:update_user_data/di/update_user_data_di.dart';
 import 'package:user_details/di/user_details_di.dart';
 
 final getIt = GetIt.instance;
+
+void restGetIt() async {
+  await getIt.reset();
+  await configureDependencies(Environment.dev);
+}
 
 // @InjectableInit(
 //   initializerName: 'init', // default
@@ -37,4 +46,6 @@ Future<void> configureDependencies(String? enviroment) async {
   await configureFavoritesDependencies(getIt, enviroment);
   await configureProfileDependencies(getIt, enviroment);
   await configureUpdateUserDataDependencies(getIt, enviroment);
+  await configureCarListingDependencies(getIt, enviroment);
+  await configureListedCarsDependencies(getIt, enviroment);
 }

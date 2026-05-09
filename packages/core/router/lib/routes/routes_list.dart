@@ -1,4 +1,7 @@
+import 'package:car_listing/presentation/car_details_screen.dart';
+
 import 'package:create_account/presentation/create_account_screen.dart';
+import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:forgot_password/presentation/forgot_password_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -119,6 +122,15 @@ final routes = <RouteBase>[
     pageBuilder: (context, state) {
       return customRightAnimationPage(
         child: EditUserProfile(editType: state.extra as PersonalInfoEditType),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.carDetails,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(
+        child: CarDetailsScreen(car: state.extra as CarEntity),
         state: state,
       );
     },

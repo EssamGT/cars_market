@@ -3,7 +3,7 @@ import 'package:data/models/car/sell_car_model.dart';
 class UserDataKeys {
   static const String data = 'data';
   static const String favoriteCarsIds = 'favoriteCarsIds';
-  static const String userListedCarsIds = 'userListedCarsIds';
+  static const String listedCarsIds = 'listedCarsIds';
   static const String id = CarsTableKeys.userId;
   static const String name = 'name';
   static const String email = 'email';
@@ -15,7 +15,7 @@ class UserDataKeys {
 
 class UserData {
   final List<String> favoriteCarsIds;
-  final List<String> userListedCarsIds;
+  final List<String> listedCarsIds;
   final String id;
   final String name;
   final String email;
@@ -25,7 +25,7 @@ class UserData {
 
   UserData({
     required this.favoriteCarsIds,
-    required this.userListedCarsIds,
+    required this.listedCarsIds,
     required this.id,
     required this.name,
     required this.email,
@@ -36,7 +36,7 @@ class UserData {
   factory UserData.init() {
     return UserData(
       favoriteCarsIds: [],
-      userListedCarsIds: [],
+      listedCarsIds: [],
       id: '',
       name: '',
       email: '',
@@ -50,9 +50,7 @@ class UserData {
       favoriteCarsIds: List<String>.from(
         json[UserDataKeys.favoriteCarsIds] ?? [],
       ),
-      userListedCarsIds: List<String>.from(
-        json[UserDataKeys.userListedCarsIds] ?? [],
-      ),
+      listedCarsIds: List<String>.from(json[UserDataKeys.listedCarsIds] ?? []),
       id: json[UserDataKeys.id] ?? '',
       name: json[UserDataKeys.name] ?? '',
       email: json[UserDataKeys.email] ?? '',
@@ -61,11 +59,38 @@ class UserData {
       createdAt: json[UserDataKeys.createdAt] ?? '',
     );
   }
+  factory UserData.fromJsonForListedCars(Map<String, dynamic> json) {
+    return UserData(
+      favoriteCarsIds: List<String>.from([]),
+      listedCarsIds: List<String>.from(json[UserDataKeys.listedCarsIds] ?? []),
+      id: json[UserDataKeys.id] ?? '',
+      name: json[UserDataKeys.name] ?? '',
+      email: json[UserDataKeys.email] ?? '',
+      phoneNumber: json[UserDataKeys.phoneNumber] ?? '',
+      verifiedEmail: json[UserDataKeys.verifiedEmail] ?? false,
+      createdAt: json[UserDataKeys.createdAt] ?? '',
+    );
+  }
+  UserData copyWith(UserData newData) {
+    return UserData(
+      favoriteCarsIds: newData.favoriteCarsIds,
+      listedCarsIds: newData.listedCarsIds,
+      id: newData.id,
+      name: newData.name,
+      email: newData.email,
+      phoneNumber: newData.phoneNumber,
+      verifiedEmail: newData.verifiedEmail,
+      createdAt: newData.createdAt,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       UserDataKeys.favoriteCarsIds: favoriteCarsIds,
-      UserDataKeys.userListedCarsIds: userListedCarsIds,
+      UserDataKeys.listedCarsIds: listedCarsIds,
       UserDataKeys.createdAt: createdAt,
+      UserDataKeys.name: name,
+      UserDataKeys.phoneNumber: phoneNumber,
     };
   }
 }

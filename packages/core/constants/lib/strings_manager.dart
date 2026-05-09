@@ -12,6 +12,15 @@ class StringsManager {
   static const String contactDetails = 'Contact Details';
   static const String profileAccount = 'Profile Account';
   static const String emailVerificationPending = 'Email Verification Pending';
+  static const String views = 'Views';
+  static const String leads = 'Leads';
+  static const String active = 'Active';
+  static const String deactivated = 'Deactivated';
+  static const String pendingReview = 'Pending Review';
+  static const String rejected = 'Rejected';
+  static const String edit = 'Edit';
+  static const String deleteAccountConfirmation =
+      'Are you sure you want to delete your account? This action cannot be undone.';
   static const String checkYourMailBox =
       'Check Your Mail Box to verify your email and login again';
   static String updateSuccess(String name) => '$name Updated Successfully';
@@ -31,6 +40,7 @@ class StringsManager {
   static const String newPassword = 'New Password';
 
   static const String deleteAccount = 'Delete Account';
+  static const String delete = 'Delete';
   static const String preferences = 'PREFERENCES';
   static const String support = 'Contact Support';
   static const String darkMode = 'Dark Mode';

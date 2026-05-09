@@ -24,6 +24,7 @@ class RoutesManager {
   static const String language = '/language';
   static const String notifications = '/notifications';
   static const String editUserProfile = '/editUserProfile';
+  static const String carDetails = '/carDetails';
   // static const String home = '/home';
   // static const String home = '/home';
 }

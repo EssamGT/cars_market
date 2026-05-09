@@ -61,11 +61,11 @@ class UpdateUserDataDawImpl extends UpdateUserDataDaw {
   @override
   Future<Either<Failure, void>> userPhoneUpdate(String newPhone) async {
     try {
-      await authManager.sendOTP(newPhone);
+      await authManager.sendOTP(newPhone, null, true);
       return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthErrorHandler.handleFirebaseAuthError(e));
     } catch (e) {
-      print("########################################");
-      print(e.toString());
       return Left(
         Failure(message: 'Failed to update user phone', code: e.toString()),
       );
@@ -78,9 +78,9 @@ class UpdateUserDataDawImpl extends UpdateUserDataDaw {
     try {
       await authManager.resendOTP(phoneNumber);
       return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthErrorHandler.handleFirebaseAuthError(e));
     } catch (e) {
-      print("########################################");
-      print(e.toString());
       return Left(Failure(message: 'Failed to resend OTP', code: e.toString()));
     }
   }
@@ -91,9 +91,9 @@ class UpdateUserDataDawImpl extends UpdateUserDataDaw {
     try {
       await authManager.userPhoneUpdated(otp);
       return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthErrorHandler.handleFirebaseAuthError(e));
     } catch (e) {
-      print("########################################");
-      print(e.toString());
       return Left(Failure(message: 'Failed to verify OTP', code: e.toString()));
     }
   }
@@ -104,11 +104,38 @@ class UpdateUserDataDawImpl extends UpdateUserDataDaw {
       await authManager.userPasswordUpdated(newPassword);
       return const Right(null);
     } catch (e) {
-      print("########################################");
-      print(e.toString());
       return Left(
         Failure(
           message: 'Failed to update user password/n ${e.toString()}',
+          code: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> userDelete() async {
+    try {
+      await authManager.deleteAccount();
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthErrorHandler.handleFirebaseAuthError(e));
+    } catch (e) {
+      return Left(
+        Failure(message: 'Failed to delete user account', code: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> userPhoneUpdateDB(String newPhone) async {
+    try {
+      await authManager.updatePhoneNumberDB(newPhone);
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        Failure(
+          message: 'Failed to update user phone in DB',
           code: e.toString(),
         ),
       );

@@ -7,9 +7,11 @@ abstract class UpdateUserDataDaw {
   Future<Either<Failure, void>> userNameUpdate(String newName);
   Future<Either<Failure, void>> userEmailUpdate(String newEmail);
   Future<Either<Failure, void>> userPhoneUpdate(String newPhone);
+  Future<Either<Failure, void>> userPhoneUpdateDB(String newPhone);
   Future<Either<Failure, Stream<User?>>> authStateChanges();
   Future<Either<Failure, UserData>> getUserData();
   Future<Either<Failure, void>> verifyOTP(String otp);
   Future<Either<Failure, void>> resendOTP(String phoneNumber);
   Future<Either<Failure, void>> userPasswordUpdate(String newPassword);
+  Future<Either<Failure, void>> userDelete();
 }

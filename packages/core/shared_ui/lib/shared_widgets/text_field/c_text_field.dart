@@ -11,7 +11,7 @@ class CTextField extends StatefulWidget {
   final bool enabled;
   final FocusNode? myNode;
   final FocusNode? next;
-  final VoidCallback? supmit;
+  final VoidCallback? submit;
   final Function(String)? onChanged;
   final TextFieldValidationType validationType;
   const CTextField({
@@ -21,7 +21,7 @@ class CTextField extends StatefulWidget {
     required this.validationType,
     this.myNode,
     this.label = '',
-    this.supmit,
+    this.submit,
     this.onChanged,
     this.enabled = true,
     this.loading = false,
@@ -153,8 +153,8 @@ class _CTextFieldState extends State<CTextField> {
                       FocusScope.of(context).requestFocus(widget.next);
                     } else {
                       FocusScope.of(context).unfocus();
-                      if (widget.supmit != null) {
-                        widget.supmit!();
+                      if (widget.submit != null) {
+                        widget.submit!();
                       }
                     }
                   },

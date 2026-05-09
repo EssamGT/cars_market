@@ -54,6 +54,8 @@ dependencies:
     path: packages/features/auth/forgot_password
   sell:
     path: packages/features/home/sell
+  car_edit:
+    path: packages/features/home/profile/car_edit
   search:
     path: packages/features/home/search
   favorites:
@@ -64,8 +66,13 @@ dependencies:
     path: packages/features/home/profile/profile
   update_user_data:
     path: packages/features/home/profile/update_user_data
+  listed_cars:
+    path: packages/features/home/profile/listed_cars
   remote:
     path: packages/core/remote
+  car_listing:
+    path: packages/features/home/car_listing
+
   storage:
     path: packages/core/storage
   sync_manager:
@@ -104,13 +111,14 @@ workspace:
   - packages/features/home/main
   - packages/features/home/search
   - packages/features/home/sell
+  - packages/features/home/profile/car_edit
   - packages/features/home/favorites
   - packages/features/home/profile/profile
   - packages/features/home/profile/update_user_data
   - packages/features/home/profile/language
   - packages/features/home/profile/listed_cars
   - packages/features/home/profile/notifications
-  
+  - packages/features/home/car_listing
 
 melos:
   scripts:
@@ -127,7 +135,8 @@ melos:
       run: melos exec --concurrency=1 -- flutter test
 
     build:
-      run: melos exec --depends-on=build_runner -- dart run build_runner build --delete-conflicting-outputs
+      run: melos exec --depends-on=build_runner -- dart run build_runner build
+        --delete-conflicting-outputs
 
     update:
       run: melos exec -- flutter pub outdated
@@ -216,7 +225,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

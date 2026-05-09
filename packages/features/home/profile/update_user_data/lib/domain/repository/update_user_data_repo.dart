@@ -12,4 +12,6 @@ abstract class UpdateUserDataRepo {
   Future<Either<Failure, void>> verifyOTP(String otp);
   Future<Either<Failure, void>> resendOTP(String phoneNumber);
   Future<Either<Failure, void>> userPasswordUpdate(String newPassword);
+  Future<Either<Failure, void>> userDelete();
+  Future<Either<Failure, void>> userPhoneUpdateDB(String newPhone);
 }

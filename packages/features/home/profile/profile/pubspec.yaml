@@ -16,6 +16,8 @@ dependencies:
 
   storage:
     path: ../../../../core/storage
+  home:
+    path: ../../../home/home
   router:
     path: ../../../../core/router
   shared_ui:

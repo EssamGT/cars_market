@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     TextFieldValidationType.loginPassword,
                                 controller: passwordController,
                                 hint: StringsManager.password,
-                                supmit: () {
+                                submit: () {
                                   if (formKey.currentState!.validate()) {
                                     cubit.login(
                                       AuthModel(

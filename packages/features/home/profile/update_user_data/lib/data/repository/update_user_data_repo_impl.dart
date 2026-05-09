@@ -84,4 +84,22 @@ class UpdateUserDataRepoImpl extends UpdateUserDataRepo {
       return Left(BaseErrorType.noInternet.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> userDelete() async {
+    if (await networkInfo.isConnected) {
+      return dataSource.userDelete();
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> userPhoneUpdateDB(String newPhone) async {
+    if (await networkInfo.isConnected) {
+      return dataSource.userPhoneUpdateDB(newPhone);
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
 }

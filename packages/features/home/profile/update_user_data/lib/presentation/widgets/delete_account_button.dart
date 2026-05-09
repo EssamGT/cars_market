@@ -1,6 +1,9 @@
+import 'package:cars_market/di/di.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
+import 'package:update_user_data/presentation/cubit/update_user_data_cubit.dart';
 
 class DeleteAccountButton extends StatelessWidget {
   const DeleteAccountButton({super.key});
@@ -10,7 +13,19 @@ class DeleteAccountButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppPadding.p40),
       child: FilledButton(
-        onPressed: () {},
+        onPressed: () {
+          LoadingPopUp.show(
+            context: context,
+            type: PopupType.custom,
+            title: StringsManager.deleteAccount,
+            content: StringsManager.deleteAccountConfirmation,
+            confirmText: StringsManager.delete,
+            cancelText: StringsManager.cancel,
+            onConfirm: () {
+              getIt.get<UpdateUserDataCubit>().userDelete();
+            },
+          );
+        },
         style: ButtonStyle(
           backgroundColor: WidgetStatePropertyAll(Colors.transparent),
           side: WidgetStatePropertyAll(

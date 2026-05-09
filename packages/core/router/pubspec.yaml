@@ -14,6 +14,13 @@ dependencies:
     path: ../../features/on_bording
   data:
     path: ../data
+  domain:
+    path: ../domain
+  car_listing:
+    path: ../../features/home/car_listing
+  car_edit:
+    path: ../../features/home/profile/car_edit
+
   cars_market:
     path: ../../..
   login:

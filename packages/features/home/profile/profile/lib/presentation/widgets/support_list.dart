@@ -1,14 +1,16 @@
-import 'package:cars_market/di/di.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remote/remote/auth/auth_manager.dart';
+import 'package:home/presentation/widgets/navigation_controller.dart';
+import 'package:profile/presentation/cubit/profile_cubit.dart';
 import 'package:router/routes_manager.dart';
 
 class SupportList extends StatelessWidget {
-  const SupportList({super.key});
-
+  SupportList({super.key});
+  final controller = Get.put(NavigationController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,8 +66,9 @@ class SupportList extends StatelessWidget {
             ),
             FilledButton(
               onPressed: () {
-                getIt.get<AuthManager>().logout();
+                ProfileCubit.get(context).logOut();
                 context.go(RoutesManager.login);
+                controller.resetIndex();
               },
               style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(Colors.transparent),

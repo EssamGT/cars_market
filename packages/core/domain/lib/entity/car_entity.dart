@@ -10,8 +10,10 @@ import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:data/models/car/car_image.dart';
+import 'package:data/models/car/car_status.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/location_model.dart';
+import 'package:data/models/user/user_data.dart';
 import 'package:domain/entity/car_entitys/engine_spec_entity.dart';
 import 'package:google_places_service/data/models/text_search_model/text_search_model.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +21,8 @@ import 'package:intl/intl.dart';
 class CarEntity {
   final String carId;
   final String userId;
+  final UserData userData;
+  final CarStatus status;
   final String createdAt;
   final EngineSpecEntity engineSpec;
   final String brand;
@@ -26,6 +30,8 @@ class CarEntity {
   final String brandId;
   final String modelId;
   final int year;
+  final List<String> leads;
+  final List<String> views;
   final String description;
   final CarBodyType bodyType;
   final TransmissionType transmissionType;
@@ -35,7 +41,6 @@ class CarEntity {
   final String? modifications;
   final String? serviceHistory;
   final TextSearchModel? googleMapsLocation;
-
   final int price;
   final String? version;
   final List<FeaturesList>? features;
@@ -47,7 +52,7 @@ class CarEntity {
   final AirConTypes airConType;
   final String? seatsNumber;
   final CarConditionType carCondition;
-  final WhatsAppMessage wahtsaapMessage;
+  final WhatsAppMessage whatsAppMessage;
 
   const CarEntity({
     required this.carId,
@@ -78,25 +83,29 @@ class CarEntity {
     required this.airConType,
     this.seatsNumber,
     required this.carCondition,
-    required this.wahtsaapMessage,
+    required this.whatsAppMessage,
     required this.transmissionType,
+    required this.userData,
+    required this.leads,
+    required this.views,
+    required this.status,
   });
 
   String getCarKM({bool withDot = false}) {
     if (km == 0) {
       return '';
     }
-    return withDot ? '· ${_formater(km)} KM' : '${_formater(km)} KM';
+    return withDot ? '· ${_formatter(km)} KM' : '${_formatter(km)} KM';
   }
 
   String getPrice({bool withDot = false}) {
     if (price == 0) {
       return '';
     }
-    return withDot ? '· ${_formater(price)} EGP' : '${_formater(price)} EGP';
+    return withDot ? '· ${_formatter(price)} EGP' : '${_formatter(price)} EGP';
   }
 
-  String _formater(int price) {
+  String _formatter(int price) {
     if (price == 0) {
       return '';
     }
@@ -133,6 +142,9 @@ class CarEntity {
       CarsTableKeys.location: location.toJson(),
       CarsTableKeys.googleMapsLocation: googleMapsLocation?.toJson(),
       // Note: images are not included in JSON representation
+      CarsTableKeys.leads: leads,
+      CarsTableKeys.views: views,
+      CarsTableKeys.status: status.name,
     };
   }
 
@@ -141,6 +153,7 @@ class CarEntity {
       engineSpec = EngineSpecEntity.fromJson(
         json[CarsTableKeys.engineSpec] ?? {},
       ),
+      userData = UserData.init(),
       userId = json[CarsTableKeys.userId] ?? '',
       createdAt = json[CarsTableKeys.createdAt] ?? '',
       brand = json[CarsTableKeys.brandName] ?? '',
@@ -156,6 +169,10 @@ class CarEntity {
       paintColor = PaintColors.values.firstWhere(
         (e) => e.name == json[CarsTableKeys.paintColor],
         orElse: () => PaintColors.none,
+      ),
+      status = CarStatus.values.firstWhere(
+        (e) => e.name == json[CarsTableKeys.status],
+        orElse: () => CarStatus.pendingReview,
       ),
       paintCondition = PaintConditions.values.firstWhere(
         (e) => e.name == json[CarsTableKeys.paintCondition],
@@ -195,7 +212,7 @@ class CarEntity {
       features = json[CarsTableKeys.features] == null
           ? null
           : resolveFeaturesFromJson(json[CarsTableKeys.features]),
-      wahtsaapMessage = WhatsAppMessage.values.firstWhere(
+      whatsAppMessage = WhatsAppMessage.values.firstWhere(
         (e) => e.name == json[CarsTableKeys.whatsappMessage],
         orElse: () => WhatsAppMessage.none,
       ),
@@ -206,7 +223,15 @@ class CarEntity {
       location = LocationModel.fromJsonId(
         json[CarsTableKeys.location] as Map<String, dynamic>? ?? {},
       ),
+      leads = List<String>.from(json[CarsTableKeys.leads] ?? []),
+
+      views = List<String>.from(json[CarsTableKeys.views] ?? []),
+
       googleMapsLocation = TextSearchModel.fromJson(
         json[CarsTableKeys.googleMapsLocation] as Map<String, dynamic>? ?? {},
       );
+
+  void fetchUserData(UserData newUserData) {
+    userData.copyWith(newUserData);
+  }
 }

@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'image_viewer.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/image_viewr.dart';
 
-class MinCarGallaryWidget extends StatefulWidget {
+class MinCarGalleryWidget extends StatefulWidget {
   final CarEntity car;
-  const MinCarGallaryWidget({super.key, required this.car});
+  const MinCarGalleryWidget({super.key, required this.car});
 
   @override
-  State<MinCarGallaryWidget> createState() => _MinCarGallaryWidgetState();
+  State<MinCarGalleryWidget> createState() => _MinCarGalleryWidgetState();
 }
 
-class _MinCarGallaryWidgetState extends State<MinCarGallaryWidget> {
+class _MinCarGalleryWidgetState extends State<MinCarGalleryWidget> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(

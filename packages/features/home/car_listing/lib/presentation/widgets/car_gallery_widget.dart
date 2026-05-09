@@ -1,18 +1,18 @@
+import 'min_car_gallery_widget.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/car_price_widget.dart';
-import 'package:shared_ui/shared_widgets/car_listing_card/details_screen_widgets/min_car_gallary_widget.dart';
+import 'car_price_widget.dart';
 
-class CarGallaryWidget extends StatefulWidget {
+class CarGalleryWidget extends StatefulWidget {
   final CarEntity car;
-  const CarGallaryWidget({super.key, required this.car});
+  const CarGalleryWidget({super.key, required this.car});
 
   @override
-  State<CarGallaryWidget> createState() => _CarGallaryWidgetState();
+  State<CarGalleryWidget> createState() => _CarGalleryWidgetState();
 }
 
-class _CarGallaryWidgetState extends State<CarGallaryWidget> {
+class _CarGalleryWidgetState extends State<CarGalleryWidget> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -39,7 +39,7 @@ class _CarGallaryWidgetState extends State<CarGallaryWidget> {
               width: double.infinity,
               height: screenSize.height * 0.425,
               // this contains hero
-              child: MinCarGallaryWidget(car: widget.car),
+              child: MinCarGalleryWidget(car: widget.car),
             ),
             Positioned(
               right: 0,

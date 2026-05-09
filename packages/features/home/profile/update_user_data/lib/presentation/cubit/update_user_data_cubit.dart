@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:cars_market/di/di.dart';
 import 'package:cars_market/globle/globle.dart';
 import 'package:data/models/failure/failure.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -16,7 +14,6 @@ part 'update_user_data_state.dart';
 class UpdateUserDataCubit extends Cubit<UpdateUserDataState> {
   UpdateUserDataUseCase useCase;
   UpdateUserDataCubit(this.useCase) : super(UpdateUserDataInitial());
-  StreamSubscription<User?>? _sub;
   String newPhoneNumber = '';
   static UpdateUserDataCubit get(BuildContext context) =>
       BlocProvider.of(context);
@@ -45,19 +42,29 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataState> {
     });
   }
 
-  Future<void> userPhoneUpdate(String newPhone) async {
+  Future<void> sendUserPhoneUpdate(String newPhone) async {
     emit(UpdateUserDataLoading());
     final result = await useCase.userPhoneUpdate(newPhone);
     result.fold((failure) => emit(UpdateUserDataFailure(failure)), (_) {
       emit(PhoneVerificationSubmittingInProgress());
-      _checkAuth();
     });
   }
 
   Future<void> verifyOTP(String otp) async {
     emit(PhoneVerificationSubmittingInProgress());
     final result = await useCase.verifyOTP(otp);
-    result.fold((failure) => emit(UpdateUserDataFailure(failure)), (_) {});
+    result.fold((failure) => emit(UpdateUserDataFailure(failure)), (_) async {
+      final res = await useCase.getUserData();
+      res.fold((failure) => emit(UpdateUserDataFailure(failure)), (data) async {
+        userData = data;
+        if (userData.phoneNumber == newPhoneNumber) {
+          final res = await useCase.userPhoneUpdateDB(newPhoneNumber);
+          res.fold((failure) => emit(UpdateUserDataFailure(failure)), (_) {
+            emit(PhoneVerified());
+          });
+        }
+      });
+    });
   }
 
   Future<void> resendOTP() async {
@@ -65,50 +72,11 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataState> {
     result.fold((failure) => emit(UpdateUserDataFailure(failure)), (_) {});
   }
 
-  void _checkAuth() async {
-    final result = await useCase.authStateChanges();
-    result.fold(
-      (failure) {
-        emit(UpdateUserDataFailure(failure));
-      },
-      (s) {
-        final stream = s;
-
-        _sub = stream.listen(
-          (user) async {
-            if (user != null) {
-              await user.reload();
-              print('dada');
-              if (user.phoneNumber == newPhoneNumber) {
-                final us = await useCase.getUserData();
-                us.fold((failure) => emit(UpdateUserDataFailure(failure)), (
-                  data,
-                ) {
-                  userData = data;
-                });
-                emit(PhoneVerified());
-
-                stopListening();
-                return;
-              }
-            }
-          },
-          onDone: () {
-            print('Auth state changes stream done');
-          },
-          onError: (error) {
-            emit(
-              UpdateUserDataFailure(
-                Failure(code: error.toString(), message: error.toString()),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  void stopListening() {
-    _sub?.cancel();
+  Future<void> userDelete() async {
+    emit(UpdateUserDataLoading());
+    final result = await useCase.userDelete();
+    result.fold((failure) => emit(UpdateUserDataFailure(failure)), (_) {
+      emit(UserDataDeletedSuccess());
+    });
   }
 }

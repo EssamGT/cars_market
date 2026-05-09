@@ -25,4 +25,8 @@ class UpdateUserDataUseCase {
       await repository.resendOTP(phoneNumber);
   Future<Either<Failure, void>> userPasswordUpdate(String newPassword) async =>
       await repository.userPasswordUpdate(newPassword);
+  Future<Either<Failure, void>> userDelete() async =>
+      await repository.userDelete();
+  Future<Either<Failure, void>> userPhoneUpdateDB(String newPhone) async =>
+      await repository.userPhoneUpdateDB(newPhone);
 }

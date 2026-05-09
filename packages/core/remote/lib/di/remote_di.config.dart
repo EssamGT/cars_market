@@ -44,7 +44,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i218.AuthManager>(
       () => _i218.AuthManager(
         firebaseAuth: gh<_i59.FirebaseAuth>(),
-        firebaseStore: gh<_i974.FirebaseFirestore>(),
+        dbManager: gh<_i760.FirebaseDbManager>(),
       ),
     );
     return this;

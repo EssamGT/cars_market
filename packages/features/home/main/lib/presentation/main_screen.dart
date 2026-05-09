@@ -43,14 +43,16 @@ class _MainScreenState extends State<MainScreen> {
           bloc: getIt.get<MainScreenCubit>(),
           builder: (context, state) {
             if (state is MainScreenLoading) {
-              return loadingC(context);
+              return LoadingC();
             }
             if (state is MainScreenFailure) {
               return RefreshIndicator(
-                  onRefresh: () {
+                onRefresh: () {
                   return getIt.get<MainScreenCubit>().getMainScreenCars();
                 },
-                child: Center(child: Text('Error: ${state.failure.message}')));
+
+                child: Center(child: Text('Error: ${state.failure.message}')),
+              );
             }
             if (state is MainScreenCars) {
               return RefreshIndicator(

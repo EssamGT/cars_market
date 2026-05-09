@@ -18,6 +18,8 @@ dependencies:
     path: ../constants
   remote:
     path: ../remote
+  router:
+    path: ../router
   data:
     path: ../data
   domain:

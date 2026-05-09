@@ -1,5 +1,4 @@
 import 'package:cars_market/di/di.dart';
-import 'package:cars_market/globle/globle.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -172,6 +171,24 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         hint: hintText,
                         validationType: validationType,
                         enabled: state is! UpdateUserDataLoading,
+                        submit: () {
+                          if (formKey.currentState!.validate()) {
+                            switch (editType) {
+                              case PersonalInfoEditType.name:
+                                cubit.userNameUpdate(controller.text);
+                                break;
+                              case PersonalInfoEditType.email:
+                                cubit.userEmailUpdate(controller.text);
+                                break;
+                              case PersonalInfoEditType.phone:
+                                break;
+                              case PersonalInfoEditType.password:
+                                break;
+                              case PersonalInfoEditType.none:
+                                break;
+                            }
+                          }
+                        },
                       ),
                     if (editType == PersonalInfoEditType.phone)
                       PhoneNumberTextField(
@@ -180,9 +197,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         isEnabled: state is! UpdateUserDataLoading,
                         number: number,
                         onInputChanged: (phone) {
-                          print(phone.phoneNumber);
-                          print(userData.phoneNumber);
-
                           cubit.newPhoneNumber = phone.phoneNumber ?? '';
                         },
                         phoneUpdate: true,
@@ -226,7 +240,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             case PersonalInfoEditType.phone:
                               UpdateUserDataCubit.get(
                                 context,
-                              ).userPhoneUpdate(cubit.newPhoneNumber);
+                              ).sendUserPhoneUpdate(cubit.newPhoneNumber);
                               break;
                             case PersonalInfoEditType.password:
                               UpdateUserDataCubit.get(
