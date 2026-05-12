@@ -1,5 +1,6 @@
 class StringsManager {
   static const String findYouCar = 'Find you dream car';
+  static const String carsMarket = 'Cars Market';
   static const String personalInformations = 'Personal Information';
   static const String listedCars = 'Listed Cars';
   static const String language = 'Language';
@@ -41,6 +42,8 @@ class StringsManager {
 
   static const String deleteAccount = 'Delete Account';
   static const String delete = 'Delete';
+  static const String deactivate = 'Deactivate';
+  static const String reactivate = 'Activate';
   static const String preferences = 'PREFERENCES';
   static const String support = 'Contact Support';
   static const String darkMode = 'Dark Mode';

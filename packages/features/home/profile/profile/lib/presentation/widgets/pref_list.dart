@@ -1,12 +1,23 @@
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:profile/presentation/widgets/list_card.dart';
 import 'package:router/routes_manager.dart';
+import 'package:theme/theme_controller.dart';
 
-class PrefList extends StatelessWidget {
+class PrefList extends StatefulWidget {
   const PrefList({super.key});
 
+  @override
+  State<PrefList> createState() => _PrefListState();
+}
+
+class _PrefListState extends State<PrefList> {
+  ThemeController themeController = Get.find<ThemeController>();
+  @override
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,8 +58,10 @@ class PrefList extends StatelessWidget {
           ListCardToggle(
             icon: Icons.dark_mode,
             title: StringsManager.darkMode,
-            onChanged: (value) {},
-            value: false,
+            onChanged: (value) {
+              themeController.changeThemeMode(value ? 2 : 1);
+            },
+            value: context.isDarkMode,
           ),
         ],
       ),

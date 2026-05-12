@@ -37,4 +37,8 @@ class ApiManager {
       data: data,
     );
   }
+
+  Future getImages(String url, String savePath) async {
+    await dio.download(url, savePath);
+  }
 }

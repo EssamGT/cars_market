@@ -45,3 +45,45 @@ InputDecorationThemeData lightInputDecoration() {
     ),
   );
 }
+
+InputDecorationThemeData darkInputDecoration() {
+  return InputDecorationThemeData(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSize.s10),
+      borderSide: BorderSide(color: ColorManager.transparent),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSize.s10),
+      borderSide: BorderSide(color: Colors.transparent, width: 2),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSize.s10),
+      borderSide: BorderSide(color: ColorManager.transparent),
+    ),
+
+    fillColor: ColorManager.surfaceVariantDark,
+
+    filled: true,
+    activeIndicatorBorder: BorderSide(color: ColorManager.surfaceVariantDark),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSize.s10),
+      borderSide: BorderSide(
+        color: darkThemeColors().primary.withAlpha(100),
+        // width: 2,
+      ),
+    ),
+    hintStyle: darkTextTheme().bodyMedium,
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSize.s10),
+      borderSide: BorderSide(color: darkThemeColors().error),
+    ),
+    errorStyle: darkTextTheme().bodySmall!.copyWith(
+      color: darkThemeColors().error,
+    ),
+
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSize.s10),
+      borderSide: BorderSide(color: darkThemeColors().error),
+    ),
+  );
+}

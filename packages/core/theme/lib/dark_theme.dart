@@ -11,22 +11,22 @@ import 'package:theme/themes/search_bar_theme.dart';
 import 'package:theme/themes/text_selection_theme.dart';
 import 'package:theme/themes/text_theme.dart';
 
-ThemeData lightTheme() {
+ThemeData darkTheme() {
   return ThemeData(
-    disabledColor: ColorManager.disabled,
-    scaffoldBackgroundColor: ColorManager.background,
-    appBarTheme: lightAppBarTheme(),
-    colorScheme: lightThemeColors(),
-    textTheme: lightTextTheme(),
+    disabledColor: ColorManager.disabledDark,
+    scaffoldBackgroundColor: ColorManager.backgroundDark,
+    appBarTheme: darkAppBarTheme(),
+
+    colorScheme: darkThemeColors(),
+    textTheme: darkTextTheme(),
     primaryTextTheme: TextTheme(),
-    inputDecorationTheme: lightInputDecoration(),
-    buttonTheme: lightButtonTheme(),
-    outlinedButtonTheme: lightOutlinedButtonTheme(),
+    inputDecorationTheme: darkInputDecoration(),
+    buttonTheme: darkButtonTheme(),
+    outlinedButtonTheme: darkOutlinedButtonTheme(),
     useMaterial3: true,
-    textSelectionTheme: lightTextSelectionTheme(),
-    navigationBarTheme: lightNavigationBarTheme(),
-    searchBarTheme: lightSearchBarTheme(),
-    expansionTileTheme: lightExpansionTileTheme(),
-    
+    textSelectionTheme: darkTextSelectionTheme(),
+    navigationBarTheme: darkNavigationBarTheme(),
+    searchBarTheme: darkSearchBarTheme(),
+    expansionTileTheme: darkExpansionTileTheme(),
   );
 }

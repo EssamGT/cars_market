@@ -5,9 +5,13 @@ sealed class SellState {}
 
 final class AddInitial extends SellState {}
 
-class FuelTypeSlected extends SellState {}
+class FuelTypeSelected extends SellState {}
 
 class NewCoditionSelected extends SellState {}
+
+class EditMainLoading extends SellState {}
+
+class EditMainSuccess extends SellState {}
 
 class MaxImagesLimitReached extends SellState {
   final int imagesLimit;
@@ -15,8 +19,8 @@ class MaxImagesLimitReached extends SellState {
 }
 
 class UploadingError extends SellState {
-  final String errorMessage;
-  UploadingError(this.errorMessage);
+  final Failure error;
+  UploadingError(this.error);
 }
 
 class UploadingSuccess extends SellState {}

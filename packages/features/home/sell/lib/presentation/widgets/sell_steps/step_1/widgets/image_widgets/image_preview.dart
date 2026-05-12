@@ -105,3 +105,102 @@ class ImagePreview extends StatelessWidget {
     );
   }
 }
+
+class EditImagePreview extends StatelessWidget {
+  final List<Object> images;
+  final FormFieldState<List<Object>> field;
+  final bool error;
+  final String? errorText;
+  const EditImagePreview({
+    super.key,
+    required this.images,
+    required this.field,
+    this.error = false,
+    this.errorText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    var cubit = SellCubit.get(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p14,
+        vertical: AppPadding.p5,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DottedBorder(
+            options: RoundedRectDottedBorderOptions(
+              color: error
+                  ? Theme.of(context).colorScheme.error
+                  : Theme.of(context).colorScheme.outline,
+              strokeWidth: 1.5,
+              dashPattern: [8, 6],
+              strokeCap: StrokeCap.round,
+
+              radius: const Radius.circular(AppSize.s15),
+            ),
+
+            child: Container(
+              constraints: BoxConstraints(
+                minHeight: AppSize.s150,
+                minWidth: screenSize.width,
+              ),
+
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSize.s15),
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: screenSize.width / 4 * 3),
+                child: ReorderableWrap(
+                  scrollPhysics: NeverScrollableScrollPhysics(),
+                  needsLongPressDraggable: true,
+                  alignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  runAlignment: WrapAlignment.center,
+                  spacing: AppSize.s10,
+                  runSpacing: AppSize.s10,
+
+                  children: [
+                    ...List.generate(images.length, (index) {
+                      return EditImageWidget(
+                        imageIndex: index,
+                        images: images,
+                        field: field,
+                      );
+                    }),
+
+                    AddEditImageWidget(
+                      key: const ValueKey('add_edit_image_widget'),
+                      field: field,
+                    ),
+                  ],
+                  onReorder: (oldIndex, newIndex) {
+                    cubit.editReorderImages(oldIndex, newIndex);
+                  },
+                ),
+              ),
+            ),
+          ),
+
+          Visibility(
+            visible: error,
+            child: Padding(
+              padding: const EdgeInsets.only(top: AppPadding.p8),
+              child: Text(
+                "$errorText",
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

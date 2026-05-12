@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cars_market/di/di.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data/models/car/brands_models/air_con_types.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
@@ -15,13 +16,16 @@ import 'package:data/models/car/brands_models/payment_options.dart';
 import 'package:data/models/car/brands_models/transmission_type.dart';
 import 'package:data/models/car/brands_models/whatsapp_message.dart';
 import 'package:data/models/car/car_image.dart';
+import 'package:data/models/car/car_status.dart';
 import 'package:data/models/car/sell_car_model.dart';
+import 'package:data/models/failure/failure.dart';
 import 'package:data/models/location/location_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_places_service/domain/usecase/gps_use_case.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:listed_cars/presentation/cubit/listed_cars_cubit.dart';
 import 'package:sell/domain/use_case/sell_use_case.dart';
 import 'package:uuid/v4.dart';
 import 'package:path_provider/path_provider.dart';
@@ -38,13 +42,25 @@ class SellCubit extends Cubit<SellState> {
 
   static SellCubit get(BuildContext context) => BlocProvider.of(context);
   SellCarUploadModel car = SellCarUploadModel();
+  SellCarUploadModel oldCar = SellCarUploadModel();
+  late List<Object> onlineImages = [];
+  late List<CarImage> deletedImages = [];
 
   late ImagePicker picker;
-
+  bool isEdit = false;
   int imagesLimit = 10;
   int imagesQuality = 100;
+
   void initList() {
     picker = ImagePicker();
+  }
+
+  void setCar(SellCarUploadModel car) async {
+    this.car = car;
+    oldCar = this.car;
+    isEdit = true;
+    onlineImages.addAll(car.uploadedImages!);
+    car.uploadedImages = [];
   }
 
   void setFuelType(FuelType fuelType) {
@@ -52,13 +68,13 @@ class SellCubit extends Cubit<SellState> {
         car.engineSpec.fuelType != FuelType.electric) {
       car.engineSpec.fuelType = fuelType;
       car.engineSpec.clearEngine();
-      emit(FuelTypeSlected());
+      emit(FuelTypeSelected());
     } else if (fuelType != FuelType.electric &&
         car.engineSpec.fuelType == FuelType.electric) {
       car.engineSpec.fuelType = fuelType;
       car.engineSpec.clearEngine();
 
-      emit(FuelTypeSlected());
+      emit(FuelTypeSelected());
     } else {
       car.engineSpec.fuelType = fuelType;
       car.engineSpec.clearEngine();
@@ -143,9 +159,9 @@ class SellCubit extends Cubit<SellState> {
     }
   }
 
-  void setWahtsaapMessage(WhatsAppMessage wahtsaapMessage) {
-    if (car.whatsappMessage != wahtsaapMessage) {
-      car.whatsappMessage = wahtsaapMessage;
+  void setWhatsappMessage(WhatsAppMessage whatsappMessage) {
+    if (car.whatsappMessage != whatsappMessage) {
+      car.whatsappMessage = whatsappMessage;
     }
   }
 
@@ -216,18 +232,18 @@ class SellCubit extends Cubit<SellState> {
   }
 
   Future<void> getImages() async {
-    List<XFile> slectedImages = await picker.pickMultiImage(
+    List<XFile> selectedImages = await picker.pickMultiImage(
       imageQuality: imagesQuality,
       limit: imagesLimit,
     );
-    if (slectedImages.isEmpty) {
+    if (selectedImages.isEmpty) {
       return;
     } else {
-      if (slectedImages.length > imagesLimit) {
-        slectedImages = slectedImages.sublist(0, imagesLimit);
+      if (selectedImages.length > imagesLimit) {
+        selectedImages = selectedImages.sublist(0, imagesLimit);
         emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
       }
-      car.selectedImages = slectedImages;
+      car.selectedImages = selectedImages;
       // emit(ImagesSelected(car.images));
     }
   }
@@ -237,22 +253,47 @@ class SellCubit extends Cubit<SellState> {
       emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
       return;
     }
-    List<XFile> slectedImages = await picker.pickMultiImage(
+    List<XFile> selectedImages = await picker.pickMultiImage(
       imageQuality: imagesQuality,
       limit: imagesLimit - car.selectedImages.length,
     );
-    if (slectedImages.isEmpty) {
+    if (selectedImages.isEmpty) {
       return;
     } else {
-      if (slectedImages.length > imagesLimit - car.selectedImages.length) {
-        slectedImages = slectedImages.sublist(
+      if (selectedImages.length > imagesLimit - car.selectedImages.length) {
+        selectedImages = selectedImages.sublist(
           0,
           imagesLimit - car.selectedImages.length,
         );
         emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
       }
-      for (var element in slectedImages) {
+      for (var element in selectedImages) {
         car.selectedImages.add(element);
+      }
+    }
+  }
+
+  Future<void> addImagesToEdit() async {
+    if (onlineImages.length >= imagesLimit) {
+      emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
+      return;
+    }
+    List<XFile> selectedImages = await picker.pickMultiImage(
+      imageQuality: imagesQuality,
+      limit: imagesLimit - onlineImages.length,
+    );
+    if (selectedImages.isEmpty) {
+      return;
+    } else {
+      if (selectedImages.length > imagesLimit - onlineImages.length) {
+        selectedImages = selectedImages.sublist(
+          0,
+          imagesLimit - onlineImages.length,
+        );
+        emit(MaxImagesLimitReached(imagesLimit: imagesLimit));
+      }
+      for (var element in selectedImages) {
+        onlineImages.add(element);
       }
     }
   }
@@ -282,6 +323,10 @@ class SellCubit extends Cubit<SellState> {
     car.selectedImages.insert(newIndex, car.selectedImages.removeAt(oldIndex));
   }
 
+  Future<void> editReorderImages(int oldIndex, int newIndex) async {
+    onlineImages.insert(newIndex, onlineImages.removeAt(oldIndex));
+  }
+
   Future<void> deleteImage(int index) async {
     car.selectedImages.removeAt(index);
     if (car.selectedImages.isEmpty) {
@@ -289,18 +334,51 @@ class SellCubit extends Cubit<SellState> {
     }
   }
 
-  Future<Either<String, List<CarImage>>> uploadImages(String uuid) async {
+  void deleteEditImage(int index) async {
+    if (onlineImages[index] is CarImage) {
+      deletedImages.add(onlineImages[index] as CarImage);
+    }
+    onlineImages.removeAt(index);
+  }
+
+  Future<Either<Failure, List<CarImage>>> uploadImages(String uuid) async {
     await compressImages(car.selectedImages);
 
-    final response = await sellUseCase.uploadImage(
+    final response = await sellUseCase.uploadImages(
       car.pendingUploadImages,
       uuid,
     );
     return response;
   }
 
+  Future<Either<Failure, List<CarImage>>> uploadEditedImages() async {
+    List<CarImage> finalImages = [];
+    if (deletedImages.isNotEmpty) {
+      final res = await sellUseCase.deleteImages(
+        deletedImages.map((e) => e.path).toList(),
+      );
+      res.fold((e) {
+        return Left(e);
+      }, (s) {});
+    }
+    for (Object image in onlineImages) {
+      if (image is XFile) {
+        final res = await sellUseCase.uploadImage(image, car.carId);
+        res.fold((e) {}, (s) {
+          finalImages.add(s);
+        });
+      }
+      if (image is CarImage) {
+        finalImages.add(image);
+      }
+    }
+    return Right(finalImages);
+  }
+
   Future<void> uploadCar() async {
     emit(UploadingLoading());
+    car.status = CarStatus.pendingReview;
+
     String uuid = UuidV4().generate();
     car.carId = uuid;
     car.createdAt = DateTime.now().toString();
@@ -330,44 +408,49 @@ class SellCubit extends Cubit<SellState> {
           },
           (suc) {
             emit(UploadingSuccess());
+            getIt.get<ListedCarsCubit>().getListedCars();
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> uploadEditedCar() async {
+    emit(UploadingLoading());
+    car.status = CarStatus.pendingReview;
+    final result = await uploadEditedImages();
+    result.fold(
+      (error) {
+        emit(UploadingError(error));
+      },
+      (images) async {
+        car.uploadedImages = images;
+        if (oldCar.location.getLocationName() !=
+            car.location.getLocationName()) {
+          final googleLocation = await gpsUseCase.getLocationByName(
+            car.location.getLocationName(),
+          );
+          googleLocation.fold(
+            (error) {
+              print(error.message);
+              print(error.code);
+            },
+            (s) {
+              car.googleMapsLocation = s;
+            },
+          );
+        }
+        final carLastResult = await sellUseCase.uploadEditedCar(car);
+        carLastResult.fold(
+          (error) {
+            emit(UploadingError(error));
+          },
+          (suc) {
+            emit(UploadingSuccess());
+            getIt.get<ListedCarsCubit>().getListedCars();
           },
         );
       },
     );
   }
 }
-  // old function
-  // Future<void> uploadCar() async {
-  //   emit(UploadingLoading());
-  //   String uuid = UuidV4().generate();
-  //   car.carId = uuid;
-  //   car.createdAt = DateTime.now().toString();
-  //   final result = await uploadImages(uuid);
-  //   result.fold(
-  //     (error) {
-  //       emit(UploadingError(error));
-  //     },
-  //     (images) async {
-  //       car.uploadedImages = images;
-  //       final latLng = await gpsUseCase.getCarLocation(car.location.placeId);
-  //       latLng.fold(
-  //         (error) {
-  //           emit(UploadingError(error.message));
-  //         },
-  //         (sucs) async {
-  //           car.location.latLng = sucs;
-  //           final carLastResult = await sellUseCase.uploadCar(car);
-  //           carLastResult.fold(
-  //             (error) {
-  //               emit(UploadingError(error));
-  //             },
-  //             (suc) {
-  //               emit(UploadingSuccess());
-  //             },
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
-

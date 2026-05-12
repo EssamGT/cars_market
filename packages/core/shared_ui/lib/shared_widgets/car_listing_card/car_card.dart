@@ -24,12 +24,6 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
     return GestureDetector(
       onTap: () async {
         context.push(RoutesManager.carDetails, extra: widget.car);
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => CarDetailsScreen(car: widget.car),
-        //   ),
-        // );
       },
       child: Container(
         height: AppSize.s350,
@@ -55,7 +49,6 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
             Hero(
               transitionOnUserGestures: true,
               tag: heroTag(widget.car.carId, 0),
-              // make tag unique for each car
               flightShuttleBuilder:
                   (
                     flightContext,

@@ -1,6 +1,7 @@
 import 'package:constants/strings_manager.dart';
 import 'package:data/models/car/brands_models/fuel_type.dart';
 import 'package:data/models/car/sell_car_model.dart';
+import 'package:domain/entity/car_entitys/engine_spec_entity.dart';
 
 enum EngineCylinderNumber { i3, i4, i5, i6, v6, v8, v10, v12, v16, none }
 
@@ -497,6 +498,23 @@ class EngineSpec {
       CarsTableKeys.fuelType: fuelType.name,
     };
   }
+}
+
+
+EngineSpec getEngineSpecEntity(EngineSpecEntity entity) {
+  return EngineSpec(
+    engineCapacity: entity.engineCapacity != EngineCapacity.none
+        ? EngineCapacityModel(
+            entity.engineCapacity,
+            entity.engineCylinderNumber,
+          )
+        : null,
+    engineCylinderNumber: entity.engineCylinderNumber,
+    hp: entity.hp,
+    topSpeed: entity.topSpeed,
+    fuelConsumption: entity.fuelConsumption,
+    fuelType: entity.fuelType,
+  );
 }
 
 List<EngineCapacityModel> i3EngineCapacities = [

@@ -31,6 +31,8 @@ dependencies:
     path: ../../../core/domain
   assets:
     path: ../../../core/assets
+  listed_cars:
+    path: ../profile/listed_cars
   error_handler:
     path: ../../../core/error_handler
   google_places_service:
@@ -60,6 +62,10 @@ dependencies:
   flutter_image_compress: ^2.4.0
   path_provider: ^2.1.5
   cached_network_image: ^3.4.1
+  redacted: ^1.0.13
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
+  firebase_storage: ^13.0.6
 
 dev_dependencies:
   flutter_test:

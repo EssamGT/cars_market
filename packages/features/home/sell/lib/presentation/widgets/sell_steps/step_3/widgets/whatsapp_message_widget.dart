@@ -24,7 +24,7 @@ class _WhatsAppMessageWidgetState extends State<WhatsAppMessageWidget> {
           .toList(),
       labelBuilder: (e) => e.getConditionText(),
       onSelected: (value) {
-        cubit.setWahtsaapMessage(value);
+        cubit.setWhatsappMessage(value);
       },
       validator: (value) => TextFieldValidator.validateNormal(
         TextFieldValidationType.whatsappMessage,

@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+
 class CarImage {
   String path;
   String url;
@@ -11,3 +13,4 @@ class CarImage {
     : path = json['path'],
       url = json['url'];
 }
+

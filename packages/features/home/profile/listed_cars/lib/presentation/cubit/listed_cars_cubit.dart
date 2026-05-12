@@ -25,4 +25,31 @@ class ListedCarsCubit extends Cubit<ListedCarsState> {
       (cars) => emit(ListedCarsLoaded(cars)),
     );
   }
+
+  Future<void> deactivateCar(String carId) async {
+    emit(ListedPopUpLoading());
+    final result = await useCase.deactivateCarFromListedCars(carId);
+    result.fold(
+      (failure) => emit(ListedCarErrorPopUp(failure)),
+      (_) => getListedCars(),
+    );
+  }
+
+  Future<void> reactivateCar(String carId) async {
+    emit(ListedPopUpLoading());
+    final result = await useCase.reactivateCarFromListedCars(carId);
+    result.fold(
+      (failure) => emit(ListedCarErrorPopUp(failure)),
+      (_) => getListedCars(),
+    );
+  }
+
+  Future<void> deleteCar(String carId) async {
+    emit(ListedPopUpLoading());
+    final result = await useCase.deleteCarFromListedCars(carId);
+    result.fold(
+      (failure) => emit(ListedCarErrorPopUp(failure)),
+      (_) => getListedCars(),
+    );
+  }
 }

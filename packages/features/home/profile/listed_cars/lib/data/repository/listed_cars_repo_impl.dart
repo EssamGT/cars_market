@@ -22,4 +22,35 @@ class ListedCarsRepoImpl extends ListedCarsRepo {
       return Left(BaseErrorType.noInternet.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deactivateCarFromListedCars(
+    String carId,
+  ) async {
+    if (await networkInfo.isConnected) {
+      return await dataSource.deactivateCarFromListedCars(carId);
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> reactivateCarFromListedCars(
+    String carId,
+  ) async {
+    if (await networkInfo.isConnected) {
+      return await dataSource.reactivateCarFromListedCars(carId);
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCarFromListedCars(String carId) async {
+    if (await networkInfo.isConnected) {
+      return await dataSource.deleteCarFromListedCars(carId);
+    } else {
+      return Left(BaseErrorType.noInternet.getFailure());
+    }
+  }
 }

@@ -29,7 +29,7 @@ class Step3 extends StatelessWidget {
             PopUpManager.show(
               context: context,
               type: PopupType.error,
-              errorMessage: state.errorMessage,
+              errorMessage: state.error.message,
             );
           }
         },

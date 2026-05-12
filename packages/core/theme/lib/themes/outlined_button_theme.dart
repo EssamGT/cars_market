@@ -21,3 +21,22 @@ OutlinedButtonThemeData lightOutlinedButtonTheme() {
     ),
   );
 }
+OutlinedButtonThemeData darkOutlinedButtonTheme() {
+  return OutlinedButtonThemeData(
+    style: ButtonStyle(
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(AppSize.s8),
+        ),
+      ),
+      side: WidgetStatePropertyAll(
+        BorderSide(width: 1, color: darkThemeColors().outline),
+      ),
+
+      minimumSize: WidgetStatePropertyAll(Size(250, 55)),
+      backgroundColor: WidgetStatePropertyAll(
+        darkThemeColors().surfaceContainerHighest,
+      ),
+    ),
+  );
+}

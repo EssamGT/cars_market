@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:constants/strings_manager.dart';
+import 'package:data/models/car/sell_car_model.dart';
 import 'package:shared_ui/shared_widgets/alert_bar/error_message_bar.dart';
 import 'package:shared_ui/shared_widgets/pop_up/loading_pop_up.dart';
 import 'cubit/sell_cubit.dart';
@@ -14,7 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 class SellScreen extends StatefulWidget {
-  const SellScreen({super.key});
+  final SellCarUploadModel? car;
+  const SellScreen({super.key, this.car});
 
   @override
   State<SellScreen> createState() => _SellScreenState();
@@ -29,6 +31,9 @@ class _SellScreenState extends State<SellScreen> {
 
     controller = Get.put(SellStepsController(), permanent: false);
     getIt.resetLazySingleton<SellCubit>();
+    if (widget.car != null) {
+      getIt<SellCubit>().setCar(widget.car!);
+    }
     // getIt.resetLazySingleton<LocationCubit>();
 
     super.initState();
@@ -86,7 +91,8 @@ class _SellScreenState extends State<SellScreen> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight:
-                        screenSize.height - (indicatorHeight + naviButtonHeight + AppPadding.p8) ,
+                        screenSize.height -
+                        (indicatorHeight + naviButtonHeight + AppPadding.p8),
                     minWidth: screenSize.width,
                   ),
                   child: IntrinsicHeight(

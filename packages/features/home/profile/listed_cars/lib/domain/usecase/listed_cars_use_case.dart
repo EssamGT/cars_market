@@ -11,4 +11,11 @@ class ListedCarsUseCase {
   Future<Either<Failure, List<CarEntity>>> getListedCars(
     List<String> listedCarIds,
   ) async => await repo.getListedCars(listedCarIds);
+  Future<Either<Failure, void>> deactivateCarFromListedCars(
+    String carId,
+  ) async => await repo.deactivateCarFromListedCars(carId);
+  Future<Either<Failure, void>> deleteCarFromListedCars(String carId) async =>
+      await repo.deleteCarFromListedCars(carId);
+  Future<Either<Failure, void>> reactivateCarFromListedCars(String carId) async =>
+      await repo.reactivateCarFromListedCars(carId);
 }

@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cars_market/di/di.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/car_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,16 +87,171 @@ class ImageWidget extends StatelessWidget {
       ),
     );
   }
-
-  // void open2(BuildContext context, final int index) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => PV(images: images, initialIndex: index),
-  //     ),
-  //   );
-  // }
 }
+
+class EditImageWidget extends StatelessWidget {
+  final int imageIndex;
+  final List<Object> images;
+  final FormFieldState<List<Object>> field;
+
+  const EditImageWidget({
+    super.key,
+    required this.imageIndex,
+    required this.images,
+    required this.field,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return BlocProvider(
+      create: (context) => getIt.get<SellCubit>(),
+      child: InkWell(
+        onTap: () {
+          open(context, imageIndex);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppSize.s8),
+          ),
+          margin: const EdgeInsets.all(AppMargin.m8),
+          height: AppSize.s93,
+          width: screenSize.width / 4,
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: AlignmentGeometry.center,
+
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(AppSize.s8),
+                child: images[imageIndex] is CarImage
+                    ? CachedNetworkImage(
+                        imageUrl: (images[imageIndex] as CarImage).url,
+                        fit: BoxFit.cover,
+                      )
+                    : images[imageIndex] is XFile
+                    ? Image.file(
+                        File((images[imageIndex] as XFile).path),
+                        fit: BoxFit.cover,
+                      )
+                    : Container(),
+              ),
+              Positioned(
+                top: -10,
+                right: -10,
+                child: IconButton(
+                  onPressed: () {
+                    SellCubit.get(context).deleteEditImage(imageIndex);
+                    field.didChange(images);
+                    field.validate();
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.of(context).colorScheme.error,
+                    size: AppSize.s20,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void open(BuildContext context, final int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditGalleryPhotoViewWrapper(
+          galleryItems: images,
+          backgroundDecoration: const BoxDecoration(color: Colors.black),
+          initialIndex: index,
+          scrollDirection: Axis.horizontal,
+        ),
+      ),
+    );
+  }
+}
+
+// class EditOnlineImageWidget extends StatelessWidget {
+//   final int imageIndex;
+//   final List<Object> images;
+//   final FormFieldState<List<Object>> field;
+
+//   const EditOnlineImageWidget({
+//     super.key,
+//     required this.imageIndex,
+//     required this.images,
+//     required this.field,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     Size screenSize = MediaQuery.of(context).size;
+//     var cubit = SellCubit.get(context);
+//     return BlocProvider(
+//       create: (context) => getIt.get<SellCubit>(),
+//       child: InkWell(
+//         onTap: () {
+//           open(context, imageIndex);
+//         },
+//         child: Container(
+//           decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(AppSize.s8),
+//           ),
+//           margin: const EdgeInsets.all(AppMargin.m8),
+//           height: AppSize.s93,
+//           width: screenSize.width / 4,
+//           child: Stack(
+//             fit: StackFit.expand,
+//             alignment: AlignmentGeometry.center,
+
+//             children: [
+//               ClipRRect(
+//                 borderRadius: BorderRadiusGeometry.circular(AppSize.s8),
+//                 child: CachedNetworkImage(
+//                   imageUrl: images[imageIndex].url,
+//                   fit: BoxFit.cover,
+//                 ),
+//               ),
+//               Positioned(
+//                 top: -10,
+//                 right: -10,
+//                 child: IconButton(
+//                   onPressed: () {
+//                     cubit.deleteEditImage(imageIndex, true);
+//                     field.didChange(cubit.carEditImages);
+//                     field.validate();
+//                   },
+//                   icon: Icon(
+//                     Icons.delete,
+//                     color: Theme.of(context).colorScheme.error,
+//                     size: AppSize.s20,
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   void open(BuildContext context, final int index) {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//         builder: (context) => OnlineGalleryPhotoViewWrapper(
+//           galleryItems: images,
+//           backgroundDecoration: const BoxDecoration(color: Colors.black),
+//           initialIndex: index,
+//           scrollDirection: Axis.horizontal,
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class GalleryPhotoViewWrapper extends StatefulWidget {
   GalleryPhotoViewWrapper({
@@ -212,6 +369,136 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
         },
         transitionOnUserGestures: true,
       ),
+      basePosition: Alignment.center, // keeps image centered
+      tightMode: true,
+      gestureDetectorBehavior: HitTestBehavior.opaque,
+    );
+  }
+}
+
+class EditGalleryPhotoViewWrapper extends StatefulWidget {
+  EditGalleryPhotoViewWrapper({
+    super.key,
+    this.loadingBuilder,
+    this.backgroundDecoration,
+    this.minScale,
+    this.maxScale,
+    this.initialIndex = 0,
+    required this.galleryItems,
+    this.scrollDirection = Axis.horizontal,
+  }) : pageController = PageController(
+         initialPage: initialIndex,
+         viewportFraction: 1.0,
+       );
+
+  final LoadingBuilder? loadingBuilder;
+  final BoxDecoration? backgroundDecoration;
+  final dynamic minScale;
+  final dynamic maxScale;
+  final int initialIndex;
+  final PageController pageController;
+  final List<Object> galleryItems;
+  final Axis scrollDirection;
+
+  @override
+  State<StatefulWidget> createState() {
+    return _EditGalleryPhotoViewWrapperState();
+  }
+}
+
+class _EditGalleryPhotoViewWrapperState
+    extends State<EditGalleryPhotoViewWrapper> {
+  late int currentIndex = widget.initialIndex;
+
+  void onPageChanged(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.black,
+          statusBarIconBrightness: Brightness.light,
+        ),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+        actionsPadding: EdgeInsets.all(AppPadding.p12),
+        actions: [
+          Text(
+            "${currentIndex + 1} / ${widget.galleryItems.length}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 17.0,
+              decoration: null,
+            ),
+          ),
+        ],
+      ),
+      body: Container(
+        decoration: widget.backgroundDecoration,
+        constraints: BoxConstraints.expand(
+          height: MediaQuery.of(context).size.height,
+        ),
+        child: PhotoViewGallery.builder(
+          // scrollPhysics: const BouncingScrollPhysics(),
+          builder: _buildItem,
+          itemCount: widget.galleryItems.length,
+          loadingBuilder: widget.loadingBuilder,
+          backgroundDecoration: widget.backgroundDecoration,
+          pageController: widget.pageController,
+          onPageChanged: onPageChanged,
+          scrollDirection: widget.scrollDirection,
+          wantKeepAlive: false,
+          gaplessPlayback: true,
+          enableRotation: false,
+          scrollPhysics: BouncingScrollPhysics(),
+          allowImplicitScrolling: true,
+          pageSnapping: true,
+
+          // pageSnapping: true,
+        ),
+      ),
+    );
+  }
+
+  PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
+    return
+    // ? PhotoViewGalleryPageOptions.customChild(
+    //     child: Container(
+    //       width: 300,
+    //       height: 300,
+    //       child: SvgPicture.asset(item.resource, height: 200.0),
+    //     ),
+    //     childSize: const Size(300, 300),
+    //     initialScale: PhotoViewComputedScale.contained,
+    //     minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
+    //     maxScale: PhotoViewComputedScale.covered * 4.1,
+    //     heroAttributes: PhotoViewHeroAttributes(tag: item.id),
+    //   )
+    PhotoViewGalleryPageOptions(
+      imageProvider: widget.galleryItems[index] is CarImage
+          ? CachedNetworkImageProvider(
+              (widget.galleryItems[index] as CarImage).url,
+            )
+          : widget.galleryItems[index] is XFile
+          ? Image.file(File((widget.galleryItems[index] as XFile).path)).image
+          : null,
+      initialScale: PhotoViewComputedScale.contained,
+      minScale: PhotoViewComputedScale.contained,
+      maxScale: PhotoViewComputedScale.covered * 4.1,
+
+      // heroAttributes: PhotoViewHeroAttributes(
+      //   tag: widget.galleryItems[index].path + index.toString(),
+      //   createRectTween: (begin, end) {
+      //     return MaterialRectCenterArcTween(begin: begin, end: end);
+      //   },
+      //   transitionOnUserGestures: true,
+      // ),
       basePosition: Alignment.center, // keeps image centered
       tightMode: true,
       gestureDetectorBehavior: HitTestBehavior.opaque,

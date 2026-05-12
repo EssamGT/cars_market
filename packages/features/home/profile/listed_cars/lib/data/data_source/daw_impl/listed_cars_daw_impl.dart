@@ -27,4 +27,44 @@ class ListedCarsDawImpl extends ListedCarsDataSource {
       return Left(FirebaseErrorType.unknown.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deactivateCarFromListedCars(
+    String carId,
+  ) async {
+    try {
+      await firebaseDbManager.deactivateCar(carId);
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseErrorHandler.handleFirestoreError(e));
+    } catch (e) {
+      return Left(FirebaseErrorType.unknown.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCarFromListedCars(String carId) async {
+    try {
+      await firebaseDbManager.deleteCar(carId);
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseErrorHandler.handleFirestoreError(e));
+    } catch (e) {
+      return Left(FirebaseErrorType.unknown.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> reactivateCarFromListedCars(
+    String carId,
+  ) async {
+    try {
+      await firebaseDbManager.reactivateCar(carId);
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseErrorHandler.handleFirestoreError(e));
+    } catch (e) {
+      return Left(FirebaseErrorType.unknown.getFailure());
+    }
+  }
 }

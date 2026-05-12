@@ -5,6 +5,7 @@ import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/car_catalog.dart';
 import 'package:data/models/car/car_filter_model.dart';
 import 'package:data/models/car/car_image.dart';
+import 'package:data/models/car/car_status.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/locations_catalog.dart';
 import 'package:data/models/user/user_data.dart';
@@ -47,20 +48,85 @@ class FirebaseDbManager {
     return carImages;
   }
 
+  Future<CarImage> uploadCarImage(XFile image, String id) async {
+    final storageRef = storage.ref();
+
+    String imageName =
+        '${DateTime.now().millisecondsSinceEpoch}_${basename(image.path)}';
+    final carImagesRef = storageRef.child('$carsImagesPath/$id/$imageName');
+
+    await carImagesRef.putFile(File(image.path));
+    String downloadUrl = await carImagesRef.getDownloadURL();
+    final finalImage = CarImage(url: downloadUrl, path: carImagesRef.fullPath);
+
+    return finalImage;
+  }
+
+  Future<void> deleteCarImages(List<String> imagePaths) async {
+    final storageRef = storage.ref();
+    for (var path in imagePaths) {
+      await storageRef.child(path).delete();
+    }
+  }
+
+  Future<void> deactivateCar(String carId) async {
+    await firestore.collection(carsDataBase!).doc(carId).update({
+      CarsTableKeys.status: CarStatus.deactivated.name,
+    });
+  }
+
+  Future<void> reactivateCar(String carId) async {
+    await firestore.collection(carsDataBase!).doc(carId).update({
+      CarsTableKeys.status: CarStatus.pendingReview.name,
+    });
+  }
+
+  Future<void> deleteCar(String carId) async {
+    await _deleteFolder("$carsImagesPath/$carId");
+    await firestore.collection(carsDataBase!).doc(carId).delete().then((
+      _,
+    ) async {
+      await firestore
+          .collection(usersDataBase!)
+          .doc(auth.currentUser!.uid)
+          .update({
+            UserDataKeys.listedCarsIds: FieldValue.arrayRemove([carId]),
+          });
+    });
+    userData.listedCarsIds.remove(carId);
+  }
+
+  Future<void> _deleteFolder(String folderPath) async {
+    final ListResult result = await storage.ref(folderPath).listAll();
+
+    for (final Reference ref in result.items) {
+      await ref.delete();
+    }
+
+    for (final Reference prefix in result.prefixes) {
+      await _deleteFolder(prefix.fullPath);
+    }
+  }
+
   Future<void> uploadCar(SellCarUploadModel car) async {
     car.userId = auth.currentUser!.uid;
     await firestore
         .collection(carsDataBase!)
         .doc(car.carId)
         .set(car.toJson())
-        .then((_) {
-          firestore
+        .then((_) async {
+          await firestore
               .collection(usersDataBase!)
               .doc(auth.currentUser!.uid)
               .update({
                 UserDataKeys.listedCarsIds: FieldValue.arrayUnion([car.carId]),
               });
+          userData.listedCarsIds.add(car.carId);
         });
+  }
+
+  Future<void> uploadEditedCar(SellCarUploadModel car) async {
+    await firestore.collection(carsDataBase!).doc(car.carId).set(car.toJson());
   }
 
   Future<CarCatalogModel> getCarCatalog() async {

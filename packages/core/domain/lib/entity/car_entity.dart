@@ -1,6 +1,9 @@
 import 'package:data/models/car/brands_models/air_con_types.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
+import 'package:data/models/car/brands_models/brands.dart';
 import 'package:data/models/car/brands_models/car_condition.dart';
+import 'package:data/models/car/brands_models/car_models.dart';
+import 'package:data/models/car/brands_models/engine_spec.dart';
 import 'package:data/models/car/brands_models/featrues_catalog.dart';
 import 'package:data/models/car/brands_models/features_model.dart';
 import 'package:data/models/car/brands_models/interior_type.dart';
@@ -13,7 +16,6 @@ import 'package:data/models/car/car_image.dart';
 import 'package:data/models/car/car_status.dart';
 import 'package:data/models/car/sell_car_model.dart';
 import 'package:data/models/location/location_model.dart';
-import 'package:data/models/user/user_data.dart';
 import 'package:domain/entity/car_entitys/engine_spec_entity.dart';
 import 'package:google_places_service/data/models/text_search_model/text_search_model.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +23,6 @@ import 'package:intl/intl.dart';
 class CarEntity {
   final String carId;
   final String userId;
-  final UserData userData;
   final CarStatus status;
   final String createdAt;
   final EngineSpecEntity engineSpec;
@@ -85,7 +86,6 @@ class CarEntity {
     required this.carCondition,
     required this.whatsAppMessage,
     required this.transmissionType,
-    required this.userData,
     required this.leads,
     required this.views,
     required this.status,
@@ -153,7 +153,7 @@ class CarEntity {
       engineSpec = EngineSpecEntity.fromJson(
         json[CarsTableKeys.engineSpec] ?? {},
       ),
-      userData = UserData.init(),
+      // userData = UserData.init(),
       userId = json[CarsTableKeys.userId] ?? '',
       createdAt = json[CarsTableKeys.createdAt] ?? '',
       brand = json[CarsTableKeys.brandName] ?? '',
@@ -231,7 +231,52 @@ class CarEntity {
         json[CarsTableKeys.googleMapsLocation] as Map<String, dynamic>? ?? {},
       );
 
-  void fetchUserData(UserData newUserData) {
-    userData.copyWith(newUserData);
+  SellCarUploadModel toEditModel() {
+    return SellCarUploadModel(
+      carId: carId,
+      userId: userId,
+      createdAt: createdAt,
+      engineSpec: getEngineSpecEntity(engineSpec),
+
+      brand: CarBrand(
+        id: brandId,
+        name: brand,
+        selectedModel: CarModel(
+          id: modelId,
+          name: model,
+          brand: brand,
+          brandId: brandId,
+        ),
+        models: [],
+      ),
+      status: status,
+      year: year.toString(),
+      description: description,
+      bodyType: bodyType,
+      km: km.toString(),
+      paintColor: paintColor,
+      paintCondition: paintCondition,
+      modifications: modifications ?? '',
+      serviceHistory: serviceHistory ?? '',
+      price: price.toString(),
+      version: version ?? '',
+      features: features ?? [],
+      negotiable: negotiable,
+
+      selectedImages: [],
+      uploadedImages: carImages,
+      pendingUploadImages: [],
+      googleMapsLocation: googleMapsLocation,
+      location2: location,
+      views: views,
+      leads: leads,
+      paymentOptions: paymentOptions,
+      interiorType: interiorType,
+      airConType: airConType,
+      seatsNumber: seatsNumber ?? '',
+      carCondition: carCondition,
+      whatsappMessage: whatsAppMessage,
+      transmissionType: transmissionType,
+    );
   }
 }

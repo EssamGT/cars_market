@@ -32,3 +32,33 @@ class AddImageButton extends StatelessWidget {
     );
   }
 }
+
+class AddEditImageWidget extends StatelessWidget {
+  final FormFieldState<List<Object>> field;
+  const AddEditImageWidget({super.key, required this.field});
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    var cubit = SellCubit.get(context);
+    return Container(
+      margin: const EdgeInsets.all(AppMargin.m8),
+      height: AppSize.s93,
+      width: screenSize.width / 4,
+      child: FilledButton(
+        style: FilledButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.s8),
+          ),
+        ),
+        onPressed: () async {
+          await cubit.addImagesToEdit();
+          field.didChange(cubit.onlineImages);
+          field.validate();
+        },
+        child: Icon(Icons.add, size: 40),
+      ),
+    );
+  }
+}

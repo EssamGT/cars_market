@@ -45,4 +45,12 @@ class PrefsHelper {
   List<String> getFavoriteCarsIds() {
     return _sharedPreferences.getStringList('favorite_cars_ids') ?? [];
   }
+
+  int getThemeMode() {
+    return _sharedPreferences.getInt('theme_mode') ?? 0;
+  }
+
+  void setThemeMode(int mode) {
+    _sharedPreferences.setInt('theme_mode', mode);
+  }
 }

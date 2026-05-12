@@ -14,7 +14,7 @@ class FuelConsumptionTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SellCubit, SellState>(
       buildWhen: (previous, current) {
-        if (current is FuelTypeSlected) {
+        if (current is FuelTypeSelected) {
           return true;
         }
         return false;

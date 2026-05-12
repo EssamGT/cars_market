@@ -16,6 +16,8 @@ class FavoritesScreen extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          // appBar: BaseAppBar(title: StringsManager.favoritesL, button: false),
+
           body: BlocBuilder<FavoritesCubit, FavoritesState>(
             builder: (context, state) {
               if (state is Error) {

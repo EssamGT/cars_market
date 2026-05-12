@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
+import 'package:data/models/car/car_status.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listed_cars/presentation/cubit/listed_cars_cubit.dart';
 import 'package:listed_cars/presentation/widgets/status_widget.dart';
 import 'package:redacted/redacted.dart';
 import 'package:router/routes_manager.dart';
@@ -90,7 +92,7 @@ class _ListedCarCardState extends State<ListedCarCard>
                           ),
                         ),
                       ),
-                
+
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
@@ -152,9 +154,47 @@ class _ListedCarCardState extends State<ListedCarCard>
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      ListedCarsButton(onPressed: () {}),
-                      ListedCarsButton(outlined: true, onPressed: () {}),
+                      ListedCarsButton(
+                        label: StringsManager.edit,
+                        iconData: Icons.edit_outlined,
+                        onPressed: () {
+                          context.push(
+                            RoutesManager.editCar,
+                            extra: widget.car.toEditModel(),
+                          );
+                        },
+                      ),
+                      ListedCarsButton(
+                        label: widget.car.status == CarStatus.deactivated
+                            ? StringsManager.reactivate
+                            : StringsManager.deactivate,
+                        outlined: true,
+                        iconData: widget.car.status == CarStatus.deactivated
+                            ? Icons.public_outlined
+                            : Icons.public_off_outlined,
+                        onPressed: () {
+                          if (widget.car.status == CarStatus.deactivated) {
+                            var cubit = ListedCarsCubit.get(context);
+                            cubit.reactivateCar(widget.car.carId);
+                          } else {
+                            var cubit = ListedCarsCubit.get(context);
+                            cubit.deactivateCar(widget.car.carId);
+                          }
+                        },
+                        isActivateButton:
+                            widget.car.status == CarStatus.deactivated,
+                      ),
+                      ListedCarsButton(
+                        label: StringsManager.delete,
+                        iconData: Icons.delete_outline,
+                        outlined: true,
+                        onPressed: () {
+                          var cubit = ListedCarsCubit.get(context);
+                          cubit.deleteCar(widget.car.carId);
+                        },
+                      ),
                     ],
                   ),
                 ],
@@ -201,47 +241,79 @@ class IconsWidget extends StatelessWidget {
 }
 
 class ListedCarsButton extends StatelessWidget {
+  final IconData iconData;
   final bool outlined;
   final VoidCallback? onPressed;
-  const ListedCarsButton({super.key, this.outlined = false, this.onPressed});
+  final String label;
+  final bool isActivateButton;
+  const ListedCarsButton({
+    super.key,
+    this.outlined = false,
+    this.onPressed,
+    required this.label,
+    required this.iconData,
+    this.isActivateButton = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+    EdgeInsets padding = MediaQuery.paddingOf(context);
     return FilledButton(
       onPressed: onPressed,
+
       style: FilledButton.styleFrom(
+        padding: const EdgeInsets.all(AppPadding.p10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
-          side: outlined
+          side: isActivateButton
+              ? BorderSide(color: Theme.of(context).colorScheme.primary)
+              : outlined
               ? BorderSide(color: Theme.of(context).colorScheme.error)
               : BorderSide.none,
         ),
-        minimumSize: Size(size.width * 0.4, AppSize.s50),
+        minimumSize: Size(
+          (size.width + padding.left + padding.right) / 4,
+          AppSize.s50,
+        ),
+
+        // maximumSize: Size(size.width / 2, AppSize.s50),
         backgroundColor: outlined
             ? Colors.transparent
             : Theme.of(context).colorScheme.primary,
-        overlayColor: outlined
+        overlayColor: isActivateButton
+            ? Theme.of(context).colorScheme.primary.withAlpha(30)
+            : outlined
             ? Theme.of(context).colorScheme.error.withAlpha(30)
             : null,
       ),
 
       child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
-            outlined ? Icons.delete_outline : Icons.edit_outlined,
+            iconData,
             size: AppSize.s20,
-            color: outlined
+            color: isActivateButton
+                ? Theme.of(context).colorScheme.primary
+                : outlined
                 ? Theme.of(context).colorScheme.error
                 : Theme.of(context).colorScheme.surface,
           ),
           SizedBox(width: AppSize.s4),
-          Text(
-            outlined ? StringsManager.delete : StringsManager.edit,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: outlined
-                  ? Theme.of(context).colorScheme.error
-                  : Theme.of(context).colorScheme.surface,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: isActivateButton
+                    ? Theme.of(context).colorScheme.primary
+                    : outlined
+                    ? Theme.of(context).colorScheme.error
+                    : Theme.of(context).colorScheme.surface,
+              ),
             ),
           ),
         ],

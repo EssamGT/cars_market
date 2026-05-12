@@ -16,7 +16,7 @@ class EngineSpecWidget extends StatelessWidget {
     var cubit = getIt.get<SellCubit>();
     return BlocBuilder<SellCubit, SellState>(
       buildWhen: (previous, current) {
-        if (current is FuelTypeSlected) {
+        if (current is FuelTypeSelected) {
           return true;
         }
         return false;

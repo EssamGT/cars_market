@@ -1,6 +1,7 @@
 import 'package:car_listing/presentation/car_details_screen.dart';
 
 import 'package:create_account/presentation/create_account_screen.dart';
+import 'package:data/models/car/sell_car_model.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:forgot_password/presentation/forgot_password_screen.dart';
@@ -45,9 +46,24 @@ final routes = <RouteBase>[
   ),
   GoRoute(
     path: RoutesManager.sellCarScreen,
+
     // builder: (context, state) => const AddScreen(),
     pageBuilder: (context, state) {
-      return customBottomAnimationPage(child: const SellScreen(), state: state);
+      return customBottomAnimationPage(
+        child: SellScreen(),
+        state: state,
+      );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.editCar,
+
+    // builder: (context, state) => const AddScreen(),
+    pageBuilder: (context, state) {
+      return customBottomAnimationPage(
+        child: SellScreen(car: state.extra as SellCarUploadModel),
+        state: state,
+      );
     },
   ),
 

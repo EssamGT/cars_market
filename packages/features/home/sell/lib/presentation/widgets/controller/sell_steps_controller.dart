@@ -45,7 +45,12 @@ class SellStepsController extends GetxController {
   void changeIndex(int index) async {
     if (index < 0) return;
     if (index >= steps.length) {
-      getIt.get<SellCubit>().uploadCar();
+      final cubit = getIt.get<SellCubit>();
+      if (cubit.isEdit) {
+        cubit.uploadEditedCar();
+      } else {
+        cubit.uploadCar();
+      }
 
       return;
     }

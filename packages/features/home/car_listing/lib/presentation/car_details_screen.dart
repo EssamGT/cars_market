@@ -30,6 +30,8 @@ class CarDetailsScreen extends StatefulWidget {
 
 class _CarDetailsScreenState extends State<CarDetailsScreen> {
   late ScrollController _scrollController;
+  late bool _isDarkMode;
+
   bool visibility = false;
   Rx<bool> isVisible = false.obs;
   Rx<bool> isAppBarTransparent = true.obs;
@@ -50,7 +52,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
     _scrollController.removeListener(_onScroll);
     _scrollController.removeListener(_appBarOnScroll);
     _scrollController.dispose();
-    if (isAppBarTransparent.value) {
+    if (isAppBarTransparent.value && !_isDarkMode) {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -60,6 +62,12 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
       );
     }
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _isDarkMode = context.isDarkMode;
   }
 
   void _onScroll() {

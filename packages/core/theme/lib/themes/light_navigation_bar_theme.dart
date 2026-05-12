@@ -20,3 +20,20 @@ NavigationBarThemeData lightNavigationBarTheme() {
     overlayColor: WidgetStatePropertyAll(lightThemeColors().shadow),
   );
 }
+NavigationBarThemeData darkNavigationBarTheme() {
+  return NavigationBarThemeData(
+    height: AppSize.s80,
+    backgroundColor: darkThemeColors().surface,
+    indicatorColor: ColorManager.transparent,
+    elevation: AppSize.s10,
+    shadowColor: darkThemeColors().shadow,
+
+    iconTheme: WidgetStateProperty.all(
+      IconThemeData(color: darkThemeColors().secondary, size: AppSize.s25),
+    ),
+    labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+    // labelPadding: EdgeInsets.all(AppPadding.p2),
+    // surfaceTintColor: darkThemeColors().shadow,
+    overlayColor: WidgetStatePropertyAll(darkThemeColors().shadow),
+  );
+}

@@ -15,4 +15,11 @@ final class ListedCarsError extends ListedCarsState {
   ListedCarsError(this.failure);
 }
 
+final class ListedCarErrorPopUp extends ListedCarsState {
+  final Failure failure;
+  ListedCarErrorPopUp(this.failure);
+}
+
 final class ListedCarsLoading extends ListedCarsState {}
+
+final class ListedPopUpLoading extends ListedCarsState {}

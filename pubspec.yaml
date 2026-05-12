@@ -54,8 +54,7 @@ dependencies:
     path: packages/features/auth/forgot_password
   sell:
     path: packages/features/home/sell
-  car_edit:
-    path: packages/features/home/profile/car_edit
+
   search:
     path: packages/features/home/search
   favorites:
@@ -85,6 +84,8 @@ dependencies:
   cloud_functions: ^6.0.6
   firebase_storage: ^13.0.6
   cloud_firestore: ^6.1.2
+  get: ^4.7.2
+
 dev_dependencies:
   melos: ^7.4.0
   injectable_generator: ^2.12.0
@@ -111,7 +112,6 @@ workspace:
   - packages/features/home/main
   - packages/features/home/search
   - packages/features/home/sell
-  - packages/features/home/profile/car_edit
   - packages/features/home/favorites
   - packages/features/home/profile/profile
   - packages/features/home/profile/update_user_data

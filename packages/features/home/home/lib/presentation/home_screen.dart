@@ -10,8 +10,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
     // Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       extendBody: true,
+      
       bottomNavigationBar: BottomCNavBar(controller: controller),
 
       body: Obx(() => controller.getScreen(controller.selectedIndex.value)),

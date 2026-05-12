@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:redacted/redacted.dart';
 import 'image_viewer.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,10 @@ class _MinCarGalleryWidgetState extends State<MinCarGalleryWidget> {
         child: CachedNetworkImage(
           imageUrl: widget.car.carImages[index].url,
           fit: BoxFit.cover,
+          placeholder: (context, url) {
+            return Container().redacted(context: context, redact: true);
+          },
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),
     );

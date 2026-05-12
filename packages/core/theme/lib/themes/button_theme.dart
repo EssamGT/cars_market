@@ -15,3 +15,16 @@ ButtonThemeData lightButtonTheme() {
     padding: EdgeInsets.all(AppPadding.p12),
   );
 }
+ButtonThemeData darkButtonTheme() {
+  return ButtonThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppSize.s8),
+    ),
+    splashColor: ColorManager.backgroundDark,
+    buttonColor: ColorManager.primaryDark,
+
+    height: AppSize.s50,
+    minWidth: double.infinity,
+    padding: EdgeInsets.all(AppPadding.p12),
+  );
+}

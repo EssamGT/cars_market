@@ -27,6 +27,8 @@ dependencies:
     path: ../../../core/data
   domain:
     path: ../../../core/domain
+  favorites:
+    path: ../favorites
   assets:
     path: ../../../core/assets
   error_handler:
@@ -41,6 +43,9 @@ dependencies:
   get: ^4.7.2
   iconsax_flutter: ^1.0.1
   cached_network_image: ^3.4.1
+
+  redacted: ^1.0.13
+  photo_viewer: ^0.1.0
 
 dev_dependencies:
   flutter_test:

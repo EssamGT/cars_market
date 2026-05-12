@@ -37,8 +37,10 @@ class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
         // backgroundColor: getBackgroundColor(context),
         systemOverlayStyle: SystemUiOverlayStyle(
           // statusBarColor: getBackgroundColor(context),
-          statusBarIconBrightness: getIconBrightness(),
-          statusBarBrightness: getIconBrightness(),
+          statusBarColor: Colors.transparent,
+
+          statusBarIconBrightness: getIconBrightness(context),
+          statusBarBrightness: getIconBrightness(context),
         ),
         leading: IconButton(
           onPressed: () {
@@ -108,6 +110,10 @@ class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
   }
 
   Color getIconColor(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    if (isDark) {
+      return Theme.of(context).colorScheme.onError;
+    }
     if (widget.startBackgroundChange < 100) {
       return Theme.of(
         context,
@@ -118,8 +124,12 @@ class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
     ).colorScheme.onError.withAlpha(widget.startBackgroundChange);
   }
 
-  Brightness getIconBrightness() {
-    return Brightness.values[widget.startBackgroundChange > 180 ? 0 : 1];
+  Brightness getIconBrightness(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return isDark
+        ? Brightness.light
+        : Brightness.values[widget.startBackgroundChange > 180 ? 0 : 1];
   }
 
   Future<void> addToFavorite() async {

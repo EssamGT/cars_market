@@ -11,6 +11,12 @@ resolution: workspace
 dependencies:
   constants:
     path: ../constants
+  cars_market:
+    path: ../../../../cars_market
+  storage:
+    path: ../storage
+  get: ^4.7.2
+
   flutter:
     sdk: flutter
 

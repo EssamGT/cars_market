@@ -16,6 +16,8 @@ dependencies:
 
   storage:
     path: ../../../../core/storage
+  theme:
+    path: ../../../../core/theme
   home:
     path: ../../../home/home
   router:

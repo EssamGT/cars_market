@@ -1,4 +1,3 @@
-
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ class ImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Size screenSize = MediaQuery.of(context).size;
     var cubit = SellCubit.get(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,53 +23,50 @@ class ImagePicker extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-        FormField<List<XFile>>(
-          builder: (FormFieldState<List<XFile>> field) {
-            if (cubit.car.selectedImages.isNotEmpty) {
-              return ImagePreview(
-                field: field,
-                images: cubit.car.selectedImages,
-                error: field.hasError,
-                errorText: field.errorText,
-              );
-            }
-            return NoImages(
-              error: field.hasError,
-              errorText: field.errorText,
-              field: field,
-            );
-          },
-          validator: (value) => TextFieldValidator.validateNormal(
-            TextFieldValidationType.images,
-            cubit.car.selectedImages.length.toString(),
-          ),
-        ),
+        cubit.isEdit
+            ? FormField<List<Object>>(
+                builder: (FormFieldState<List<Object>> field) {
+                  if (cubit.onlineImages.isNotEmpty) {
+                    return EditImagePreview(
+                      field: field,
+                      images: cubit.onlineImages,
+                      error: field.hasError,
+                      errorText: field.errorText,
+                    );
+                  }
+                  return NoEditImages(
+                    error: field.hasError,
+                    errorText: field.errorText,
+                    field: field,
+                  );
+                },
+                validator: (value) => TextFieldValidator.validateNormal(
+                  TextFieldValidationType.images,
+                  (cubit.onlineImages.length).toString(),
+                ),
+              )
+            : FormField<List<XFile>>(
+                builder: (FormFieldState<List<XFile>> field) {
+                  if (cubit.car.selectedImages.isNotEmpty) {
+                    return ImagePreview(
+                      field: field,
+                      images: cubit.car.selectedImages,
+                      error: field.hasError,
+                      errorText: field.errorText,
+                    );
+                  }
+                  return NoImages(
+                    error: field.hasError,
+                    errorText: field.errorText,
+                    field: field,
+                  );
+                },
+                validator: (value) => TextFieldValidator.validateNormal(
+                  TextFieldValidationType.images,
+                  cubit.car.selectedImages.length.toString(),
+                ),
+              ),
       ],
     );
   }
 }
-
-  // BlocBuilder<AddCubit, AddState>(
-  //         buildWhen: (previous, current) {
-  //           if (current is ImagesSelected ||
-  //               current is EmptyImages ||
-  //               current is EmptyErrorImages ||
-  //               current is LessThan3ErrorImages) {
-  //             return true;
-  //           } else {
-  //             return false;
-  //           }
-  //         },
-  //         builder: (context, state) {
-  //           if (state is ImagesSelected) {
-  //             return ImagePreview(images: state.images);
-  //           }
-  //           if (state is LessThan3ErrorImages) {
-  //             return ImagePreview(images: state.images,error: true);
-  //           }
-  //           if (state is EmptyErrorImages) {
-  //             return NoImages(error: true);
-  //           }
-  //           return NoImages();
-        //   },
-        // ),

@@ -6,4 +6,7 @@ abstract class ListedCarsDataSource {
   Future<Either<Failure, List<CarEntity>>> getListedCars(
     List<String> listedCarIds,
   );
+  Future<Either<Failure, void>> deactivateCarFromListedCars(String carId);
+  Future<Either<Failure, void>> reactivateCarFromListedCars(String carId);
+  Future<Either<Failure, void>> deleteCarFromListedCars(String carId);
 }

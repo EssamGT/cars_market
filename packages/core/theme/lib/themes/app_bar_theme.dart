@@ -22,3 +22,21 @@ AppBarTheme lightAppBarTheme() {
     foregroundColor: lightThemeColors().onError,
   );
 }
+AppBarTheme darkAppBarTheme() {
+  return AppBarTheme(
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      // systemNavigationBarColor: Colors.transparent,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    ),
+    titleTextStyle: getSemiBoldStyle(
+      color: darkThemeColors().onError,
+      fontSize: FontSize.s16,
+    ),
+     
+    foregroundColor: darkThemeColors().onError,
+  );
+}

@@ -24,3 +24,25 @@ SearchBarThemeData lightSearchBarTheme() {
   
   );
 }
+
+SearchBarThemeData darkSearchBarTheme() {
+  return SearchBarThemeData(
+    textStyle: WidgetStatePropertyAll(
+      darkTextTheme().bodyMedium,
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(AppSize.s15),),
+    ),
+    shadowColor: WidgetStatePropertyAll(darkThemeColors().shadow),
+    // overlayColor: WidgetStatePropertyAll(darkThemeColors().secondary)
+    elevation: WidgetStatePropertyAll(AppSize.s10),
+    backgroundColor: WidgetStatePropertyAll(darkThemeColors().surface),
+    side: WidgetStatePropertyAll(
+      BorderSide(
+        color: darkThemeColors().onSurface.withAlpha(40),
+        width: 1,
+      ),
+    ),
+  
+  );
+}
