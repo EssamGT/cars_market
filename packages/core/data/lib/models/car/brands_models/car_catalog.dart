@@ -1,4 +1,3 @@
-import 'package:constants/constants_manager.dart';
 import 'package:data/models/car/brands_models/brands.dart';
 import 'package:data/models/car/brands_models/car_models.dart';
 

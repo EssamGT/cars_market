@@ -71,7 +71,8 @@ dependencies:
     path: packages/core/remote
   car_listing:
     path: packages/features/home/car_listing
-
+  flutter_localizations:
+    sdk: flutter
   storage:
     path: packages/core/storage
   sync_manager:
@@ -214,7 +215,6 @@ melos:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -227,10 +227,8 @@ flutter:
     - .env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -247,7 +245,6 @@ flutter:
   #         weight: 500
   #       - asset: assets/fonts/inter/Inter-Regular.ttf
   #         weight: 400
-
   #   - family: Poppins
   #     fonts:
   #       - asset: assets/fonts/poppins/Poppins-Black.ttf
@@ -263,3 +260,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true

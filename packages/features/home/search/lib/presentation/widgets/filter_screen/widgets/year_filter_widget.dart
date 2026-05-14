@@ -13,6 +13,8 @@ class YearFilterWidget extends StatelessWidget {
       title: StringsManager.yearLabel,
       initValue1: cubit.searchModel.minYear,
       initValue2: cubit.searchModel.maxYear,
+      hint1: StringsManager.min,
+      hint2: StringsManager.max,
       type1: FilterTextFieldValidationType.minYear,
       type2: FilterTextFieldValidationType.maxYear,
       onChanged1: (value) => cubit.setMinYear(value),

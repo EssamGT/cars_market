@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cars_market/di/di.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data/models/car/brands_models/air_con_types.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
@@ -390,7 +392,7 @@ class SellCubit extends Cubit<SellState> {
       (images) async {
         car.uploadedImages = images;
         final googleLocation = await gpsUseCase.getLocationByName(
-          car.location.getLocationName(),
+          car.location.getLocationName(LocalizationService.isRTL),
         );
         googleLocation.fold(
           (error) {
@@ -425,10 +427,9 @@ class SellCubit extends Cubit<SellState> {
       },
       (images) async {
         car.uploadedImages = images;
-        if (oldCar.location.getLocationName() !=
-            car.location.getLocationName()) {
+        if (oldCar.location.id != car.location.id) {
           final googleLocation = await gpsUseCase.getLocationByName(
-            car.location.getLocationName(),
+            car.location.getLocationName(LocalizationService.isRTL),
           );
           googleLocation.fold(
             (error) {
@@ -444,6 +445,9 @@ class SellCubit extends Cubit<SellState> {
         carLastResult.fold(
           (error) {
             emit(UploadingError(error));
+            print("33333333333333333333333333333333333333333333333");
+            print(error.code);
+            print(error.message);
           },
           (suc) {
             emit(UploadingSuccess());

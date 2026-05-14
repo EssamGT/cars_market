@@ -14,6 +14,8 @@ class PriceFilterWidget extends StatelessWidget {
       title: StringsManager.priceLabel,
       initValue1: cubit.searchModel.minPrice,
       initValue2: cubit.searchModel.maxPrice,
+      hint1: StringsManager.min,
+      hint2: StringsManager.max,
       type1: FilterTextFieldValidationType.minPrice,
       type2: FilterTextFieldValidationType.maxPrice,
       onChanged1: (value) => cubit.setMinPrice(value),

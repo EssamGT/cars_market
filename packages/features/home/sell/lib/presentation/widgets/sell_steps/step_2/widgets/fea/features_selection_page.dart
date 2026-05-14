@@ -1,5 +1,6 @@
 
 import 'package:cars_market/di/di.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/featrues_catalog.dart';
@@ -87,7 +88,9 @@ class _FeaturesGroupState extends State<_FeaturesGroup> {
             horizontal: AppPadding.p12,
             vertical: AppPadding.p16,
           ),
-          alignment: Alignment.centerLeft,
+            alignment: LocalizationService.isRTL
+              ? Alignment.centerRight
+              : Alignment.centerLeft,
           child: Text(
             widget.featuresList.title,
             style: Theme.of(context).textTheme.headlineSmall,

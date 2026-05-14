@@ -16,6 +16,8 @@ class FilterKmWidget extends StatelessWidget {
       initValue2: cubit.searchModel.maxKm,
       type1: FilterTextFieldValidationType.minKm,
       type2: FilterTextFieldValidationType.maxKm,
+      hint1: StringsManager.min,
+      hint2: StringsManager.max,
       onChanged1: (value) => cubit.setMinKm(value),
       onChanged2: (value) => cubit.setMaxKm(value),
       keyboardType: TextInputType.number,

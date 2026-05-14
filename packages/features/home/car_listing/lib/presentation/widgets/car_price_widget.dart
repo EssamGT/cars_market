@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:data/models/car/brands_models/negotiation.dart';
@@ -13,8 +14,9 @@ class CarPriceWidget extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       height: AppSize.s100,
+
       margin: EdgeInsets.symmetric(horizontal: AppPadding.p14),
-      padding: EdgeInsets.all(AppPadding.p20),
+      padding: EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
         color: Theme.of(
           context,
@@ -64,6 +66,8 @@ class CarPriceWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
+                LocalizationService.isRTL?
+                "${car.getCarKM(withDot: true)} ${car.year}":
                 "${car.year} ${car.getCarKM(withDot: true)}",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),

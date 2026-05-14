@@ -177,7 +177,7 @@ class _ExitDialog extends StatelessWidget {
                           LoadingPopUp.hide();
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
                           foregroundColor: Colors.white,
                           padding: EdgeInsets.symmetric(
                             horizontal: AppPadding.p24,

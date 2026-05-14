@@ -58,7 +58,9 @@ class _SellScreenState extends State<SellScreen> {
     Size screenSize = MediaQuery.of(context).size;
     final double indicatorHeight = AppSize.s60;
     final double naviButtonHeight = AppSize.s80;
-
+    final double availableContentHeight =
+        screenSize.height -
+        (indicatorHeight + naviButtonHeight + AppPadding.p8);
     return BlocProvider.value(
       value: getIt.get<SellCubit>(),
       child: Scaffold(
@@ -91,97 +93,92 @@ class _SellScreenState extends State<SellScreen> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight:
-                        screenSize.height -
-                        (indicatorHeight + naviButtonHeight + AppPadding.p8),
+                        availableContentHeight,
                     minWidth: screenSize.width,
                   ),
-                  child: IntrinsicHeight(
-                    child: PopScope(
-                      canPop: false,
-                      onPopInvokedWithResult: (didPop, result) async {
-                        if (!didPop) {
-                          if (loading == false) {
-                            LoadingPopUp.show(
-                              context: context,
-                              type: PopupType.exit,
-                            );
-                          }
+                  child: PopScope(
+                    canPop: false,
+                    onPopInvokedWithResult: (didPop, result) async {
+                      if (!didPop) {
+                        if (loading == false) {
+                          LoadingPopUp.show(
+                            context: context,
+                            type: PopupType.exit,
+                          );
                         }
-                      },
+                      }
+                    },
 
-                      child: Obx(() {
-                        final currentIndex = controller.selectedIndex.value;
-                        final isForward = currentIndex >= _lastIndex;
-                        _lastIndex = currentIndex;
-                        return Column(
-                          children: [
-                            // keep only the current step in the scrollable area
-                            Form(
-                              key: controller.key,
-                              child: AnimatedSwitcher(
-                                duration: controller.animationDuration,
-                                switchInCurve: controller.animationCurve,
-                                switchOutCurve: controller.animationCurve,
-                                transitionBuilder: (child, animation) {
-                                  final offset = isForward
-                                      ? const Offset(1.0, 0.0)
-                                      : const Offset(-1.0, 0.0);
-                                  final blur = Tween<double>(
-                                    begin: 4.0,
-                                    end: 0.0,
-                                  ).animate(animation);
+                    child: Obx(() {
+                      final currentIndex = controller.selectedIndex.value;
+                      final isForward = currentIndex >= _lastIndex;
+                      _lastIndex = currentIndex;
+                      return Column(
+                        children: [
+                          // keep only the current step in the scrollable area
+                          Form(
+                            key: controller.key,
+                            child: AnimatedSwitcher(
+                              duration: controller.animationDuration,
+                              switchInCurve: controller.animationCurve,
+                              switchOutCurve: controller.animationCurve,
+                              transitionBuilder: (child, animation) {
+                                final offset = isForward
+                                    ? const Offset(1.0, 0.0)
+                                    : const Offset(-1.0, 0.0);
+                                final blur = Tween<double>(
+                                  begin: 4.0,
+                                  end: 0.0,
+                                ).animate(animation);
 
-                                  return ClipRect(
-                                    child: SlideTransition(
-                                      position: Tween<Offset>(
-                                        begin: offset,
-                                        end: Offset.zero,
-                                      ).animate(animation),
-                                      child: Container(
-                                        color: Theme.of(
-                                          context,
-                                        ).scaffoldBackgroundColor,
-                                        child: AnimatedBuilder(
-                                          animation: blur,
-                                          builder: (context, child) {
-                                            return ImageFiltered(
-                                              imageFilter: ImageFilter.blur(
-                                                sigmaX: blur.value,
-                                                sigmaY: blur.value,
-                                              ),
-                                              child: child,
-                                            );
-                                          },
-                                          child: child,
-                                        ),
+                                return ClipRect(
+                                  child: SlideTransition(
+                                    position: Tween<Offset>(
+                                      begin: offset,
+                                      end: Offset.zero,
+                                    ).animate(animation),
+                                    child: Container(
+                                      color: Theme.of(
+                                        context,
+                                      ).scaffoldBackgroundColor,
+                                      child: AnimatedBuilder(
+                                        animation: blur,
+                                        builder: (context, child) {
+                                          return ImageFiltered(
+                                            imageFilter: ImageFilter.blur(
+                                              sigmaX: blur.value,
+                                              sigmaY: blur.value,
+                                            ),
+                                            child: child,
+                                          );
+                                        },
+                                        child: child,
                                       ),
                                     ),
-                                  );
-                                },
-                                layoutBuilder:
-                                    (currentChild, previousChildren) {
-                                      return Stack(
-                                        alignment: Alignment.topCenter,
-                                        children: <Widget>[
-                                          if (previousChildren.isNotEmpty)
-                                            IgnorePointer(
-                                              child: previousChildren.first,
-                                            ),
-                                          if (currentChild != null)
-                                            currentChild,
-                                        ],
-                                      );
-                                    },
-                                child: KeyedSubtree(
-                                  key: ValueKey(currentIndex),
-                                  child: controller.steps[currentIndex],
-                                ),
+                                  ),
+                                );
+                              },
+                              layoutBuilder: (currentChild, previousChildren) {
+                                return Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: <Widget>[
+                                    if (previousChildren.isNotEmpty)
+                                      IgnorePointer(
+                                        child: previousChildren.first,
+                                      ),
+                                    if (currentChild != null) currentChild,
+                                  ],
+                                );
+                              },
+                              child: KeyedSubtree(
+                                key: ValueKey(currentIndex),
+                                child: controller.steps[currentIndex],
                               ),
                             ),
-                          ],
-                        );
-                      }),
-                    ),
+                          ),
+                        ],
+                      );
+                    }),
                   ),
                 ),
               ),

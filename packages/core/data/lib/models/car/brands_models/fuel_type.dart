@@ -1,12 +1,12 @@
 import 'package:constants/strings_manager.dart';
 
-final List<String> fuelTypes = [
-  "Petrol",
-  "Diesel",
-  "Hybrid",
-  "Electric",
-  "Natural Gas",
-];
+// final List<String> fuelTypes = [
+//   "Petrol",
+//   "Diesel",
+//   "Hybrid",
+//   "Electric",
+//   "Natural Gas",
+// ];
 
 enum FuelType {
   none,

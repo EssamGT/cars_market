@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/car_status.dart';
@@ -31,7 +32,8 @@ class _ListedCarCardState extends State<ListedCarCard>
         context.push(RoutesManager.carDetails, extra: widget.car);
       },
       child: Container(
-        height: AppSize.s400,
+        // height: AppSize.s400,
+        constraints: BoxConstraints(minHeight: AppSize.s400),
         margin: EdgeInsets.all(AppMargin.m14),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onSecondary,
@@ -98,10 +100,7 @@ class _ListedCarCardState extends State<ListedCarCard>
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p12,
-                vertical: AppPadding.p16,
-              ),
+              padding: const EdgeInsets.all(AppPadding.p12),
               child: Column(
                 spacing: 5,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +112,9 @@ class _ListedCarCardState extends State<ListedCarCard>
                   ),
 
                   Transform.translate(
-                    offset: Offset(-4, 0),
+                    offset: LocalizationService.isRTL
+                        ? Offset(4, 0)
+                        : Offset(-4, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,7 +123,9 @@ class _ListedCarCardState extends State<ListedCarCard>
                         Icon(Icons.location_on_outlined, size: AppSize.s20),
 
                         Text(
-                          widget.car.location.getLocationName(),
+                          widget.car.location.getLocationName(
+                            LocalizationService.isRTL,
+                          ),
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ],
@@ -150,7 +153,7 @@ class _ListedCarCardState extends State<ListedCarCard>
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  SizedBox(height: AppSize.s5),
+                  // SizedBox(height: AppSize.s5),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

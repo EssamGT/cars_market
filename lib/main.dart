@@ -1,9 +1,12 @@
 import 'package:cars_market/di/di.dart';
+import 'package:cars_market/generated/l10n.dart';
 import 'package:cars_market/globle/globle.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -43,8 +46,19 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         darkTheme: darkTheme(),
-
+        locale: Locale(themeController.language.value),
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         themeMode: ThemeMode.values[themeController.themeMode.value],
+        builder: (context, child) {
+          LocalizationService.initialize(S.of(context));
+          return child ?? const SizedBox();
+        },
       ),
     );
   }

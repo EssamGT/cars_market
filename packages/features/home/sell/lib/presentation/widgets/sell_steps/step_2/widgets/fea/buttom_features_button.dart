@@ -11,7 +11,7 @@ class ButtomFeaturesButton extends StatelessWidget {
     Size size = MediaQuery.sizeOf(context);
     return Container(
       color: Colors.transparent,
-      height: size.height * 0.07,
+      height: size.height * 0.08,
       width: size.width - AppSize.s40,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ElevatedButton(

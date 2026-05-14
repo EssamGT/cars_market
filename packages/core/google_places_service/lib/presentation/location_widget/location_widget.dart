@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -173,11 +174,11 @@ class _LocationWidgetState extends State<LocationWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    ' ${widget.car.location.nameEn}',
+                    ' ${widget.car.location.getName(LocalizationService.isRTL)}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
-                    ' ${widget.car.location.governorateEn}',
+                    ' ${widget.car.location.getGovernorate(LocalizationService.isRTL)}',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

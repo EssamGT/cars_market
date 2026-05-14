@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   domain:
     path: ../domain
+  constants:
+    path: ../constants
   data:
     path: ../data
   firebase_core: ^4.4.0

@@ -44,7 +44,7 @@ class CustomElevatedButtonDecoration {
       // minimumSize: Size(width, AppSize.s45),
       // maximumSize: Size(width, AppSize.s45),
       backgroundColor: isSelected
-          ? Theme.of(context).primaryColor
+          ? Theme.of(context).colorScheme.primary
           : Theme.of(context).colorScheme.surfaceContainerHighest,
 
       padding: const EdgeInsets.symmetric(

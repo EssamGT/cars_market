@@ -55,7 +55,7 @@ class ListedCarsScreen extends StatelessWidget {
                   builder: (context, state) {
                     if (state is ListedCarsLoaded) {
                       if (state.listedCars.isEmpty) {
-                        return Center(child: Text('No listed cars found.'));
+                        return Center(child: Text(StringsManager.noListedCarFound));
                       }
                       final cars = state.listedCars;
                       return RefreshIndicator(

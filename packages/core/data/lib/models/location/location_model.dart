@@ -64,11 +64,26 @@ class LocationModel {
       id: "",
     );
   }
-  String getLocationName() {
+  String getLocationName(bool isArabic) {
+    if (isArabic) {
+      if (nameAr == governorateAr) {
+        return nameAr;
+      }
+      return '$nameAr, $governorateAr';
+    }
+
     if (nameEn == governorateEn) {
       return nameEn;
     }
 
     return '$nameEn, $governorateEn';
+  }
+
+  String getGovernorate(bool isArabic) {
+    return isArabic ? governorateAr : governorateEn;
+  }
+
+  String getName(bool isArabic) {
+    return isArabic ? nameAr : nameEn;
   }
 }

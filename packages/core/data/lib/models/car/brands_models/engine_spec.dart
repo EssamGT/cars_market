@@ -434,7 +434,7 @@ extension EngineCapacityExtension on EngineCapacity {
       case EngineCapacity.c8000:
         return StringsManager.c8000Value;
       case EngineCapacity.none:
-        return StringsManager.empty;
+        return "0";
     }
   }
 }
@@ -499,7 +499,6 @@ class EngineSpec {
     };
   }
 }
-
 
 EngineSpec getEngineSpecEntity(EngineSpecEntity entity) {
   return EngineSpec(

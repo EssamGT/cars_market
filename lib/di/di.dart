@@ -1,4 +1,5 @@
 import 'package:car_listing/di/car_listing_di.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:favorites/di/favorites_di.dart';
 import 'package:get_it/get_it.dart';
 import 'package:create_account/di/create_account_di.dart';
@@ -32,6 +33,7 @@ void restGetIt() async {
 // )
 Future<void> configureDependencies(String? enviroment) async {
   // getIt.init(environment: enviroment);
+  getIt.registerSingleton<LocalizationService>(LocalizationService());
   await configureRemoteDependencies(getIt, enviroment);
   await configureLoginDependencies(getIt, enviroment);
   await configureCreateAccountDependencies(getIt, enviroment);

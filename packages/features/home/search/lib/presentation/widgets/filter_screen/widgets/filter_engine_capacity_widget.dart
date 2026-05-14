@@ -21,6 +21,8 @@ class FilterEngineCapacityWidget extends StatelessWidget {
       type1: FilterTextFieldValidationType.minEngineCapacity,
       type2: FilterTextFieldValidationType.maxEngineCapacity,
       maxLength: 4,
+      hint1: StringsManager.min,
+      hint2: StringsManager.max,
       onChanged1: (value) => cubit.setMinEngineCapacity(value),
       onChanged2: (value) => cubit.setMaxEngineCapacity(value),
       keyboardType: TextInputType.number,

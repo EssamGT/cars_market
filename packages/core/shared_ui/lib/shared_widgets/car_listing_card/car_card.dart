@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/car_condition.dart';
 import 'package:domain/entity/car_entity.dart';
@@ -92,10 +93,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p12,
-                vertical: AppPadding.p16,
-              ),
+              padding: const EdgeInsets.all(AppPadding.p12),
               child: Column(
                 spacing: 5,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -106,11 +104,16 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
-                    '${widget.car.year} ${widget.car.getCarKM(withDot: true)}',
+                    LocalizationService.isRTL
+                        ? '${widget.car.getCarKM(withDot: true)} ${widget.car.year}'
+                        : '${widget.car.year} ${widget.car.getCarKM(withDot: true)}',
+
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Transform.translate(
-                    offset: Offset(-4, 0),
+                    offset: LocalizationService.isRTL
+                        ? Offset(4, 0)
+                        : Offset(-4, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,7 +122,7 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                         Icon(Icons.location_on_outlined, size: AppSize.s20),
 
                         Text(
-                          widget.car.location.getLocationName(),
+                          widget.car.location.getLocationName(LocalizationService.isRTL),
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ],

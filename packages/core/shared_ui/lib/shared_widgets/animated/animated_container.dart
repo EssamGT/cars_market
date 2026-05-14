@@ -16,7 +16,7 @@ class AnimatedBar extends StatelessWidget {
             height: isActive ? AppSize.s30 : AppSize.s0,
             width: isActive ? AppSize.s2 : AppSize.s0,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
           )
@@ -26,7 +26,7 @@ class AnimatedBar extends StatelessWidget {
             height: AppSize.s4,
             width: isActive ? AppSize.s20 : AppSize.s0,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
           );

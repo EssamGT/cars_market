@@ -1,3 +1,4 @@
+import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class StepsIndicator extends StatelessWidget {
             spacing: AppSize.s5,
             children: [
               Text(
-                "Step ${index + 1} of 3",
+                "${StringsManager.steps} ${index + 1} ${StringsManager.of} 3",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],

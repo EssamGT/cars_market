@@ -68,7 +68,7 @@ class NoImages extends StatelessWidget {
                           child: Icon(
                             Icons.add_a_photo_outlined,
                             size: AppSize.s50,
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         SizedBox(height: AppSize.s5),

@@ -20,34 +20,40 @@ class MessageBar {
     MessageBarType type = MessageBarType.error,
   ]) {
     Flushbar(
-      titleText: Text(
-        getTitle(type, context),
-        style: Theme.of(
-          context,
-        ).textTheme.bodyLarge!.copyWith(color: getColor(type)),
-      ),
-      // message: message,
+      // titleText: Text(
+      //   getTitle(type, context),
+      //   style: Theme.of(
+      //     context,
+      //   ).textTheme.bodyLarge!.copyWith(color: getColor(type)),
+      // ),
       boxShadows: [
         BoxShadow(
-          color: Theme.of(context).colorScheme.scrim,
+          color: Theme.of(context).colorScheme.shadow.withAlpha(50),
           // spreadRadius: 0.2,
           blurRadius: 2,
           blurStyle: BlurStyle.outer,
         ),
       ],
-      messageText: Text(
-        message,
-        style: Theme.of(
-          context,
-        ).textTheme.bodyMedium!.copyWith(color: getColor(type)),
+      messageText: Flexible(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            message,
+            maxLines: 1,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(color: getColor(type)),
+          ),
+        ),
       ),
       duration: const Duration(seconds: 5),
       isDismissible: true,
       margin: const EdgeInsets.all(AppPadding.p12),
-      borderRadius: BorderRadius.circular(AppSize.s8),
+      borderRadius: BorderRadius.circular(AppSize.s30),
       flushbarPosition: FlushbarPosition.TOP,
       backgroundColor: Theme.of(context).colorScheme.onSecondary,
       icon: getIcon(type),
+
     ).show(context);
   }
 }
@@ -60,7 +66,7 @@ Icon getIcon(MessageBarType type) {
       return Icon(Icons.error, color: getColor(type));
 
     case MessageBarType.warning:
-      return Icon(Icons.error, color: getColor(type));
+      return Icon(Icons.warning, color: getColor(type));
   }
 }
 

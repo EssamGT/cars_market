@@ -1,17 +1,17 @@
-class ErrorStrings{
-static const String success = "Success";
-static const String noContent = "no_content";   
-static const String badRequest = "bad_request";
-static const String unauthorized = "unauthorized";  
-static const String forbidden = "forbidden";
-static const String internalServerError = "internal_server_error";
-static const String connectTimeOut = "connect_time_out";
-static const String cancelled = "cancelled";
-static const String receivedTimeout = "received_timeout";
-static const String sendTimeout = "send_timeout";
-static const String cacheError = "cache_error";
-static const String noInternetConnection = "no_internet_connection";
-static const String defaultError = "default_error";
+import 'package:constants/strings_manager.dart';
 
-
+class ErrorStrings {
+  static String get success => StringsManager.success;
+  static String get noContent => StringsManager.notFound;
+  static String get badRequest => StringsManager.badRequest;
+  static String get unauthorized => StringsManager.unauthorized;
+  static String get forbidden => StringsManager.forbidden;
+  static String get internalServerError => StringsManager.internalError;
+  static String get connectTimeOut => StringsManager.timeout;
+  static String get cancelled => StringsManager.cancelled;
+  static String get receivedTimeout => StringsManager.timeout;
+  static String get sendTimeout => StringsManager.timeout;
+  static  String get cacheError => StringsManager.error;
+  static String get noInternetConnection => StringsManager.noInternet;
+  static String get defaultError => StringsManager.firebaseUnknown;
 }

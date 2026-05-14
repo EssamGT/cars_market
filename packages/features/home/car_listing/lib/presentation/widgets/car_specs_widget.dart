@@ -1,4 +1,5 @@
 import 'package:assets/custom_icons_icons.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
@@ -43,7 +44,7 @@ class CarSpecsWidget extends StatelessWidget {
       ),
       SpecData(
         icon: CustomIcons.bodyType,
-        title: StringsManager.bodyTypes,
+        title: StringsManager.dBodyType,
         value: car.bodyType.getCarBodyTypeName(),
       ),
       SpecData(
@@ -65,7 +66,10 @@ class CarSpecsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppPadding.p10, right: AppPadding.p10,),
+      padding: const EdgeInsets.only(
+        left: AppPadding.p10,
+        right: AppPadding.p10,
+      ),
       child: Column(
         children: [
           text(context),
@@ -81,7 +85,7 @@ class CarSpecsWidget extends StatelessWidget {
             padding: EdgeInsets.only(
               left: AppPadding.p10,
               right: AppPadding.p10,
-              top: AppPadding.p16
+              top: AppPadding.p16,
             ),
             itemCount: specItems(car).length,
             itemBuilder: (context, index) {
@@ -121,25 +125,31 @@ class CarSpecsWidget extends StatelessWidget {
             size: iconSize,
           ),
           SizedBox(width: AppSize.s5),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                specData.title,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              Flexible(
-                child: FittedBox(
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  specData.title,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                FittedBox(
                   fit: BoxFit.scaleDown,
-                  alignment: Alignment.centerLeft,
+                  alignment: LocalizationService.isArabic(specData.value)
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: Text(
                     specData.value,
+                    maxLines: 1,
+                    textDirection: LocalizationService.isArabic(specData.value)
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -156,7 +166,10 @@ class CarSpecsWidget extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(AppSize.s2),
           ),
-          margin: const EdgeInsets.only(right: AppMargin.m8),
+          margin: EdgeInsets.only(
+            right: LocalizationService.isRTL ? 0 : AppMargin.m8,
+            left: LocalizationService.isRTL ? AppMargin.m8 : 0,
+          ),
         ),
         Container(
           alignment: Alignment.centerLeft,

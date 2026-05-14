@@ -109,9 +109,7 @@ class _SelectionPageState<T> extends State<_SelectionPage<T>> {
                             borderRadius: BorderRadius.circular(AppSize.s15),
                             boxShadow: [
                               BoxShadow(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.shadow.withAlpha(40),
+                                color: Theme.of(context).colorScheme.shadow.withAlpha(40),
                                 blurRadius: 10,
                                 offset: Offset(0, 5),
                                 blurStyle: BlurStyle.outer,
@@ -144,7 +142,7 @@ class _SelectionPageState<T> extends State<_SelectionPage<T>> {
                                           bottom: BorderSide(
                                             color: Theme.of(
                                               context,
-                                            ).colorScheme.onError.withAlpha(20),
+                                            ).colorScheme.shadow.withAlpha(20),
                                             width: 1,
                                           ),
                                         )
@@ -154,6 +152,7 @@ class _SelectionPageState<T> extends State<_SelectionPage<T>> {
                                   visualDensity: VisualDensity.comfortable,
                                   titleAlignment: ListTileTitleAlignment.center,
                                   leading: widget.leadingBuilder?.call(item),
+
                                   title: Text(
                                     widget.labelBuilder(item),
                                     style: Theme.of(

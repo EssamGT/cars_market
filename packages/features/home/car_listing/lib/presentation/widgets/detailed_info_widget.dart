@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/air_con_types.dart';
@@ -22,7 +23,10 @@ class DetailedInfoWidget extends StatelessWidget {
       DetailsItem(title: StringsManager.model, subTitle: car.model),
       DetailsItem(title: StringsManager.version, subTitle: car.version!),
 
-      DetailsItem(title: StringsManager.yearLabel, subTitle: car.year.toString()),
+      DetailsItem(
+        title: StringsManager.yearLabel,
+        subTitle: car.year.toString(),
+      ),
       DetailsItem(
         title: StringsManager.carConditionLabel,
         subTitle: car.carCondition.getConditionText(),
@@ -156,15 +160,13 @@ class DetailedInfoWidget extends StatelessWidget {
   Widget title(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: AppMargin.m10),
-      alignment: Alignment.centerLeft,
+      // alignment: Alignment.centerLeft,
       child: Text(
         StringsManager.details,
         style: Theme.of(context).textTheme.headlineSmall,
       ),
     );
   }
-
-
 }
 
 class DetailsScreen extends StatelessWidget {
@@ -194,7 +196,9 @@ class DetailsScreen extends StatelessWidget {
           ),
           SizedBox(height: AppSize.s10),
           Container(
-            alignment: Alignment.centerLeft,
+            alignment: LocalizationService.isRTL
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(
               horizontal: AppPadding.p20,
               vertical: AppPadding.p16,

@@ -1,4 +1,5 @@
 import 'package:cars_market/di/di.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:data/models/location/location_model.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class LocationTextField extends StatelessWidget {
       onSelected: (LocationModel location) {
         getIt<SellCubit>().setLocation(location);
       },
-      labelBuilder: (LocationModel location) => location.nameEn,
+      labelBuilder: (LocationModel location) => location.getLocationName(LocalizationService.isRTL),
       validator: (value) => TextFieldValidator.validateNormal(
         TextFieldValidationType.location,
         value!.id,

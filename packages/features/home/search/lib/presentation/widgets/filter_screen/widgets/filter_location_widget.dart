@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:data/models/location/location_model.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class FilterLocationWidget extends StatelessWidget {
       onSelected: (LocationModel location) {
         SearchScreenCubit.get(context).setLocation(location);
       },
-      labelBuilder: (LocationModel location) => location.nameEn,
+      labelBuilder: (LocationModel location) => location.getLocationName(LocalizationService.isRTL),
     );
   }
 }

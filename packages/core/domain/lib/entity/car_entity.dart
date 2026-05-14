@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:data/models/car/brands_models/air_con_types.dart';
 import 'package:data/models/car/brands_models/body_types.dart';
 import 'package:data/models/car/brands_models/brands.dart';
@@ -95,14 +96,23 @@ class CarEntity {
     if (km == 0) {
       return '';
     }
-    return withDot ? '· ${_formatter(km)} KM' : '${_formatter(km)} KM';
+    if (LocalizationService.isRTL) {
+      return withDot
+          ? '${_formatter(km)} ${LocalizationService.strings.km} ·'
+          : '${_formatter(km)} ${LocalizationService.strings.km}';
+    }
+    return withDot
+        ? '· ${_formatter(km)} ${LocalizationService.strings.km}'
+        : '${_formatter(km)} ${LocalizationService.strings.km}';
   }
 
   String getPrice({bool withDot = false}) {
     if (price == 0) {
       return '';
     }
-    return withDot ? '· ${_formatter(price)} EGP' : '${_formatter(price)} EGP';
+    return withDot
+        ? '· ${_formatter(price)} ${LocalizationService.strings.egp}'
+        : '${_formatter(price)} ${LocalizationService.strings.egp}';
   }
 
   String _formatter(int price) {

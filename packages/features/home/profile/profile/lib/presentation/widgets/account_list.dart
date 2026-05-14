@@ -1,29 +1,28 @@
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:profile/data/models/settings_model.dart';
 import 'package:profile/presentation/widgets/list_card.dart';
 import 'package:router/routes_manager.dart';
 
 class AccountList extends StatelessWidget {
-  AccountList({super.key});
-  final List<SettingsModel> account = [
-    SettingsModel(
-      name: StringsManager.personalInformations,
-      routeName: RoutesManager.personalInfo,
-      icon: Icons.privacy_tip_outlined,
-    ),
-    SettingsModel(
-      name: StringsManager.listedCars,
-      routeName: RoutesManager.listedCars,
-      icon: Icons.garage_outlined,
-    ),
-    SettingsModel(
-      name: StringsManager.notifications,
-      routeName: RoutesManager.notifications,
-      icon: Icons.notifications_outlined,
-    ),
-  ];
+  const AccountList({super.key});
+  // final List<SettingsModel> account = [
+  //   SettingsModel(
+  //     name: StringsManager.personalInformations,
+  //     routeName: RoutesManager.personalInfo,
+  //     icon: Icons.privacy_tip_outlined,
+  //   ),
+  //   SettingsModel(
+  //     name: StringsManager.listedCars,
+  //     routeName: RoutesManager.listedCars,
+  //     icon: Icons.garage_outlined,
+  //   ),
+  //   SettingsModel(
+  //     name: StringsManager.notifications,
+  //     routeName: RoutesManager.notifications,
+  //     icon: Icons.notifications_outlined,
+  //   ),
+  // ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,12 +55,20 @@ class AccountList extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          ...account.map(
-            (accountList) => ListCard(
-              icon: accountList.icon,
-              route: accountList.routeName,
-              title: accountList.name,
-            ),
+          ListCard(
+            route: RoutesManager.personalInfo,
+            icon: Icons.privacy_tip_outlined,
+            title: StringsManager.personalInformations,
+          ),
+          ListCard(
+            route: RoutesManager.listedCars,
+            icon: Icons.garage_outlined,
+            title: StringsManager.listedCars,
+          ),
+          ListCard(
+            route: RoutesManager.notifications,
+            icon: Icons.notifications_outlined,
+            title: StringsManager.notifications,
           ),
         ],
       ),

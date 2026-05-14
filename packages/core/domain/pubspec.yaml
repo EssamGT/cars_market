@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   data:
     path: ../data
+  cars_market:
+    path: ../../../../cars_market  
   image_picker: ^1.2.0
   google_maps_flutter: ^2.14.0
   intl: ^0.20.2

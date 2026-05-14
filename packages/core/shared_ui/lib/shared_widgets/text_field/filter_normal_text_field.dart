@@ -213,8 +213,8 @@ class DoubleFilterTextField extends StatefulWidget {
   const DoubleFilterTextField({
     super.key,
     required this.title,
-    this.hint1 = StringsManager.min,
-    this.hint2 = StringsManager.max,
+    this.hint1 = "",
+    this.hint2 = "",
     this.initValue1 = "",
     this.initValue2 = "",
     this.onChanged1,
@@ -270,7 +270,7 @@ class _DoubleFilterTextFieldState extends State<DoubleFilterTextField> {
           keyboardType: widget.keyboardType,
           maxLength: widget.maxLength,
         ),
-        
+
         BaseTextField(
           controller: controller2,
           width: size.width * width,

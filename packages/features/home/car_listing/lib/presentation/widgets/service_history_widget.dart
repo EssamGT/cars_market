@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
@@ -27,7 +28,9 @@ class ServiceHistoryWidget extends StatelessWidget {
                 left: AppMargin.m10,
                 top: AppMargin.m10,
               ),
-              alignment: Alignment.centerLeft,
+              alignment: LocalizationService.isRTL
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
               child: Text(
                 StringsManager.serviceHistoryLabel,
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -43,7 +46,9 @@ class ServiceHistoryWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSize.s8),
               ),
-              alignment: Alignment.centerLeft,
+              alignment: LocalizationService.isArabic(car.serviceHistory!)
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
               child: Text(
                 car.serviceHistory!,
                 style: Theme.of(context).textTheme.bodyMedium,

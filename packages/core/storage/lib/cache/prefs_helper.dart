@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:data/models/car/brands_models/car_catalog.dart';
 import 'package:data/models/location/locations_catalog.dart';
@@ -52,5 +53,25 @@ class PrefsHelper {
 
   void setThemeMode(int mode) {
     _sharedPreferences.setInt('theme_mode', mode);
+  }
+
+  void setLocale(String locale) {
+    _sharedPreferences.setString('locale', locale);
+  }
+
+  String getLocale() {
+    final lanCode = _sharedPreferences.getString('locale');
+    if (lanCode != null) {
+      return lanCode;
+    } else {
+      final sysLanCode = PlatformDispatcher.instance.locale.languageCode;
+      if (sysLanCode == "ar") {
+        return "ar";
+      }
+      if (sysLanCode == "en") {
+        return "en";
+      }
+    }
+    return "en"; // Default locale
   }
 }

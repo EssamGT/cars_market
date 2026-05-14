@@ -44,13 +44,12 @@ abstract class ColorManager {
   // Neutrals
   static const Color divider = Color(0xffE0E0E0);
   static const Color outline = Color(0xff9E9E9E);
-  static const Color shadow = Color(0x33000000);
+  static const Color shadow = Color(0x1A000000);
 
   // Utility
   static const Color transparent = Colors.transparent;
 
   // dark theme adjustments
-// Brand
   static const Color primaryDarkTheme = Color(
     0xff4DA3FF,
   ); // lightened blue for dark bg
@@ -78,16 +77,62 @@ abstract class ColorManager {
   // Text
   static const Color textPrimaryDark = Color(0xffECEFF4); // near-white
   static const Color textSecondaryDark = Color(0xffB0BEC5);
-  static const Color textTertiaryDark = Color(0xff78909C);
+  static const Color textTertiaryDark = Color(
+    0xff90A4AE,
+  ); // ✅ was #78909C, boosted for WCAG AA
 
   // Status
-  static const Color successDark = Color(0xff1B3A2A); // deep green tint
-  static const Color onSuccessDark = Color(0xff6FCF97); // readable green
+  static const Color successDark = Color(
+    0xff2E7D52,
+  ); // ✅ was #1B3A2A, lighter to avoid blending
+  static const Color onSuccessDark = Color(
+    0xffC8F5D8,
+  ); // ✅ was #6FCF97, higher contrast
   static const Color warningDark = Color(0xffFFB74D); // softened amber
   static const Color errorDark = Color(0xffEF5350); // softened red
 
   // Neutrals
   static const Color dividerDark = Color(0xff2E2E2E);
   static const Color outlineDark = Color(0xff4A4A4A);
-  static const Color shadowDark = Color(0x66000000); // stronger alpha
+  static const Color shadowDark = Color(0x1AFFFFFF); //
+  // Brand
+  // static const Color primaryDarkTheme = Color(
+  //   0xff4DA3FF,
+  // ); // lightened blue for dark bg
+  // static const Color primaryDarkDarkTheme = Color(
+  //   0xff82BFFF,
+  // ); // lighter variant
+  // static const Color primaryLightDarkTheme = Color(
+  //   0xff1E1E1E,
+  // ); // surface-matched
+
+  // // Secondary
+  // static const Color secondaryDarkTheme = Color(0xff90A4AE); // lighter gunmetal
+  // static const Color onSecondaryDarkTheme = Color(
+  //   0xff1E1E1E,
+  // ); // surface-matched
+
+  // // Backgrounds & Surfaces — all neutral gray
+  // static const Color backgroundDark = Color(0xff111111); // base
+  // static const Color surfaceDark = Color(0xff1E1E1E); // cards / sheets
+  // static const Color surfaceVariantDark = Color(
+  //   0xff2A2A2A,
+  // ); // elevated / input bg
+  // static const Color disabledDark = Color(0xff3A3A3A);
+
+  // // Text
+  // static const Color textPrimaryDark = Color(0xffECEFF4); // near-white
+  // static const Color textSecondaryDark = Color(0xffB0BEC5);
+  // static const Color textTertiaryDark = Color(0xff78909C);
+
+  // // Status
+  // static const Color successDark = Color(0xff1B3A2A); // deep green tint
+  // static const Color onSuccessDark = Color(0xff6FCF97); // readable green
+  // static const Color warningDark = Color(0xffFFB74D); // softened amber
+  // static const Color errorDark = Color(0xffEF5350); // softened red
+
+  // // Neutrals
+  // static const Color dividerDark = Color(0xff2E2E2E);
+  // static const Color outlineDark = Color(0xff4A4A4A);
+  // static const Color shadowDark = Color(0x29000000); // stronger alpha
 }

@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_widgets/buttons/elevated_button_decoration.dart';
@@ -41,7 +42,9 @@ class OneSelectedButton<T extends Enum> extends StatelessWidget {
               Padding(
                 padding: padding,
                 child: Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: LocalizationService.isRTL
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: Text(
                     label,
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -69,7 +72,9 @@ class OneSelectedButton<T extends Enum> extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: AppPadding.p8),
                   child: Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: LocalizationService.isRTL
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                     child: Text(
                       "${field.errorText}",
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(

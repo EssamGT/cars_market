@@ -1,3 +1,4 @@
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/features_model.dart';
@@ -20,10 +21,10 @@ class CarFeaturesWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          alignment: Alignment.centerLeft,
+          // alignment: Alignment.centerLeft,
           margin: const EdgeInsets.symmetric(horizontal: AppMargin.m10),
           child: Text(
-            StringsManager.detailsfeaturesLabel,
+            StringsManager.detailsFeaturesLabel,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
@@ -91,13 +92,15 @@ class FeaturesScreen extends StatelessWidget {
           ),
           SizedBox(height: AppSize.s10),
           Container(
-            alignment: Alignment.centerLeft,
+            alignment: LocalizationService.isRTL
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(
               horizontal: AppPadding.p20,
               vertical: AppPadding.p16,
             ),
             child: Text(
-              StringsManager.detailsfeaturesLabel,
+              StringsManager.detailsFeaturesLabel,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
@@ -132,7 +135,9 @@ class FeaturesGroup extends StatelessWidget {
       children: [
         if (!display)
           Container(
-            alignment: Alignment.centerLeft,
+            alignment: LocalizationService.isRTL
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
             child: Text(
               features.title,

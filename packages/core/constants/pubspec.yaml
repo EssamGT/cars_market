@@ -12,7 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  cars_market:
+    path: ../../../../cars_market
 dev_dependencies:
   flutter_test:
     sdk: flutter
