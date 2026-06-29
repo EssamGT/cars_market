@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:assets/custom_icons_icons.dart';
 import '../cubit/car_listing_cubit.dart';
 import 'package:cars_market/di/di.dart';
@@ -65,6 +64,7 @@ class SellerInfo extends StatelessWidget {
         ),
         title: FittedBox(
           fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
           child:
               Text(
                 userData.name,

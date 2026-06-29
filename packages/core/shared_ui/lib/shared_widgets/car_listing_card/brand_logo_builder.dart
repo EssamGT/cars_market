@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:constants/values_manager.dart';
 import 'package:data/models/car/brands_models/brands.dart';
@@ -42,5 +43,8 @@ String carInfoBuilderFilter(CarBrand? carBrand) {
 }
 
 String carInfoBuilderListedCar(CarEntity car) {
+  if (LocalizationService.isRTL) {
+    return "${car.getCarKM(withDot: true)} ${car.brand} ${car.model} ${car.version} ${car.year}";
+  }
   return "${car.brand} ${car.model} ${car.version} ${car.year} ${car.getCarKM(withDot: true)}";
 }

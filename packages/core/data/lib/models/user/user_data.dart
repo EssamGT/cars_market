@@ -11,6 +11,7 @@ class UserDataKeys {
   static const String verifiedPhoneNumber = 'verifiedPhoneNumber';
   static const String verifiedEmail = 'verifiedEmail';
   static const String createdAt = 'createdAt';
+  static const String role = 'role';
 }
 
 class UserData {
@@ -22,6 +23,7 @@ class UserData {
   final String phoneNumber;
   final bool verifiedEmail;
   final String createdAt;
+  final String role;
 
   UserData({
     required this.favoriteCarsIds,
@@ -32,6 +34,7 @@ class UserData {
     required this.phoneNumber,
     required this.verifiedEmail,
     required this.createdAt,
+    required this.role,
   });
   factory UserData.init() {
     return UserData(
@@ -43,6 +46,7 @@ class UserData {
       phoneNumber: '',
       verifiedEmail: false,
       createdAt: '',
+      role: '',
     );
   }
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -57,6 +61,7 @@ class UserData {
       phoneNumber: json[UserDataKeys.phoneNumber] ?? '',
       verifiedEmail: json[UserDataKeys.verifiedEmail] ?? false,
       createdAt: json[UserDataKeys.createdAt] ?? '',
+      role: json[UserDataKeys.role] ?? '',
     );
   }
   factory UserData.fromJsonForListedCars(Map<String, dynamic> json) {
@@ -69,6 +74,7 @@ class UserData {
       phoneNumber: json[UserDataKeys.phoneNumber] ?? '',
       verifiedEmail: json[UserDataKeys.verifiedEmail] ?? false,
       createdAt: json[UserDataKeys.createdAt] ?? '',
+      role: json[UserDataKeys.role] ?? '',
     );
   }
   UserData copyWith(UserData newData) {
@@ -81,6 +87,7 @@ class UserData {
       phoneNumber: newData.phoneNumber,
       verifiedEmail: newData.verifiedEmail,
       createdAt: newData.createdAt,
+      role: newData.role,
     );
   }
 
@@ -91,6 +98,7 @@ class UserData {
       UserDataKeys.createdAt: createdAt,
       UserDataKeys.name: name,
       UserDataKeys.phoneNumber: phoneNumber,
+      UserDataKeys.role: role,
     };
   }
 }

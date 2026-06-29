@@ -13,6 +13,7 @@ import 'package:login/presentation/login_screen.dart';
 import 'package:notifications/presentation/notifications_screen.dart';
 import 'package:on_bording/presentation/on_bording_screen.dart';
 import 'package:router/routes_manager.dart';
+import 'package:search/presentation/search_screen.dart';
 import 'package:search/presentation/widgets/filter_screen/filter_screen.dart';
 import 'package:search/presentation/widgets/search_result/search_result_screen.dart';
 import 'package:sell/presentation/sell_screen.dart';
@@ -49,10 +50,7 @@ final routes = <RouteBase>[
 
     // builder: (context, state) => const AddScreen(),
     pageBuilder: (context, state) {
-      return customBottomAnimationPage(
-        child: SellScreen(),
-        state: state,
-      );
+      return customBottomAnimationPage(child: SellScreen(), state: state);
     },
   ),
   GoRoute(
@@ -149,6 +147,12 @@ final routes = <RouteBase>[
         child: CarDetailsScreen(car: state.extra as CarEntity),
         state: state,
       );
+    },
+  ),
+  GoRoute(
+    path: RoutesManager.search,
+    pageBuilder: (context, state) {
+      return customRightAnimationPage(child: SearchScreen(), state: state);
     },
   ),
 ];

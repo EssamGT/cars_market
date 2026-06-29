@@ -116,6 +116,7 @@
   "hpLabel": "Horsepower (Optional)",
   "hpHint": "e.g.., 150 HP",
   "hp": "Horsepower",
+  "hps": "HP",
   "topSpeedLabel": "Top Speed (Optional)",
   "topSpeedHint": "e.g.., 200 km/h",
   "topSpeed": "Top Speed",
@@ -822,5 +823,6 @@
   "firebaseInvalidChecksum": "File upload failed due to checksum mismatch. Try uploading again.",
   "firebaseCanceled": "The operation was canceled before completion.",
   "firebaseDownloadSizeExceeded": "Download size exceeds the allowed limit.",
-  "firebaseUnknown": "An unexpected Firebase error occurred. Please try again later."
+  "firebaseUnknown": "An unexpected Firebase error occurred. Please try again later.",
+  "noFavCars": "No favorite cars found."
 }

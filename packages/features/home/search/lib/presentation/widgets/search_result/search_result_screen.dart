@@ -2,6 +2,8 @@ import 'package:cars_market/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/presentation/cubit/search_screen_cubit.dart';
+import 'package:search/presentation/widgets/c_search_bar.dart';
+import 'package:search/presentation/widgets/search_result/widgets/search_app_bar.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
 
 class SearchResultScreen extends StatelessWidget {
@@ -12,6 +14,7 @@ class SearchResultScreen extends StatelessWidget {
     return BlocProvider.value(
       value: getIt.get<SearchScreenCubit>(),
       child: Scaffold(
+        appBar: const SearchAppBar(),
         body: BlocBuilder<SearchScreenCubit, SearchScreenState>(
           buildWhen: (previous, current) {
             if (current is SearchFailure ||

@@ -17,7 +17,7 @@ import 'package:search/data/data_source/daw_impl/search_daw_impl.dart' as _i458;
 import 'package:search/data/data_source/search_data_source.dart' as _i656;
 import 'package:search/data/repository/search_repo_impl.dart' as _i108;
 import 'package:search/domain/repository/search_repo.dart' as _i973;
-import 'package:search/domain/use_case/search_use_case.dart' as _i757;
+import 'package:search/domain/use_case/search_use_case.dart' as _i827;
 import 'package:search/presentation/cubit/search_screen_cubit.dart' as _i423;
 import 'package:storage/cache/prefs_helper.dart' as _i602;
 
@@ -37,12 +37,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i583.NetworkInfo>(),
       ),
     );
-    gh.factory<_i757.SearchUseCase>(
-      () => _i757.SearchUseCase(gh<_i973.SearchRepo>()),
+    gh.factory<_i827.SearchUseCase>(
+      () => _i827.SearchUseCase(gh<_i973.SearchRepo>()),
     );
     gh.lazySingleton<_i423.SearchScreenCubit>(
       () => _i423.SearchScreenCubit(
-        gh<_i757.SearchUseCase>(),
+        gh<_i827.SearchUseCase>(),
         gh<_i602.PrefsHelper>(),
       ),
     );

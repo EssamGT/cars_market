@@ -34,17 +34,11 @@ class MessageBar {
           blurStyle: BlurStyle.outer,
         ),
       ],
-      messageText: Flexible(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            message,
-            maxLines: 1,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium!.copyWith(color: getColor(type)),
-          ),
-        ),
+      messageText: Text(
+        message,
+        style: Theme.of(
+          context,
+        ).textTheme.bodyMedium!.copyWith(color: getColor(type)),
       ),
       duration: const Duration(seconds: 5),
       isDismissible: true,
@@ -53,7 +47,6 @@ class MessageBar {
       flushbarPosition: FlushbarPosition.TOP,
       backgroundColor: Theme.of(context).colorScheme.onSecondary,
       icon: getIcon(type),
-
     ).show(context);
   }
 }

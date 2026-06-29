@@ -4,7 +4,7 @@ import 'package:cars_market/globle/globle.dart';
 import 'package:cars_market/globle/localization_service.dart';
 import 'package:constants/constants_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -30,7 +30,7 @@ void main() async {
 
   Get.put(ThemeController());
   await getIt.get<SyncManagerUseCase>().syncData();
-  userData = await getIt.get<SyncManagerUseCase>().getUserData();
+  userData = await getIt.get<SyncManagerUseCase>().getUserData(); 
 }
 
 class MyApp extends StatelessWidget {

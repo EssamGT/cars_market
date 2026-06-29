@@ -726,6 +726,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hpRealisticError": MessageLookupByLibrary.simpleMessage(
       "Please enter a realistic horsepower value.",
     ),
+    "hps": MessageLookupByLibrary.simpleMessage("HP"),
     "hudId": MessageLookupByLibrary.simpleMessage("hud"),
     "hudLabel": MessageLookupByLibrary.simpleMessage("Head-Up Display"),
     "hybrid": MessageLookupByLibrary.simpleMessage("Hybrid"),
@@ -940,6 +941,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noEngineCylinderNumbersFound": MessageLookupByLibrary.simpleMessage(
       "No Engine Cylinder Numbers Found",
+    ),
+    "noFavCars": MessageLookupByLibrary.simpleMessage(
+      "No favorite cars found.",
     ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection. Please check your network and try again.",

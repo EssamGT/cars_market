@@ -22,12 +22,14 @@ class BottomNaviBar extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       offset: isVisible ? Offset.zero : const Offset(0, 1),
       child: Container(
-        height: AppSize.s70,
+        height: AppSize.s80,
+        // margin: const EdgeInsets.all(AppMargin.m8),
+
         width: double.maxFinite,
         color: Theme.of(context).colorScheme.surface,
         padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p16,
-          // vertical: AppPadding.p10,
+          horizontal: AppPadding.p24,
+          // vertical: AppPadding.p8,
         ),
         child: BlocBuilder<CarListingCubit, CarListingState>(
           buildWhen: (previous, current) {
@@ -41,6 +43,7 @@ class BottomNaviBar extends StatelessWidget {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: [
                 callButton(
                   context: context,
@@ -102,12 +105,13 @@ class BottomNaviBar extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return FilledButton(
       onPressed: onPressed,
+    
       style: FilledButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
         ),
-        maximumSize: Size(size.width / 3, AppSize.s50),
-        minimumSize: Size(size.width / 3.5, AppSize.s50),
+        maximumSize: Size(size.width / 3.5, AppSize.s50),
+        minimumSize: Size(size.width / 4, AppSize.s50),
       ),
       child: Icon(icon, size: AppSize.s25),
     );

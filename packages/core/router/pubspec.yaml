@@ -50,9 +50,9 @@ dependencies:
     path: ../../features/home/profile/language
   notifications:
     path: ../../features/home/profile/notifications
-  firebase_core: ^4.4.0
-  firebase_auth: ^6.1.4
-  go_router: ^16.2.4
+  firebase_core: ^4.9.0
+  firebase_auth: ^6.5.1
+  go_router: ^17.2.3
   flutter_bloc: ^9.1.1
 dev_dependencies:
   flutter_test:

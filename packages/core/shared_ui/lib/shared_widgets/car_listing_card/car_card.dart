@@ -122,7 +122,9 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
                         Icon(Icons.location_on_outlined, size: AppSize.s20),
 
                         Text(
-                          widget.car.location.getLocationName(LocalizationService.isRTL),
+                          widget.car.location.getLocationName(
+                            LocalizationService.isRTL,
+                          ),
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ],
@@ -159,4 +161,107 @@ class _CarCardState extends State<CarCard> with AutomaticKeepAliveClientMixin {
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class LoadingCarCard extends StatelessWidget {
+  const LoadingCarCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: AppSize.s350,
+      margin: EdgeInsets.all(AppMargin.m14),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onSecondary,
+        borderRadius: BorderRadius.circular(AppSize.s20),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(
+              context,
+            ).shadowColor.withAlpha(20), // very light (5%)
+            blurRadius: AppSize.s6, // smaller blur for subtle depth
+            spreadRadius: AppSize.s1, // minimal spread
+            offset: const Offset(0, 2), // small downward offset
+          ),
+        ],
+      ),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadiusGeometry.only(
+              topLeft: Radius.circular(AppSize.s20),
+              topRight: Radius.circular(AppSize.s20),
+            ),
+            child:
+                Container(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  height: AppSize.s200,
+                  width: double.infinity,
+                ).redacted(
+                  context: context,
+                  redact: true,
+                  configuration: RedactedConfiguration(
+                    defaultBorderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(AppSize.s20),
+                      topRight: Radius.circular(AppSize.s20),
+                    ),
+                  ),
+                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p12),
+            child: Column(
+              spacing: 5,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  ".................",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ).redacted(context: context, redact: true),
+                Text(
+                  "...................",
+
+                  style: Theme.of(context).textTheme.labelLarge,
+                ).redacted(context: context, redact: true),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // spacing: AppSize.s,
+                  children: [
+                    // Icon(Icons.location_on_outlined, size: AppSize.s20),
+                
+                    Text(
+                      "....................",
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ).redacted(context: context, redact: true),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      ".................",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ).redacted(context: context, redact: true),
+                    Text(
+                      ".................",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ).redacted(context: context, redact: true),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

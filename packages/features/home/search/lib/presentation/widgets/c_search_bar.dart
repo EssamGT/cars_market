@@ -1,3 +1,4 @@
+import 'package:cars_market/di/di.dart';
 import 'package:constants/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:constants/values_manager.dart';
@@ -7,7 +8,8 @@ import 'package:router/routes_manager.dart';
 
 class CSearchBar extends StatefulWidget implements PreferredSizeWidget {
   final void Function(String)? onChanged;
-  const CSearchBar({super.key, this.onChanged});
+  final bool isOnResultsScreen;
+  const CSearchBar({super.key, this.onChanged, this.isOnResultsScreen = false});
 
   @override
   State<CSearchBar> createState() => _CSearchBarState();
@@ -17,17 +19,24 @@ class CSearchBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CSearchBarState extends State<CSearchBar> {
+  late TextEditingController searchController;
   late FocusNode searchFocusNode;
   @override
   initState() {
+    searchController = TextEditingController();
     searchFocusNode = FocusNode();
     super.initState();
   }
 
   @override
   void dispose() {
+    searchController.dispose();
     searchFocusNode.dispose();
     super.dispose();
+  }
+
+  void clearSearch() {
+    searchController.clear();
   }
 
   @override
@@ -38,6 +47,7 @@ class _CSearchBarState extends State<CSearchBar> {
         horizontal: AppPadding.p10,
       ),
       child: SearchBar(
+        controller: searchController,
         constraints: const BoxConstraints(maxHeight: AppSize.s60),
         leading: Icon(
           Iconsax.search_normal,
@@ -69,12 +79,11 @@ class _CSearchBarState extends State<CSearchBar> {
             ),
           ),
         ],
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.s12),
-          ),
-        ),
-
+        onTap: () {
+          if (widget.isOnResultsScreen) {
+            context.push(RoutesManager.search);
+          }
+        },
         elevation: WidgetStateProperty.all(AppSize.s8),
         side: WidgetStateProperty.all(
           BorderSide(

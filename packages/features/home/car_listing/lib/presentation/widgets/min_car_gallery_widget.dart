@@ -34,8 +34,15 @@ class _MinCarGalleryWidgetState extends State<MinCarGalleryWidget> {
         child: CachedNetworkImage(
           imageUrl: widget.car.carImages[index].url,
           fit: BoxFit.cover,
+
           placeholder: (context, url) {
-            return Container().redacted(context: context, redact: true);
+            return Container().redacted(
+              context: context,
+              redact: true,
+              configuration: RedactedConfiguration(
+                defaultBorderRadius: BorderRadius.zero,
+              ),
+            );
           },
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),

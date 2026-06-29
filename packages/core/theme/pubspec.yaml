@@ -15,7 +15,7 @@ dependencies:
     path: ../../../../cars_market
   storage:
     path: ../storage
-  get: ^4.7.2
+  get: ^4.7.3
 
   flutter:
     sdk: flutter

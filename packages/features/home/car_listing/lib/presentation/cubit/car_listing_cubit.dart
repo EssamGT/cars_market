@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 part 'car_listing_state.dart';
 
-@lazySingleton
+@singleton
 class CarListingCubit extends Cubit<CarListingState> {
   final CarListingUseCase useCase;
   CarListingCubit(this.useCase) : super(CarListingInitial());
@@ -21,7 +21,7 @@ class CarListingCubit extends Cubit<CarListingState> {
     );
   }
 
-  Future<void> view(String carId, String carUserId) async {
+  Future<void> newView(String carId, String carUserId) async {
     if (userData.id != carUserId) {
       await useCase.view(carId, userData.id);
     }

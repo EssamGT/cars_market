@@ -40,7 +40,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   @override
   void initState() {
     getIt.get<CarListingCubit>().getUserData(widget.car.userId);
-    getIt.get<CarListingCubit>().view(widget.car.carId, widget.car.userId);
+    getIt.get<CarListingCubit>().newView(widget.car.carId, widget.car.userId);
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
     _scrollController.addListener(_appBarOnScroll);
@@ -107,6 +107,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
           }
         },
         child: Scaffold(
+          
           body: Stack(
             children: [
               SingleChildScrollView(

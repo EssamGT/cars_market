@@ -804,6 +804,7 @@ import 'package:cars_market/globle/localization_service.dart';
 class StringsManager {
   static String get findYouCar => LocalizationService.strings.findYouCar;
   static String get carsMarket => LocalizationService.strings.carsMarket;
+  static String get noFavCars => LocalizationService.strings.noFavCars;
   static String get personalInformations =>
       LocalizationService.strings.personalInformation;
   static String get steps => LocalizationService.strings.steps;

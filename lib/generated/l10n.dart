@@ -764,6 +764,11 @@ class S {
     return Intl.message('Horsepower', name: 'hp', desc: '', args: []);
   }
 
+  /// `HP`
+  String get hps {
+    return Intl.message('HP', name: 'hps', desc: '', args: []);
+  }
+
   /// `Top Speed (Optional)`
   String get topSpeedLabel {
     return Intl.message(
@@ -6379,6 +6384,16 @@ class S {
     return Intl.message(
       'An unexpected Firebase error occurred. Please try again later.',
       name: 'firebaseUnknown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No favorite cars found.`
+  String get noFavCars {
+    return Intl.message(
+      'No favorite cars found.',
+      name: 'noFavCars',
       desc: '',
       args: [],
     );

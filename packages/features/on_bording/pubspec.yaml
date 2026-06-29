@@ -19,7 +19,7 @@ dependencies:
   shared_ui:
     path: ../../core/shared_ui
   flutter_bloc: ^9.1.1
-  go_router: ^16.2.4
+  go_router: ^17.2.3
 
 dev_dependencies:
   flutter_test:

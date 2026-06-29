@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cars_market/globle/globle.dart';
 import 'package:data/models/failure/failure.dart';
+import 'package:data/models/user/role.dart';
 import 'package:data/models/user/user_data.dart';
 import 'package:data/models/user/user_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -57,7 +58,7 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
                     name: user.displayName ?? '',
                     email: user.email ?? '',
                     phoneNumber: user.phoneNumber ?? '',
-
+                    role: UserRole.user.name,
                     verifiedEmail: user.emailVerified,
                     createdAt: DateTime.now().toIso8601String(),
                     favoriteCarsIds: [],

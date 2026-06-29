@@ -10,7 +10,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  image_picker: ^1.2.0
+  image_picker: ^1.2.2
   google_places_service:
     path: ../google_places_service
   constants:

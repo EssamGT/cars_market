@@ -60,6 +60,12 @@
     <array>
       <string>location</string>
     </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to show nearby cars on the map</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need your location to show nearby cars on the map</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>We need your location to show nearby cars on the map</string>
     <key>CFBundleLocalizations</key>
     <array>
       <string>en</string>

@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cars_market/di/di.dart';
 import 'package:cars_market/globle/globle.dart';
 import 'package:constants/values_manager.dart';
 import 'package:domain/entity/car_entity.dart';
 import 'package:favorites/presentation/cubit/favorites_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:remote/remote/firebase/firebase_db_manager.dart';
@@ -34,6 +37,7 @@ class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
       color: getBackgroundColor(context),
       child: AppBar(
         forceMaterialTransparency: true,
+
         // backgroundColor: getBackgroundColor(context),
         systemOverlayStyle: SystemUiOverlayStyle(
           // statusBarColor: getBackgroundColor(context),
@@ -75,7 +79,7 @@ class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
           IconButton(
             onPressed: () {},
             icon: Icon(
-              Icons.share,
+              Platform.isIOS ? CupertinoIcons.share : Icons.share,
               color: getIconColor(context),
               size: AppSize.s20,
             ),
@@ -126,9 +130,13 @@ class _DetailsScreenAppBarState extends State<DetailsScreenAppBar> {
 
   Brightness getIconBrightness(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
+    bool ios = Platform.isIOS;
     return isDark
-        ? Brightness.light
+        ? ios
+              ? Brightness.dark
+              : Brightness.light
+        : ios
+        ? Brightness.values[widget.startBackgroundChange > 180 ? 1 : 0]
         : Brightness.values[widget.startBackgroundChange > 180 ? 0 : 1];
   }
 

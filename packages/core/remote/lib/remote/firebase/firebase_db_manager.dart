@@ -351,6 +351,7 @@ class FirebaseDbManager {
             auth.currentUser!.phoneNumber ?? userDataFromDoc.phoneNumber,
         verifiedEmail: userDataFromDoc.verifiedEmail,
         createdAt: userDataFromDoc.createdAt,
+        role: userDataFromDoc.role,
       );
       return userData;
     }
@@ -370,6 +371,7 @@ class FirebaseDbManager {
         phoneNumber: userDataFromDoc.phoneNumber,
         verifiedEmail: userDataFromDoc.verifiedEmail,
         createdAt: userDataFromDoc.createdAt,
+        role: userDataFromDoc.role,
       );
       return userData;
     }
@@ -410,6 +412,7 @@ class FirebaseDbManager {
         phoneNumber: userDataFromDoc.phoneNumber,
         verifiedEmail: userDataFromDoc.verifiedEmail,
         createdAt: userDataFromDoc.createdAt,
+        role: userDataFromDoc.role,
       );
       return userData;
     }

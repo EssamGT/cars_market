@@ -716,6 +716,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hpRealisticError": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال قيمة قوة حصان واقعية.",
     ),
+    "hps": MessageLookupByLibrary.simpleMessage("حصان"),
     "hudId": MessageLookupByLibrary.simpleMessage("hud"),
     "hudLabel": MessageLookupByLibrary.simpleMessage(
       "شاشة العرض على الزجاج الأمامي",
@@ -932,6 +933,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noEngineCylinderNumbersFound": MessageLookupByLibrary.simpleMessage(
       "لم يتم العثور على عدد الأسطوانات",
+    ),
+    "noFavCars": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على سيارات مفضلة.",
     ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا توجد اتصال إنترنت. يرجى التحقق من شبكتك والمحاولة مرة أخرى.",

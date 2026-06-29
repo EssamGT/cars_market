@@ -1,9 +1,11 @@
 import 'package:cars_market/di/di.dart';
+import 'package:constants/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/presentation/cubit/main_screen_cubit.dart';
+import 'package:shared_ui/shared_widgets/alert_bar/error_message_bar.dart';
+import 'package:shared_ui/shared_widgets/app_bar/base_app_bar.dart';
 import 'package:shared_ui/shared_widgets/car_listing_card/car_card.dart';
-import 'package:shared_ui/shared_widgets/loading/loading_c.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -34,45 +36,59 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: BaseAppBar(title: StringsManager.carsMarket, button: false),
+      body: BlocConsumer(
+        listener: (context, state) {
+          if (state is MainScreenFailure) {
+            MessageBar.show(context, state.failure.message);
+          }
+        },
+        bloc: getIt.get<MainScreenCubit>(),
+        builder: (context, state) {
+          // if (state is MainScreenFailure) {
+          //   return RefreshIndicator(
+          //     onRefresh: () {
+          //       return getIt.get<MainScreenCubit>().getMainScreenCars();
+          //     },
 
-        body: BlocBuilder(
-          bloc: getIt.get<MainScreenCubit>(),
-          builder: (context, state) {
-            if (state is MainScreenLoading) {
-              return LoadingC();
-            }
-            if (state is MainScreenFailure) {
-              return RefreshIndicator(
-                onRefresh: () {
-                  return getIt.get<MainScreenCubit>().getMainScreenCars();
+          //     child: Center(child: Text('Error: ${state.failure.message}')),
+          //   );
+          // }
+          if (state is MainScreenCars) {
+            return RefreshIndicator(
+              onRefresh: () {
+                return getIt.get<MainScreenCubit>().getMainScreenCars();
+              },
+              child: ListView.builder(
+                addAutomaticKeepAlives: true,
+
+                controller: scrollController,
+                itemCount: state.cars.length,
+                itemBuilder: (context, index) {
+                  return CarCard(car: state.cars[index]);
                 },
-
-                child: Center(child: Text('Error: ${state.failure.message}')),
-              );
-            }
-            if (state is MainScreenCars) {
-              return RefreshIndicator(
-                onRefresh: () {
-                  return getIt.get<MainScreenCubit>().getMainScreenCars();
-                },
-                child: ListView.builder(
-                  addAutomaticKeepAlives: true,
-
-                  controller: scrollController,
-                  itemCount: state.cars.length,
-                  itemBuilder: (context, index) {
-                    return CarCard(car: state.cars[index]);
+              ),
+            );
+          }
+          return RefreshIndicator(
+            onRefresh: state is MainScreenLoading
+                ? () async {}
+                : () {
+                    return getIt.get<MainScreenCubit>().getMainScreenCars();
                   },
-                ),
-              );
-            }
-            return Center(child: Text('Main Screen'));
-          },
-        ),
+            child: ListView.builder(
+              addAutomaticKeepAlives: true,
+
+              controller: scrollController,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return LoadingCarCard();
+              },
+            ),
+          );
+        },
       ),
     );
   }
